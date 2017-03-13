@@ -1,11 +1,9 @@
 import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
-import "./map.scss"
+import "./container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import GoogleMap from 'google-map-react';
-import MyGreatPlace from './my-great-place';
 Object.assign = require('object-assign');
-import GMap from './gmap';
+import GMap from '../../components/google-map/google-map';
 
 //import { withGoogleMap } from "react-google-maps";
 

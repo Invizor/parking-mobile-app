@@ -1,9 +1,9 @@
 import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
-import "./map.scss"
+import "../../containers/container/container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import GoogleMap from 'google-map-react';
-import MyGreatPlace from './my-great-place';
+import MyGreatPlace from '../parking-marker/parking-marker';
 Object.assign = require('object-assign');
 
 //import { withGoogleMap } from "react-google-maps";
@@ -31,7 +31,7 @@ export default class GMap extends Component {
     getGeoLocation(e, position);
     //console.log("one", this);
     //this.geoLocation=[position.coords.latitude, position.coords.longitude];
-    //this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
+
   }
   getGeoLocation(position) {
     //console.log("three", position.coords.latitude, position.coords.longitude);

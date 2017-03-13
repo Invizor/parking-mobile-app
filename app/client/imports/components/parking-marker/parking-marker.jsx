@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import {greatPlaceStyle} from './my-great-place-styles.js';
+import {greatPlaceStyle} from './parking-marker-styles.js';
 
 export default class MyGreatPlace extends Component {
   static propTypes = {

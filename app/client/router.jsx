@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import Index from './imports/components/index';
-import App from './imports/components/app';
-import Layout from './imports/components/layouts/main';
-import Map from './imports/components/map';
-import AutorizationForm from './imports/components/autorization-form';
-import NoMatch from './imports/components/nomatch';
+import Index from './imports/components/index/index';
+import App from './imports/containers/app/app';
+import Layout from './imports/layouts/main';
+import Map from './imports/containers/container/container';
+import AutorizationForm from './imports/components/autorization-form/autorization-form';
+import NoMatch from './imports/components/nomatch/nomatch';
 
 let main = ()=> {
 

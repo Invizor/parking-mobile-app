@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonBody } from 'reactionic';
-import { getPlatform } from './utils/helpers.jsx';
+import { getPlatform } from '../../utils/helpers.jsx';
 
 var App = React.createClass({
   getInitialState: function() {
