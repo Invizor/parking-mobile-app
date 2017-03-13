@@ -4,10 +4,11 @@ import "./container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
 Object.assign = require('object-assign');
 import GMap from '../../components/google-map/google-map';
+import MyPosition from '../../components/my-position/my-position';
 
 //import { withGoogleMap } from "react-google-maps";
 
-export default class Map extends Component {
+export default class Container extends Component {
 
   static defaultProps = {
     center: [45.0287579, 38.9680473],
@@ -72,7 +73,6 @@ export default class Map extends Component {
           <GMap
             coordinates = {this.props.center}
             parkingMarkers={this.parkingMarkers}>
-
           </GMap>
         </div>
         <div className="main-navigation">

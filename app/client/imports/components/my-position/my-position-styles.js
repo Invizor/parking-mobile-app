@@ -1,7 +1,7 @@
-const K_WIDTH = 40;
-const K_HEIGHT = 40;
+const K_WIDTH = 180;
+const K_HEIGHT = 180;
 
-const greatPlaceStyle = {
+const myPositionStyle = {
   // initially any map object has left top corner at lat lng coordinates
   // it's on you to set object origin to 0,0 coordinates
   position: 'absolute',
@@ -12,13 +12,13 @@ const greatPlaceStyle = {
 
   border: '5px solid #f44336',
   borderRadius: K_HEIGHT,
-  backgroundColor: 'white',
+  backgroundColor: '#879292',
   textAlign: 'center',
   color: '#3f51b5',
   fontSize: 16,
   fontWeight: 'bold',
   padding: 4,
-  cursor: 'pointer'
+  opacity: 0.3
 };
 
-export {greatPlaceStyle};
+export {myPositionStyle};

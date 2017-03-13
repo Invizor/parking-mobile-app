@@ -1,9 +1,7 @@
 import React, {PropTypes, Component} from 'react';
-import { IonContent, IonButton } from 'reactionic';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import {greatPlaceStyle} from './parking-marker-styles.js';
-import "./parking-marker.scss";
+import {myPositionStyle} from './my-position-styles.js';
 
 export default class MyGreatPlace extends Component {
   static propTypes = {
@@ -16,10 +14,8 @@ export default class MyGreatPlace extends Component {
 
   render() {
     return (
-          <div style={greatPlaceStyle} className="parking" onClick={}>
-            {this.props.text}
-            <IonButton link="/parking-item">P</IonButton>
-          </div>
+      <div style={myPositionStyle}>
+      </div>
     );
   }
 }

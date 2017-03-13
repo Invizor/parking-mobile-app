@@ -10288,3 +10288,11 @@ a.button {
 
 .autorization button {
   width: 100%; }
+
+.first-symbol {
+  width: 10%;
+  display: inline-block; }
+
+.phone-input {
+  width: 80%;
+  display: inline-block; }

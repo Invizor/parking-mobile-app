@@ -3,6 +3,9 @@ import { IonContent, IonButton } from 'reactionic';
 import "../../containers/container/container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import GoogleMap from 'google-map-react';
+import MyPosition from '../../components/my-position/my-position';
+import ParkingItem from '../parking-item/parking-item';
+
 import MyGreatPlace from '../parking-marker/parking-marker';
 Object.assign = require('object-assign');
 
@@ -60,8 +63,8 @@ export default class GMap extends Component {
   showCoords(e) {
     //this.setState({mapCenter: [45.0287579, 38.9680473]});
     //this.watchId = navigator.geolocation.watchPosition(this.getPosition, this.onError);
-    console.log("e ", e);
-    console.log("this ", this);
+    //console.log("e ", e);
+    //console.log("this ", this);
     this.setState({mapCenter: [e.center.lat, e.center.lng]})
   }
   showCoordsE(e) {
@@ -82,11 +85,17 @@ export default class GMap extends Component {
               onClick={e=> this.showCoordsE(e)}
               center={this.state.mapCenter}
               defaultZoom={this.props.zoom}>
+              <MyPosition lat={45.0287579} lng={38.9680473}/>
               {
                 this.props.parkingMarkers.map((parking, index)=>{
-                  return <MyGreatPlace lat={parking[0]} lng={parking[1]} text={'P'} key={index}/>
+                  return <MyGreatPlace lat={parking[0]}
+                                       lng={parking[1]}
+                                       text={'P'}
+                                       key={index}
+                                       link="/parking-item"/>
                 })
               }
+
             </GoogleMap>
             <IonButton color="positive" onClick={e=>this.onGeoLocBtnClick(e)}>
               Определить местоположение!

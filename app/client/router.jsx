@@ -6,6 +6,7 @@ import App from './imports/containers/app/app';
 import Layout from './imports/layouts/main';
 import Map from './imports/containers/container/container';
 import AutorizationForm from './imports/components/autorization-form/autorization-form';
+import ParkingItem from './imports/components/parking-item/parking-item';
 import NoMatch from './imports/components/nomatch/nomatch';
 
 let main = ()=> {
@@ -13,7 +14,8 @@ let main = ()=> {
   var pageList = [
     { path:'/', component:Index, title:'React Ionic', done:true},
     { path:'/map', component:Map, title:'Map', done:true},
-    { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true}
+    { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
+    { path:'/parking-item', component:ParkingItem, title:'Parking', done:true}
   ];
 
   var tabRoutes;
