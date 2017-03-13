@@ -35192,33 +35192,102 @@ Object.assign = __webpack_require__(5);
 var GMap = function (_Component) {
   _inherits(GMap, _Component);
 
-  function GMap() {
+  function GMap(props) {
     _classCallCheck(this, GMap);
 
-    return _possibleConstructorReturn(this, (GMap.__proto__ || Object.getPrototypeOf(GMap)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (GMap.__proto__ || Object.getPrototypeOf(GMap)).call(this, props));
+
+    _this.geoLocation = [45.0287579, 38.9680473];
+
+    _this.state = { mapCenter: _this.geoLocation };
+    _this.getGeoLocation = _this.getGeoLocation.bind(_this);
+    return _this;
   }
 
   _createClass(GMap, [{
-    key: 'onClickHandler',
-    value: function onClickHandler(e) {
+    key: 'onSuccess',
+    value: function onSuccess(e, position) {
+      //  console.log('Latitude: ' + position.coords.latitude);
+      // console.log('Longitude: ' + position.coords.longitude);
+      getGeoLocation(e, position);
+      //console.log("one", this);
+      //this.geoLocation=[position.coords.latitude, position.coords.longitude];
+      //this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
+    }
+  }, {
+    key: 'getGeoLocation',
+    value: function getGeoLocation(position) {
+      //console.log("three", position.coords.latitude, position.coords.longitude);
+      this.setState({ mapCenter: [position.coords.latitude, position.coords.longitude] });
+      //console.log(e.lat, e.lng);
+      //this.setState({mapCenter: [e.lat, e.lng]});
+      /*setTimeout(()=>{this.geoLocation = [
+        position.coords.latitude,
+        position.coords.longitude
+      ]}, 3000)*/
+    }
+  }, {
+    key: 'onError',
+    value: function onError(error) {
+      alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+    }
+  }, {
+    key: 'onGeoLocBtnClick',
+    value: function onGeoLocBtnClick(e) {
+      this.watchID = navigator.geolocation.getCurrentPosition(this.getGeoLocation, this.onError);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // this.watchID = navigator.geolocation.watchPosition(this.getGeoLocation, this.onError, { timeout: 1000 });
+    }
+  }, {
+    key: 'showCoords',
+    value: function showCoords(e) {
+      //this.setState({mapCenter: [45.0287579, 38.9680473]});
+      //this.watchId = navigator.geolocation.watchPosition(this.getPosition, this.onError);
+      console.log("e ", e);
+      console.log("this ", this);
+      this.setState({ mapCenter: [e.center.lat, e.center.lng] });
+    }
+  }, {
+    key: 'showCoordsE',
+    value: function showCoordsE(e) {
       console.log(e);
     }
+  }, {
+    key: 'getPosition',
+    value: function getPosition() {}
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _googleMapReact2.default,
-        {
-          center: this.props.center,
-          defaultZoom: this.props.zoom,
-          onClick: function onClick(e) {
-            return _this2.onClickHandler(e);
-          } },
-        this.props.parkingMarkers.map(function (parking) {
-          return _react2.default.createElement(_myGreatPlace2.default, { lat: parking[0], lng: parking[1], text: 'P' });
-        })
+        'div',
+        null,
+        _react2.default.createElement(
+          _googleMapReact2.default,
+          {
+            onChange: function onChange(e) {
+              return _this2.showCoords(e);
+            },
+            onClick: function onClick(e) {
+              return _this2.showCoordsE(e);
+            },
+            center: this.state.mapCenter,
+            defaultZoom: this.props.zoom },
+          this.props.parkingMarkers.map(function (parking, index) {
+            return _react2.default.createElement(_myGreatPlace2.default, { lat: parking[0], lng: parking[1], text: 'P', key: index });
+          })
+        ),
+        _react2.default.createElement(
+          _reactionic.IonButton,
+          { color: 'positive', onClick: function onClick(e) {
+              return _this2.onGeoLocBtnClick(e);
+            } },
+          '\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u0442\u044C \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435!'
+        )
       );
     }
   }]);
@@ -35510,7 +35579,9 @@ var Map = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'mapContainer' },
-          _react2.default.createElement(_gmap2.default, { parkingMarkers: this.parkingMarkers })
+          _react2.default.createElement(_gmap2.default, {
+            coordinates: this.props.center,
+            parkingMarkers: this.parkingMarkers })
         ),
         _react2.default.createElement(
           'div',
@@ -35587,6 +35658,11 @@ export default Map;
 */
 
 
+Map.defaultProps = {
+  center: [45.0287579, 38.9680473],
+  zoom: 18,
+  greatPlaceCoords: { lat: 45.0287579, lng: 38.9680473 }
+};
 exports.default = Map;
 
 /***/ }),

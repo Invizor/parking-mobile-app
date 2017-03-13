@@ -11,6 +11,11 @@ import GMap from './gmap';
 
 export default class Map extends Component {
 
+  static defaultProps = {
+    center: [45.0287579, 38.9680473],
+    zoom: 18,
+    greatPlaceCoords: {lat: 45.0287579, lng: 38.9680473}
+  };
 
   parkingMarkers = [
     [45.028857, 38.967913],
@@ -66,7 +71,9 @@ export default class Map extends Component {
       <IonContent customClasses=""
                   {...this.props}>
         <div className="mapContainer">
-          <GMap parkingMarkers={this.parkingMarkers}>
+          <GMap
+            coordinates = {this.props.center}
+            parkingMarkers={this.parkingMarkers}>
 
           </GMap>
         </div>
