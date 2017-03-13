@@ -1,0 +1,46 @@
+{
+  "name": "parking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "classnames": "^2.2.3",
+    "google-map-react": "^0.22.3",
+    "google-maps-react": "^1.0.19",
+    "immutable": "^3.7.3",
+    "lodash": "^4.11.1",
+    "react": "^15.0.2",
+    "react-addons-css-transition-group": "^15.0.2",
+    "react-addons-pure-render-mixin": "^15.0.2",
+    "react-controllables": "^0.3.3",
+    "react-display-name": "^0.2.0",
+    "react-dom": "^15.0.2",
+    "react-google-maps": "^6.0.1",
+    "react-helmet": "^4.0.0",
+    "react-pure-render": "^1.0.2",
+    "react-router": "^2.3.0",
+    "react-slick": "^0.12.0",
+    "react-static-container": "^1.0.1",
+    "reactionic": "1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.6.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "extended-define-webpack-plugin": "^0.1.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-sass": "^3.5.3",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.2.0"
+  }
+}
