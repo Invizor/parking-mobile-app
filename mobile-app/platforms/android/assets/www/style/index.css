@@ -10279,6 +10279,10 @@ a.button {
 .main-navigation a {
   width: 100%;
   display: inline-block; }
+.parking button {
+  border: 5px solid red;
+  border-radius: 10px;
+  background: green; }
 .autorization {
   width: 200px;
   margin: 100px auto 0; }
