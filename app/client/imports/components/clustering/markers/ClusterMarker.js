@@ -4,7 +4,7 @@ import defaultProps from 'recompose/defaultProps';
 import withPropsOnChange from 'recompose/withPropsOnChange';
 import pure from 'recompose/pure';
 import { Motion, spring } from 'react-motion';
-import clusterMarkerStyles from './ClusterMarker.sass';
+//import clusterMarkerStyles from './ClusterMarker.sass';
 
 export const clusterMarker = ({
   styles, text,
@@ -36,7 +36,7 @@ export const clusterMarker = ({
 export const clusterMarkerHOC = compose(
   defaultProps({
     text: '0',
-    styles: clusterMarkerStyles,
+    //styles: clusterMarkerStyles,
     initialScale: 0.6,
     defaultScale: 1,
     hoveredScale: 1.15,

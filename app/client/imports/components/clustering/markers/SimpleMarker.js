@@ -4,7 +4,7 @@ import defaultProps from 'recompose/defaultProps';
 // import mapPropsOnChange from 'recompose/mapPropsOnChange';
 import { Motion } from 'react-motion';
 import { clusterMarkerHOC } from './ClusterMarker.js';
-import simpleMarkerStyles from './SimpleMarker.sass';
+//import simpleMarkerStyles from './SimpleMarker.sass';
 
 export const simpleMarker = ({
   styles,
@@ -30,7 +30,7 @@ export const simpleMarker = ({
 
 export const simpleMarkerHOC = compose(
   defaultProps({
-    styles: simpleMarkerStyles,
+    //styles: simpleMarkerStyles,
     initialScale: 0.3,
     defaultScale: 0.6,
     hoveredScale: 0.7,
