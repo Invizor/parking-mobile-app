@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
 import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
-
+import Repostitory from '../Repository/Repository';
 
 class AutorizationForm extends React.Component {
 
@@ -21,7 +21,7 @@ class AutorizationForm extends React.Component {
         let client = new XMLHttpRequest();
         client.open("POST", theUrl,true);
 
-        let params = "username="+String(this.refs.phoneInput.value);
+        let params = "number="+String(this.refs.phoneInput.value);
         client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         client.send(params);
 
