@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import compose from 'recompose/compose';
 import defaultProps from 'recompose/defaultProps';
-import './Layout.scss';
 import GMap from './GMap';
+import layoutStyles from './Layout.scss';
 // for hmr to work I need the first class to extend Component
 export class ClusterLayout extends Component {
   render() {
-    const { styles: { layout, header, main, footer, logo } } = this.props;
+    const { styles: { header, main, footer, logo } } = this.props;
     return (
-      <div className={layout}>
+      <div>
       <header className={header}>
       <div>
       Clustering example google-map-react (zoom, move to play with)
@@ -42,7 +42,7 @@ export class ClusterLayout extends Component {
 
 export const ClusterlayoutHOC = compose(
   defaultProps({
-    //styles: layoutStyles,
+    styles: layoutStyles,
   })
 );
 

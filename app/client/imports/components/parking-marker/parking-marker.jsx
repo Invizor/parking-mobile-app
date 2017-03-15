@@ -22,7 +22,7 @@ export default class ParkingMarker extends Component {
   render() {
     return (
           <div className="parking">
-            <IonButton link={this.getLink(this.props.parkingId)}>{this.props.text}</IonButton>
+            <IonButton link={this.getLink(this.props.parkingId)}>1125</IonButton>
           </div>
     );
   }

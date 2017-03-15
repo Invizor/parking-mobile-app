@@ -1,11 +1,13 @@
 .parking a {
   display: block;
-  width: 15px;
-  height: 20px;
+  wdth: 49px;
+  height: 64px;
   border-radius: 30px;
-  background: blue;
   color: #FFFFFF;
   font-size: 10px;
+  background: url('./mapIcon.svg');
+  top: -64px;
+  left: -24px;
 }
 .parking a:hover {
   color: #FFFFFF;

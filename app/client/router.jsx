@@ -15,11 +15,11 @@ let main = ()=> {
 
   var pageList = [
     { path:'/', component:Index, title:'React Ionic', done:true},
-    { path:'/map', component:Map, title:'Map', done:true},
     { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
     { path:'/parking-item/:id', component:ParkingItem, title:'Parking', done:true},
     { path:'/clustering-layout', component:ClusterLayout, title:'Clustering Layout', done:true},
-    { path:'/cluster-main', component:ClusterMain, title:'ClusterMain', done:true}
+    { path:'/cluster-main', component:ClusterMain, title:'ClusterMain', done:true},
+    { path:'/map', component:Map, title:'Map', done:true,}
   ];
 
   var tabRoutes;
