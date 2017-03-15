@@ -10279,10 +10279,17 @@ a.button {
 .main-navigation a {
   width: 100%;
   display: inline-block; }
-.parking button {
-  border: 5px solid red;
-  border-radius: 10px;
-  background: green; }
+.parking a {
+  display: block;
+  width: 15px;
+  height: 20px;
+  border-radius: 30px;
+  background: blue;
+  color: #FFFFFF;
+  font-size: 10px; }
+
+.parking a:hover {
+  color: #FFFFFF; }
 .autorization {
   width: 200px;
   margin: 100px auto 0; }
@@ -10300,3 +10307,40 @@ a.button {
 .phone-input {
   width: 80%;
   display: inline-block; }
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0 1px 0 1px; }
+
+.header {
+  height: 2em;
+  background-color: #004336;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 10px; }
+  .header a {
+    color: #fff; }
+
+.logo {
+  width: 1.3em;
+  height: 1.3em;
+  margin: 0.3em;
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+.main {
+  flex: 1;
+  display: flex; }
+
+.footer {
+  height: 2em;
+  background-color: #004336;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .footer a {
+    color: #fff; }

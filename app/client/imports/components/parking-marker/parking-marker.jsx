@@ -2,10 +2,10 @@ import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import {greatPlaceStyle} from './parking-marker-styles.js';
+//import {greatPlaceStyle} from './parking-marker-styles.js';
 import "./parking-marker.scss";
 
-export default class MyGreatPlace extends Component {
+export default class ParkingMarker extends Component {
   static propTypes = {
     text: PropTypes.string
   };
@@ -14,11 +14,15 @@ export default class MyGreatPlace extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  getLink(id) {
+    return "/parking-item/" + id;
+  }
+
+
   render() {
     return (
-          <div style={greatPlaceStyle} className="parking" onClick={}>
-            {this.props.text}
-            <IonButton link="/parking-item">P</IonButton>
+          <div className="parking">
+            <IonButton link={this.getLink(this.props.parkingId)}>{this.props.text}</IonButton>
           </div>
     );
   }
