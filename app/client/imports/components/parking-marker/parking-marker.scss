@@ -1,5 +1,12 @@
-.parking button {
-  border: 5px solid red;
-  border-radius: 10px;
-  background: green;
+.parking a {
+  display: block;
+  width: 15px;
+  height: 20px;
+  border-radius: 30px;
+  background: blue;
+  color: #FFFFFF;
+  font-size: 10px;
+}
+.parking a:hover {
+  color: #FFFFFF;
 }

@@ -6,7 +6,7 @@ import GoogleMap from 'google-map-react';
 import MyPosition from '../../components/my-position/my-position';
 import ParkingItem from '../parking-item/parking-item';
 
-import MyGreatPlace from '../parking-marker/parking-marker';
+import ParkingMarker from '../parking-marker/parking-marker';
 Object.assign = require('object-assign');
 
 //import { withGoogleMap } from "react-google-maps";
@@ -15,36 +15,30 @@ export default class GMap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {mapCenter: this.geoLocation};
+    this.state = {
+      mapCenter: this.geoLocation,
+      parkingMarkers: []
+    };
     this.getGeoLocation = this.getGeoLocation.bind(this);
   }
+
 
   geoLocation=[45.0287579, 38.9680473];
 
   static defaultProps = {
     center: [45.0287579, 38.9680473],
-    zoom: 18,
+    zoom: 4,
     greatPlaceCoords: {lat: 45.0287579, lng: 38.9680473}
   };
 
 
-  onSuccess(e, position) {
-  //  console.log('Latitude: ' + position.coords.latitude);
-   // console.log('Longitude: ' + position.coords.longitude);
-    getGeoLocation(e, position);
-    //console.log("one", this);
-    //this.geoLocation=[position.coords.latitude, position.coords.longitude];
 
+  onSuccess(e, position) {
+    getGeoLocation(e, position);
   }
   getGeoLocation(position) {
-    //console.log("three", position.coords.latitude, position.coords.longitude);
     this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
-    //console.log(e.lat, e.lng);
-    //this.setState({mapCenter: [e.lat, e.lng]});
-    /*setTimeout(()=>{this.geoLocation = [
-      position.coords.latitude,
-      position.coords.longitude
-    ]}, 3000)*/
+
   }
 
   onError(error) {
@@ -55,10 +49,14 @@ export default class GMap extends Component {
   onGeoLocBtnClick(e) {
     this.watchID = navigator.geolocation.getCurrentPosition(this.getGeoLocation, this.onError);
   }
-
-  componentDidMount(){
-   // this.watchID = navigator.geolocation.watchPosition(this.getGeoLocation, this.onError, { timeout: 1000 });
+  onShowStateBtnClick(e) {
+    //console.log('parkingMarkers', this.parkingMarkers);
+    //console.log(  this.parkingMarkers[2]);
+    //console.log(this.state.parkingMarkers.length);
+    //console.log(this.state.parkingMarkers[0]);
   }
+
+
 
   showCoords(e) {
     //this.setState({mapCenter: [45.0287579, 38.9680473]});
@@ -68,16 +66,52 @@ export default class GMap extends Component {
     this.setState({mapCenter: [e.center.lat, e.center.lng]})
   }
   showCoordsE(e) {
-    console.log(e);
+    //console.log(e);
   }
 
 
-  getPosition() {
-
+  httpGet(theUrl) {
+    //this.setState({parkingMarkers: [{id: 0, coord:[45.0287579,38.9680473]}]})
+    let client = new XMLHttpRequest();
+    client.withCredentials = true;
+    client.open("GET", theUrl);
+    client.onload=()=>{
+      let parkingList = JSON.parse(client.responseText);
+      //console.log('parkingList', parkingList);
+      //this.setState({parkingMarkers: parkingList})
+      this.setState({parkingMarkers: [{id: 0, coord:[45.0287579,38.9680473]}]})
+     // this.parkingMarkers = parkingList;
+    };
+    client.send();
   }
 
+
+  getData() {
+    this.httpGet('http://parkingkrd.ru/parking/getJson');
+  }
+
+
+  componentDidMount(){
+    //console.log('this.responseText');
+    this.getData();
+    // this.watchID = navigator.geolocation.watchPosition(this.getGeoLocation, this.onError, { timeout: 1000 });
+  }
 
   render() {
+
+    let parkings;
+   // console.log(this.state.parkingMarkers,this.state);
+    if (this.state.parkingMarkers.length){
+      parkings = this.state.parkingMarkers.map((parking)=> {
+        return <ParkingMarker lat={parking.coord[0]}
+                              lng={parking.coord[1]}
+                              text="P"
+                              parkingId={parking.id}
+                              key={parking.id}/>
+      });
+   // console.log(this.state.parkingMarkers,this.state)
+    }
+
     return (
           <div>
             <GoogleMap
@@ -87,18 +121,14 @@ export default class GMap extends Component {
               defaultZoom={this.props.zoom}>
               <MyPosition lat={45.0287579} lng={38.9680473}/>
               {
-                this.props.parkingMarkers.map((parking, index)=>{
-                  return <MyGreatPlace lat={parking[0]}
-                                       lng={parking[1]}
-                                       text={'P'}
-                                       key={index}
-                                       link="/parking-item"/>
-                })
+                parkings
               }
-
             </GoogleMap>
             <IonButton color="positive" onClick={e=>this.onGeoLocBtnClick(e)}>
               Определить местоположение!
+            </IonButton>
+            <IonButton color="positive" onClick={e=>this.onShowStateBtnClick(e)}>
+              Показать состояние!
             </IonButton>
           </div>
 

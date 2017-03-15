@@ -7,6 +7,8 @@ import Layout from './imports/layouts/main';
 import Map from './imports/containers/container/container';
 import AutorizationForm from './imports/components/autorization-form/autorization-form';
 import ParkingItem from './imports/components/parking-item/parking-item';
+import ClusterLayout from './imports/components/clustering/Layout';
+import ClusterMain from './imports/components/clustering/Main';
 import NoMatch from './imports/components/nomatch/nomatch';
 
 let main = ()=> {
@@ -15,7 +17,9 @@ let main = ()=> {
     { path:'/', component:Index, title:'React Ionic', done:true},
     { path:'/map', component:Map, title:'Map', done:true},
     { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
-    { path:'/parking-item', component:ParkingItem, title:'Parking', done:true}
+    { path:'/parking-item/:id', component:ParkingItem, title:'Parking', done:true},
+    { path:'/clustering-layout', component:ClusterLayout, title:'Clustering Layout', done:true},
+    { path:'/cluster-main', component:ClusterMain, title:'ClusterMain', done:true}
   ];
 
   var tabRoutes;
