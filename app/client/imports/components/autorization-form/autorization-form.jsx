@@ -4,120 +4,74 @@ import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
 
 
-var AutorizationForm = React.createClass({
+class AutorizationForm extends React.Component {
 
-  contextTypes: {
-    ionUpdatePopup: React.PropTypes.func
-  },
+    constructor(props,context){
+        super(props,context);
+        this.state = {
+            usersMarkers: []
+        };
+    }
 
-  getTemplate: function() {
+    static contextTypes = {
+        ionUpdatePopup: React.PropTypes.func
+    };
 
-    const phoneInput = findDOMNode(this.refs.phoneInput);
-    ionUpdatePopup({
-      popupType: 'confirm',
-      title: 'Are you sure?',
-      //template: <span>Are you <strong>really</strong> sure?</span>,
-      template: <span>Ваш номер телефона: <strong>+7 {phoneInput} </strong></span>,
-      cancelType: 'button-light',
-      onOk: function () {
-        console.log('Confirmed');
-        console.log(this);
-      },
-      onCancel: function () {
-        console.log('Cancelled');
-      }
-    });
-  },
-  render() {
-    var ionUpdatePopup = this.context.ionUpdatePopup;
-    return (
-      <IonContent customClasses=""
-                  {...this.props}>
-        <h1>This is autorization form!</h1>
-        <div className="autorization">
-          <div className="first-symbol">
-            +7
-          </div>
-          <div className="phone-input">
-            <input type="text"
-                   name="phone"
-                   placeholder="(900) 123-45-67"
-                   ref="phoneInput"/>
-          </div>
-          <IonButton color="positive">
-            Войти
-          </IonButton>
-          <IonButton color="positive"
-                     type="outline"
-                     expand="block"
+    registerMobile(theUrl) {
+        let client = new XMLHttpRequest();
+        client.open("POST", theUrl,true);
 
-                     onClick={() => ionUpdatePopup({
-                       popupType: 'confirm',
-                       title: 'Вы уверены?',
-                       //template: <span>Are you <strong>really</strong> sure?</span>,
-                       template: <span>Вы уверены в правильности Вашего номера телефона?</span>,
-                       cancelType: 'button-light',
-                       onOk: function () {
-                         console.log('Confirmed');
-                         console.log(this);
-                       },
-                       onCancel: function () {
-                         console.log('Cancelled');
-                       }
-                     })}>Show Confirm</IonButton>
-        </div>
-      </IonContent>
-    );
-  }
-});
+        let params = "username="+String(this.refs.phoneInput.value);
+        client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        client.send(params);
+
+        client.onload=()=>{
+            let userList = JSON.parse(client.responseText);
+            this.setState({usersMarkers: userList});
+            console.log(this.state.usersMarkers);
+        };
+    }
+
+    render() {
+        let ionUpdatePopup = this.context.ionUpdatePopup;
+        let thisObj = this;
+        return (
+          <IonContent customClasses="" {...this.props}>
+            <div className="autorization">
+              <div className="first-symbol"> +7 </div>
+              <div className="phone-input">
+                <input type="text"
+                       name="phone"
+                       placeholder="(900) 123-45-67"
+                       ref="phoneInput"/>
+              </div>
+              <IonButton
+                  color="positive"
+                  onClick={() => ionUpdatePopup({
+                      popupType: 'confirm',
+                      cancelText: 'Нет',
+                      okText: 'Да',
+                      title: 'Пожалуйста проверьте:',
+                      template: <span>Мы отправим код подтверждения на телефон:
+                          <p>+7 ({this.refs.phoneInput.value.slice(0,3)}) {this.refs.phoneInput.value.slice(3)}</p>
+                      </span>,
+                      cancelType: 'button-light',
+                      onOk: ()=> {
+                          this.registerMobile('https://parkimon.ru/api/v1/user/register-mobile');
+                      },
+                      onCancel: function() {
+                          console.log('Cancelled');
+                      }
+                  })}>
+                Войти
+              </IonButton>
+            </div>
+              <div className="warningAuth">
+                  Нашимая войти/зарегистрироваться вы принимаете Условия успользования сервиса
+              </div>
+          </IonContent>
+        );
+    }
+}
 
 export default AutorizationForm;
-
-
-
-
-
-/*
-
-export default class AutorizationForm extends Component {
-
-
-
-  render() {
-    var ionUpdatePopup = this.context.ionUpdatePopup;
-    return (
-      <IonContent customClasses=""
-                  {...this.props}>
-        <h1>This is autorization form!</h1>
-        <div className="autorization">
-          <div className="first-symbol">
-            +7
-          </div>
-          <div className="phone-input">
-            <input type="text"
-                   name="phone"
-                   placeholder="(900) 123-45-67"/>
-          </div>
-          <IonButton color="positive">
-            Войти
-          </IonButton>
-          <IonButton color="dark" type="outline" expand="block"
-                     onClick={() => ionUpdatePopup({
-                       popupType: 'confirm',
-                       title: 'Are you sure?',
-                       template: <span>Are you <strong>really</strong> sure?</span>,
-                       cancelType: 'button-light',
-                       onOk: function() {
-                         console.log('Confirmed');
-                       },
-                       onCancel: function() {
-                         console.log('Cancelled');
-                       }
-                     })}>Show Confirm</IonButton>
-        </div>
-      </IonContent>
-    );
-  }
-
-
-}*/
