@@ -16,7 +16,7 @@ export default class MyGreatPlace extends Component {
 
   render() {
     return (
-          <div style={greatPlaceStyle} className="parking" onClick={}>
+          <div style={greatPlaceStyle} className="parking" >
             {this.props.text}
             <IonButton link="/parking-item">P</IonButton>
           </div>

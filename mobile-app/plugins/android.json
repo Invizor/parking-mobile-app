@@ -7,14 +7,14 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-googlemaps": {
             "API_KEY_FOR_ANDROID": "AIzaSyAsGFO7IEUdV8xdl6JpkVLnECAvcME2jEg",
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-geolocation": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
