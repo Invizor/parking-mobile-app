@@ -4,7 +4,7 @@ import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repostitory from '../Repository/Repository';
 import createHashHistory from 'history/lib/createHashHistory';
-
+import userStorage from '../storage/user-storage';
 
 class AutorizationForm extends React.Component {
 
@@ -35,6 +35,18 @@ class AutorizationForm extends React.Component {
         };
     }
 
+    getUser(theUrl) {
+        let client = new XMLHttpRequest();
+        client.open('GET', theUrl+'?token='+Repostitory.get_obj("token"));
+        //client.setRequestHeader('Authorization', `bearer ${Repostitory.get_obj("token")}`);
+        client.send();
+        client.onload=()=>{
+            let userList = JSON.parse(client.responseText);
+            console.log('USER=',userList);
+            userStorage.user = userList.user;
+        };
+    }
+
     enterButton(){
         let history = createHashHistory();
         let user = this.refs.phoneInput.value;
@@ -60,6 +72,7 @@ class AutorizationForm extends React.Component {
                 }
             })
         } else {
+            userStorage.user = this.getUser('https://parkimon.ru/api/v1/user');
             history.goBack(); // исправить, когда появиться главное окно, после авторизации
         }
     }
