@@ -10327,6 +10327,31 @@ a.button {
   position: absolute;
   bottom: 5px;
   left: 5px; }
+.verification {
+  width: 200px;
+  margin: 100px auto 0;
+  border: 1px #999999;
+  border-radius: 4px; }
+
+.verification input {
+  margin-bottom: 20px; }
+
+.verification button {
+  width: 100%; }
+
+.verification-code {
+  width: 80%;
+  display: inline-block;
+  border: 1px #999999;
+  border-radius: 4px; }
+
+.verification-title {
+  width: 80%;
+  display: inline-block;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  color: #4b8bf4; }
 .layout {
   display: flex;
   min-height: 100vh;
