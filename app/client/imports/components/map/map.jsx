@@ -11,14 +11,20 @@ import {
 import parkingStorage from '../parking-storage/parking-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 import { IonButton } from 'reactionic';
+import Repository from '../Repository/Repository';
 
 
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
 
+
+
+
+
 const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
     defaultZoom={14}
-    defaultCenter={{ lat: 45.0287579, lng: 38.9680473 }}
+    center={{ lat: 45.0287579, lng: 38.9680473 }}
+   // defaultCenter={this.props.mapCenter ? this.props.mapCenter : { lat: this.props.mapCenter[0], lng: this.props.mapCenter[1]}}
   >
     <MarkerClusterer
       averageCenter
@@ -52,12 +58,6 @@ export default class Map extends Component {
   }
 
 
-  static defaultProps = {
-    center: [45.0287579, 38.9680473],
-    zoom: 14,
-    greatPlaceCoords: {lat: 45.0287579, lng: 38.9680473}
-  };
-
 
 
   onSuccess(e, position) {
@@ -66,7 +66,6 @@ export default class Map extends Component {
 
   getGeoLocation(position) {
     this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
-
   }
 
   onError(error) {
@@ -84,18 +83,8 @@ export default class Map extends Component {
 
 
   showCoords(e) {
-    //this.setState({mapCenter: [45.0287579, 38.9680473]});
-    //this.watchId = navigator.geolocation.watchPosition(this.getPosition, this.onError);
-    //console.log("e ", e);
-    //console.log("this ", this);
     this.setState({mapCenter: [e.center.lat, e.center.lng]})
   }
-
-
-
-
-
-
 
 
   httpGet(theUrl) {
@@ -118,6 +107,9 @@ export default class Map extends Component {
     let history = createHashHistory();
     history.push('/parking-item/' + targetMarker._id);
   }
+  onClearLocalStorageClick(e) {
+    Repository.clearRep();
+  }
 
 
 
@@ -133,12 +125,16 @@ export default class Map extends Component {
             }
             markers={this.state.markers}
             onMarkerClick={this.handleMarkerClick}
+            mapCenter={this.state.mapCenter}
           />
           <IonButton color="positive" onClick={e=>this.onGeoLocBtnClick(e)}>
             Определить местоположение!
           </IonButton>
           <IonButton color="positive" onClick={e=>this.onShowStateBtnClick(e)}>
             Показать состояние!
+          </IonButton>
+          <IonButton color="positive" onClick={e=>this.onClearLocalStorageClick(e)}>
+            Очистить localStorage!
           </IonButton>
         </div>
 

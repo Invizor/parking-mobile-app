@@ -53,7 +53,7 @@ class VerificationForm extends React.Component {
                     },
                 });
             }
-            history.push('/map');
+            history.push('/container');
         };
     }
 

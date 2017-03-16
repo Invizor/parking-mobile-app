@@ -4,7 +4,9 @@ import "./container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import Map from '../../components/map/map';
 Object.assign = require('object-assign');
-
+import UnautorizedUserButtons from '../../components/unauthorized-user-buttons/unauthorized-user-buttons';
+import AutorizedUserButtons from '../../components/authorized-user-buttons/authorized-user-buttons';
+import Repository from '../../components/Repository/Repository';
 
 export default class Container extends Component {
 
@@ -63,25 +65,21 @@ export default class Container extends Component {
 
   render() {
     return (
+
       <IonContent customClasses=""
                   {...this.props}>
         <div className="mapContainer">
           <Map/>
         </div>
 
-        <div className="main-navigation">
-          <div className="main-button">
-            <IonButton color="positive">
-              Быстрая парковка
-            </IonButton>
-          </div>
-          <div className="main-button-second">
-            <IonButton color="positive"
-                       link="/autorization-form">
-              Войти!
-            </IonButton>
-          </div>
-        </div>
+        {
+          Repository.get_obj('token') ?
+            <AutorizedUserButtons />
+            :
+            <UnautorizedUserButtons/>
+        }
+
+
       </IonContent>
     );
   }
