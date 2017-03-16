@@ -15,25 +15,6 @@ Object.assign = require('object-assign');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default class GMap extends Component {
 
   constructor(props) {

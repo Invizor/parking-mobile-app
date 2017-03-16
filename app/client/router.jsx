@@ -4,13 +4,9 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Index from './imports/components/index/index';
 import App from './imports/containers/app/app';
 import Layout from './imports/layouts/main';
-import Map from './imports/containers/container/container';
+import Container from './imports/containers/container/container';
 import AutorizationForm from './imports/components/autorization-form/autorization-form';
 import ParkingItem from './imports/components/parking-item/parking-item';
-import ClusterLayout from './imports/components/clustering/Layout';
-import ClusterMain from './imports/components/clustering/Main';
-import ThirdMap from './imports/components/third-library/third-map';
-import GMapOriginal from './imports/components/scripts/GMapOriginal';
 import NoMatch from './imports/components/nomatch/nomatch';
 
 let main = ()=> {
@@ -19,11 +15,7 @@ let main = ()=> {
     { path:'/', component:Index, title:'React Ionic', done:true},
     { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
     { path:'/parking-item/:id', component:ParkingItem, title:'Parking', done:true},
-    { path:'/clustering-layout', component:ClusterLayout, title:'Clustering Layout', done:true},
-    { path:'/cluster-main', component:ClusterMain, title:'ClusterMain', done:true},
-    { path:'/map', component:Map, title:'Map', done:true,},
-    { path:'/third-map', component:ThirdMap, title:'ThirdMap', done:true,},
-    { path:'/gmap-original', component:GMapOriginal, title:'GMapOriginal', done:true,}
+    { path:'/container', component:Container, title:'Container', done:true}
   ];
 
   var tabRoutes;
