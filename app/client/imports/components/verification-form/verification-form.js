@@ -4,7 +4,7 @@ import "./verification-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repostitory from '../Repository/Repository';
 import createHashHistory from 'history/lib/createHashHistory';
-
+import userStorage from '../storage/user-storage';
 
 class VerificationForm extends React.Component {
 
@@ -53,7 +53,9 @@ class VerificationForm extends React.Component {
                     },
                 });
             }
-            history.push('/map');
+            userStorage.user = userData.user;
+            console.log('USER=',userStorage);
+            history.push('/container');
         };
     }
 

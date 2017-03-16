@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonContent, IonList, IonItem, IonIcon } from 'reactionic';
-import parkingStorage from '../parking-storage/parking-storage';
+import parkingStorage from '../storage/parking-storage';
 import ReactDOM from 'react-dom';
 
 
