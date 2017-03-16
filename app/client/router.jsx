@@ -9,6 +9,7 @@ import AutorizationForm from './imports/components/autorization-form/autorizatio
 import ParkingItem from './imports/components/parking-item/parking-item';
 import ClusterLayout from './imports/components/clustering/Layout';
 import ClusterMain from './imports/components/clustering/Main';
+import ThirdMap from './imports/components/third-library/third-map';
 import GMapOriginal from './imports/components/scripts/GMapOriginal';
 import NoMatch from './imports/components/nomatch/nomatch';
 
@@ -21,6 +22,7 @@ let main = ()=> {
     { path:'/clustering-layout', component:ClusterLayout, title:'Clustering Layout', done:true},
     { path:'/cluster-main', component:ClusterMain, title:'ClusterMain', done:true},
     { path:'/map', component:Map, title:'Map', done:true,},
+    { path:'/third-map', component:ThirdMap, title:'ThirdMap', done:true,},
     { path:'/gmap-original', component:GMapOriginal, title:'GMapOriginal', done:true,}
   ];
 

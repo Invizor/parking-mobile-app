@@ -204,7 +204,7 @@ export default class Container extends Component {
           </div>
           <div className="main-button-second">
             <IonButton color="positive"
-                       link="/gmap-original">
+                       link="/third-map">
               Войти!
             </IonButton>
           </div>
