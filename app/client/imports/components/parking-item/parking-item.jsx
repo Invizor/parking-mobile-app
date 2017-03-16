@@ -122,13 +122,13 @@ var ParkingItem = React.createClass({
         <IonList>
           {
             parking.zoneId ?
-              <IonItem divider>Парковка: {parking.zoneId}</IonItem>
+              <h1 className="text-center">Парковка: #{parking.zoneId}</h1>
               :
               <IonItem divider>Информация неизвестна</IonItem>
           }
           {
             parking.totalPlaces ?
-              <IonItem divider>Количество мест {parking.totalPlaces}</IonItem>
+              <IonItem divider>Всего мест: {parking.totalPlaces}</IonItem>
               :
               <IonItem divider>Количество мест неизвестно</IonItem>
           }

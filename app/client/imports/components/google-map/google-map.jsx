@@ -12,6 +12,28 @@ Object.assign = require('object-assign');
 
 //import { withGoogleMap } from "react-google-maps";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export default class GMap extends Component {
 
   constructor(props) {
@@ -129,6 +151,7 @@ export default class GMap extends Component {
                 parkings
               }
             </GoogleMap>
+
             <IonButton color="positive" onClick={e=>this.onGeoLocBtnClick(e)}>
               Определить местоположение!
             </IonButton>

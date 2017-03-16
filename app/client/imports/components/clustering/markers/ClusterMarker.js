@@ -8,11 +8,10 @@ import { Motion, spring } from 'react-motion';
 
 export const clusterMarker = ({
   styles, text,
-  defaultMotionStyle, motionStyle,
+  defaultMotionStyle
 }) => (
   <Motion
     defaultStyle={defaultMotionStyle}
-    style={motionStyle}
   >
     {
       ({ scale }) => (
@@ -39,8 +38,6 @@ export const clusterMarkerHOC = compose(
     //styles: clusterMarkerStyles,
     initialScale: 0.6,
     defaultScale: 1,
-    hoveredScale: 1.15,
-    hovered: false,
     stiffness: 320,
     damping: 7,
     precision: 0.001,
@@ -56,19 +53,7 @@ export const clusterMarkerHOC = compose(
     })
   ),
   withPropsOnChange(
-    ['hovered'],
-    ({
-      hovered, hoveredScale, defaultScale,
-      stiffness, damping, precision,
-    }) => ({
-      hovered,
-      motionStyle: {
-        scale: spring(
-          hovered ? hoveredScale : defaultScale,
-          { stiffness, damping, precision }
-        ),
-      },
-    })
+
   )
 );
 

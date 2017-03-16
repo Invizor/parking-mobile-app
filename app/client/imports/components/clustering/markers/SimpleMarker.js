@@ -8,11 +8,10 @@ import { clusterMarkerHOC } from './ClusterMarker.js';
 
 export const simpleMarker = ({
   styles,
-  defaultMotionStyle, motionStyle,
+  defaultMotionStyle
 }) => (
   <Motion
     defaultStyle={defaultMotionStyle}
-    style={motionStyle}
   >
     {
       ({ scale }) => (
@@ -32,8 +31,7 @@ export const simpleMarkerHOC = compose(
   defaultProps({
     //styles: simpleMarkerStyles,
     initialScale: 0.3,
-    defaultScale: 0.6,
-    hoveredScale: 0.7,
+    defaultScale: 0.6
   }),
   // resuse HOC
   clusterMarkerHOC
