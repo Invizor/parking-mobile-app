@@ -3,6 +3,8 @@ import { IonContent, IonButton } from 'reactionic';
 import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repostitory from '../Repository/Repository';
+import createHashHistory from 'history/lib/createHashHistory';
+
 
 class AutorizationForm extends React.Component {
 
@@ -19,9 +21,10 @@ class AutorizationForm extends React.Component {
 
     registerMobile(theUrl) {
         let client = new XMLHttpRequest();
-        client.open("POST", theUrl,true);
+        client.open("POST", theUrl, true);
 
         let params = "number="+String(this.refs.phoneInput.value);
+        console.log(this.refs.phoneInput.value);
         client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         client.send(params);
 
@@ -32,9 +35,36 @@ class AutorizationForm extends React.Component {
         };
     }
 
+    enterButton(){
+        let history = createHashHistory();
+        let user = this.refs.phoneInput.value;
+        let obj = Repostitory.get_obj("token");
+
+        if(obj == undefined || obj == null){
+            let ionUpdatePopup = this.context.ionUpdatePopup;
+            ionUpdatePopup({
+                popupType: 'confirm',
+                cancelText: 'Нет',
+                okText: 'Да',
+                title: 'Пожалуйста проверьте:',
+                template: <span>Мы отправим код подтверждения на телефон:
+                          <p>+7 ({this.refs.phoneInput.value.slice(0,3)}) {this.refs.phoneInput.value.slice(3)}</p>
+                      </span>,
+                cancelType: 'button-light',
+                onOk: ()=> {
+                    this.registerMobile('https://parkimon.ru/api/v1/user/register-mobile');
+                    history.push('/verification-form/'+String(this.refs.phoneInput.value));
+                },
+                onCancel: function() {
+                    console.log('Cancelled');
+                }
+            })
+        } else {
+            history.goBack(); // исправить, когда появиться главное окно, после авторизации
+        }
+    }
+
     render() {
-        let ionUpdatePopup = this.context.ionUpdatePopup;
-        let thisObj = this;
         return (
           <IonContent customClasses="" {...this.props}>
             <div className="autorization">
@@ -47,22 +77,7 @@ class AutorizationForm extends React.Component {
               </div>
               <IonButton
                   color="positive"
-                  onClick={() => ionUpdatePopup({
-                      popupType: 'confirm',
-                      cancelText: 'Нет',
-                      okText: 'Да',
-                      title: 'Пожалуйста проверьте:',
-                      template: <span>Мы отправим код подтверждения на телефон:
-                          <p>+7 ({this.refs.phoneInput.value.slice(0,3)}) {this.refs.phoneInput.value.slice(3)}</p>
-                      </span>,
-                      cancelType: 'button-light',
-                      onOk: ()=> {
-                          this.registerMobile('https://parkimon.ru/api/v1/user/register-mobile');
-                      },
-                      onCancel: function() {
-                          console.log('Cancelled');
-                      }
-                  })}>
+                  onClick={() => this.enterButton()}>
                 Войти
               </IonButton>
             </div>
