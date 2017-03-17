@@ -9,6 +9,7 @@ import AutorizationForm from './imports/components/autorization-form/autorizatio
 import VerificationForm from './imports/components/verification-form/verification-form';
 import ParkingItem from './imports/components/parking-item/parking-item';
 import ConfirmPayParking from './imports/components/confirm-pay-parking/confirm-pay-parking';
+import SetBalance from './imports/components/set-balance/set-balance';
 import NoMatch from './imports/components/nomatch/nomatch';
 
 let main = ()=> {
@@ -16,9 +17,10 @@ let main = ()=> {
   var pageList = [
     { path:'/', component:Index, title:'React Ionic', done:true},
     { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
-      { path:'/verification-form/:number', component:VerificationForm, title:'Verification Form', done:true},
+    { path:'/verification-form/:number', component:VerificationForm, title:'Verification Form', done:true},
     { path:'/parking-item/:id', component:ParkingItem, title:'Parking', done:true},
     { path:'/container', component:Container, title:'Container', done:true},
+    { path:'/set-balance', component:SetBalance, title:'SetBalance', done:true},
     { path:'/confirm-pay-parking/:id', component:ConfirmPayParking, title:'ConfirmPayParking', done:true}
   ];
 

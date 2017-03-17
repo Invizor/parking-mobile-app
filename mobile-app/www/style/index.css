@@ -10350,5 +10350,46 @@ body {
   width: 100%; }
 
 .pay-parking a {
+  display: block;
+  margin: 30px auto; }
+.confirm-pay-parking a {
+  width: 300px;
+  display: block;
+  margin: 30px auto; }
+
+.balance {
+  text-align: justify; }
+
+.balance-amount {
+  position: absolute;
+  right: 0; }
+
+.duration input {
+  border: 1px solid #000; }
+.set-balance {
+  width: 300px;
+  margin: 100px auto 0;
+  border: 1px #999999;
+  border-radius: 4px; }
+
+.set-balance input {
   width: 100%;
-  display: inline-block; }
+  margin-bottom: 20px;
+  border: 1px solid #000; }
+
+.set-balance button {
+  width: 100%;
+  margin-bottom: 20px; }
+
+.set-balance-input {
+  width: 100%;
+  display: inline-block;
+  border: 1px #999999;
+  border-radius: 4px; }
+
+.set-balance-title {
+  width: 80%;
+  display: inline-block;
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: #4b8bf4; }

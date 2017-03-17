@@ -1,10 +1,15 @@
-.confirm-pay-parking {
-
-  width: 200px;
-  margin: 100px auto 0;
-  border: 1px #999999;
-  border-radius: 4px;
-}
 .confirm-pay-parking a {
+  width: 300px;
   display: block;
+  margin: 30px auto;
+}
+.balance {
+  text-align: justify;
+}
+.balance-amount {
+  position: absolute;
+  right: 0;
+}
+.duration input{
+  border: 1px solid #000;
 }
