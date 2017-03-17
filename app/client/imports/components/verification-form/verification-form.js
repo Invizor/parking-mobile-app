@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
 import "./verification-form.scss";
 import {findDOMNode} from 'react-dom';
-import Repostitory from '../../storage/local-storage';
+import Repository from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 
 
@@ -12,7 +12,7 @@ class VerificationForm extends React.Component {
         super(props,context);
         this.state = {
             userToken : '',
-            userName : ''
+            user: {}
         };
     }
     static contextTypes = {
@@ -34,12 +34,12 @@ class VerificationForm extends React.Component {
             let userData = JSON.parse(client.responseText);
             console.log("userData",userData);
             this.setState({userToken: userData.token});
-            this.setState({userName: userData.user.username});
+            this.setState({user: userData.user});
 
             console.log('userToken=',this.state.userToken);
             if(this.state.userToken != '' && this.state.userToken != undefined){
-                Repostitory.add_obj("token",this.state.userToken);
-                Repostitory.add_obj("user",this.state.userName);
+                Repository.add_obj("token",this.state.userToken);
+                Repository.add_obj("user",this.state.user);
 
                 let ionUpdatePopup = this.context.ionUpdatePopup;
                 ionUpdatePopup({
