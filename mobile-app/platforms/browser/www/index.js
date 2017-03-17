@@ -4055,21 +4055,19 @@ var Repository = function () {
     }
 
     _createClass(Repository, null, [{
-        key: 'add_obj',
+        key: "add_obj",
         value: function add_obj(key, obj) {
-            console.log('key', key);
-            console.log('obj', obj);
             var str = JSON.stringify(obj);
             localStorage.setItem(key, str);
         }
     }, {
-        key: 'get_obj',
+        key: "get_obj",
         value: function get_obj(key) {
             var obj = JSON.parse(localStorage.getItem(key));
             return obj;
         }
     }, {
-        key: 'get_all',
+        key: "get_all",
         value: function get_all() {
             var arr = [];
             for (var i = 0; i < localStorage.length; i++) {
@@ -4080,17 +4078,17 @@ var Repository = function () {
             return arr;
         }
     }, {
-        key: 'remove_obj',
+        key: "remove_obj",
         value: function remove_obj(key) {
             localStorage.removeItem(key);
         }
     }, {
-        key: 'change_obj',
+        key: "change_obj",
         value: function change_obj(key, obj) {
             localStorage[key] = JSON.stringify(obj);
         }
     }, {
-        key: 'clearRep',
+        key: "clearRep",
         value: function clearRep() {
             localStorage.clear();
         }
@@ -39715,7 +39713,7 @@ var Container = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.getUser('https://parkimon.ru/api/v1/user');
+      if (_localStorage2.default.get_obj('user') == undefined || _localStorage2.default.get_obj('user').success == false) this.getUser('https://parkimon.ru/api/v1/user');
     }
   }, {
     key: 'render',

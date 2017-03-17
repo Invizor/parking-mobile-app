@@ -78,6 +78,7 @@ export default class Container extends Component {
   }
 
   componentDidMount(){
+    if(Repository.get_obj('user')==undefined || Repository.get_obj('user').success==false)
         this.getUser('https://parkimon.ru/api/v1/user');
   }
 
