@@ -8,10 +8,10 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import parkingStorage from '../storage/parking-storage';
+import parkingStorage from '../../storage/parking-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 import { IonButton } from 'reactionic';
-import Repository from '../Repository/Repository';
+import Repository from '../../storage/local-storage';
 
 
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";

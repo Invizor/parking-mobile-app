@@ -2,9 +2,9 @@ import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
 import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
-import Repostitory from '../Repository/Repository';
+import Repostitory from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
-import userStorage from '../storage/user-storage';
+import userStorage from '../../storage/user-storage';
 
 class AutorizationForm extends React.Component {
 

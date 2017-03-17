@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { IonButton} from 'reactionic';
-import parkingStorage from '../parking-storage/parking-storage';
-import ReactDOM from 'react-dom';
+
 
 
 export default class AutorizedUserButtons extends Component {

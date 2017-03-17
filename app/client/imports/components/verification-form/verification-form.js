@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import { IonContent, IonButton } from 'reactionic';
 import "./verification-form.scss";
 import {findDOMNode} from 'react-dom';
-import Repostitory from '../Repository/Repository';
+import Repostitory from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 
 

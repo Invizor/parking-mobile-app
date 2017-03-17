@@ -6,7 +6,7 @@ import Map from '../../components/map/map';
 Object.assign = require('object-assign');
 import UnautorizedUserButtons from '../../components/unauthorized-user-buttons/unauthorized-user-buttons';
 import AutorizedUserButtons from '../../components/authorized-user-buttons/authorized-user-buttons';
-import Repository from '../../components/Repository/Repository';
+import Repository from '../../storage/local-storage';
 
 export default class Container extends Component {
 

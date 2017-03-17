@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonContent, IonList, IonItem, IonButton } from 'reactionic';
-import parkingStorage from '../parking-storage/parking-storage';
+import parkingStorage from '../../storage/parking-storage';
 import './parking-item.scss';
 
 
@@ -58,6 +58,10 @@ var ParkingItem = React.createClass({
     const parking = this.getCurrentParking();
     let parkingInfo = [];
 
+  },
+
+  getPayParkingLink() {
+    return "/confirm-pay-parking/" + this.getParkingId();
   },
 
 
@@ -120,7 +124,7 @@ var ParkingItem = React.createClass({
         </IonList>
         <div className="pay-parking">
           <IonButton color="positive"
-                     link="/autorization-form">
+                     link={this.getPayParkingLink()}>
             Оплатить парковку
           </IonButton>
         </div>
