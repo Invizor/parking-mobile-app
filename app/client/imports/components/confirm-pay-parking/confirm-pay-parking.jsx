@@ -3,7 +3,7 @@ import {IonButton, IonSelect, IonItem} from 'reactionic';
 import parkingStorage from '../../storage/parking-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 import "./confirm-pay-parking.scss";
-
+import Repository from '../../storage/local-storage';
 
 export default class ConfirmPayParking extends Component {
 
@@ -121,6 +121,10 @@ export default class ConfirmPayParking extends Component {
 
   }
 
+
+  getUserCars() {
+    this.setState({carsList: Repository.get_obj('cars')});
+  }
 
   render() {
     return (

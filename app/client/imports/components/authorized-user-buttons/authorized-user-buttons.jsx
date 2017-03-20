@@ -21,6 +21,12 @@ export default class AutorizedUserButtons extends Component {
               История
             </IonButton>
           </div>
+          <div className="main-button-third">
+            <IonButton color="positive"
+                       link="/list-car">
+              Автомобили
+            </IonButton>
+          </div>
         </div>
       </div>
     )

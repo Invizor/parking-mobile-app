@@ -7,6 +7,7 @@ Object.assign = require('object-assign');
 import UnautorizedUserButtons from '../../components/unauthorized-user-buttons/unauthorized-user-buttons';
 import AutorizedUserButtons from '../../components/authorized-user-buttons/authorized-user-buttons';
 import Repository from '../../storage/local-storage';
+import userStorage from '../../storage/user-storage';
 
 export default class Container extends Component {
 
@@ -57,10 +58,27 @@ export default class Container extends Component {
   }
 
 
+
   onClickChangeCoords(e) {
     console.log("old coords: ", this.geoLocation);
     this.geoLocation = [45.000000, 38.000000];
     console.log("new coords: ", this.geoLocation);
+  }
+
+  getUser(theUrl) {
+      let client = new XMLHttpRequest();
+      client.open('GET', theUrl, true);
+      client.setRequestHeader("Authorization", 'Bearer '+String(Repository.get_obj("token")));
+      client.send();
+      client.onload=()=>{
+          let userList = JSON.parse(client.responseText);
+          userStorage.user = userList;
+          Repository.add_obj("user",userList);
+      };
+  }
+
+  componentDidMount(){
+        this.getUser('https://parkimon.ru/api/v1/user');
   }
 
   render() {

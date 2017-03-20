@@ -20,6 +20,7 @@ class AutorizationForm extends React.Component {
     };
 
     registerMobile(theUrl) {
+        let history = createHashHistory();
         let client = new XMLHttpRequest();
         client.open("POST", theUrl, true);
 
@@ -29,21 +30,7 @@ class AutorizationForm extends React.Component {
         client.send(params);
 
         client.onload=()=>{
-            let userList = JSON.parse(client.responseText);
-            this.setState({usersMarkers: userList});
-            console.log(this.state.usersMarkers);
-        };
-    }
-
-    getUser(theUrl) {
-        let client = new XMLHttpRequest();
-        client.open('GET', theUrl+'?token='+Repostitory.get_obj("token"));
-        //client.setRequestHeader('Authorization', `bearer ${Repostitory.get_obj("token")}`);
-        client.send();
-        client.onload=()=>{
-            let userList = JSON.parse(client.responseText);
-            console.log('USER=',userList);
-            userStorage.user = userList.user;
+            history.push('/verification-form/'+String(this.refs.phoneInput.value));
         };
     }
 
@@ -65,14 +52,12 @@ class AutorizationForm extends React.Component {
                 cancelType: 'button-light',
                 onOk: ()=> {
                     this.registerMobile('https://parkimon.ru/api/v1/user/register-mobile');
-                    history.push('/verification-form/'+String(this.refs.phoneInput.value));
                 },
                 onCancel: function() {
                     console.log('Cancelled');
                 }
             })
         } else {
-            userStorage.user = this.getUser('https://parkimon.ru/api/v1/user');
             history.goBack(); // исправить, когда появиться главное окно, после авторизации
         }
     }

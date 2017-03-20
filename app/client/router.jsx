@@ -11,6 +11,8 @@ import ParkingItem from './imports/components/parking-item/parking-item';
 import ConfirmPayParking from './imports/components/confirm-pay-parking/confirm-pay-parking';
 import SetBalance from './imports/components/set-balance/set-balance';
 import NoMatch from './imports/components/nomatch/nomatch';
+import CarForm from './imports/components/car-form/car-form'
+import addCarsForm from './imports/components/add-cars-form/add-cars-form'
 
 let main = ()=> {
 
@@ -18,6 +20,8 @@ let main = ()=> {
     { path:'/', component:Index, title:'React Ionic', done:true},
     { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
     { path:'/verification-form/:number', component:VerificationForm, title:'Verification Form', done:true},
+    { path:'/list-car', component:CarForm, title:'Car form', done:true},
+    { path:'/add-car', component:addCarsForm, title:'Add car Form', done:true},
     { path:'/parking-item/:id', component:ParkingItem, title:'Parking', done:true},
     { path:'/container', component:Container, title:'Container', done:true},
     { path:'/set-balance', component:SetBalance, title:'SetBalance', done:true},
