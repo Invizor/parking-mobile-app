@@ -8,9 +8,7 @@
     },
     "installed_plugins": {
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-whitelist": {
+            "GEOLOCATION_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },

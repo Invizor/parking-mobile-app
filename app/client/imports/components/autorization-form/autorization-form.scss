@@ -1,11 +1,12 @@
 .autorization {
   width: 200px;
   margin: 100px auto 0;
-  border: 1px #999999;
-  border-radius: 4px;
 }
 .autorization input {
+  width: 100%;
   margin-bottom: 20px;
+  border: 1px solid #4b8bf4;
+  border-radius: 3px;
 }
 .autorization button {
   width: 100%;
@@ -17,14 +18,6 @@
 .phone-input {
   width: 80%;
   display: inline-block;
-  border: 1px #999999;
-  border-radius: 4px;
-}
-.password-input {
-  width: 80%;
-  display: inline-block;
-  border: 1px #999999;
-  border-radius: 4px;
 }
 .warningAuth {
   width: 80%;
@@ -33,4 +26,5 @@
   position: absolute;
   bottom: 5px;
   left:5px;
+  margin: 0 auto 5px;
 }

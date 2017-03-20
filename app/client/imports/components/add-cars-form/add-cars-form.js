@@ -34,10 +34,11 @@ class addCarsForm extends React.Component {
     render() {
         return (
             <IonContent customClasses="" {...this.props}>
-                <div className="titleAddCar text-center" >
-                    Добавить ваш автомобиль:
-                </div>
+
                 <div className="car-info">
+                    <div className="titleAddCar" >
+                        Добавить ваш автомобиль:
+                    </div>
                     <div className="title-car">
                         <input type="text"
                            name="title"

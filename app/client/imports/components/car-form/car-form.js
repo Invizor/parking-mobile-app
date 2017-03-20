@@ -31,7 +31,6 @@ class CarForm extends React.Component {
         client.send();
         client.onload=()=>{
             let list = JSON.parse(client.responseText);
-            console.log('CAR=',list);
             Repository.add_obj("cars",list);
             this.setState({ carList : list.userCars });
         };
@@ -43,7 +42,6 @@ class CarForm extends React.Component {
 
     render() {
         let cars = this.state.carList;
-        console.log("Cars2=",cars);
         let myCars = [];
         for(let i = 0 ; i<cars.length; i++){
             myCars.push(<IonButton  color="positive">
@@ -52,14 +50,15 @@ class CarForm extends React.Component {
         }
         return (
             <IonContent customClasses="" {...this.props}>
-                <div className="titleListCar text-center" >
-                   Ваши транспортные средства:
-                </div>
-                <div className="my-cars">
+
+                <div className="list-cars">
+                    <div className="titleListCar" >
+                        Ваши транспортные средства:
+                    </div>
                     {myCars}
-                </div>
-                <div className="list-car">
-                    <img className="addCarButton" src='./img/addCar.png' onClick={() => this.addCar()}/>
+                    <div className="button-add-car">
+                        <img className="addCarButton" src='./img/addCar.png' onClick={() => this.addCar()}/>
+                    </div>
                 </div>
             </IonContent>
         );

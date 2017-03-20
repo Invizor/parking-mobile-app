@@ -1,32 +1,25 @@
-.add-car-button{
+.add-car-button button{
   width:100%;
   display: inline-block;
   position: fixed;
   bottom: 0;
   left: 0;
 }
-.add-car-button button{
-  width:100%;
-}
 .car-info {
-  width: 80%;
-  display: inline-block;
+  width: 200px;
+  margin: 100px auto 0;
 }
-.title-car{
+.car-info input{
+  margin-bottom: 10px;
   width: 80%;
   display: inline-block;
+  border: 1px solid #0c60ee;
+  border-radius: 3px;
 }
-.plate-number{
-  width: 80%;
+.car-info .titleAddCar {
   display: inline-block;
-}
-.type-car{
-  width: 80%;
-  display: inline-block;
-}
-.titleAddCar {
-  width: 80%;
-  display: inline-block;
-  position: fixed;
-  top: 0;
+  font-size: 16px;
+  color: #4b8bf4;
+  margin: 5px 5px 5px 5px;
+  text-align: left;
 }
