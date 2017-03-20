@@ -5,8 +5,6 @@ class Repository{
     }
 
     static add_obj(key,obj){
-        console.log('key', key);
-        console.log('obj', obj);
         let str = JSON.stringify(obj);
         localStorage.setItem(key, str);
     }
