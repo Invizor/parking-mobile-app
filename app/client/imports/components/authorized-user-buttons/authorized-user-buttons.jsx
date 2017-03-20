@@ -4,7 +4,6 @@ import { IonButton} from 'reactionic';
 
 
 export default class AutorizedUserButtons extends Component {
-
   render() {
     return (
       <div>
