@@ -10260,7 +10260,8 @@ body {
 .mapContainer {
   width: 100%;
   margin-top: 60px;
-  height: 400px; }
+  height: 400px;
+  margin-bottom: 150px; }
 
 .main-button {
   position: fixed;
@@ -10291,20 +10292,23 @@ body {
   margin: 100px auto 0; }
 
 .autorization input {
-  width: 100%;
-  margin-bottom: 20px;
+  width: 90%;
+  margin: 5px 5px 20px 5px;
   border: 1px solid #4b8bf4;
   border-radius: 3px; }
 
 .autorization button {
-  width: 100%; }
+  width: 90%;
+  display: inline-block;
+  margin: 5px 5px 5px 5px; }
 
 .first-symbol {
   width: 10%;
-  display: inline-block; }
+  display: inline-block;
+  vertical-align: -1px; }
 
 .phone-input {
-  width: 80%;
+  width: 90%;
   display: inline-block; }
 
 .warningAuth {

@@ -38122,10 +38122,10 @@ var AutorizedUserButtons = function (_Component) {
         null,
         _react2.default.createElement(
           'div',
-          { className: 'main-navigation' },
+          { className: 'authorized-user-buttons' },
           _react2.default.createElement(
             'div',
-            { className: 'main-button' },
+            null,
             _react2.default.createElement(
               _reactionic.IonButton,
               { color: 'positive',
@@ -38135,7 +38135,7 @@ var AutorizedUserButtons = function (_Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'main-button-second' },
+            null,
             _react2.default.createElement(
               _reactionic.IonButton,
               { color: 'positive',
@@ -38145,7 +38145,7 @@ var AutorizedUserButtons = function (_Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'main-button-third' },
+            null,
             _react2.default.createElement(
               _reactionic.IonButton,
               { color: 'positive',
@@ -38775,6 +38775,7 @@ var Map = function (_Component) {
   }, {
     key: "getGeoLocation",
     value: function getGeoLocation(position) {
+      console.log(position);
       this.setState({ mapCenter: [position.coords.latitude, position.coords.longitude] });
     }
   }, {
@@ -38839,7 +38840,8 @@ var Map = function (_Component) {
           null,
           _react2.default.createElement(_reactionic.IonSpinner, { icon: "dots", customClasses: "inloader spinner-light" }),
           "\u041F\u043E\u0434\u043E\u0436\u0434\u0438\u0442\u0435",
-          _react2.default.createElement(_reactionic.IonSpinner, { icon: "dots", customClasses: "inloader spinner-light" })
+          _react2.default.createElement(_reactionic.IonSpinner, {
+            icon: "dots", customClasses: "inloader spinner-light" })
         ),
         _react2.default.createElement(
           "p",
@@ -38870,15 +38872,7 @@ var Map = function (_Component) {
           onMarkerClick: this.handleMarkerClick,
           mapCenter: this.state.mapCenter
         }),
-        _react2.default.createElement(
-          _reactionic.IonButton,
-          { color: "dark",
-            type: "outline",
-            onClick: function onClick() {
-              return _this3.showLoading();
-            } },
-          "Show Loading with Backdrop (3 sec)"
-        ),
+        _react2.default.createElement("div", null),
         _react2.default.createElement(
           _reactionic.IonButton,
           { color: "positive", onClick: function onClick(e) {
@@ -38887,18 +38881,26 @@ var Map = function (_Component) {
           "\u041E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u0442\u044C \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435!"
         ),
         _react2.default.createElement(
-          _reactionic.IonButton,
-          { color: "positive", onClick: function onClick(e) {
-              return _this3.onShowStateBtnClick(e);
-            } },
-          "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0441\u043E\u0441\u0442\u043E\u044F\u043D\u0438\u0435!"
+          "div",
+          null,
+          _react2.default.createElement(
+            _reactionic.IonButton,
+            { color: "positive", onClick: function onClick(e) {
+                return _this3.onShowStateBtnClick(e);
+              } },
+            "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0441\u043E\u0441\u0442\u043E\u044F\u043D\u0438\u0435!"
+          )
         ),
         _react2.default.createElement(
-          _reactionic.IonButton,
-          { color: "positive", onClick: function onClick(e) {
-              return _this3.onClearLocalStorageClick(e);
-            } },
-          "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C localStorage!"
+          "div",
+          null,
+          _react2.default.createElement(
+            _reactionic.IonButton,
+            { color: "positive", onClick: function onClick(e) {
+                return _this3.onClearLocalStorageClick(e);
+              } },
+            "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C localStorage!"
+          )
         )
       );
     }

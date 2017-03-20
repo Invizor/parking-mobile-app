@@ -13,8 +13,8 @@ import parkingStorage from '../../storage/parking-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 import {IonButton} from 'reactionic';
 import Repository from '../../storage/local-storage';
-import { IonContent, IonSpinner } from 'reactionic';
-import { AbsoluteMiddle } from '../../utils/helpers';
+import {IonContent, IonSpinner} from 'reactionic';
+import {AbsoluteMiddle} from '../../utils/helpers';
 
 
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
@@ -63,6 +63,7 @@ export default class Map extends Component {
   }
 
   getGeoLocation(position) {
+    console.log(position)
     this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
   }
 
@@ -116,13 +117,14 @@ export default class Map extends Component {
   };
 
   showLoading() {
-    var customTemplate = <div><h2><IonSpinner icon="dots" customClasses="inloader spinner-light" />Подождите<IonSpinner icon="dots" customClasses="inloader spinner-light" /></h2><p>Парковки загружаются</p></div>
+    var customTemplate = <div><h2><IonSpinner icon="dots" customClasses="inloader spinner-light"/>Подождите<IonSpinner
+      icon="dots" customClasses="inloader spinner-light"/></h2><p>Парковки загружаются</p></div>
     let ionShowLoading = this.context.ionShowLoading;
     ionShowLoading(true, {
-      backdrop:true,
-      delay:0,
+      backdrop: true,
+      delay: 0,
       duration: 3000,
-      customTemplate:  customTemplate
+      customTemplate: customTemplate
     });
   }
 
@@ -141,19 +143,25 @@ export default class Map extends Component {
           onMarkerClick={this.handleMarkerClick}
           mapCenter={this.state.mapCenter}
         />
-        <IonButton color="dark"
-                   type="outline"
-                   onClick={() => this.showLoading()}>Show Loading with Backdrop (3 sec)
-        </IonButton>
+        <div>
+
+        </div>
         <IonButton color="positive" onClick={e => this.onGeoLocBtnClick(e)}>
           Определить местоположение!
         </IonButton>
-        <IonButton color="positive" onClick={e => this.onShowStateBtnClick(e)}>
-          Показать состояние!
-        </IonButton>
-        <IonButton color="positive" onClick={e => this.onClearLocalStorageClick(e)}>
-          Очистить localStorage!
-        </IonButton>
+        <div>
+          <IonButton color="positive" onClick={e => this.onShowStateBtnClick(e)}>
+            Показать состояние!
+          </IonButton>
+        </div>
+
+        <div>
+          <IonButton color="positive" onClick={e => this.onClearLocalStorageClick(e)}>
+            Очистить localStorage!
+          </IonButton>
+        </div>
+
+
       </div>
 
     );
