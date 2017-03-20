@@ -3,16 +3,16 @@
   margin: 100px auto 0;
 }
 .verification input {
-  width: 80%;
-  display: inline-block;
+  margin-bottom: 20px;
   border: 1px solid #4b8bf4;
   border-radius: 3px;
-  margin: 5px 5px 20px 5px;
 }
 .verification button {
+  width: 100%;
+}
+.verification-code {
   width: 80%;
   display: inline-block;
-  margin: 5px 5px 5px 5px;
 }
 .verification-title{
   width: 80%;

@@ -10,7 +10,7 @@ export default class ConfirmPayParking extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      carsList: ['Не выбрано', 'BMW','Audi','Mersedes'],
+      carsList: ['Не выбрано', 'BMW', 'Audi', 'Mersedes'],
       selectedValue: 'Не указано',
       balance: 0
     };
@@ -123,7 +123,19 @@ export default class ConfirmPayParking extends Component {
 
 
   getUserCars() {
-    this.setState({carsList: Repository.get_obj('cars')});
+    const myCars = Repository.get_obj('cars');
+    let myCarsTitleList = myCars.userCars.map((car) => {
+      return car.title;
+    });
+    myCarsTitleList.unshift('Не указано');
+    console.log('myCarsTitleList', myCarsTitleList);
+    this.setState({carsList: myCarsTitleList});
+  }
+
+  componentDidMount() {
+    console.log('userCars1', this.state.carsList);
+    this.getUserCars();
+    console.log('userCars2', this.state.carsList);
   }
 
   render() {
@@ -139,7 +151,7 @@ export default class ConfirmPayParking extends Component {
             <div onMouseDown={e => this.checkCarsList(e)}>
               <IonSelect label='Паркуемое авто'
                          options={this.state.carsList}
-                         defaultValue= {this.state.carsList[0]}
+                         defaultValue='Не указано'
                          ref="carSelect"
                          handleChange={e => this.changeValue(e)}>
               </IonSelect>

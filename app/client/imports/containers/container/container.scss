@@ -1,34 +1,42 @@
 @import "../../../../../node_modules/reactionic/dist/scss/styles/reactionic";
+
 body {
-    overflow: scroll;
+  overflow: scroll;
 }
+
 .mapContainer {
-    width: 100%;
-    margin-top: 60px;
-    height: 400px;
+  width: 100%;
+  margin-top: 60px;
+  height: 400px;
 }
+
 .main-button {
-    position:fixed;
-    bottom:0;
-    width: 50%;
+  position: fixed;
+  bottom: 0;
+  width: 50%;
 }
+
 .main-button-second {
-    position:fixed;
-    bottom:0;
-    width: 50%;
-    left: 50%;
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+  left: 50%;
 }
+
 .main-button button {
-    width: 100%;
+  width: 100%;
 }
+
 .main-button-second button {
-    width: 100%;
+  width: 100%;
 }
+
 .main-navigation a {
   width: 100%;
   display: inline-block;
 }
+
 .main-button-third {
-    position: relative;
-    top: 30px;
+  position: relative;
+  top: 30px;
 }

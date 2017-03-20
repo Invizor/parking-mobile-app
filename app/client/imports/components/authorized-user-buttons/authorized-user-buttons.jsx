@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { IonButton} from 'reactionic';
-
+import React, {Component} from 'react';
+import {IonButton} from 'reactionic';
 
 
 export default class AutorizedUserButtons extends Component {

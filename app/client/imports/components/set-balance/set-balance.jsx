@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import { IonContent, IonButton } from 'reactionic';
+import React, {Component} from 'react';
+import {IonContent, IonButton} from 'reactionic';
 import './set-balance.scss';
 
 
-
 export default class SetBalance extends Component {
-
-
 
 
   render() {

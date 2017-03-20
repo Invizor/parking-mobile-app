@@ -31,10 +31,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "ionic-plugin-keyboard": {
+    "de.mayflower.cordova.android-scrollbar": {
         "source": {
             "type": "registry",
-            "id": "ionic-plugin-keyboard"
+            "id": "cordova-android-scrollbar"
         },
         "is_top_level": true,
         "variables": {}

@@ -13,7 +13,7 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "ionic-plugin-keyboard": {
+        "de.mayflower.cordova.android-scrollbar": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },

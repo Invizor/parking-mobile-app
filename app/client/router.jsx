@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import Index from './imports/components/index/index';
 import App from './imports/containers/app/app';
 import Layout from './imports/layouts/main';
@@ -11,35 +11,35 @@ import ParkingItem from './imports/components/parking-item/parking-item';
 import ConfirmPayParking from './imports/components/confirm-pay-parking/confirm-pay-parking';
 import SetBalance from './imports/components/set-balance/set-balance';
 import NoMatch from './imports/components/nomatch/nomatch';
-import CarForm from './imports/components/car-form/car-form'
-import addCarsForm from './imports/components/add-cars-form/add-cars-form'
+import CarList from './imports/components/car-list/car-list'
+import addCarForm from './imports/components/add-car-form/add-car-form'
 
-let main = ()=> {
+let main = () => {
 
   var pageList = [
-    { path:'/', component:Index, title:'React Ionic', done:true},
-    { path:'/autorization-form', component:AutorizationForm, title:'Autorization Form', done:true},
-    { path:'/verification-form/:number', component:VerificationForm, title:'Verification Form', done:true},
-    { path:'/list-car', component:CarForm, title:'Car form', done:true},
-    { path:'/add-car', component:addCarsForm, title:'Add car Form', done:true},
-    { path:'/parking-item/:id', component:ParkingItem, title:'Parking', done:true},
-    { path:'/container', component:Container, title:'Container', done:true},
-    { path:'/set-balance', component:SetBalance, title:'SetBalance', done:true},
-    { path:'/confirm-pay-parking/:id', component:ConfirmPayParking, title:'ConfirmPayParking', done:true}
+    {path: '/', component: Index, title: 'React Ionic', done: true},
+    {path: '/autorization-form', component: AutorizationForm, title: 'Autorization Form', done: true},
+    {path: '/verification-form/:number', component: VerificationForm, title: 'Verification Form', done: true},
+    {path: '/list-car', component: CarList, title: 'Car List', done: true},
+    {path: '/add-car', component: addCarForm, title: 'Add Car Form', done: true},
+    {path: '/parking-item/:id', component: ParkingItem, title: 'Parking', done: true},
+    {path: '/container', component: Container, title: 'Container', done: true},
+    {path: '/set-balance', component: SetBalance, title: 'SetBalance', done: true},
+    {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'ConfirmPayParking', done: true}
   ];
 
   var tabRoutes;
-  const pageRoutes = pageList.map(function(page) {
-    if(page.childRoutes) {
-      tabRoutes = page.childRoutes.map(function(cpage) {
-        return <Route path={cpage.path} component={cpage.component} key={cpage.path} />;
+  const pageRoutes = pageList.map(function (page) {
+    if (page.childRoutes) {
+      tabRoutes = page.childRoutes.map(function (cpage) {
+        return <Route path={cpage.path} component={cpage.component} key={cpage.path}/>;
       });
     } else {
-      return <Route path={page.path} component={page.component} key={page.path} />;
+      return <Route path={page.path} component={page.component} key={page.path}/>;
     }
   });
 
-  var PageList = pageList.map(function(page, idx, pageArray) {
+  var PageList = pageList.map(function (page, idx, pageArray) {
     // strip the page components
     delete page.component;
     return page;
@@ -47,11 +47,10 @@ let main = ()=> {
 
   let mainRoute = (
     <Route component={Layout}>
-      <IndexRoute component={Index} />
+      <IndexRoute component={Index}/>
       {pageRoutes}
     </Route>
   );
-
 
 
   var routes = (
@@ -62,12 +61,11 @@ let main = ()=> {
   );
 
 
-
   //alert("hello");
   ReactDOM.render(
     <Router history={hashHistory}>{routes}</Router>,
     document.getElementById('app')
-  ) ;
+  );
 };
 
 main();

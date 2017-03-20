@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonList, IonItem, IonButton } from 'reactionic';
+import {IonContent, IonList, IonItem, IonButton} from 'reactionic';
 import parkingStorage from '../../storage/parking-storage';
 import './parking-item.scss';
 
@@ -21,7 +21,7 @@ var ParkingItem = React.createClass({
 
   getCurrentParking() {
     if (!Array.prototype.find) {
-      Array.prototype.find = function(predicate) {
+      Array.prototype.find = function (predicate) {
         if (this == null) {
           throw new TypeError('Array.prototype.find called on null or undefined');
         }
@@ -42,8 +42,8 @@ var ParkingItem = React.createClass({
         return undefined;
       };
     }
-    const currentParking = parkingStorage.parkings.find((parking)=> {
-      if(parking._id === this.getParkingId()) {
+    const currentParking = parkingStorage.parkings.find((parking) => {
+      if (parking._id === this.getParkingId()) {
         return parking;
       }
     });
@@ -63,7 +63,6 @@ var ParkingItem = React.createClass({
   getPayParkingLink() {
     return "/confirm-pay-parking/" + this.getParkingId();
   },
-
 
 
   render() {
@@ -108,18 +107,6 @@ var ParkingItem = React.createClass({
               <IonItem>Цена: {parking.price[0].cost}</IonItem>
               :
               <IonItem>Цена неизвестна</IonItem>
-          }
-          {
-            parking.photos.length ?
-              <IonItem>
-                {
-                  parking.photos.map((photo, index)=>{
-                    return <img src={photo} width="100" height="100" key={index}/>
-                  })
-                }
-              </IonItem>
-              :
-              <IonItem>Фотографии отсутствуют</IonItem>
           }
         </IonList>
         <div className="pay-parking">
