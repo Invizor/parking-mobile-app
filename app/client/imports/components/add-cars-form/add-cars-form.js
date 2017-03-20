@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import { IonContent, IonButton, IonIcon } from 'reactionic';
+import { IonContent, IonButton, } from 'reactionic';
 import "./add-cars-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repostitory from '../../storage/local-storage';

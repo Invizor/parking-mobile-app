@@ -10291,20 +10291,23 @@ body {
   margin: 100px auto 0; }
 
 .autorization input {
-  width: 100%;
-  margin-bottom: 20px;
+  width: 90%;
+  margin: 5px 5px 20px 5px;
   border: 1px solid #4b8bf4;
   border-radius: 3px; }
 
 .autorization button {
-  width: 100%; }
+  width: 90%;
+  display: inline-block;
+  margin: 5px 5px 5px 5px; }
 
 .first-symbol {
   width: 10%;
-  display: inline-block; }
+  display: inline-block;
+  vertical-align: -1px; }
 
 .phone-input {
-  width: 80%;
+  width: 90%;
   display: inline-block; }
 
 .warningAuth {
@@ -10320,16 +10323,16 @@ body {
   margin: 100px auto 0; }
 
 .verification input {
-  margin-bottom: 20px;
+  width: 80%;
+  display: inline-block;
   border: 1px solid #4b8bf4;
-  border-radius: 3px; }
+  border-radius: 3px;
+  margin: 5px 5px 20px 5px; }
 
 .verification button {
-  width: 100%; }
-
-.verification-code {
   width: 80%;
-  display: inline-block; }
+  display: inline-block;
+  margin: 5px 5px 5px 5px; }
 
 .verification-title {
   width: 80%;
