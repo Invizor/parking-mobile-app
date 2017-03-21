@@ -44,7 +44,8 @@ class CarList extends React.Component {
     let cars = this.state.carList;
     let myCars = [];
     for (let i = 0; i < cars.length; i++) {
-      myCars.push(<IonButton color="positive">
+      myCars.push(
+        <IonButton color="positive" key={i}>
         <span>{cars[i].title + ' ' + cars[i].regNumber}</span>
       </IonButton>);
     }

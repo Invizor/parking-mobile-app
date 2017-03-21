@@ -10,7 +10,8 @@ export default class ConfirmPayParking extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      carsList: ['Не выбрано', 'BMW', 'Audi', 'Mersedes'],
+      carTitleList: ['Не выбрано', 'BMW', 'Audi', 'Mersedes'],
+      carList: [],
       selectedValue: 'Не указано',
       balance: 0
     };
@@ -26,6 +27,28 @@ export default class ConfirmPayParking extends Component {
     const start = this.props.location.pathname.lastIndexOf("/");
     const parkingId = this.props.location.pathname.substring(start + 1);
     return parkingId;
+  }
+
+  getCarIdByTitle() {
+    const carId = this.state.carList.filter((car)=> {
+      if(car.title === this.state.selectedValue) {
+        return <car></car>;
+      }
+    });
+    return carId[0]._id;
+  }
+  getCarRegNumberByTitle() {
+    const carId = this.state.carList.filter((car)=> {
+      if(car.title === this.state.selectedValue) {
+        return <car></car>;
+      }
+    });
+    return carId[0].regNumber;
+  }
+
+  getBalance() {
+    const balance = Repository.get_obj('user').wallet;
+    this.setState({balance: balance});
   }
 
   getCurrentParking() {
@@ -70,7 +93,7 @@ export default class ConfirmPayParking extends Component {
   }
 
   checkCarsList(e) {
-    if (this.state.carsList === 0) {
+    if (this.state.carTitleList === 0) {
       e.preventDefault();
       console.log('999');
       let ionUpdatePopup = this.context.ionUpdatePopup;
@@ -119,29 +142,64 @@ export default class ConfirmPayParking extends Component {
       })
     }
 
+    else {
+      const parkingID = this.getParkingId();
+      this.getCarIdByTitle();
+      let client = new XMLHttpRequest();
+      client.open("POST", "https://parkimon.ru/api/v1/parking/start", true);
+      client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
+      let params = "zoneId=" + parkingID + "&transportId=" + this.getCarIdByTitle() + "&transportString=" + this.getCarRegNumberByTitle();
+
+      client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      client.send(params);
+
+      client.onload = () => {
+        let list = JSON.parse(client.responseText);
+        console.log("response text", list);
+
+        function sendRequest() {
+          let secondRequest = new XMLHttpRequest();
+          secondRequest.open("GET", "https://parkimon.ru/api/v1/parking/" + list.session._id, true);
+          secondRequest.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));;
+          secondRequest.send();
+          secondRequest.onload = () => {
+            let newList = JSON.parse(secondRequest.responseText);
+            console.log(newList);
+          }
+        }
+
+        window.setInterval(sendRequest, 5000);
+
+
+      };
+    }
+
+
 
   }
 
 
   getUserCars() {
     const myCars = Repository.get_obj('cars');
+    this.setState({carList: myCars.userCars});
     let myCarsTitleList = myCars.userCars.map((car) => {
       return car.title;
     });
     myCarsTitleList.unshift('Не указано');
     console.log('myCarsTitleList', myCarsTitleList);
-    this.setState({carsList: myCarsTitleList});
+    this.setState({carTitleList: myCarsTitleList});
   }
 
   componentDidMount() {
-    console.log('userCars1', this.state.carsList);
+    console.log('userCars1', this.state.carTitleList);
     this.getUserCars();
-    console.log('userCars2', this.state.carsList);
+    this.getBalance();
+    console.log('userCars2', this.state.carTitleList);
   }
 
   render() {
 
-    let data = {
+  /*  let data = {
       numbers: [
         {description: "1"},
         {description: "2"},
@@ -178,9 +236,10 @@ export default class ConfirmPayParking extends Component {
         {description: "Neptune"}
       ]
     };
-
+*/
     //config here... (see config for each screenshot below to get desired results)
 
+    /*
     let config = {
       title: "Выберите количество часов",
       items:[
@@ -190,22 +249,12 @@ export default class ConfirmPayParking extends Component {
       positiveButtonText: "Ок",
       negativeButtonText: "Отмена"
     };
-
-
-/*
-    var config = {
-      title: "Select something",
-      items:[
-        [data.numbers],
-        [data.fruits],
-        [data.measurements],
-        [data.planets]
-      ],
-      wrapWheelText: true,
-      positiveButtonText: "Cool",
-      negativeButtonText: "No way!"
-    };
 */
+
+
+    console.log("this.state.carList", this.state.carList);
+    console.log("this.state.carTitleList", this.state.carTitleList);
+    console.log("this.state.balance", this.state.balance);
 
 
     return (
@@ -219,7 +268,7 @@ export default class ConfirmPayParking extends Component {
 
             <div onMouseDown={e => this.checkCarsList(e)}>
               <IonSelect label='Паркуемое авто'
-                         options={this.state.carsList}
+                         options={this.state.carTitleList}
                          defaultValue='Не указано'
                          ref="carSelect"
                          handleChange={e => this.changeValue(e)}>
@@ -234,16 +283,6 @@ export default class ConfirmPayParking extends Component {
                 </div>
               </IonItem>
             </div>
-
-            <div>
-              {
-                //console.log(window)
-                window.SelectorCordovaPlugin.showSelector(config)
-
-              }
-
-            </div>
-
 
             <div className="balance">
               <IonItem>

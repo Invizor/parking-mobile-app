@@ -18,7 +18,7 @@ class addCarsForm extends React.Component {
         client.open("POST", theUrl, true);
 
         let params = "user=" + String(Repostitory.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
-        params += '&' + "type=" + String(this.refs.typeCar.value) + '&' + "regNumber=" + String(this.refs.plateNumber.value);
+        params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
         console.log('ParamsAddCar=', params);
         client.setRequestHeader("Authorization", 'Bearer ' + String(Repostitory.get_obj("token")));
         client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -51,13 +51,6 @@ class addCarsForm extends React.Component {
                             name="plateNumber"
                             placeholder="номер автомобиля"
                             ref="plateNumber"/>
-                    </div>
-                    <div className="type-car"> 
-                        <input
-                            type="text" 
-                            name="typeCar" 
-                            placeholder="тип машины: a,b,c,d,e" 
-                            ref="typeCar"/> 
                     </div>
                     <div className="add-car-button">
                         <button className="button button-positive"

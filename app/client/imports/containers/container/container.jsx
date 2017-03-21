@@ -80,15 +80,6 @@ export default class Container extends Component {
   }
 
   componentDidMount() {
-    mayflower.AndroidScrollbar.queryVerticalScrollbarVisibility()
-      .then(
-        function (visiblity) {
-          alert('Vertical scrollbar is ' + (visibility ? 'visible' : 'hidden'));
-        },
-        function (error) {
-          alert('error', error);
-        }
-      );
     if (Repository.get_obj('user') == undefined || Repository.get_obj('user').success == false)
       this.getUser('https://parkimon.ru/api/v1/user');
   }

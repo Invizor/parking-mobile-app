@@ -10260,7 +10260,7 @@ body {
 .mapContainer {
   width: 100%;
   margin-top: 60px;
-  height: 400px;
+  height: 200px;
   margin-bottom: 150px; }
 
 .main-button {
@@ -10315,9 +10315,10 @@ body {
   width: 80%;
   display: inline-block;
   font-size: 12px;
-  position: absolute;
+  position: fixed;
   bottom: 5px;
   left: 5px;
+  text-align: justify;
   margin: 0 auto 5px; }
 .verification {
   width: 200px;
@@ -10418,16 +10419,14 @@ body {
   width: 30px;
   height: 30px;
   margin: 5px 5px 5px 5px; }
-.add-car-button button {
-  width: 100%;
-  display: inline-block;
-  position: fixed;
-  bottom: 0;
-  left: 0; }
-
 .car-info {
   width: 200px;
   margin: 100px auto 0; }
+
+.car-info .add-car-button button {
+  width: 80%;
+  display: inline-block;
+  margin: 5px 0 5px 0; }
 
 .car-info input {
   margin-bottom: 10px;
