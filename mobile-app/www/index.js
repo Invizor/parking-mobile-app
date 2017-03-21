@@ -38915,13 +38915,17 @@ var AutorizationForm = function (_React$Component) {
               ref: 'phoneInput' })
           ),
           _react2.default.createElement(
-            _reactionic.IonButton,
-            {
-              color: 'positive',
-              onClick: function onClick() {
-                return _this4.onRegistrationBtnClicked();
-              } },
-            '\u0412\u043E\u0439\u0442\u0438'
+            'div',
+            { className: 'autorization-btn' },
+            _react2.default.createElement(
+              _reactionic.IonButton,
+              {
+                color: 'positive',
+                onClick: function onClick() {
+                  return _this4.onRegistrationBtnClicked();
+                } },
+              '\u0412\u043E\u0439\u0442\u0438'
+            )
           )
         ),
         _react2.default.createElement(
@@ -38995,7 +38999,7 @@ var ConfirmPayParking = function (_Component) {
       selectedValue: 'Не указано',
       balance: 0
     };
-    console.log('one', _this);
+    //console.log('one', this);
     return _this;
   }
 
@@ -39131,6 +39135,38 @@ var ConfirmPayParking = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var data = {
+        numbers: [{ description: "1" }, { description: "2" }, { description: "3" }, { description: "4" }, { description: "5" }, { description: "6" }, { description: "7" }, { description: "8" }, { description: "9" }, { description: "10" }],
+        fruits: [{ description: "Apple" }, { description: "Orange" }, { description: "Pear" }, { description: "Banana" }, { description: "Grapefruit" }, { description: "Tangerine" }],
+        measurements: [{ description: "Teaspoon" }, { description: "Tablespoon" }, { description: "Cup(s)" }, { description: "Quart(s)" }, { description: "Packages (7 oz)" }, { description: "Packages (12 oz)" }],
+        planets: [{ description: "Venus" }, { description: "Jupiter" }, { description: "Earth" }, { description: "Pluto" }, { description: "Neptune" }]
+      };
+
+      //config here... (see config for each screenshot below to get desired results)
+
+      var config = {
+        title: "Выберите количество часов",
+        items: [[data.numbers]],
+        theme: 'light',
+        positiveButtonText: "Ок",
+        negativeButtonText: "Отмена"
+      };
+
+      /*
+          var config = {
+            title: "Select something",
+            items:[
+              [data.numbers],
+              [data.fruits],
+              [data.measurements],
+              [data.planets]
+            ],
+            wrapWheelText: true,
+            positiveButtonText: "Cool",
+            negativeButtonText: "No way!"
+          };
+      */
+
       return _react2.default.createElement(
         'div',
         null,
@@ -39185,6 +39221,13 @@ var ConfirmPayParking = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
+              null,
+
+              //console.log(window)
+              window.SelectorCordovaPlugin.showSelector(config)
+            ),
+            _react2.default.createElement(
+              'div',
               { className: 'balance' },
               _react2.default.createElement(
                 _reactionic.IonItem,
@@ -39217,7 +39260,8 @@ var ConfirmPayParking = function (_Component) {
 }(_react.Component);
 
 ConfirmPayParking.contextTypes = {
-  ionUpdatePopup: _react2.default.PropTypes.func
+  ionUpdatePopup: _react2.default.PropTypes.func,
+  showSelector: _react2.default.PropTypes.func
 };
 exports.default = ConfirmPayParking;
 
