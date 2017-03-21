@@ -1,0 +1,27 @@
+{
+  "name": "cordova-wheel-selector-plugin",
+  "version": "1.0.3",
+  "cordova": {
+    "id": "cordova-wheel-selector-plugin",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "description": "A native Android/iOS wheel selector plugin for Cordova or Ionic projects (pick numbers, strings, etc)",
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonmamy/cordova-wheel-selector-plugin"
+  },
+  "keywords": [
+    "picker",
+    "numberpicker",
+    "stringpicker",
+    "wheelpicker",
+    "ios",
+    "android",
+    "wheelselector"
+  ],
+  "author": "Jason Amy",
+  "license": "MIT"
+}
