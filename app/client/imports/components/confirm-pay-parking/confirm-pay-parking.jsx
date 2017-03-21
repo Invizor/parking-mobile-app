@@ -14,11 +14,12 @@ export default class ConfirmPayParking extends Component {
       selectedValue: 'Не указано',
       balance: 0
     };
-    console.log('one', this);
+    //console.log('one', this);
   }
 
   static contextTypes = {
-    ionUpdatePopup: React.PropTypes.func
+    ionUpdatePopup: React.PropTypes.func,
+    showSelector: React.PropTypes.func
   };
 
   getParkingId() {
@@ -139,6 +140,74 @@ export default class ConfirmPayParking extends Component {
   }
 
   render() {
+
+    let data = {
+      numbers: [
+        {description: "1"},
+        {description: "2"},
+        {description: "3"},
+        {description: "4"},
+        {description: "5"},
+        {description: "6"},
+        {description: "7"},
+        {description: "8"},
+        {description: "9"},
+        {description: "10"}
+      ],
+      fruits: [
+        {description: "Apple"},
+        {description: "Orange"},
+        {description: "Pear"},
+        {description: "Banana"},
+        {description: "Grapefruit"},
+        {description: "Tangerine"}
+      ],
+      measurements: [
+        {description: "Teaspoon"},
+        {description: "Tablespoon"},
+        {description: "Cup(s)"},
+        {description: "Quart(s)"},
+        {description: "Packages (7 oz)"},
+        {description: "Packages (12 oz)"}
+      ],
+      planets: [
+        {description: "Venus"},
+        {description: "Jupiter"},
+        {description: "Earth"},
+        {description: "Pluto"},
+        {description: "Neptune"}
+      ]
+    };
+
+    //config here... (see config for each screenshot below to get desired results)
+
+    let config = {
+      title: "Выберите количество часов",
+      items:[
+        [data.numbers]
+      ],
+      theme: 'light',
+      positiveButtonText: "Ок",
+      negativeButtonText: "Отмена"
+    };
+
+
+/*
+    var config = {
+      title: "Select something",
+      items:[
+        [data.numbers],
+        [data.fruits],
+        [data.measurements],
+        [data.planets]
+      ],
+      wrapWheelText: true,
+      positiveButtonText: "Cool",
+      negativeButtonText: "No way!"
+    };
+*/
+
+
     return (
       <div>
         <div className="confirm-pay-parking">
@@ -164,6 +233,15 @@ export default class ConfirmPayParking extends Component {
                   <input type="number" ref="minutes" min="0" max="59"/>
                 </div>
               </IonItem>
+            </div>
+
+            <div>
+              {
+                //console.log(window)
+                window.SelectorCordovaPlugin.showSelector(config)
+
+              }
+
             </div>
 
 

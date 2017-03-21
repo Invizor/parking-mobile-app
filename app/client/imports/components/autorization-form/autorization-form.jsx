@@ -74,11 +74,13 @@ class AutorizationForm extends React.Component {
                    placeholder="(900) 123-45-67"
                    ref="phoneInput"/>
           </div>
-          <IonButton
-            color="positive"
-            onClick={() => this.onRegistrationBtnClicked()}>
-            Войти
-          </IonButton>
+          <div className="autorization-btn">
+            <IonButton
+              color="positive"
+              onClick={() => this.onRegistrationBtnClicked()}>
+              Войти
+            </IonButton>
+          </div>
         </div>
         <div className="warningAuth">
           Нажимая войти/зарегистрироваться вы принимаете Условия успользования сервиса
