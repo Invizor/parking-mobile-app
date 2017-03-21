@@ -38306,13 +38306,17 @@ var AutorizationForm = function (_React$Component) {
               ref: 'phoneInput' })
           ),
           _react2.default.createElement(
-            _reactionic.IonButton,
-            {
-              color: 'positive',
-              onClick: function onClick() {
-                return _this4.onRegistrationBtnClicked();
-              } },
-            '\u0412\u043E\u0439\u0442\u0438'
+            'div',
+            { className: 'autorization-btn' },
+            _react2.default.createElement(
+              _reactionic.IonButton,
+              {
+                color: 'positive',
+                onClick: function onClick() {
+                  return _this4.onRegistrationBtnClicked();
+                } },
+              '\u0412\u043E\u0439\u0442\u0438'
+            )
           )
         ),
         _react2.default.createElement(
@@ -38386,7 +38390,7 @@ var ConfirmPayParking = function (_Component) {
       selectedValue: 'Не указано',
       balance: 0
     };
-    console.log('one', _this);
+    //console.log('one', this);
     return _this;
   }
 
@@ -38522,6 +38526,38 @@ var ConfirmPayParking = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var data = {
+        numbers: [{ description: "1" }, { description: "2" }, { description: "3" }, { description: "4" }, { description: "5" }, { description: "6" }, { description: "7" }, { description: "8" }, { description: "9" }, { description: "10" }],
+        fruits: [{ description: "Apple" }, { description: "Orange" }, { description: "Pear" }, { description: "Banana" }, { description: "Grapefruit" }, { description: "Tangerine" }],
+        measurements: [{ description: "Teaspoon" }, { description: "Tablespoon" }, { description: "Cup(s)" }, { description: "Quart(s)" }, { description: "Packages (7 oz)" }, { description: "Packages (12 oz)" }],
+        planets: [{ description: "Venus" }, { description: "Jupiter" }, { description: "Earth" }, { description: "Pluto" }, { description: "Neptune" }]
+      };
+
+      //config here... (see config for each screenshot below to get desired results)
+
+      var config = {
+        title: "Выберите количество часов",
+        items: [[data.numbers]],
+        theme: 'light',
+        positiveButtonText: "Ок",
+        negativeButtonText: "Отмена"
+      };
+
+      /*
+          var config = {
+            title: "Select something",
+            items:[
+              [data.numbers],
+              [data.fruits],
+              [data.measurements],
+              [data.planets]
+            ],
+            wrapWheelText: true,
+            positiveButtonText: "Cool",
+            negativeButtonText: "No way!"
+          };
+      */
+
       return _react2.default.createElement(
         'div',
         null,
@@ -38576,6 +38612,13 @@ var ConfirmPayParking = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
+              null,
+
+              //console.log(window)
+              window.SelectorCordovaPlugin.showSelector(config)
+            ),
+            _react2.default.createElement(
+              'div',
               { className: 'balance' },
               _react2.default.createElement(
                 _reactionic.IonItem,
@@ -38608,7 +38651,8 @@ var ConfirmPayParking = function (_Component) {
 }(_react.Component);
 
 ConfirmPayParking.contextTypes = {
-  ionUpdatePopup: _react2.default.PropTypes.func
+  ionUpdatePopup: _react2.default.PropTypes.func,
+  showSelector: _react2.default.PropTypes.func
 };
 exports.default = ConfirmPayParking;
 
@@ -39706,7 +39750,7 @@ var addCarsForm = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement(_reactionic.IonContent, _extends({ customClasses: '' }, this.props), _react2.default.createElement('div', { className: 'car-info' }, _react2.default.createElement('div', { className: 'titleAddCar' }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"), _react2.default.createElement('div', { className: 'title-car' }, _react2.default.createElement('input', { type: 'text',
+      return _react2.default.createElement(_reactionic.IonContent, _extends({ customClasses: '' }, this.props, { className: 'add-car-container' }), _react2.default.createElement('div', { className: 'car-info' }, _react2.default.createElement('div', { className: 'titleAddCar' }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"), _react2.default.createElement('div', { className: 'title-car' }, _react2.default.createElement('input', { type: 'text',
         name: 'title',
         placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
         ref: 'titleCar' })), _react2.default.createElement('div', { className: 'plate-number' }, _react2.default.createElement('input', { type: 'text',

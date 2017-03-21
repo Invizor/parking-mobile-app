@@ -33,7 +33,7 @@ class addCarsForm extends React.Component {
 
   render() {
     return (
-      <IonContent customClasses="" {...this.props}>
+      <IonContent customClasses="" {...this.props} className="add-car-container">
 
         <div className="car-info">
           <div className="titleAddCar">
