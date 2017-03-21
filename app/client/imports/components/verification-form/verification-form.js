@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton} from 'reactionic';
+import {IonContent, IonButton, IonNavBar} from 'reactionic';
 import "./verification-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repository from '../../storage/local-storage';

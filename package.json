@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start_browser": "webpack && cd /mobile-app; cordova run browser"
   },
   "author": "",
   "license": "ISC",
