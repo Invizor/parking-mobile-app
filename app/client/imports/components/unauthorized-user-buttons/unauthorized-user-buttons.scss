@@ -1,0 +1,19 @@
+.unauthorized-user-buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  height: 58px;
+}
+
+.unauthorized-user-button a {
+  display: block;
+  min-height: 30px;
+  line-height: 28px;
+  width: 120px;
+}
+
+.unauthorized-user-button:nth-child(2) a {
+  height:100%;
+  padding-top: 13px;
+}

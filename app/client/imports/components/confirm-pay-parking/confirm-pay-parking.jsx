@@ -29,21 +29,13 @@ export default class ConfirmPayParking extends Component {
     return parkingId;
   }
 
-  getCarIdByTitle() {
+  getCarByTitle() {
     const carId = this.state.carList.filter((car)=> {
       if(car.title === this.state.selectedValue) {
         return <car></car>;
       }
     });
-    return carId[0]._id;
-  }
-  getCarRegNumberByTitle() {
-    const carId = this.state.carList.filter((car)=> {
-      if(car.title === this.state.selectedValue) {
-        return <car></car>;
-      }
-    });
-    return carId[0].regNumber;
+    return carId[0];
   }
 
   getBalance() {
@@ -143,12 +135,53 @@ export default class ConfirmPayParking extends Component {
     }
 
     else {
+
+      if (window.SelectorCordovaPlugin) {
+        let data = {
+          numbers: [
+            {description: 1},
+            {description: 3},
+            {description: 3},
+            {description: 4},
+            {description: 5},
+            {description: 6},
+            {description: 7},
+            {description: 8},
+
+          ]
+        };
+
+        let config = {
+          title: "Укажите длительность",
+          items:[
+            [data.numbers]
+          ],
+          positiveButtonText: "Готово",
+          negativeButtonText: "Отмена"
+        };
+
+
+
+        window.SelectorCordovaPlugin.showSelector(config, function(result) {
+          console.log("result: " + JSON.stringify(result) );
+          console.log('User chose number: ' + result[0].description + ' at array index: ' + result[0].index);
+
+          //note: as of now in iOS result[1] is ignored
+          console.log('User chose fruit: ' + result[1].description + ' at array index: ' + result[1].index);
+        }, function() {
+          console.log('Canceled');
+        });
+      }
+
+
+
+
       const parkingID = this.getParkingId();
-      this.getCarIdByTitle();
+      this.getCarByTitle();
       let client = new XMLHttpRequest();
       client.open("POST", "https://parkimon.ru/api/v1/parking/start", true);
       client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-      let params = "zoneId=" + parkingID + "&transportId=" + this.getCarIdByTitle() + "&transportString=" + this.getCarRegNumberByTitle();
+      let params = "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber;
 
       client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       client.send(params);
@@ -157,18 +190,22 @@ export default class ConfirmPayParking extends Component {
         let list = JSON.parse(client.responseText);
         console.log("response text", list);
 
-        function sendRequest() {
+        let parkingTimer = window.setInterval(()=>{
           let secondRequest = new XMLHttpRequest();
           secondRequest.open("GET", "https://parkimon.ru/api/v1/parking/" + list.session._id, true);
-          secondRequest.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));;
+          secondRequest.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
           secondRequest.send();
           secondRequest.onload = () => {
             let newList = JSON.parse(secondRequest.responseText);
             console.log(newList);
+            if (newList.session.status === "done") {
+              console.log("done");
+              clearInterval(parkingTimer);
+            }
           }
-        }
+        }, 5000);
 
-        window.setInterval(sendRequest, 5000);
+
 
 
       };
@@ -199,62 +236,6 @@ export default class ConfirmPayParking extends Component {
 
   render() {
 
-  /*  let data = {
-      numbers: [
-        {description: "1"},
-        {description: "2"},
-        {description: "3"},
-        {description: "4"},
-        {description: "5"},
-        {description: "6"},
-        {description: "7"},
-        {description: "8"},
-        {description: "9"},
-        {description: "10"}
-      ],
-      fruits: [
-        {description: "Apple"},
-        {description: "Orange"},
-        {description: "Pear"},
-        {description: "Banana"},
-        {description: "Grapefruit"},
-        {description: "Tangerine"}
-      ],
-      measurements: [
-        {description: "Teaspoon"},
-        {description: "Tablespoon"},
-        {description: "Cup(s)"},
-        {description: "Quart(s)"},
-        {description: "Packages (7 oz)"},
-        {description: "Packages (12 oz)"}
-      ],
-      planets: [
-        {description: "Venus"},
-        {description: "Jupiter"},
-        {description: "Earth"},
-        {description: "Pluto"},
-        {description: "Neptune"}
-      ]
-    };
-*/
-    //config here... (see config for each screenshot below to get desired results)
-
-    /*
-    let config = {
-      title: "Выберите количество часов",
-      items:[
-        [data.numbers]
-      ],
-      theme: 'light',
-      positiveButtonText: "Ок",
-      negativeButtonText: "Отмена"
-    };
-*/
-
-
-    console.log("this.state.carList", this.state.carList);
-    console.log("this.state.carTitleList", this.state.carTitleList);
-    console.log("this.state.balance", this.state.balance);
 
 
     return (
@@ -289,6 +270,13 @@ export default class ConfirmPayParking extends Component {
                 Баланс <span className="balance-amount">{this.state.balance} руб.</span>
               </IonItem>
             </div>
+            <div>
+              {
+
+              }
+            </div>
+
+
 
 
             <IonButton color="positive"

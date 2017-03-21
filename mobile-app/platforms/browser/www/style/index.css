@@ -10254,14 +10254,9 @@ a.button {
 .popover {
   height: auto; }
 
-body {
-  overflow: scroll; }
-
 .mapContainer {
   width: 100%;
-  margin-top: 60px;
-  height: 200px;
-  margin-bottom: 150px; }
+  height: 400px; }
 
 .main-button {
   position: fixed;
@@ -10287,6 +10282,29 @@ body {
 .main-button-third {
   position: relative;
   top: 30px; }
+.authorized-user-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  height: 58px; }
+
+.authorized-user-button a {
+  display: block;
+  min-height: 30px;
+  line-height: 28px;
+  width: 120px; }
+
+.authorized-user-button:nth-child(2) a {
+  height: 100%;
+  padding-top: 13px; }
+
+.balance-info {
+  width: 100%;
+  margin: 50px 0;
+  font-size: 26px;
+  text-align: center;
+  font-weight: bold;
+  font-style: italic; }
 .autorization {
   width: 200px;
   margin: 100px auto 0; }
@@ -10395,8 +10413,8 @@ body {
   margin-bottom: 30px;
   color: #4b8bf4; }
 .list-cars {
-  width: 200px;
-  margin: 100px auto 0; }
+  width: 90%;
+  margin: 0 auto; }
 
 .list-cars button {
   width: 180px;
@@ -10441,7 +10459,3 @@ body {
   color: #4b8bf4;
   margin: 5px 5px 5px 5px;
   text-align: left; }
-
-.add-car-container {
-  display: flex;
-  flex-direction: column; }

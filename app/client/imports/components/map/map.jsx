@@ -63,8 +63,8 @@ export default class Map extends Component {
     getGeoLocation(e, position);
   }
 
-  getGeoLocation(position) {
-    console.log(position)
+  getGeoLocation(e, position) {
+    console.log(position);
     this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
   }
 
@@ -144,26 +144,6 @@ export default class Map extends Component {
           onMarkerClick={this.handleMarkerClick}
           mapCenter={this.state.mapCenter}
         />
-        <div>
-
-        </div>
-        <div className="mapButton">
-          <IonButton color="positive" onClick={e => this.onGeoLocBtnClick(e)}>
-            Определить местоположение!
-          </IonButton>
-          <div>
-            <IonButton color="positive" onClick={e => this.onShowStateBtnClick(e)}>
-              Показать состояние!
-            </IonButton>
-          </div>
-
-          <div>
-            <IonButton color="positive" onClick={e => this.onClearLocalStorageClick(e)}>
-              Очистить localStorage!
-            </IonButton>
-          </div>
-        </div>
-
       </div>
 
     );

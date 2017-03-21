@@ -11,26 +11,7 @@ Object.assign = require('object-assign');
 
 export default class Container extends Component {
 
-  static defaultProps = {
-    center: [45.0287579, 38.9680473],
-    zoom: 18,
-    greatPlaceCoords: {lat: 45.0287579, lng: 38.9680473}
-  };
 
-
-  parkingMarkers = [
-    {
-      id: 1225,
-      coordinates: [45.028857, 38.967913]
-    },
-    {
-      id: 1227,
-      coordinates: [45.028808, 38.968230]
-    }
-  ];
-
-
-  geoLocation = [45.0287579, 38.9680473];
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
