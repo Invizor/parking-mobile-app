@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton} from 'reactionic';
+import {IonContent, IonButton, IonNavBar} from 'reactionic';
 import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repostitory from '../../storage/local-storage';
@@ -63,7 +63,6 @@ class AutorizationForm extends React.Component {
   }
 
   render() {
-
     return (
       <IonContent customClasses="" {...this.props}>
         <div className="autorization">

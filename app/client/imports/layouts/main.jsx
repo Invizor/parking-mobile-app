@@ -30,28 +30,34 @@ var Layout = React.createClass({
       page.leftHeaderButton = backButton;
       return page
     });
-
+      console.log("List=",pageList);
     var pageProps = _.keyBy(pageList, 'path');
 
     // custom pageProps
-    pageProps['/'].leftHeaderButton=null;
+    pageProps['/container'].leftHeaderButton=null;
 
-
-
+      console.log("PageProps=",pageProps);
     return pageProps[path];
   },
   render() {
-    var currentPageProps = this.getPageProps(this.context.location.pathname);
-    
+    console.log("this=",this);
+    console.log("props=",this.props);
+    console.log(this.props.routes[this.props.routes.length - 1]);
+    var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
+
     return (
-
-      <IonContent customClasses=""
-                  {...this.props}>
-
-        <IonView customClasses="" {...this.props}>
-          {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
-        </IonView>
-      </IonContent>
+        <IonSideMenuContent>
+            <IonNavBar customClasses="nav-blue"
+                       title={currentPageProps.headerTitle}
+                       leftButton={currentPageProps.leftHeaderButton}
+                       {...this.props}
+            />
+            <IonContent customClasses="" {...this.props}>
+              <IonView customClasses="" {...this.props}>
+                {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
+              </IonView>
+            </IonContent>
+        </IonSideMenuContent>
 
 
       /*

@@ -18,14 +18,14 @@ let main = () => {
 
   var pageList = [
     {path: '/', component: Index, title: 'React Ionic', done: true},
-    {path: '/autorization-form', component: AutorizationForm, title: 'Autorization Form', done: true},
-    {path: '/verification-form/:number', component: VerificationForm, title: 'Verification Form', done: true},
-    {path: '/list-car', component: CarList, title: 'Car List', done: true},
-    {path: '/add-car', component: addCarForm, title: 'Add Car Form', done: true},
-    {path: '/parking-item/:id', component: ParkingItem, title: 'Parking', done: true},
-    {path: '/container', component: Container, title: 'Container', done: true},
-    {path: '/set-balance', component: SetBalance, title: 'SetBalance', done: true},
-    {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'ConfirmPayParking', done: true}
+    {path: '/autorization-form', component: AutorizationForm, title: 'Авторизация', done: true},
+    {path: '/verification-form/:number', component: VerificationForm, title: 'Верификация', done: true},
+    {path: '/list-car', component: CarList, title: 'Список автомобилей', done: true},
+    {path: '/add-car', component: addCarForm, title: 'Добавление машины', done: true},
+    {path: '/parking-item/:id', component: ParkingItem, title: 'Информация о парковке', done: true},
+    {path: '/container', component: Container, title: 'Карта', done: true},
+    {path: '/set-balance', component: SetBalance, title: 'Пополнение баланса', done: true},
+    {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'Условия парковки', done: true}
   ];
 
   var tabRoutes;
