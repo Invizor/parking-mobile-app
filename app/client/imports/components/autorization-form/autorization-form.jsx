@@ -63,6 +63,7 @@ class AutorizationForm extends React.Component {
   }
 
   render() {
+
     return (
       <IonContent customClasses="" {...this.props}>
         <div className="autorization">
@@ -80,7 +81,7 @@ class AutorizationForm extends React.Component {
           </IonButton>
         </div>
         <div className="warningAuth">
-          Нашимая войти/зарегистрироваться вы принимаете Условия успользования сервиса
+          Нажимая войти/зарегистрироваться вы принимаете Условия успользования сервиса
         </div>
       </IonContent>
     );

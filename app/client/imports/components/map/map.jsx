@@ -15,6 +15,7 @@ import {IonButton} from 'reactionic';
 import Repository from '../../storage/local-storage';
 import {IonContent, IonSpinner} from 'reactionic';
 import {AbsoluteMiddle} from '../../utils/helpers';
+import "./map.scss";
 
 
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
@@ -146,21 +147,22 @@ export default class Map extends Component {
         <div>
 
         </div>
-        <IonButton color="positive" onClick={e => this.onGeoLocBtnClick(e)}>
-          Определить местоположение!
-        </IonButton>
-        <div>
-          <IonButton color="positive" onClick={e => this.onShowStateBtnClick(e)}>
-            Показать состояние!
+        <div className="mapButton">
+          <IonButton color="positive" onClick={e => this.onGeoLocBtnClick(e)}>
+            Определить местоположение!
           </IonButton>
-        </div>
+          <div>
+            <IonButton color="positive" onClick={e => this.onShowStateBtnClick(e)}>
+              Показать состояние!
+            </IonButton>
+          </div>
 
-        <div>
-          <IonButton color="positive" onClick={e => this.onClearLocalStorageClick(e)}>
-            Очистить localStorage!
-          </IonButton>
+          <div>
+            <IonButton color="positive" onClick={e => this.onClearLocalStorageClick(e)}>
+              Очистить localStorage!
+            </IonButton>
+          </div>
         </div>
-
 
       </div>
 
