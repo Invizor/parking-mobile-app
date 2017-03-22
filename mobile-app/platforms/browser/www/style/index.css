@@ -10292,6 +10292,9 @@ a.button {
 
 .nav-blue button {
   color: #FFF; }
+
+.overflow-scroll .has-header {
+  top: 0; }
 .unauthorized-user-buttons {
   margin-top: 50px;
   display: flex;
@@ -10360,11 +10363,15 @@ a.button {
   width: 80%;
   display: inline-block;
   font-size: 12px;
+  text-align: center;
   position: fixed;
-  bottom: 5px;
-  left: 5px;
-  text-align: justify;
-  margin: 0 auto 5px; }
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto; }
+
+.warningAuth a {
+  text-decoration: underline; }
 .verification {
   width: 200px;
   margin: 100px auto 0; }
@@ -10440,17 +10447,29 @@ a.button {
   margin-bottom: 30px;
   color: #4b8bf4; }
 .list-cars {
-  width: 90%;
+  width: 100%;
   margin: 0 auto; }
 
-.list-cars button {
-  width: 180px;
-  height: 90px;
+.list-cars .content-list-cars {
+  left: 0;
+  right: 0;
+  margin: 0 auto; }
+
+.item {
+  min-height: 30px; }
+
+.item h2 {
+  text-align: left;
   margin: 5px 5px 5px 5px; }
 
-.my-cars {
-  width: 80%;
-  display: inline-block; }
+.item p {
+  text-align: left;
+  margin: 5px 5px 5px 5px;
+  font-size: 18px; }
+
+.item img {
+  width: 20px;
+  height: 20px; }
 
 .list-cars .titleListCar {
   width: 80%;

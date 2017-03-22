@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton, IonIcon} from 'reactionic';
+import {IonContent, IonButton, IonIcon, IonList, IonItem} from 'reactionic';
 import "./car-list.scss";
 import {findDOMNode} from 'react-dom';
 import Repository from '../../storage/local-storage';
@@ -45,9 +45,12 @@ class CarList extends React.Component {
     let myCars = [];
     for (let i = 0; i < cars.length; i++) {
       myCars.push(
-        <IonButton color="positive" key={i}>
-        <span>{cars[i].title + ' ' + cars[i].regNumber}</span>
-      </IonButton>);
+          <IonItem>
+            <h2>{cars[i].title}</h2>
+            <p>{cars[i].regNumber}</p>
+            <img src="./img/delete.png"/>
+          </IonItem>
+      );
     }
     return (
       <IonContent customClasses="" {...this.props}>
@@ -56,7 +59,9 @@ class CarList extends React.Component {
           <div className="titleListCar">
             Ваши транспортные средства:
           </div>
-          {myCars}
+          <IonList className="content-list-cars">
+            {myCars}
+          </IonList>
           <div className="button-add-car">
             <img className="addCarButton" src='./img/addCar.png' onClick={() => this.addCar()}/>
           </div>

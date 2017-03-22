@@ -82,7 +82,7 @@ class AutorizationForm extends React.Component {
           </div>
         </div>
         <div className="warningAuth">
-          Нажимая войти/зарегистрироваться вы принимаете Условия успользования сервиса
+          Нажимая войти/зарегистрироваться вы принимаете <a href="none.html">Условия использования сервиса</a>
         </div>
       </IonContent>
     );

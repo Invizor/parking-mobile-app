@@ -30,19 +30,14 @@ var Layout = React.createClass({
       page.leftHeaderButton = backButton;
       return page
     });
-      console.log("List=",pageList);
     var pageProps = _.keyBy(pageList, 'path');
 
     // custom pageProps
     pageProps['/container'].leftHeaderButton=null;
 
-      console.log("PageProps=",pageProps);
     return pageProps[path];
   },
   render() {
-    console.log("this=",this);
-    console.log("props=",this.props);
-    console.log(this.props.routes[this.props.routes.length - 1]);
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
 
     return (
