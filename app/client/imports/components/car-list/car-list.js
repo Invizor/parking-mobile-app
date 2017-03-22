@@ -40,21 +40,19 @@ class CarList extends React.Component {
     this.getListCar('https://parkimon.ru/api/v1/user-car');
   }
 
-  deleteCarBtnClicked(carIndex) {
-    let url = "https://parkimon.ru/api/v1/user-car/remove/" + carIndex;
-    console.log("url", url);
-
-    let client = new XMLHttpRequest();
-    client.open("GET", url, true);
-    client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.send();
-
-    client.onload = () => {
-      let userList = JSON.parse(client.responseText);
-      console.log(userList);
-    };
-
+  deleteCarBtnClicked(index) {
+      let masCars = this.state.carList;  
+      let theUrl = "https://parkimon.ru/api/v1/user-car/remove/"+String(masCars[index]._id); 
+      let client = new XMLHttpRequest();     client.open("GET", theUrl, true); 
+      client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token"))); 
+      client.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+      client.send();  
+      client.onload = () => { 
+          let result = JSON.parse(client.responseText); 
+          console.log(result); 
+          if(result.success == true) masCars.splice(index,1); 
+          this.setState({carList : masCars}); 
+      };
   }
 
   showEditCarPage(carId) {
@@ -65,14 +63,21 @@ class CarList extends React.Component {
 
   render() {
     let cars = this.state.carList;
+    console.log(cars);
     let myCars = [];
     for (let i = 0; i < cars.length; i++) {
       myCars.push(
           <IonItem key={i}>
-            <h2>{cars[i].title}</h2>
-            <p>{cars[i].regNumber}</p>
-            <img className="img-delete" src="./img/delete.png" onClick={this.deleteCarBtnClicked(cars[i]._id)} />
-            <img className="img-edit" src="./img/edit.png" onClick={()=>this.showEditCarPage(cars[i]._id)}/>
+              <div className="car-item-container">
+                  <div className="item-info">
+                      <h2>{cars[i].title}</h2>
+                      <p>{cars[i].regNumber}</p>
+                  </div>
+                  <div className="item-buttons">
+                      <img className="img-delete" src="./img/delete.png" onClick={()=>this.deleteCarBtnClicked(i)} />
+                      <img className="img-edit" src="./img/edit.png" onClick={()=>this.showEditCarPage(cars[i]._id)}/>
+                  </div>
+              </div>
           </IonItem>
       );
     }
