@@ -255,15 +255,6 @@ export default class ConfirmPayParking extends Component {
                          handleChange={e => this.changeValue(e)}>
               </IonSelect>
             </div>
-            <div className="duration">
-              <IonItem>
-                <div>Укажите время парковки</div>
-                <div>
-                  <input type="number" ref="hours" min="0" max="23"/>
-                  <input type="number" ref="minutes" min="0" max="59"/>
-                </div>
-              </IonItem>
-            </div>
 
             <div className="balance">
               <IonItem>

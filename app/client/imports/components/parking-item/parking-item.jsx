@@ -69,12 +69,11 @@ var ParkingItem = React.createClass({
     const parking = this.getCurrentParking();
 
     return (
-      <IonContent customClasses=""
-                  {...this.props}>
+      <div>
         <IonList>
           {
             parking.zoneId ?
-              <h1 className="text-center">Парковка: #{parking.zoneId}</h1>
+              <h1 className="text-center">Парковка #{parking.zoneId}</h1>
               :
               <IonItem divider>Информация неизвестна</IonItem>
           }
@@ -115,7 +114,7 @@ var ParkingItem = React.createClass({
             Оплатить парковку
           </IonButton>
         </div>
-      </IonContent>
+      </div>
 
     )
   }

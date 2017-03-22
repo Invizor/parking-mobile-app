@@ -10282,6 +10282,16 @@ a.button {
 .main-button-third {
   position: relative;
   top: 30px; }
+
+.nav-blue {
+  background: #4b8bf4;
+  color: #FFF; }
+
+.nav-blue h1 {
+  color: #FFF; }
+
+.nav-blue button {
+  color: #FFF; }
 .unauthorized-user-buttons {
   margin-top: 50px;
   display: flex;
@@ -10299,7 +10309,7 @@ a.button {
   height: 100%;
   padding-top: 13px; }
 .authorized-user-buttons {
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
@@ -10317,7 +10327,7 @@ a.button {
 
 .balance-info {
   width: 100%;
-  margin: 50px 0;
+  margin: 40px 0;
   font-size: 26px;
   text-align: center;
   font-weight: bold;
