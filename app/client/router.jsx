@@ -14,6 +14,7 @@ import NoMatch from './imports/components/nomatch/nomatch';
 import CarList from './imports/components/car-list/car-list'
 import addCarForm from './imports/components/add-car-form/add-car-form';
 import ParkingHistory from './imports/components/parking-history/parking-history';
+import EditCar from './imports/components/edit-car/edit-car';
 
 let main = () => {
 
@@ -27,7 +28,8 @@ let main = () => {
     {path: '/container', component: Container, title: 'Карта', done: true},
     {path: '/set-balance', component: SetBalance, title: 'Пополнение баланса', done: true},
     {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'Условия парковки', done: true},
-    {path: '/parking-history/:id', component: ParkingHistory, title: 'История парковок', done: true}
+    {path: '/parking-history/:id', component: ParkingHistory, title: 'История парковок', done: true},
+    {path: '/edit-car/:id', component: EditCar, title: 'Редактирование автомобиля', done: true}
   ];
 
   var tabRoutes;

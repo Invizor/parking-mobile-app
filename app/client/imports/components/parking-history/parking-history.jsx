@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {IonList, IonItem} from 'reactionic';
+import {IonContent, IonList, IonItem} from 'reactionic';
 import Repository from '../../storage/local-storage';
 
 export default class ParkingHistory extends Component {
@@ -32,24 +32,26 @@ export default class ParkingHistory extends Component {
 
   render() {
     console.log("parking history",this.state.parkingHistory);
-    let counter = 0;
+    let counter = 1;
     let parkingList = [];
     this.state.parkingHistory.map((parking, index)=> {
       parkingList.push(
         <IonItem key={index}>
-          <div>{counter++}</div>
-          <div>Парковка: #{parking.zone}</div>
+          <div>{counter++}. Парковка: #{parking.zone}</div>
+          <div>Дата парковки: {parking.start.substring(0,10)}</div>
+          <div>Время парковки: {parking.start.substring(11,16)}</div>
           <div>Номер вашего авто: {parking.transportNumber}</div>
         </IonItem>
       )
     });
     return (
-      <IonList>
-        {
-          parkingList
-        }
-
-      </IonList>
+      <IonContent customClasses="" {...this.props}>
+        <IonList>
+          {
+            parkingList
+          }
+        </IonList>
+      </IonContent>
     )
   }
 }

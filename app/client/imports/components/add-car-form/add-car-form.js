@@ -1,10 +1,8 @@
 import React, {PropTypes, Component} from 'react';
 import {IonContent, IonButton, IonIcon} from 'reactionic';
 import "./add-car-form.scss";
-import {findDOMNode} from 'react-dom';
 import Repostitory from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
-import userStorage from '../../storage/user-storage';
 
 class addCarsForm extends React.Component {
 
@@ -37,7 +35,7 @@ class addCarsForm extends React.Component {
 
                 <div className="car-info">
                     <div className="titleAddCar">
-                        Добавить ваш автомобиль:
+                        Добавьте ваш автомобиль:
                     </div>
                     <div className="title-car">
                         <input type="text"
