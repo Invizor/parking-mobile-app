@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+.car-item-container{
+  display: flex;
+  justify-content: space-between;
+}
+
 .list-cars .content-list-cars{
   left: 0;
   right: 0;
@@ -14,10 +19,12 @@
 }
 
 .item h2{
+  width: 90%;
   text-align: left;
   margin: 5px 5px 5px 5px;
 }
 .item p{
+  width: 90%;
   text-align: left;
   margin: 5px 5px 5px 5px;
   font-size: 18px;
@@ -26,13 +33,15 @@
 .item .img-delete{
   width: 20px;
   height: 20px;
-  align-items: right;
+  margin: 5px 5px 5px 5px;
+  float: right;
 }
 
 .item .img-edit{
   width: 20px;
   height: 20px;
-  align-items: right;
+  margin: 5px 5px 5px 5px;
+  float: right;
 }
 
 .list-cars .titleListCar {
