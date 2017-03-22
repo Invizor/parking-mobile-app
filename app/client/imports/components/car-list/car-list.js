@@ -31,6 +31,7 @@ class CarList extends React.Component {
     client.send();
     client.onload = () => {
       let list = JSON.parse(client.responseText);
+      console.log("list", list);
       Repository.add_obj("cars", list);
       this.setState({carList: list.userCars});
     };
@@ -71,7 +72,7 @@ class CarList extends React.Component {
           <IonItem key={i}>
             <h2>{cars[i].title}</h2>
             <p>{cars[i].regNumber}</p>
-            <img className="img-delete" src="./img/delete.png" onClick={this.deleteCarBtnClicked(cars[i]._id)} />
+            <img className="img-delete" src="./img/delete.png" onClick={()=>this.deleteCarBtnClicked(cars[i]._id)} />
             <img className="img-edit" src="./img/edit.png" onClick={()=>this.showEditCarPage(cars[i]._id)}/>
           </IonItem>
       );

@@ -38737,25 +38737,36 @@ var EditCar = function (_Component) {
 
     _this.state = {
       carTitleValue: _this.getCar().title,
-      carRegNumberValue: _this.getCar().RegNumber
+      carRegNumberValue: _this.getCar().regNumber
     };
     return _this;
   }
 
   _createClass(EditCar, [{
+    key: 'handleTitleChange',
+    value: function handleTitleChange(e) {
+      this.setState({ carTitleValue: e.target.value });
+    }
+  }, {
+    key: 'handleRegNumberChange',
+    value: function handleRegNumberChange(e) {
+      this.setState({ carRegNumberValue: e.target.value });
+    }
+  }, {
     key: 'getCar',
     value: function getCar() {
       var start = this.props.location.pathname.lastIndexOf("/");
       var carId = this.props.location.pathname.substring(start + 1);
-      console.log(carId);
       var carList = _localStorage2.default.get_obj('cars');
-      carList.filter(function (car) {
+      var car = carList.userCars.filter(function (car) {
         if (car._id === carId) {
           return true;
         } else {
           return false;
         }
       });
+      console.log('car', car[0]);
+      return car[0];
 
       /* const taskId = this.props.taskId;
        let task = this.props.tasks.find((element)=> {
@@ -38768,19 +38779,18 @@ var EditCar = function (_Component) {
        return task;*/
     }
   }, {
-    key: 'addCarToList',
-    value: function addCarToList(theUrl) {
+    key: 'editCarBtnClicked',
+    value: function editCarBtnClicked(theUrl) {
+      console.log("theUrl", theUrl);
       var history = (0, _createHashHistory2.default)();
       var client = new XMLHttpRequest();
       client.open("POST", theUrl, true);
 
-      var params = "user=" + String(_localStorage2.default.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
-      params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
-      console.log('ParamsAddCar=', params);
+      var params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
+      console.log('ParamsEditCar', params);
       client.setRequestHeader("Authorization", 'Bearer ' + String(_localStorage2.default.get_obj("token")));
       client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       client.send(params);
-
       client.onload = function () {
         var userList = JSON.parse(client.responseText);
         console.log(userList);
@@ -38810,6 +38820,7 @@ var EditCar = function (_Component) {
               name: 'title',
               placeholder: '\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435',
               ref: 'titleCar',
+              value: this.state.carTitleValue,
               onChange: function onChange(e) {
                 return _this2.handleTitleChange(e);
               } })
@@ -38822,6 +38833,7 @@ var EditCar = function (_Component) {
               name: 'plateNumber',
               placeholder: '\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F',
               ref: 'plateNumber',
+              value: this.state.carRegNumberValue,
               onChange: function onChange(e) {
                 return _this2.handleRegNumberChange(e);
               } })
@@ -38833,7 +38845,7 @@ var EditCar = function (_Component) {
               'button',
               { className: 'button button-positive',
                 onClick: function onClick() {
-                  return _this2.editCarBtnClicked('https://parkimon.ru/api/v1/user-car/edit)');
+                  return _this2.editCarBtnClicked('https://parkimon.ru/api/v1/user-car/edit/' + _this2.getCar()._id);
                 } },
               '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C'
             )
@@ -40143,6 +40155,7 @@ var CarList = function (_React$Component) {
       client.send();
       client.onload = function () {
         var list = JSON.parse(client.responseText);
+        console.log("list", list);
         _localStorage2.default.add_obj("cars", list);
         _this2.setState({ carList: list.userCars });
       };
@@ -40185,7 +40198,9 @@ var CarList = function (_React$Component) {
       var myCars = [];
 
       var _loop = function _loop(i) {
-        myCars.push(_react2.default.createElement(_reactionic.IonItem, { key: i }, _react2.default.createElement('h2', null, cars[i].title), _react2.default.createElement('p', null, cars[i].regNumber), _react2.default.createElement('img', { className: 'img-delete', src: './img/delete.png', onClick: _this3.deleteCarBtnClicked(cars[i]._id) }), _react2.default.createElement('img', { className: 'img-edit', src: './img/edit.png', onClick: function onClick() {
+        myCars.push(_react2.default.createElement(_reactionic.IonItem, { key: i }, _react2.default.createElement('h2', null, cars[i].title), _react2.default.createElement('p', null, cars[i].regNumber), _react2.default.createElement('img', { className: 'img-delete', src: './img/delete.png', onClick: function onClick() {
+            return _this3.deleteCarBtnClicked(cars[i]._id);
+          } }), _react2.default.createElement('img', { className: 'img-edit', src: './img/edit.png', onClick: function onClick() {
             return _this3.showEditCarPage(cars[i]._id);
           } })));
       };

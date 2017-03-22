@@ -9,22 +9,32 @@ class EditCar extends Component {
     super(props, context);
     this.state = {
       carTitleValue: this.getCar().title,
-      carRegNumberValue: this.getCar().RegNumber
+      carRegNumberValue: this.getCar().regNumber
     };
   }
+
+  handleTitleChange(e) {
+    this.setState({carTitleValue: e.target.value});
+  }
+  handleRegNumberChange(e) {
+    this.setState({carRegNumberValue: e.target.value});
+  }
+
 
   getCar() {
     const start = this.props.location.pathname.lastIndexOf("/");
     const carId = this.props.location.pathname.substring(start + 1);
-    console.log(carId);
     const carList = Repostitory.get_obj('cars');
-    carList.filter((car)=>{
+    let car = carList.userCars.filter((car)=>{
       if(car._id === carId) {
         return true;
       } else {
         return false;
       }
-    })
+
+    });
+    console.log('car', car[0]);
+    return car[0];
 
 
    /* const taskId = this.props.taskId;
@@ -39,29 +49,28 @@ class EditCar extends Component {
   }
 
 
-  addCarToList(theUrl) {
+  editCarBtnClicked(theUrl) {
+    console.log("theUrl", theUrl);
     let history = createHashHistory();
     let client = new XMLHttpRequest();
     client.open("POST", theUrl, true);
 
-    let params = "user=" + String(Repostitory.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
-    params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
-    console.log('ParamsAddCar=', params);
+    let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
+    console.log('ParamsEditCar', params);
     client.setRequestHeader("Authorization", 'Bearer ' + String(Repostitory.get_obj("token")));
     client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     client.send(params);
-
     client.onload = () => {
       let userList = JSON.parse(client.responseText);
       console.log(userList);
       history.goBack();
     };
+
   }
 
   render() {
     return (
       <IonContent customClasses="" {...this.props}>
-
         <div className="car-info">
           <div className="titleAddCar">
             Ваш автомобиль:
@@ -71,6 +80,7 @@ class EditCar extends Component {
                    name="title"
                    placeholder="название"
                    ref="titleCar"
+                   value={this.state.carTitleValue}
                    onChange={e => this.handleTitleChange(e)}/>
           </div>
           <div className="plate-number">
@@ -79,11 +89,12 @@ class EditCar extends Component {
               name="plateNumber"
               placeholder="номер автомобиля"
               ref="plateNumber"
+              value={this.state.carRegNumberValue}
               onChange={e => this.handleRegNumberChange(e)}/>
           </div>
           <div className="add-car-button">
             <button className="button button-positive"
-                    onClick={() => this.editCarBtnClicked('https://parkimon.ru/api/v1/user-car/edit)')}>
+                    onClick={() => this.editCarBtnClicked('https://parkimon.ru/api/v1/user-car/edit/' + this.getCar()._id)}>
               Добавить
             </button>
           </div>
