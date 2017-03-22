@@ -40599,7 +40599,7 @@ var CarList = function (_React$Component) {
       var cars = this.state.carList;
       var myCars = [];
       for (var i = 0; i < cars.length; i++) {
-        myCars.push(_react2.default.createElement(_reactionic.IonItem, null, _react2.default.createElement('h2', null, cars[i].title), _react2.default.createElement('p', null, cars[i].regNumber), _react2.default.createElement('img', { src: './img/delete.png' })));
+        myCars.push(_react2.default.createElement(_reactionic.IonItem, null, _react2.default.createElement('h2', null, cars[i].title), _react2.default.createElement('p', null, cars[i].regNumber), _react2.default.createElement('img', { className: 'img-delete', src: './img/delete.png' }), _react2.default.createElement('img', { className: 'img-edit', src: './img/edit.png' })));
       }
       return _react2.default.createElement(_reactionic.IonContent, _extends({ customClasses: '' }, this.props), _react2.default.createElement('div', { className: 'list-cars' }, _react2.default.createElement('div', { className: 'titleListCar' }, "\u0412\u0430\u0448\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u044B\u0435 \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u0430:"), _react2.default.createElement(_reactionic.IonList, { className: 'content-list-cars' }, myCars), _react2.default.createElement('div', { className: 'button-add-car' }, _react2.default.createElement('img', { className: 'addCarButton', src: './img/addCar.png', onClick: function onClick() {
           return _this3.addCar();

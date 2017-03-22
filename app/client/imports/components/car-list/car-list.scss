@@ -23,9 +23,16 @@
   font-size: 18px;
 }
 
-.item img{
+.item .img-delete{
   width: 20px;
   height: 20px;
+  align-items: right;
+}
+
+.item .img-edit{
+  width: 20px;
+  height: 20px;
+  align-items: right;
 }
 
 .list-cars .titleListCar {

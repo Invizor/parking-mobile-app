@@ -48,7 +48,8 @@ class CarList extends React.Component {
           <IonItem>
             <h2>{cars[i].title}</h2>
             <p>{cars[i].regNumber}</p>
-            <img src="./img/delete.png"/>
+            <img className="img-delete" src="./img/delete.png"/>
+            <img className="img-edit" src="./img/edit.png"/>
           </IonItem>
       );
     }
