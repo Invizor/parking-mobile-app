@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton} from 'reactionic';
+import {IonContent, IonSpinner} from 'reactionic';
 import "./container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import Map from '../../components/map/map';
@@ -67,9 +67,11 @@ export default class Container extends Component {
 
   render() {
     return (
-
       <IonContent customClasses=""
                   {...this.props}>
+        <div className="spinner">
+          <IonSpinner icon="spiral" />
+        </div>
         <div className="mapContainer">
           <Map/>
         </div>

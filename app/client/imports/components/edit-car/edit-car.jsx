@@ -33,7 +33,6 @@ class EditCar extends Component {
       }
 
     });
-    console.log('car', car[0]);
     return car[0];
 
 

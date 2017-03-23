@@ -74,8 +74,8 @@ class CarList extends React.Component {
                       <p>{cars[i].regNumber}</p>
                   </div>
                   <div className="item-buttons">
-                      <img className="img-delete" src="./img/delete.png" onClick={()=>this.deleteCarBtnClicked(i)} />
-                      <img className="img-edit" src="./img/edit.png" onClick={()=>this.showEditCarPage(cars[i]._id)}/>
+                      <img className="img-delete item-button" src="./img/delete.png" onClick={()=>this.deleteCarBtnClicked(i)}/>
+                      <img className="img-edit item-button" src="./img/edit.png" onClick={()=>this.showEditCarPage(cars[i]._id)}/>
                   </div>
               </div>
           </IonItem>

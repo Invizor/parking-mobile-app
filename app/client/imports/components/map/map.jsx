@@ -101,7 +101,7 @@ export default class Map extends Component {
 
   componentDidMount() {
     this.httpGet('https://parkimon.ru/api/v1/geolocation/near');
-    this.showLoading();
+   // this.showLoading();
   }
 
   handleMarkerClick(targetMarker) {
@@ -122,7 +122,7 @@ export default class Map extends Component {
       icon="dots" customClasses="inloader spinner-light"/></h2><p>Парковки загружаются</p></div>
     let ionShowLoading = this.context.ionShowLoading;
     ionShowLoading(true, {
-      backdrop: true,
+      backdrop: false,
       delay: 0,
       duration: 3000,
       customTemplate: customTemplate

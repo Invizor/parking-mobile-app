@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import {IonContent, IonButton} from 'reactionic';
 import './set-balance.scss';
-
+import createHashHistory from 'history/lib/createHashHistory';
 
 export default class SetBalance extends Component {
+
+  balancePaymentByBankCard() {
+
+  }
 
 
   render() {
@@ -24,7 +28,7 @@ export default class SetBalance extends Component {
             </IonButton>
             <IonButton
               color="positive"
-              onClick={() => this.enterButton()}>
+              onClick={() => this.balancePaymentByBankCard()}>
               Банковской картой
             </IonButton>
           </div>

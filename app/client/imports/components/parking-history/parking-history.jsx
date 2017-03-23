@@ -37,7 +37,7 @@ export default class ParkingHistory extends Component {
     this.state.parkingHistory.map((parking, index)=> {
       parkingList.push(
         <IonItem key={index}>
-          <div>{counter++}. Парковка: #{parking.zone}</div>
+          <div>{counter++}. Парковка: #{parking.zone.zoneId}</div>
           <div>Дата парковки: {parking.start.substring(0,10)}</div>
           <div>Время парковки: {parking.start.substring(11,16)}</div>
           <div>Номер вашего авто: {parking.transportNumber}</div>

@@ -10254,6 +10254,12 @@ a.button {
 .popover {
   height: auto; }
 
+.spinner {
+  top: 300px;
+  left: 50%;
+  position: absolute;
+  z-index: 10; }
+
 .mapContainer {
   width: 100%;
   height: 400px; }
@@ -10477,13 +10483,15 @@ a.button {
   width: 20px;
   height: 20px;
   margin: 5px 5px 5px 5px;
-  float: right; }
+  float: right;
+  cursor: pointer; }
 
 .item .img-edit {
   width: 20px;
   height: 20px;
   margin: 5px 5px 5px 5px;
-  float: right; }
+  float: right;
+  cursor: pointer; }
 
 .list-cars .titleListCar {
   width: 80%;
