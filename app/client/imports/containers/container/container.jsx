@@ -69,9 +69,11 @@ export default class Container extends Component {
     return (
       <IonContent customClasses=""
                   {...this.props}>
+
         <div className="spinner">
           <IonSpinner icon="spiral" />
         </div>
+
         <div className="mapContainer">
           <Map/>
         </div>
