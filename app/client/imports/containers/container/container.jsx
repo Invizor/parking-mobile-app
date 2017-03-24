@@ -7,7 +7,9 @@ import UnautorizedUserButtons from '../../components/unauthorized-user-buttons/u
 import AutorizedUserButtons from '../../components/authorized-user-buttons/authorized-user-buttons';
 import Repository from '../../storage/local-storage';
 import userStorage from '../../storage/user-storage';
+import emitterStorage from '../../storage/emitter-storage';
 Object.assign = require('object-assign');
+let EventEmitter = require('events').EventEmitter;
 
 export default class Container extends Component {
 
@@ -61,9 +63,18 @@ export default class Container extends Component {
   }
 
   componentDidMount() {
-    if (Repository.get_obj('user') == undefined || Repository.get_obj('user').success == false)
-      this.getUser('https://parkimon.ru/api/v1/user');
+    if (Repository.get_obj('user') == undefined || Repository.get_obj('user').success == false) {
+        this.getUser('https://parkimon.ru/api/v1/user');
+    }
+    console.log("USERcont=",Repository.get_obj('user'));
+    let emitTek = emitterStorage.emitter;
+    console.log(emitTek);
+    if(emitTek != null && emitTek != undefined) {
+        if (Repository.get_obj('user') != null) emitTek.emit('radiation',true);
+        else if (Repository.get_obj('user') == null) emitTek.emit('radiation',false);
+    }
   }
+
 
   render() {
     return (

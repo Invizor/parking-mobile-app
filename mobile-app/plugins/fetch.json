@@ -29,7 +29,12 @@
             "id": "cordova-plugin-googlemaps"
         },
         "is_top_level": true,
-        "variables": {}
+        "variables": {
+            "API_KEY_FOR_ANDROID": "AIzaSyBL_4q00W1oEtaVVwDcwiiA96IUdPmMVLs",
+            "API_KEY_FOR_IOS": "AIzaSyBL_4q00W1oEtaVVwDcwiiA96IUdPmMVLs",
+            "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
+            "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
+        }
     },
     "de.mayflower.cordova.android-scrollbar": {
         "source": {
@@ -37,6 +42,15 @@
             "id": "cordova-android-scrollbar"
         },
         "is_top_level": true,
+        "variables": {}
+    },
+    "com.googlemaps.ios": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk",
+            "subdir": "."
+        },
+        "is_top_level": false,
         "variables": {}
     }
 }

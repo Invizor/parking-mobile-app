@@ -4,6 +4,11 @@ import _ from 'lodash';
 import { IonNavView, IonView, IonContent, IonNavBar, IonNavBackButton, IonFooterBar, IonButton, IonIcon,
          IonSideMenuContainer, IonSideMenus, IonSideMenu, IonSideMenuContent, IonPopoverButton } from 'reactionic';
 //import { DemoPopover } from '../popover';
+import SideMenu from '../components/side-menu/side-menu';
+import Repository from '../storage/local-storage';
+var EventEmitter = require('event-emitter');
+import emitterStorage from '../storage/emitter-storage';
+
 
 var Layout = React.createClass({
   contextTypes: {
@@ -13,6 +18,12 @@ var Layout = React.createClass({
     router: React.PropTypes.object.isRequired,
     location: React.PropTypes.object
   },
+    getInitialState : function() {
+      return {
+          isUser: false,
+          fl : false
+      }
+    },
   getPageProps: function(path) {
     var backButton = (
       <IonNavBackButton icon="ion-ios-arrow-back"
@@ -33,27 +44,53 @@ var Layout = React.createClass({
     var pageProps = _.keyBy(pageList, 'path');
 
     // custom pageProps
-    pageProps['/container'].leftHeaderButton=null;
+      pageProps['/container'].leftHeaderButton=  null;
 
     return pageProps[path];
   },
+
+    componentDidMount: function(){
+        if(Repository.get_obj("token") != null && this.state.isUser == false) {
+            this.setState({isUser:true});
+        }
+        if(Repository.get_obj("token") == null && this.state.isUser == true){
+            this.setState({isUser:false});
+        }
+        let emitter = new EventEmitter();
+        emitter.on('radiation', (flag) => {
+            console.log("FLAG=",flag);
+            this.setState({fl: flag});
+        });
+        emitterStorage.emitter = emitter;
+    },
+    componentDidUnmount(){
+        emitter = emitterStorage.emitter;
+        emitter.off('radiation', false);
+        emitterStorage.emitter = {};
+    },
   render() {
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
-
+      console.log("render, flag =", this.state.fl);
     return (
-        <IonSideMenuContent>
-            <IonNavBar customClasses="nav-blue"
-                       title={currentPageProps.headerTitle}
-                       leftButton={currentPageProps.leftHeaderButton}
-                       {...this.props}
-            />
-            <IonContent customClasses="" {...this.props}>
-              <IonView customClasses="" {...this.props}>
-                {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
-              </IonView>
-            </IonContent>
-        </IonSideMenuContent>
-
+        <IonSideMenuContainer {...this.props}>
+            <IonSideMenus>
+                <IonSideMenu customClasses="side-menu">
+                  <SideMenu isAutorized={this.state.fl} />
+                </IonSideMenu>
+            </IonSideMenus>
+            <IonSideMenuContent>
+                <IonNavBar customClasses="nav-blue"
+                           title={currentPageProps.headerTitle}
+                           leftButton={currentPageProps.leftHeaderButton}
+                           {...this.props}
+                />
+                <IonContent customClasses="" {...this.props}>
+                    <IonView customClasses="" {...this.props} >
+                      {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
+                    </IonView>
+                </IonContent>
+            </IonSideMenuContent>
+        </IonSideMenuContainer>
 
       /*
       <IonSideMenuContainer {...this.props}>

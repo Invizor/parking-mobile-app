@@ -16,10 +16,19 @@
         },
         "de.mayflower.cordova.android-scrollbar": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-googlemaps": {
+            "API_KEY_FOR_IOS": "AIzaSyBL_4q00W1oEtaVVwDcwiiA96IUdPmMVLs",
+            "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
+            "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map",
+            "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "com.googlemaps.ios": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     }
