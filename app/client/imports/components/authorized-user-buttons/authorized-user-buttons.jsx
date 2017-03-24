@@ -15,7 +15,7 @@ export default class AutorizedUserButtons extends Component {
 
           <div className="authorized-user-button">
             <IonButton color="positive"
-                       link="/parking-history/1">
+                       link="/parking-history">
                История парковок
             </IonButton>
           </div>

@@ -23,14 +23,14 @@ class SideMenu extends React.Component {
             </div>
             <div className="content has-header side-menu">
                 <div className="list">
-                    <div className="item item-icon-right"  >
+                    <div className="item item-icon-right" onClick={() => {this.goToRoute('/list-car')}} >
                         Мои автомобили <IonIcon icon="ios-arrow-right" />
                     </div>
                 </div>
             </div>
             <div className="content has-header side-menu">
                 <div className="list">
-                    <div className="item item-icon-right"  >
+                    <div className="item item-icon-right" onClick={() => {this.goToRoute('/parking-history')}} >
                         История парковок <IonIcon icon="ios-arrow-right" />
                     </div>
                 </div>
@@ -44,7 +44,7 @@ class SideMenu extends React.Component {
             </div>
             <div className="content has-header side-menu">
                 <div className="list">
-                    <div className="item item-icon-right"  >
+                    <div className="item item-icon-right" onClick={() => {this.goToRoute('/set-balance')}}>
                         Пополнение баланса <IonIcon icon="ios-arrow-right" />
                     </div>
                 </div>
@@ -52,6 +52,13 @@ class SideMenu extends React.Component {
         </div>
         );
     }
+
+    goToRoute(theUrl){
+        console.log("goToRoute");
+        let history = createHashHistory();
+        history.push(theUrl);
+    }
+
     userGost(){
         return (
             <div>
@@ -61,7 +68,7 @@ class SideMenu extends React.Component {
                 <div className="content has-header side-menu">
                     <div className="list">
                         <div className="item item-icon-right"  >
-                            О приложении <IonIcon icon="ios-arrow-right" />
+                            О приложении <IonIcon icon="ios-arrow-right"/>
                         </div>
                     </div>
                 </div>

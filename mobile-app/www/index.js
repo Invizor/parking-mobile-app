@@ -38668,7 +38668,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var main = function main() {
 
-  var pageList = [{ path: '/', component: _index2.default, title: 'React Ionic', done: true }, { path: '/autorization-form', component: _autorizationForm2.default, title: 'Авторизация', done: true }, { path: '/verification-form/:number', component: _verificationForm2.default, title: 'Верификация', done: true }, { path: '/list-car', component: _carList2.default, title: 'Список автомобилей', done: true }, { path: '/add-car', component: _addCarForm2.default, title: 'Добавление машины', done: true }, { path: '/parking-item/:id', component: _parkingItem2.default, title: 'Информация о парковке', done: true }, { path: '/container', component: _container2.default, title: 'Карта', done: true }, { path: '/set-balance', component: _setBalance2.default, title: 'Пополнение баланса', done: true }, { path: '/confirm-pay-parking/:id', component: _confirmPayParking2.default, title: 'Условия парковки', done: true }, { path: '/parking-history/:id', component: _parkingHistory2.default, title: 'История парковок', done: true }, { path: '/edit-car/:id', component: _editCar2.default, title: 'Редактирование автомобиля', done: true }];
+  var pageList = [{ path: '/', component: _index2.default, title: 'React Ionic', done: true }, { path: '/autorization-form', component: _autorizationForm2.default, title: 'Авторизация', done: true }, { path: '/verification-form/:number', component: _verificationForm2.default, title: 'Верификация', done: true }, { path: '/list-car', component: _carList2.default, title: 'Список автомобилей', done: true }, { path: '/add-car', component: _addCarForm2.default, title: 'Добавление машины', done: true }, { path: '/parking-item/:id', component: _parkingItem2.default, title: 'Информация о парковке', done: true }, { path: '/container', component: _container2.default, title: 'Карта', done: true }, { path: '/set-balance', component: _setBalance2.default, title: 'Пополнение баланса', done: true }, { path: '/confirm-pay-parking/:id', component: _confirmPayParking2.default, title: 'Условия парковки', done: true }, { path: '/parking-history', component: _parkingHistory2.default, title: 'История парковок', done: true }, { path: '/edit-car/:id', component: _editCar2.default, title: 'Редактирование автомобиля', done: true }];
 
   var tabRoutes;
   var pageRoutes = pageList.map(function (page) {
@@ -38775,7 +38775,7 @@ var AutorizedUserButtons = function (_Component) {
             _react2.default.createElement(
               _reactionic.IonButton,
               { color: 'positive',
-                link: '/parking-history/1' },
+                link: '/parking-history' },
               '\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043E\u043A'
             )
           ),
@@ -40465,9 +40465,7 @@ var Container = function (_Component) {
       if (_localStorage2.default.get_obj('user') == undefined || _localStorage2.default.get_obj('user').success == false) {
         this.getUser('https://parkimon.ru/api/v1/user');
       }
-      console.log("USERcont=", _localStorage2.default.get_obj('user'));
       var emitTek = _emitterStorage2.default.emitter;
-      console.log(emitTek);
       if (emitTek != null && emitTek != undefined) {
         if (_localStorage2.default.get_obj('user') != null) emitTek.emit('radiation', true);else if (_localStorage2.default.get_obj('user') == null) emitTek.emit('radiation', false);
       }
@@ -40593,7 +40591,6 @@ var Layout = _react2.default.createClass({
     }
     var emitter = new EventEmitter();
     emitter.on('radiation', function (flag) {
-      console.log("FLAG=", flag);
       _this.setState({ fl: flag });
     });
     _emitterStorage2.default.emitter = emitter;
@@ -40601,11 +40598,10 @@ var Layout = _react2.default.createClass({
   componentDidUnmount: function componentDidUnmount() {
     emitter = _emitterStorage2.default.emitter;
     emitter.off('radiation', false);
-    _emitterStorage2.default.emitter = {};
+    _emitterStorage2.default.emitter = null;
   },
   render: function render() {
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
-    console.log("render, flag =", this.state.fl);
     return _react2.default.createElement(
       _reactionic.IonSideMenuContainer,
       this.props,
@@ -40941,6 +40937,7 @@ var CarList = function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
+      console.log("car-list", this.state.carList);
       var cars = this.state.carList;
       console.log(cars);
       var myCars = [];
@@ -41052,7 +41049,22 @@ var SideMenu = function (_React$Component) {
     }, {
         key: 'userAutorized',
         value: function userAutorized() {
-            return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'bar bar-header bar-stable' }, _react2.default.createElement('h1', { className: 'title' }, _localStorage2.default.get_obj("user").username)), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right' }, "\u041C\u043E\u0438 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u0438 ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right' }, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043E\u043A ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right' }, "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430 ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right' }, "\u041F\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435 \u0431\u0430\u043B\u0430\u043D\u0441\u0430 ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))));
+            var _this2 = this;
+
+            return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'bar bar-header bar-stable' }, _react2.default.createElement('h1', { className: 'title' }, _localStorage2.default.get_obj("user").username)), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right', onClick: function onClick() {
+                    _this2.goToRoute('/list-car');
+                } }, "\u041C\u043E\u0438 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u0438 ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right', onClick: function onClick() {
+                    _this2.goToRoute('/parking-history');
+                } }, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043E\u043A ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right' }, "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430 ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))), _react2.default.createElement('div', { className: 'content has-header side-menu' }, _react2.default.createElement('div', { className: 'list' }, _react2.default.createElement('div', { className: 'item item-icon-right', onClick: function onClick() {
+                    _this2.goToRoute('/set-balance');
+                } }, "\u041F\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435 \u0431\u0430\u043B\u0430\u043D\u0441\u0430 ", _react2.default.createElement(_reactionic.IonIcon, { icon: 'ios-arrow-right' })))));
+        }
+    }, {
+        key: 'goToRoute',
+        value: function goToRoute(theUrl) {
+            console.log("goToRoute");
+            var history = (0, _createHashHistory2.default)();
+            history.push(theUrl);
         }
     }, {
         key: 'userGost',

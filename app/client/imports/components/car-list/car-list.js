@@ -62,6 +62,7 @@ class CarList extends React.Component {
   }
 
   render() {
+      console.log("car-list",this.state.carList);
     let cars = this.state.carList;
     console.log(cars);
     let myCars = [];

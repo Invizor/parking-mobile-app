@@ -28,7 +28,7 @@ let main = () => {
     {path: '/container', component: Container, title: 'Карта', done: true},
     {path: '/set-balance', component: SetBalance, title: 'Пополнение баланса', done: true},
     {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'Условия парковки', done: true},
-    {path: '/parking-history/:id', component: ParkingHistory, title: 'История парковок', done: true},
+    {path: '/parking-history', component: ParkingHistory, title: 'История парковок', done: true},
     {path: '/edit-car/:id', component: EditCar, title: 'Редактирование автомобиля', done: true}
   ];
 

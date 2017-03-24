@@ -58,7 +58,6 @@ var Layout = React.createClass({
         }
         let emitter = new EventEmitter();
         emitter.on('radiation', (flag) => {
-            console.log("FLAG=",flag);
             this.setState({fl: flag});
         });
         emitterStorage.emitter = emitter;
@@ -66,11 +65,10 @@ var Layout = React.createClass({
     componentDidUnmount(){
         emitter = emitterStorage.emitter;
         emitter.off('radiation', false);
-        emitterStorage.emitter = {};
+        emitterStorage.emitter = null;
     },
   render() {
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
-      console.log("render, flag =", this.state.fl);
     return (
         <IonSideMenuContainer {...this.props}>
             <IonSideMenus>
