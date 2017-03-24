@@ -39682,7 +39682,37 @@ var Map = function (_Component) {
       client.send();
       client.onload = function () {
         var parkingList = JSON.parse(client.responseText);
-        _this2.setState({ markers: parkingList.parkings });
+
+        if (!Array.prototype.find) {
+          Array.prototype.find = function (predicate) {
+            if (this == null) {
+              throw new TypeError('Array.prototype.find called on null or undefined');
+            }
+            if (typeof predicate !== 'function') {
+              throw new TypeError('predicate must be a function');
+            }
+            var list = Object(this);
+            var length = list.length >>> 0;
+            var thisArg = arguments[1];
+            var value;
+
+            for (var i = 0; i < length; i++) {
+              value = list[i];
+              if (predicate.call(thisArg, value, i, list)) {
+                return value;
+              }
+            }
+            return undefined;
+          };
+        }
+        var paidParkingList = parkingList.parkings.filter(function (parking) {
+          if (parking.price.length) {
+            return parking;
+          }
+        });
+        console.log('parkingList', parkingList);
+        console.log('paidParkingList', paidParkingList);
+        _this2.setState({ markers: paidParkingList });
         _parkingStorage2.default.parkings = parkingList.parkings;
       };
     }
@@ -39734,6 +39764,7 @@ var Map = function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      //console.log('parkings', this.state.markers);
       return _react2.default.createElement(
         "div",
         null,
@@ -39857,7 +39888,7 @@ var ParkingHistory = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log("parking history", this.state.parkingHistory);
+      // console.log("parking history",this.state.parkingHistory);
       var counter = 1;
       var parkingList = [];
       this.state.parkingHistory.map(function (parking, index) {

@@ -93,7 +93,37 @@ export default class Map extends Component {
     client.send();
     client.onload = () => {
       let parkingList = JSON.parse(client.responseText);
-      this.setState({markers: parkingList.parkings});
+
+      if (!Array.prototype.find) {
+        Array.prototype.find = function (predicate) {
+          if (this == null) {
+            throw new TypeError('Array.prototype.find called on null or undefined');
+          }
+          if (typeof predicate !== 'function') {
+            throw new TypeError('predicate must be a function');
+          }
+          var list = Object(this);
+          var length = list.length >>> 0;
+          var thisArg = arguments[1];
+          var value;
+
+          for (var i = 0; i < length; i++) {
+            value = list[i];
+            if (predicate.call(thisArg, value, i, list)) {
+              return value;
+            }
+          }
+          return undefined;
+        };
+      }
+      let paidParkingList = parkingList.parkings.filter((parking)=> {
+        if(parking.price.length) {
+          return parking;
+        }
+      });
+      console.log('parkingList', parkingList);
+      console.log('paidParkingList', paidParkingList);
+      this.setState({markers: paidParkingList});
       parkingStorage.parkings = parkingList.parkings;
     };
   }
@@ -131,8 +161,8 @@ export default class Map extends Component {
 
 
   render() {
+    //console.log('parkings', this.state.markers);
     return (
-
       <div>
         <MarkerClustererExampleGoogleMap
           containerElement={

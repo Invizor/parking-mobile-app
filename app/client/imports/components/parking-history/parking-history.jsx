@@ -31,7 +31,7 @@ export default class ParkingHistory extends Component {
 
 
   render() {
-    console.log("parking history",this.state.parkingHistory);
+   // console.log("parking history",this.state.parkingHistory);
     let counter = 1;
     let parkingList = [];
     this.state.parkingHistory.map((parking, index)=> {
