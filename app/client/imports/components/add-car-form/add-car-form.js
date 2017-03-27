@@ -17,14 +17,12 @@ class addCarsForm extends React.Component {
 
         let params = "user=" + String(Repostitory.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
         params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
-        console.log('ParamsAddCar=', params);
         client.setRequestHeader("Authorization", 'Bearer ' + String(Repostitory.get_obj("token")));
         client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         client.send(params);
 
         client.onload = () => {
             let userList = JSON.parse(client.responseText);
-            console.log(userList);
             history.goBack();
         };
     }

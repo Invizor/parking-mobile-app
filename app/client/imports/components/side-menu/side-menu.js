@@ -54,7 +54,7 @@ class SideMenu extends React.Component {
     }
 
     goToRoute(theUrl){
-        console.log("goToRoute");
+        this.props.contextMain.ionSnapper.close();
         let history = createHashHistory();
         history.push(theUrl);
     }

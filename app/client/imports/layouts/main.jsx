@@ -23,7 +23,7 @@ var Layout = React.createClass({
       return {
           isUser: false,
           fl : false,
-          userBalance: 0
+          userBalance: 0,
       }
     },
   getPageProps: function(path) {
@@ -49,11 +49,16 @@ var Layout = React.createClass({
     var pageProps = _.keyBy(pageList, 'path');
 
     // custom pageProps
-      pageProps['/container'].leftHeaderButton=  null;
-
+      pageProps['/container'].leftHeaderButton= 
+          <IonNavBackButton
+              menu-toggle="left"
+              type="clear"
+              className="side-menu-button"
+              icon="ion-navicon"
+              onClick={()=>{ this.context.ionSnapper.toggle('left') }}
+          /> ;
     return pageProps[path];
   },
-
     componentDidMount: function(){
         if(Repository.get_obj("token") != null && this.state.isUser == false) {
             this.setState({isUser:true});
@@ -67,33 +72,39 @@ var Layout = React.createClass({
         });
         emitterStorage.emitter = emitter;
     },
-    componentDidUnmount(){
+    componentWillUnmount(){
         emitter = emitterStorage.emitter;
         emitter.off('radiation', false);
         emitterStorage.emitter = null;
     },
   render() {
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
+    let globalFl = false
+    if(Repository.get_obj("token"))globalFl = true;
+    if(this.state.fl == true)globalFl = true;
     return (
-        <IonSideMenuContainer {...this.props}>
+        <IonSideMenuContainer {...this.props} settings={{
+            disable: 'right',
+            touchToDrag: false
+        }}>
             <IonSideMenus>
-                <IonSideMenu customClasses="side-menu">
-                  <SideMenu isAutorized={this.state.fl} />
+                <IonSideMenu customClasses="side-menu" >
+                  <SideMenu isAutorized={globalFl} contextMain={this.context}/>
                 </IonSideMenu>
+                <IonSideMenuContent >
+                    <IonNavBar customClasses="nav-blue"
+                               title={currentPageProps.headerTitle}
+                               leftButton={currentPageProps.leftHeaderButton}
+                               rightButton={currentPageProps.rightHeaderButton}
+                               {...this.props}
+                    />
+                    <IonContent customClasses="" {...this.props} >
+                        <IonView customClasses="" {...this.props}>
+                            {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
+                        </IonView>
+                    </IonContent>
+                </IonSideMenuContent>
             </IonSideMenus>
-            <IonSideMenuContent>
-                <IonNavBar customClasses="nav-blue"
-                           title={currentPageProps.headerTitle}
-                           leftButton={currentPageProps.leftHeaderButton}
-                           rightButton={currentPageProps.rightHeaderButton}
-                           {...this.props}
-                />
-                <IonContent customClasses="" {...this.props}>
-                    <IonView customClasses="" {...this.props} >
-                      {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
-                    </IonView>
-                </IonContent>
-            </IonSideMenuContent>
         </IonSideMenuContainer>
 
       /*

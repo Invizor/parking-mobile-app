@@ -49,22 +49,18 @@ class CarList extends React.Component {
       client.send();  
       client.onload = () => { 
           let result = JSON.parse(client.responseText); 
-          console.log(result); 
           if(result.success == true) masCars.splice(index,1); 
           this.setState({carList : masCars}); 
       };
   }
 
   showEditCarPage(carId) {
-    console.log('carId', carId);
     let history = createHashHistory();
     history.push('/edit-car/' + carId);
   }
 
   render() {
-      console.log("car-list",this.state.carList);
     let cars = this.state.carList;
-    console.log(cars);
     let myCars = [];
     for (let i = 0; i < cars.length; i++) {
       myCars.push(

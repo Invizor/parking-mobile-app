@@ -33,11 +33,9 @@ class VerificationForm extends React.Component {
     client.onload = () => {
       let history = createHashHistory();
       let userData = JSON.parse(client.responseText);
-      console.log("userData", userData);
       this.setState({userToken: userData.token});
       this.setState({user: userData.user});
 
-      console.log('userToken=', this.state.userToken);
       if (this.state.userToken != '' && this.state.userToken != undefined) {
         Repository.add_obj("token", this.state.userToken);
         Repository.add_obj("user", this.state.user);

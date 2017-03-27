@@ -25,7 +25,6 @@ class AutorizationForm extends React.Component {
     client.open("POST", theUrl, true);
 
     let params = "number=" + String(this.refs.phoneInput.value);
-    console.log(this.refs.phoneInput.value);
     client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     client.send(params);
 

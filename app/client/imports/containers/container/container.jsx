@@ -87,16 +87,11 @@ export default class Container extends Component {
 
     let emitTek = emitterStorage.emitter;
     if(emitTek != null && emitTek != undefined) {
-        if (Repository.get_obj('user') != null) emitTek.emit('radiation',true);
-        else if (Repository.get_obj('user') == null) emitTek.emit('radiation',false);
+        if (Repository.get_obj('user')._id) emitTek.emit('radiation',true);
+        else if (Repository.get_obj('user')._id) emitTek.emit('radiation',false);
     }
     //cordova.plugins.Keyboard.disableScroll(true);
    // cordova.plugins.Keyboard.show();
-  }
-
-  openMenu() {
-    const obj = document.getElementById('IonSideMenuContent');
-    obj.style.transform="translate3d(266px, 0px, 0px)";
   }
 
   render() {
@@ -111,7 +106,6 @@ export default class Container extends Component {
         <div className="mapContainer">
           <Map/>
         </div>
-        <div onClick={()=>this.openMenu()}>Открыть меню</div>
 
         {
           Repository.get_obj('token') ?
@@ -119,7 +113,6 @@ export default class Container extends Component {
             :
             <UnautorizedUserButtons/>
         }
-
 
       </IonContent>
     );
