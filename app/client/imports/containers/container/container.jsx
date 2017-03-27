@@ -103,6 +103,12 @@ export default class Container extends Component {
         </div>
 
 
+          {
+              Repository.get_obj('token') ?
+                  ""
+                  :
+                  <UnautorizedUserButtons/>
+          }
       </IonContent>
     );
   }
