@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {IonButton, IonSelect, IonItem} from 'reactionic';
-import parkingStorage from '../../storage/parking-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 import "./confirm-pay-parking.scss";
 import Repository from '../../storage/local-storage';
@@ -66,7 +65,7 @@ export default class ConfirmPayParking extends Component {
         return undefined;
       };
     }
-    const currentParking = parkingStorage.parkings.find((parking) => {
+    const currentParking = Repository.get_obj('paidParkingList').find((parking) => {
       if (parking._id === this.getParkingId()) {
         return parking;
       }

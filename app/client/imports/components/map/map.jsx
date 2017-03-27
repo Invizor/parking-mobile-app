@@ -9,7 +9,6 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import parkingStorage from '../../storage/parking-storage';
 import createHashHistory from 'history/lib/createHashHistory';
 import {IonButton} from 'reactionic';
 import Repository from '../../storage/local-storage';
@@ -124,13 +123,17 @@ export default class Map extends Component {
       console.log('parkingList', parkingList);
       console.log('paidParkingList', paidParkingList);
       this.setState({markers: paidParkingList});
-      parkingStorage.parkings = parkingList.parkings;
+      Repository.add_obj('paidParkingList', paidParkingList);
     };
   }
 
 
   componentDidMount() {
-    this.httpGet('https://parkimon.ru/api/v1/geolocation/near');
+    if (Repository.get_obj('paidParkingList')) {
+      this.setState({markers: Repository.get_obj('paidParkingList')});
+    } else {
+      this.httpGet('https://parkimon.ru/api/v1/geolocation/near');
+    }
    // this.showLoading();
   }
 

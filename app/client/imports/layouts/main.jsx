@@ -6,6 +6,7 @@ import { IonNavView, IonView, IonContent, IonNavBar, IonNavBackButton, IonFooter
 //import { DemoPopover } from '../popover';
 import SideMenu from '../components/side-menu/side-menu';
 import UserBalance from '../components/user-balance/user-balance';
+import MainTitle from '../components/main-title/main-title';
 import Repository from '../storage/local-storage';
 var EventEmitter = require('event-emitter');
 import emitterStorage from '../storage/emitter-storage';
@@ -23,7 +24,7 @@ var Layout = React.createClass({
       return {
           isUser: false,
           fl : false,
-          userBalance: 0,
+          userBalance: 0
       }
     },
   getPageProps: function(path) {
@@ -41,7 +42,7 @@ var Layout = React.createClass({
 
     // add defaults to pageListItems
     var pageList = this.props.pageList.map(function(page) {
-      page.headerTitle = page.title;
+      page.headerTitle = <MainTitle title={page.title}/>;
       page.rightHeaderButton = balance;
       page.leftHeaderButton = backButton;
       return page

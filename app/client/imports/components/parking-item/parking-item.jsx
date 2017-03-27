@@ -1,14 +1,8 @@
 import React from 'react';
 import {IonContent, IonList, IonItem, IonButton} from 'reactionic';
-import parkingStorage from '../../storage/parking-storage';
+import Repository from '../../storage/local-storage';
 import './parking-item.scss';
 
-
-let IonItemContainer = React.createClass({
-  render: function () {
-    <IonItem>hi</IonItem>
-  }
-});
 
 var ParkingItem = React.createClass({
 
@@ -42,13 +36,13 @@ var ParkingItem = React.createClass({
         return undefined;
       };
     }
-    const currentParking = parkingStorage.parkings.find((parking) => {
+    const currentParking = Repository.get_obj('paidParkingList').find((parking) => {
       if (parking._id === this.getParkingId()) {
         return parking;
       }
     });
 
-    //console.log('getCurrentParking', currentParking);
+    console.log('getCurrentParking', currentParking);
     return currentParking;
 
 
@@ -57,7 +51,6 @@ var ParkingItem = React.createClass({
   getParkingInfo() {
     const parking = this.getCurrentParking();
     let parkingInfo = [];
-
   },
 
   getPayParkingLink() {

@@ -74,7 +74,6 @@ export default class Container extends Component {
   }
 
   componentDidMount() {
-    const id = document.getElementById('app');
     app.onMouseDown = ()=>{
       return false;
     };
@@ -99,20 +98,10 @@ export default class Container extends Component {
       <IonContent customClasses=""
                   {...this.props}>
 
-        <div className="spinner">
-          <IonSpinner icon="spiral" />
-        </div>
-
         <div className="mapContainer">
           <Map/>
         </div>
 
-        {
-          Repository.get_obj('token') ?
-            <AutorizedUserButtons />
-            :
-            <UnautorizedUserButtons/>
-        }
 
       </IonContent>
     );
