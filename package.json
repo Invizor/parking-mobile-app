@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start_browser": "webpack && cd /mobile-app; cordova run browser"
+    "start-browser": "webpack && cd mobile-app; cordova run browser",
+    "start-android": "webpack && cd mobile-app; cordova run android"
   },
   "author": "",
   "license": "ISC",

@@ -8,9 +8,6 @@ export default class AutorizedUserButtons extends Component {
   render() {
     return (
       <div>
-        <div className="balance-info">
-          Ваш баланс: {LocalStorage.get_obj('user').wallet} руб.
-        </div>
         <div className="authorized-user-buttons">
 
           <div className="authorized-user-button">

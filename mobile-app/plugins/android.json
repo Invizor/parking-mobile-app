@@ -6,21 +6,7 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-googlemaps": {
-            "API_KEY_FOR_ANDROID": "AIzaSyBL_4q00W1oEtaVVwDcwiiA96IUdPmMVLs",
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "de.mayflower.cordova.android-scrollbar": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        }
-    },
+    "installed_plugins": {},
     "dependent_plugins": {
         "com.googlemaps.ios": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
@@ -28,10 +14,7 @@
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-wheel-selector-plugin": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     }

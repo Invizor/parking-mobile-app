@@ -5,6 +5,7 @@ import { IonNavView, IonView, IonContent, IonNavBar, IonNavBackButton, IonFooter
          IonSideMenuContainer, IonSideMenus, IonSideMenu, IonSideMenuContent, IonPopoverButton } from 'reactionic';
 //import { DemoPopover } from '../popover';
 import SideMenu from '../components/side-menu/side-menu';
+import UserBalance from '../components/user-balance/user-balance';
 import Repository from '../storage/local-storage';
 var EventEmitter = require('event-emitter');
 import emitterStorage from '../storage/emitter-storage';
@@ -21,23 +22,27 @@ var Layout = React.createClass({
     getInitialState : function() {
       return {
           isUser: false,
-          fl : false
+          fl : false,
+          userBalance: 0
       }
     },
   getPageProps: function(path) {
     var backButton = (
       <IonNavBackButton icon="ion-ios-arrow-back"
-                        color=""
+                        color= "#FFFFFF"
                         type="clear"
                         customClasses="button-stage"
                         title="Back"
       />
     );
 
+    const balance =<UserBalance />;
+
+
     // add defaults to pageListItems
     var pageList = this.props.pageList.map(function(page) {
       page.headerTitle = page.title;
-      page.rightHeaderButton = null;
+      page.rightHeaderButton = balance;
       page.leftHeaderButton = backButton;
       return page
     });
@@ -80,6 +85,7 @@ var Layout = React.createClass({
                 <IonNavBar customClasses="nav-blue"
                            title={currentPageProps.headerTitle}
                            leftButton={currentPageProps.leftHeaderButton}
+                           rightButton={currentPageProps.rightHeaderButton}
                            {...this.props}
                 />
                 <IonContent customClasses="" {...this.props}>

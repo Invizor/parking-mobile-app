@@ -1,54 +1,8 @@
 {
-    "cordova-plugin-whitelist": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-whitelist@1"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-geolocation": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-geolocation"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-compat": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-compat"
-        },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-googlemaps": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-googlemaps"
-        },
-        "is_top_level": true,
-        "variables": {
-            "API_KEY_FOR_ANDROID": "AIzaSyBL_4q00W1oEtaVVwDcwiiA96IUdPmMVLs",
-            "API_KEY_FOR_IOS": "AIzaSyBL_4q00W1oEtaVVwDcwiiA96IUdPmMVLs",
-            "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
-            "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
-        }
-    },
-    "de.mayflower.cordova.android-scrollbar": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-android-scrollbar"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "com.googlemaps.ios": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk",
-            "subdir": "."
         },
         "is_top_level": false,
         "variables": {}

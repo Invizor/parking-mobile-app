@@ -25,7 +25,7 @@ let main = () => {
     {path: '/list-car', component: CarList, title: 'Список автомобилей', done: true},
     {path: '/add-car', component: addCarForm, title: 'Добавление машины', done: true},
     {path: '/parking-item/:id', component: ParkingItem, title: 'Информация о парковке', done: true},
-    {path: '/container', component: Container, title: 'Карта', done: true},
+    {path: '/container', component: Container, title: 'Parkimon', done: true},
     {path: '/set-balance', component: SetBalance, title: 'Пополнение баланса', done: true},
     {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'Условия парковки', done: true},
     {path: '/parking-history', component: ParkingHistory, title: 'История парковок', done: true},

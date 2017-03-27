@@ -6,22 +6,21 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {
+    "installed_plugins": {},
+    "dependent_plugins": {
+        "com.googlemaps.ios": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "de.mayflower.cordova.android-scrollbar": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-googlemaps": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
-        }
-    },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
+        },
+        "cordova-wheel-selector-plugin": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     }

@@ -39953,10 +39953,6 @@ var Container = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var id = document.getElementById('app');
-      app.onMouseDown = function () {
-        return false;
-      };
       if (_localStorage2.default.get_obj('user') == undefined || _localStorage2.default.get_obj('user').success == false) {
         this.getUser('https://parkimon.ru/api/v1/user');
       }
@@ -39972,16 +39968,8 @@ var Container = function (_Component) {
       // cordova.plugins.Keyboard.show();
     }
   }, {
-    key: 'openMenu',
-    value: function openMenu() {
-      var obj = document.getElementById('IonSideMenuContent');
-      obj.style.transform = "translate3d(266px, 0px, 0px)";
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       return _react2.default.createElement(
         _reactionic.IonContent,
         _extends({ customClasses: ''
@@ -39995,13 +39983,6 @@ var Container = function (_Component) {
           'div',
           { className: 'mapContainer' },
           _react2.default.createElement(_map2.default, null)
-        ),
-        _react2.default.createElement(
-          'div',
-          { onClick: function onClick() {
-              return _this3.openMenu();
-            } },
-          '\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043C\u0435\u043D\u044E'
         ),
         _localStorage2.default.get_obj('token') ? _react2.default.createElement(_authorizedUserButtons2.default, null) : _react2.default.createElement(_unauthorizedUserButtons2.default, null)
       );
