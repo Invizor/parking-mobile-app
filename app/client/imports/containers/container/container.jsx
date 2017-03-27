@@ -74,7 +74,6 @@ export default class Container extends Component {
   }
 
   componentDidMount() {
-    const id = document.getElementById('app');
     app.onMouseDown = ()=>{
       return false;
     };
@@ -94,33 +93,15 @@ export default class Container extends Component {
    // cordova.plugins.Keyboard.show();
   }
 
-  openMenu() {
-    const obj = document.getElementById('IonSideMenuContent');
-    obj.style.transform="translate3d(266px, 0px, 0px)";
-  }
 
   render() {
     return (
       <IonContent customClasses=""
                   {...this.props}>
 
-        <div className="spinner">
-          <IonSpinner icon="spiral" />
-        </div>
-
         <div className="mapContainer">
           <Map/>
         </div>
-        <div onClick={()=>this.openMenu()}>Открыть меню</div>
-
-        {
-          Repository.get_obj('token') ?
-            <AutorizedUserButtons />
-            :
-            <UnautorizedUserButtons/>
-        }
-
-
       </IonContent>
     );
   }

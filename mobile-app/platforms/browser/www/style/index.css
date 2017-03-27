@@ -2,6 +2,13 @@
   width: 80px;
   margin-top: 8px;
   font-size: 18px; }
+.spinner {
+  top: 8px;
+  position: absolute;
+  z-index: 10; }
+
+.mySpinner {
+  margin-left: 15px; }
 @charset "UTF-8";
 /*!
   Ionicons, v2.0.1
@@ -10257,12 +10264,6 @@ a.button {
 
 .popover {
   height: auto; }
-
-.spinner {
-  top: 300px;
-  left: 50%;
-  position: absolute;
-  z-index: 10; }
 
 .mapContainer {
   width: 100%;
