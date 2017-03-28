@@ -3,8 +3,7 @@ import {IonContent, IonSpinner} from 'reactionic';
 import "./container.scss"
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import Map from '../../components/map/map';
-import UnautorizedUserButtons from '../../components/unauthorized-user-buttons/unauthorized-user-buttons';
-import AutorizedUserButtons from '../../components/authorized-user-buttons/authorized-user-buttons';
+import AutorizationForm from '../../components/autorization-form/autorization-form';
 import Repository from '../../storage/local-storage';
 import userStorage from '../../storage/user-storage';
 import emitterStorage from '../../storage/emitter-storage';
@@ -101,21 +100,14 @@ export default class Container extends Component {
         <div className="content-container">
             {
           Repository.get_obj('token') ?
-              <div className="mapContainer2">
-                <Map/>
-              </div>
-          :
               <div className="mapContainer">
                 <Map/>
               </div>
+              :
+              <div className="autorization-form">
+                <AutorizationForm/>
+              </div>
           }
-
-            {
-                Repository.get_obj('token') ?
-                    ""
-                    :
-                    <UnautorizedUserButtons className="content-button"/>
-            }
         </div>
       </IonContent>
     );
