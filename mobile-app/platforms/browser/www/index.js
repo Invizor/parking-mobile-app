@@ -38303,13 +38303,19 @@ var ConfirmPayParking = function (_Component) {
       carTitleList: ['Не выбрано', 'BMW', 'Audi', 'Mersedes'],
       carList: [],
       selectedValue: 'Не указано',
-      balance: 0
+      balance: 0,
+      rangeValue: 1
     };
     //console.log('one', this);
     return _this;
   }
 
   _createClass(ConfirmPayParking, [{
+    key: 'rangeSelection',
+    value: function rangeSelection(value) {
+      this.setState({ rangeValue: value });
+    }
+  }, {
     key: 'getParkingId',
     value: function getParkingId() {
       var start = this.props.location.pathname.lastIndexOf("/");
@@ -38373,9 +38379,7 @@ var ConfirmPayParking = function (_Component) {
   }, {
     key: 'changeValue',
     value: function changeValue(value) {
-      // console.log('e',e);
       this.setState({ selectedValue: value });
-      // console.log('value', value)
     }
   }, {
     key: 'checkCarsList',
@@ -38462,9 +38466,6 @@ var ConfirmPayParking = function (_Component) {
         var parkingID = this.getParkingId();
         this.getCarByTitle();
         var client = new XMLHttpRequest();
-        console.log('zoneId', parkingID);
-        console.log('transportId', this.getCarByTitle()._id);
-        console.log('transportString', this.getCarByTitle().regNumber);
         client.open("POST", "https://parkimon.ru/api/v1/parking/start", true);
         client.setRequestHeader("Authorization", 'Bearer ' + String(_localStorage2.default.get_obj("token")));
         var params = "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber;
@@ -38518,6 +38519,7 @@ var ConfirmPayParking = function (_Component) {
     value: function render() {
       var _this4 = this;
 
+      var rangeLabel = 'Range ' + this.state.rangeValue;
       return _react2.default.createElement(
         'div',
         null,
@@ -38566,7 +38568,18 @@ var ConfirmPayParking = function (_Component) {
                 )
               )
             ),
-            _react2.default.createElement('div', null),
+            _react2.default.createElement(
+              _reactionic.IonItem,
+              { divider: true },
+              rangeLabel
+            ),
+            _react2.default.createElement(_reactionic.IonRange, {
+              defaultValue: 1,
+              handleChange: function handleChange(e) {
+                return _this4.rangeSelection(e);
+              },
+              min: 1,
+              max: 24 }),
             _react2.default.createElement(
               _reactionic.IonButton,
               { color: 'positive',
@@ -39013,16 +39026,11 @@ var Map = function (_Component) {
       this.setState({ mapCenter: [e.center.lat, e.center.lng] });
     }
   }, {
-    key: "httpGet",
-    value: function httpGet(theUrl) {
+    key: "getPaidParkings",
+    value: function getPaidParkings() {
       var _this2 = this;
 
-      var client = new XMLHttpRequest();
-      client.open("GET", theUrl + '?lon=45.029453&lat=38.969549&distance=2000');
-      client.send();
-      client.onload = function () {
-        var parkingList = JSON.parse(client.responseText);
-
+      (0, _requestToServer2.default)('GET', 'https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000', function (parkingList) {
         if (!Array.prototype.find) {
           Array.prototype.find = function (predicate) {
             if (this == null) {
@@ -39050,11 +39058,11 @@ var Map = function (_Component) {
             return parking;
           }
         });
-        console.log('parkingList', parkingList);
-        console.log('paidParkingList', paidParkingList);
+        /*console.log('parkingList', parkingList);
+        console.log('paidParkingList', paidParkingList);*/
         _this2.setState({ markers: paidParkingList });
         _localStorage2.default.add_obj('paidParkingList', paidParkingList);
-      };
+      });
     }
   }, {
     key: "componentDidMount",
@@ -39062,12 +39070,10 @@ var Map = function (_Component) {
       if (_localStorage2.default.get_obj('paidParkingList')) {
         this.setState({ markers: _localStorage2.default.get_obj('paidParkingList') });
       } else {
-        this.httpGet('https://parkimon.ru/api/v1/geolocation/near');
+        this.getPaidParkings();
       }
       // this.showLoading();
-      (0, _requestToServer2.default)('GET', 'https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000', function (responseText) {
-        console.log('responseText', responseText);
-      });
+
     }
   }, {
     key: "handleMarkerClick",
@@ -39600,24 +39606,16 @@ var UnautorizedUserButtons = function (_Component) {
           'div',
           { className: 'unauthorized-user-buttons' },
           _react2.default.createElement(
-            'div',
-            { className: 'unauthorized-user-button' },
-            _react2.default.createElement(
-              _reactionic.IonButton,
-              { color: 'positive',
-                link: '/set-balance' },
-              '\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430'
-            )
+            _reactionic.IonButton,
+            { color: 'positive',
+              link: '/set-balance' },
+            '\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430'
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'unauthorized-user-button' },
-            _react2.default.createElement(
-              _reactionic.IonButton,
-              { color: 'positive',
-                link: '/autorization-form' },
-              '\u0412\u043E\u0439\u0442\u0438'
-            )
+            _reactionic.IonButton,
+            { color: 'positive',
+              link: '/autorization-form' },
+            '\u0412\u043E\u0439\u0442\u0438'
           )
         )
       );
@@ -39927,17 +39925,24 @@ var Container = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var unautorizedUserButtons = !_localStorage2.default.get_obj('token') ? _react2.default.createElement(_unauthorizedUserButtons2.default, null) : null;
       return _react2.default.createElement(
         _reactionic.IonContent,
         _extends({ customClasses: ''
         }, this.props),
         _react2.default.createElement(
           'div',
-          { className: 'mapContainer' },
-          _react2.default.createElement(_map2.default, null)
-        ),
-        unautorizedUserButtons
+          { className: 'content-container' },
+          _localStorage2.default.get_obj('token') ? _react2.default.createElement(
+            'div',
+            { className: 'mapContainer2' },
+            _react2.default.createElement(_map2.default, null)
+          ) : _react2.default.createElement(
+            'div',
+            { className: 'mapContainer' },
+            _react2.default.createElement(_map2.default, null)
+          ),
+          _localStorage2.default.get_obj('token') ? "" : _react2.default.createElement(_unauthorizedUserButtons2.default, { className: 'content-button' })
+        )
       );
     }
   }]);
@@ -39955,7 +39960,7 @@ exports.default = Container;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -40000,133 +40005,133 @@ var EventEmitter = __webpack_require__(372);
 
 
 var Layout = _react2.default.createClass({
-  displayName: 'Layout',
+    displayName: 'Layout',
 
-  contextTypes: {
-    ionSnapper: _react2.default.PropTypes.object,
-    ionShowPopover: _react2.default.PropTypes.func,
-    ionPlatform: _react2.default.PropTypes.object,
-    router: _react2.default.PropTypes.object.isRequired,
-    location: _react2.default.PropTypes.object
-  },
-  getInitialState: function getInitialState() {
-    return {
-      isUser: false,
-      fl: false,
-      userBalance: 0
-    };
-  },
-  getPageProps: function getPageProps(path) {
-    var _this = this;
+    contextTypes: {
+        ionSnapper: _react2.default.PropTypes.object,
+        ionShowPopover: _react2.default.PropTypes.func,
+        ionPlatform: _react2.default.PropTypes.object,
+        router: _react2.default.PropTypes.object.isRequired,
+        location: _react2.default.PropTypes.object
+    },
+    getInitialState: function getInitialState() {
+        return {
+            isUser: false,
+            fl: false,
+            userBalance: 0
+        };
+    },
+    getPageProps: function getPageProps(path) {
+        var _this = this;
 
-    var backButton = _react2.default.createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
-      color: '#FFFFFF',
-      type: 'clear',
-      customClasses: 'button-stage',
-      title: 'Back'
-    });
+        var backButton = _react2.default.createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
+            color: '#FFFFFF',
+            type: 'clear',
+            customClasses: 'button-stage',
+            title: 'Back'
+        });
 
-    var balance = _react2.default.createElement(_userBalance2.default, null);
+        var balance = _react2.default.createElement(_userBalance2.default, null);
 
-    // add defaults to pageListItems
-    var pageList = this.props.pageList.map(function (page) {
-      page.headerTitle = _react2.default.createElement(_mainTitle2.default, { title: page.title });
-      page.rightHeaderButton = balance;
-      page.leftHeaderButton = backButton;
-      return page;
-    });
-    var pageProps = _lodash2.default.keyBy(pageList, 'path');
+        // add defaults to pageListItems
+        var pageList = this.props.pageList.map(function (page) {
+            page.headerTitle = _react2.default.createElement(_mainTitle2.default, { title: page.title });
+            page.rightHeaderButton = balance;
+            page.leftHeaderButton = backButton;
+            return page;
+        });
+        var pageProps = _lodash2.default.keyBy(pageList, 'path');
 
-    // custom pageProps
-    pageProps['/container'].leftHeaderButton = _react2.default.createElement(_reactionic.IonNavBackButton, {
-      'menu-toggle': 'left',
-      type: 'clear',
-      className: 'side-menu-button',
-      icon: 'ion-navicon',
-      onClick: function onClick() {
-        _this.context.ionSnapper.toggle('left');
-      }
-    });
-    return pageProps[path];
-  },
-  componentDidMount: function componentDidMount() {
-    var _this2 = this;
+        // custom pageProps
+        pageProps['/container'].leftHeaderButton = _react2.default.createElement(_reactionic.IonButton, {
+            'menu-toggle': 'left',
+            type: 'clear',
+            className: 'side-menu-button',
+            icon: 'ion-navicon',
+            onClick: function onClick() {
+                _this.context.ionSnapper.toggle('left');
+            }
+        });
+        return pageProps[path];
+    },
+    componentDidMount: function componentDidMount() {
+        var _this2 = this;
 
-    if (_localStorage2.default.get_obj("token") != null && this.state.isUser == false) {
-      this.setState({ isUser: true });
-    }
-    if (_localStorage2.default.get_obj("token") == null && this.state.isUser == true) {
-      this.setState({ isUser: false });
-    }
-    var emitter = new EventEmitter();
-    emitter.on('radiation', function (flag) {
-      _this2.setState({ fl: flag });
-    });
-    _emitterStorage2.default.emitter = emitter;
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    emitter = _emitterStorage2.default.emitter;
-    emitter.off('radiation', false);
-    _emitterStorage2.default.emitter = null;
-  },
-  render: function render() {
-    var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
-    var globalFl = false;
-    if (_localStorage2.default.get_obj("token")) globalFl = true;
-    if (this.state.fl == true) globalFl = true;
-    return _react2.default.createElement(
-      _reactionic.IonSideMenuContainer,
-      _extends({}, this.props, { settings: {
-          disable: 'right',
-          touchToDrag: false
-        } }),
-      _react2.default.createElement(
-        _reactionic.IonSideMenus,
-        null,
-        _react2.default.createElement(
-          _reactionic.IonSideMenu,
-          { customClasses: 'side-menu' },
-          _react2.default.createElement(_sideMenu2.default, { isAutorized: globalFl, contextMain: this.context })
-        ),
-        _react2.default.createElement(
-          _reactionic.IonSideMenuContent,
-          null,
-          _react2.default.createElement(_reactionic.IonNavBar, _extends({ customClasses: 'nav-blue',
-            title: currentPageProps.headerTitle,
-            leftButton: currentPageProps.leftHeaderButton,
-            rightButton: currentPageProps.rightHeaderButton
-          }, this.props)),
-          _react2.default.createElement(
-            _reactionic.IonContent,
-            _extends({ customClasses: '' }, this.props),
+        if (_localStorage2.default.get_obj("token") != null && this.state.isUser == false) {
+            this.setState({ isUser: true });
+        }
+        if (_localStorage2.default.get_obj("token") == null && this.state.isUser == true) {
+            this.setState({ isUser: false });
+        }
+        var emitter = new EventEmitter();
+        emitter.on('radiation', function (flag) {
+            _this2.setState({ fl: flag });
+        });
+        _emitterStorage2.default.emitter = emitter;
+    },
+    componentWillUnmount: function componentWillUnmount() {
+        emitter = _emitterStorage2.default.emitter;
+        emitter.off('radiation', false);
+        _emitterStorage2.default.emitter = null;
+    },
+    render: function render() {
+        var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
+        var globalFl = false;
+        if (_localStorage2.default.get_obj("token")) globalFl = true;
+        if (this.state.fl == true) globalFl = true;
+        return _react2.default.createElement(
+            _reactionic.IonSideMenuContainer,
+            _extends({}, this.props, { settings: {
+                    disable: 'right',
+                    touchToDrag: false
+                } }),
             _react2.default.createElement(
-              _reactionic.IonView,
-              _extends({ customClasses: '' }, this.props),
-              _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+                _reactionic.IonSideMenus,
+                null,
+                _react2.default.createElement(
+                    _reactionic.IonSideMenu,
+                    { customClasses: 'side-menu' },
+                    _react2.default.createElement(_sideMenu2.default, { isAutorized: globalFl, contextMain: this.context })
+                ),
+                _react2.default.createElement(
+                    _reactionic.IonSideMenuContent,
+                    null,
+                    _react2.default.createElement(_reactionic.IonNavBar, _extends({ customClasses: 'nav-blue',
+                        title: currentPageProps.headerTitle,
+                        leftButton: currentPageProps.leftHeaderButton,
+                        rightButton: currentPageProps.rightHeaderButton
+                    }, this.props)),
+                    _react2.default.createElement(
+                        _reactionic.IonContent,
+                        _extends({ customClasses: '' }, this.props),
+                        _react2.default.createElement(
+                            _reactionic.IonView,
+                            _extends({ customClasses: '' }, this.props),
+                            _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+                        )
+                    )
+                )
             )
-          )
         )
-      )
-    )
 
-    /*
-    <IonSideMenuContainer {...this.props}>
-       <IonSideMenuContent>
-        <IonNavBar customClasses="bar-dark"
-                   title={currentPageProps.headerTitle}
-                   leftButton={currentPageProps.leftHeaderButton}
-                   rightButton={currentPageProps.rightHeaderButton}
-                   {...this.props}
-        />
-         <IonNavView customClasses="" {...this.props}>
-          <IonView customClasses="" {...this.props}>
-            {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
-          </IonView>
-        </IonNavView>
-      </IonSideMenuContent>
-    </IonSideMenuContainer>*/
-    ;
-  }
+        /*
+         <IonSideMenuContainer {...this.props}>
+          <IonSideMenuContent>
+         <IonNavBar customClasses="bar-dark"
+         title={currentPageProps.headerTitle}
+         leftButton={currentPageProps.leftHeaderButton}
+         rightButton={currentPageProps.rightHeaderButton}
+         {...this.props}
+         />
+          <IonNavView customClasses="" {...this.props}>
+         <IonView customClasses="" {...this.props}>
+         {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
+         </IonView>
+         </IonNavView>
+         </IonSideMenuContent>
+         </IonSideMenuContainer>*/
+        ;
+    }
 });
 
 exports.default = Layout;
@@ -40479,11 +40484,10 @@ var CarList = function (_React$Component) {
       client.send();
 
       client.onload = function () {
-
         var result = JSON.parse(client.responseText);
-
-        if (result.success == true) masCars.splice(index, 1);
-
+        if (result.success) {
+          masCars.splice(index, 1);
+        }
         _this3.setState({ carList: masCars });
       };
     }

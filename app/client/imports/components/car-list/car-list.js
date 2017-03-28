@@ -47,10 +47,12 @@ class CarList extends React.Component {
       client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token"))); 
       client.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
       client.send();  
-      client.onload = () => { 
-          let result = JSON.parse(client.responseText); 
-          if(result.success == true) masCars.splice(index,1); 
-          this.setState({carList : masCars}); 
+      client.onload = () => {
+        let result = JSON.parse(client.responseText);
+        if (result.success) {
+          masCars.splice(index, 1);
+        }
+        this.setState({carList: masCars});
       };
   }
 

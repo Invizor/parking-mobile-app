@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {IonButton, IonSelect, IonItem} from 'reactionic';
+import {IonButton, IonSelect, IonItem, IonRange} from 'reactionic';
 import createHashHistory from 'history/lib/createHashHistory';
 import "./confirm-pay-parking.scss";
 import Repository from '../../storage/local-storage';
@@ -12,7 +12,8 @@ export default class ConfirmPayParking extends Component {
       carTitleList: ['Не выбрано', 'BMW', 'Audi', 'Mersedes'],
       carList: [],
       selectedValue: 'Не указано',
-      balance: 0
+      balance: 0,
+      rangeValue: 1
     };
     //console.log('one', this);
   }
@@ -21,6 +22,10 @@ export default class ConfirmPayParking extends Component {
     ionUpdatePopup: React.PropTypes.func,
     showSelector: React.PropTypes.func
   };
+
+  rangeSelection(value){
+    this.setState({ rangeValue: value});
+  }
 
   getParkingId() {
     const start = this.props.location.pathname.lastIndexOf("/");
@@ -78,9 +83,7 @@ export default class ConfirmPayParking extends Component {
   }
 
   changeValue(value) {
-    // console.log('e',e);
     this.setState({selectedValue: value});
-    // console.log('value', value)
   }
 
   checkCarsList(e) {
@@ -236,7 +239,7 @@ export default class ConfirmPayParking extends Component {
   render() {
 
 
-
+    var rangeLabel  = 'Range '+ this.state.rangeValue;
     return (
       <div>
         <div className="confirm-pay-parking">
@@ -260,15 +263,13 @@ export default class ConfirmPayParking extends Component {
                 Баланс <span className="balance-amount">{this.state.balance} руб.</span>
               </IonItem>
             </div>
-            <div>
-              {
-
-              }
-            </div>
-
-
-
-
+            <IonItem divider>{rangeLabel}</IonItem>
+            <IonRange
+                      defaultValue={1}
+                      handleChange={e=> this.rangeSelection(e)}
+                      min={1}
+                      max={24}>
+            </IonRange>
             <IonButton color="positive"
                        className="confirm-pay-parking-button"
                        onClick={e => this.startParking(e)}>

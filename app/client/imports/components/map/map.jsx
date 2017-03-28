@@ -88,13 +88,8 @@ export default class Map extends Component {
   }
 
 
-  httpGet(theUrl) {
-    let client = new XMLHttpRequest();
-    client.open("GET", theUrl + '?lon=45.029453&lat=38.969549&distance=2000');
-    client.send();
-    client.onload = () => {
-      let parkingList = JSON.parse(client.responseText);
-
+  getPaidParkings() {
+    requestToServer('GET', 'https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000', (parkingList)=>{
       if (!Array.prototype.find) {
         Array.prototype.find = function (predicate) {
           if (this == null) {
@@ -122,24 +117,22 @@ export default class Map extends Component {
           return parking;
         }
       });
-      console.log('parkingList', parkingList);
-      console.log('paidParkingList', paidParkingList);
+      /*console.log('parkingList', parkingList);
+      console.log('paidParkingList', paidParkingList);*/
       this.setState({markers: paidParkingList});
       Repository.add_obj('paidParkingList', paidParkingList);
-    };
+    });
   }
-
-
 
 
   componentDidMount() {
     if (Repository.get_obj('paidParkingList')) {
       this.setState({markers: Repository.get_obj('paidParkingList')});
     } else {
-      this.httpGet('https://parkimon.ru/api/v1/geolocation/near');
+      this.getPaidParkings();
     }
    // this.showLoading();
-    requestToServer('GET', 'https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000', (responseText)=>{console.log('responseText', responseText)});
+
 
   }
 
