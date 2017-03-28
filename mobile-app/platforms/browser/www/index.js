@@ -40296,24 +40296,16 @@ var UnautorizedUserButtons = function (_Component) {
           'div',
           { className: 'unauthorized-user-buttons' },
           _react2.default.createElement(
-            'div',
-            { className: 'unauthorized-user-button' },
-            _react2.default.createElement(
-              _reactionic.IonButton,
-              { color: 'positive',
-                link: '/set-balance' },
-              '\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430'
-            )
+            _reactionic.IonButton,
+            { color: 'positive',
+              link: '/set-balance' },
+            '\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430'
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'unauthorized-user-button' },
-            _react2.default.createElement(
-              _reactionic.IonButton,
-              { color: 'positive',
-                link: '/autorization-form' },
-              '\u0412\u043E\u0439\u0442\u0438'
-            )
+            _reactionic.IonButton,
+            { color: 'positive',
+              link: '/autorization-form' },
+            '\u0412\u043E\u0439\u0442\u0438'
           )
         )
       );
@@ -40383,8 +40375,8 @@ var UserBalance = function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var userBalance = void 0;
-      if (_localStorage2.default.get_obj('user') && _localStorage2.default.get_obj('user').wallet) {
-        userBalance = _localStorage2.default.get_obj('user').wallet + ' руб.';
+      if (_localStorage2.default.get_obj('user') && _localStorage2.default.get_obj('user')._id) {
+        userBalance = _localStorage2.default.get_obj('user').wallet ? _localStorage2.default.get_obj('user').wallet + ' руб' : '0 руб.';
       } else {
         userBalance = null;
       }
@@ -40629,10 +40621,18 @@ var Container = function (_Component) {
         }, this.props),
         _react2.default.createElement(
           'div',
-          { className: 'mapContainer' },
-          _react2.default.createElement(_map2.default, null)
-        ),
-        _localStorage2.default.get_obj('token') ? "" : _react2.default.createElement(_unauthorizedUserButtons2.default, null)
+          { className: 'content-container' },
+          _localStorage2.default.get_obj('token') ? _react2.default.createElement(
+            'div',
+            { className: 'mapContainer2' },
+            _react2.default.createElement(_map2.default, null)
+          ) : _react2.default.createElement(
+            'div',
+            { className: 'mapContainer' },
+            _react2.default.createElement(_map2.default, null)
+          ),
+          _localStorage2.default.get_obj('token') ? "" : _react2.default.createElement(_unauthorizedUserButtons2.default, { className: 'content-button' })
+        )
       );
     }
   }]);
@@ -40650,7 +40650,7 @@ exports.default = Container;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -40695,133 +40695,133 @@ var EventEmitter = __webpack_require__(380);
 
 
 var Layout = _react2.default.createClass({
-  displayName: 'Layout',
+    displayName: 'Layout',
 
-  contextTypes: {
-    ionSnapper: _react2.default.PropTypes.object,
-    ionShowPopover: _react2.default.PropTypes.func,
-    ionPlatform: _react2.default.PropTypes.object,
-    router: _react2.default.PropTypes.object.isRequired,
-    location: _react2.default.PropTypes.object
-  },
-  getInitialState: function getInitialState() {
-    return {
-      isUser: false,
-      fl: false,
-      userBalance: 0
-    };
-  },
-  getPageProps: function getPageProps(path) {
-    var _this = this;
+    contextTypes: {
+        ionSnapper: _react2.default.PropTypes.object,
+        ionShowPopover: _react2.default.PropTypes.func,
+        ionPlatform: _react2.default.PropTypes.object,
+        router: _react2.default.PropTypes.object.isRequired,
+        location: _react2.default.PropTypes.object
+    },
+    getInitialState: function getInitialState() {
+        return {
+            isUser: false,
+            fl: false,
+            userBalance: 0
+        };
+    },
+    getPageProps: function getPageProps(path) {
+        var _this = this;
 
-    var backButton = _react2.default.createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
-      color: '#FFFFFF',
-      type: 'clear',
-      customClasses: 'button-stage',
-      title: 'Back'
-    });
+        var backButton = _react2.default.createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
+            color: '#FFFFFF',
+            type: 'clear',
+            customClasses: 'button-stage',
+            title: 'Back'
+        });
 
-    var balance = _react2.default.createElement(_userBalance2.default, null);
+        var balance = _react2.default.createElement(_userBalance2.default, null);
 
-    // add defaults to pageListItems
-    var pageList = this.props.pageList.map(function (page) {
-      page.headerTitle = _react2.default.createElement(_mainTitle2.default, { title: page.title });
-      page.rightHeaderButton = balance;
-      page.leftHeaderButton = backButton;
-      return page;
-    });
-    var pageProps = _lodash2.default.keyBy(pageList, 'path');
+        // add defaults to pageListItems
+        var pageList = this.props.pageList.map(function (page) {
+            page.headerTitle = _react2.default.createElement(_mainTitle2.default, { title: page.title });
+            page.rightHeaderButton = balance;
+            page.leftHeaderButton = backButton;
+            return page;
+        });
+        var pageProps = _lodash2.default.keyBy(pageList, 'path');
 
-    // custom pageProps
-    pageProps['/container'].leftHeaderButton = _react2.default.createElement(_reactionic.IonNavBackButton, {
-      'menu-toggle': 'left',
-      type: 'clear',
-      className: 'side-menu-button',
-      icon: 'ion-navicon',
-      onClick: function onClick() {
-        _this.context.ionSnapper.toggle('left');
-      }
-    });
-    return pageProps[path];
-  },
-  componentDidMount: function componentDidMount() {
-    var _this2 = this;
+        // custom pageProps
+        pageProps['/container'].leftHeaderButton = _react2.default.createElement(_reactionic.IonButton, {
+            'menu-toggle': 'left',
+            type: 'clear',
+            className: 'side-menu-button',
+            icon: 'ion-navicon',
+            onClick: function onClick() {
+                _this.context.ionSnapper.toggle('left');
+            }
+        });
+        return pageProps[path];
+    },
+    componentDidMount: function componentDidMount() {
+        var _this2 = this;
 
-    if (_localStorage2.default.get_obj("token") != null && this.state.isUser == false) {
-      this.setState({ isUser: true });
-    }
-    if (_localStorage2.default.get_obj("token") == null && this.state.isUser == true) {
-      this.setState({ isUser: false });
-    }
-    var emitter = new EventEmitter();
-    emitter.on('radiation', function (flag) {
-      _this2.setState({ fl: flag });
-    });
-    _emitterStorage2.default.emitter = emitter;
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    emitter = _emitterStorage2.default.emitter;
-    emitter.off('radiation', false);
-    _emitterStorage2.default.emitter = null;
-  },
-  render: function render() {
-    var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
-    var globalFl = false;
-    if (_localStorage2.default.get_obj("token")) globalFl = true;
-    if (this.state.fl == true) globalFl = true;
-    return _react2.default.createElement(
-      _reactionic.IonSideMenuContainer,
-      _extends({}, this.props, { settings: {
-          disable: 'right',
-          touchToDrag: false
-        } }),
-      _react2.default.createElement(
-        _reactionic.IonSideMenus,
-        null,
-        _react2.default.createElement(
-          _reactionic.IonSideMenu,
-          { customClasses: 'side-menu' },
-          _react2.default.createElement(_sideMenu2.default, { isAutorized: globalFl, contextMain: this.context })
-        ),
-        _react2.default.createElement(
-          _reactionic.IonSideMenuContent,
-          null,
-          _react2.default.createElement(_reactionic.IonNavBar, _extends({ customClasses: 'nav-blue',
-            title: currentPageProps.headerTitle,
-            leftButton: currentPageProps.leftHeaderButton,
-            rightButton: currentPageProps.rightHeaderButton
-          }, this.props)),
-          _react2.default.createElement(
-            _reactionic.IonContent,
-            _extends({ customClasses: '' }, this.props),
+        if (_localStorage2.default.get_obj("token") != null && this.state.isUser == false) {
+            this.setState({ isUser: true });
+        }
+        if (_localStorage2.default.get_obj("token") == null && this.state.isUser == true) {
+            this.setState({ isUser: false });
+        }
+        var emitter = new EventEmitter();
+        emitter.on('radiation', function (flag) {
+            _this2.setState({ fl: flag });
+        });
+        _emitterStorage2.default.emitter = emitter;
+    },
+    componentWillUnmount: function componentWillUnmount() {
+        emitter = _emitterStorage2.default.emitter;
+        emitter.off('radiation', false);
+        _emitterStorage2.default.emitter = null;
+    },
+    render: function render() {
+        var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
+        var globalFl = false;
+        if (_localStorage2.default.get_obj("token")) globalFl = true;
+        if (this.state.fl == true) globalFl = true;
+        return _react2.default.createElement(
+            _reactionic.IonSideMenuContainer,
+            _extends({}, this.props, { settings: {
+                    disable: 'right',
+                    touchToDrag: false
+                } }),
             _react2.default.createElement(
-              _reactionic.IonView,
-              _extends({ customClasses: '' }, this.props),
-              _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+                _reactionic.IonSideMenus,
+                null,
+                _react2.default.createElement(
+                    _reactionic.IonSideMenu,
+                    { customClasses: 'side-menu' },
+                    _react2.default.createElement(_sideMenu2.default, { isAutorized: globalFl, contextMain: this.context })
+                ),
+                _react2.default.createElement(
+                    _reactionic.IonSideMenuContent,
+                    null,
+                    _react2.default.createElement(_reactionic.IonNavBar, _extends({ customClasses: 'nav-blue',
+                        title: currentPageProps.headerTitle,
+                        leftButton: currentPageProps.leftHeaderButton,
+                        rightButton: currentPageProps.rightHeaderButton
+                    }, this.props)),
+                    _react2.default.createElement(
+                        _reactionic.IonContent,
+                        _extends({ customClasses: '' }, this.props),
+                        _react2.default.createElement(
+                            _reactionic.IonView,
+                            _extends({ customClasses: '' }, this.props),
+                            _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+                        )
+                    )
+                )
             )
-          )
         )
-      )
-    )
 
-    /*
-    <IonSideMenuContainer {...this.props}>
-       <IonSideMenuContent>
-        <IonNavBar customClasses="bar-dark"
-                   title={currentPageProps.headerTitle}
-                   leftButton={currentPageProps.leftHeaderButton}
-                   rightButton={currentPageProps.rightHeaderButton}
-                   {...this.props}
-        />
-         <IonNavView customClasses="" {...this.props}>
-          <IonView customClasses="" {...this.props}>
-            {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
-          </IonView>
-        </IonNavView>
-      </IonSideMenuContent>
-    </IonSideMenuContainer>*/
-    ;
-  }
+        /*
+         <IonSideMenuContainer {...this.props}>
+          <IonSideMenuContent>
+         <IonNavBar customClasses="bar-dark"
+         title={currentPageProps.headerTitle}
+         leftButton={currentPageProps.leftHeaderButton}
+         rightButton={currentPageProps.rightHeaderButton}
+         {...this.props}
+         />
+          <IonNavView customClasses="" {...this.props}>
+         <IonView customClasses="" {...this.props}>
+         {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
+         </IonView>
+         </IonNavView>
+         </IonSideMenuContent>
+         </IonSideMenuContainer>*/
+        ;
+    }
 });
 
 exports.default = Layout;
