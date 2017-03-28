@@ -35,16 +35,6 @@ class EditCar extends Component {
     });
     return car[0];
 
-
-   /* const taskId = this.props.taskId;
-    let task = this.props.tasks.find((element)=> {
-      if(element.id === taskId) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    return task;*/
   }
 
 

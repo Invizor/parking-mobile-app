@@ -10267,7 +10267,7 @@ a.button {
 
 .mapContainer {
   width: 100%;
-  height: 400px; }
+  height: 90%; }
 
 .main-button {
   position: fixed;
@@ -10423,8 +10423,8 @@ a.button {
 .duration input {
   border: 1px solid #000; }
 .set-balance {
-  width: 300px;
-  margin: 100px auto 0;
+  width: 80%;
+  margin: 20px auto 0;
   border: 1px #999999;
   border-radius: 4px; }
 
@@ -10444,11 +10444,15 @@ a.button {
   border-radius: 4px; }
 
 .set-balance-title {
-  width: 80%;
-  display: inline-block;
-  font-size: 20px;
   margin-bottom: 30px;
-  color: #4b8bf4; }
+  font-size: 20px;
+  color: #4b8bf4;
+  text-align: center; }
+
+.balance-info {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 50px; }
 .list-cars {
   width: 100%;
   margin: 0 auto; }

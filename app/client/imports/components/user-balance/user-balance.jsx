@@ -18,8 +18,8 @@ class UserBalance extends React.Component {
 
   componentWillMount() {
     let userBalance;
-    if (Repository.get_obj('user') && Repository.get_obj('user').wallet) {
-      userBalance = Repository.get_obj('user').wallet + ' руб.'
+    if (Repository.get_obj('user')  && Repository.get_obj('user')._id) {
+      userBalance = Repository.get_obj('user').wallet ? Repository.get_obj('user').wallet + ' руб' : '0 руб.';
     } else {
       userBalance = null
     }

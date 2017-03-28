@@ -13,7 +13,7 @@ import createHashHistory from 'history/lib/createHashHistory';
 import {IonButton} from 'reactionic';
 import Repository from '../../storage/local-storage';
 import {IonContent, IonSpinner} from 'reactionic';
-import {AbsoluteMiddle} from '../../utils/helpers';
+import requestToServer from '../../utils/request-to-server';
 import "./map.scss";
 
 
@@ -30,6 +30,8 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
       averageCenter
       enableRetinaIcons
       gridSize={60}
+      imagePath="/android_asset/www/img/cluster-icons/m" // for browser version
+      // imagePath="/img/cluster-icons/m" // for mobile version
     >
       {props.markers.map((marker, index) => (
         <Marker
@@ -128,6 +130,8 @@ export default class Map extends Component {
   }
 
 
+
+
   componentDidMount() {
     if (Repository.get_obj('paidParkingList')) {
       this.setState({markers: Repository.get_obj('paidParkingList')});
@@ -135,6 +139,8 @@ export default class Map extends Component {
       this.httpGet('https://parkimon.ru/api/v1/geolocation/near');
     }
    // this.showLoading();
+    requestToServer('GET', 'https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000', (responseText)=>{console.log('responseText', responseText)});
+
   }
 
   handleMarkerClick(targetMarker) {

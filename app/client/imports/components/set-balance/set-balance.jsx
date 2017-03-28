@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {IonContent, IonButton} from 'reactionic';
 import './set-balance.scss';
-import createHashHistory from 'history/lib/createHashHistory';
+import LocalStorage from '../../storage/local-storage';
 
 export default class SetBalance extends Component {
 
@@ -12,9 +12,11 @@ export default class SetBalance extends Component {
 
   render() {
     return (
-      <div>
         <IonContent customClasses="" {...this.props}>
           <div className="set-balance">
+            <div className="balance-info">
+              Ваш баланс: {LocalStorage.get_obj('user').wallet} руб.
+            </div>
             <div className="set-balance-title">Укажите сумму в рублях:</div>
             <div className="set-balance-input">
               <input type="text"
@@ -33,7 +35,6 @@ export default class SetBalance extends Component {
             </IonButton>
           </div>
         </IonContent>
-      </div>
     )
   }
 }
