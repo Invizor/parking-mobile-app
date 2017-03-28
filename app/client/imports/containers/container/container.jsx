@@ -94,15 +94,29 @@ export default class Container extends Component {
   }
 
   render() {
-    let unautorizedUserButtons = !Repository.get_obj('token') ? <UnautorizedUserButtons/> : null;
     return (
       <IonContent customClasses=""
                   {...this.props}>
 
-        <div className="mapContainer">
-          <Map/>
+        <div className="content-container">
+            {
+          Repository.get_obj('token') ?
+              <div className="mapContainer2">
+                <Map/>
+              </div>
+          :
+              <div className="mapContainer">
+                <Map/>
+              </div>
+          }
+
+            {
+                Repository.get_obj('token') ?
+                    ""
+                    :
+                    <UnautorizedUserButtons className="content-button"/>
+            }
         </div>
-          {unautorizedUserButtons}
       </IonContent>
     );
   }

@@ -1,9 +1,24 @@
 @import "../../../../../node_modules/reactionic/dist/scss/styles/reactionic";
 
-.mapContainer {
-  width: 100%;
-  height: 90%;
+.content-container{
+  display : flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+.content-container .mapContainer{
+  width: 100%;
+  height: 93%;
+}
+.content-container .mapContainer2{
+  width: 100%;
+  height: 100%;
+}
+
+.content-container .unauthorized-user-buttons{
+  width: 100%;
+  height: 7%;
+}
+
 
 .main-button {
   position: fixed;
