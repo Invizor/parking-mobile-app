@@ -62,11 +62,11 @@ var ParkingItem = React.createClass({
     const parking = this.getCurrentParking();
 
     return (
-      <div>
+      <div className="parking-item">
         <IonList>
           {
             parking.zoneId ?
-              <h1 className="text-center">Парковка #{parking.zoneId}</h1>
+              <h1 className="parking-title text-center">#{parking.zoneId}</h1>
               :
               <IonItem divider>Информация неизвестна</IonItem>
           }
@@ -78,7 +78,7 @@ var ParkingItem = React.createClass({
           }
           {
             parking.address ?
-              <IonItem>Адрес: {parking.address}</IonItem>
+              <div className="address">Адрес: {parking.address}</div>
               :
               <IonItem>Адрес неизвестен</IonItem>
           }

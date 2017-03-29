@@ -10413,12 +10413,27 @@ a.button {
   margin: 50px auto;
   width: 50%; }
 
+.parking-item {
+  margin-top: 20px;
+  margin-bottom: 10px; }
+
+.parking-item .address {
+  margin-left: 16px;
+  padding: 16px 0;
+  font-size: 16px;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  color: #444; }
+
 .pay-parking button {
   width: 100%; }
 
 .pay-parking a {
   display: block;
   margin: 30px auto; }
+.confirm-pay-parking {
+  margin-top: 20px;
+  margin-bottom: 10px; }
+
 .confirm-pay-parking a {
   width: 300px;
   display: block;
@@ -10433,6 +10448,16 @@ a.button {
 
 .duration input {
   border: 1px solid #000; }
+
+.confirm-pay-parking-button {
+  margin-top: 120px; }
+
+.reg-number input {
+  width: 100px;
+  margin-left: 80px;
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid #ccc; }
 .set-balance {
   width: 80%;
   margin: 20px auto 0;

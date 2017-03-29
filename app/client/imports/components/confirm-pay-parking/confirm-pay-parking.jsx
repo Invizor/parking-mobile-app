@@ -3,6 +3,7 @@ import {IonButton, IonSelect, IonItem, IonRange} from 'reactionic';
 import createHashHistory from 'history/lib/createHashHistory';
 import "./confirm-pay-parking.scss";
 import Repository from '../../storage/local-storage';
+import {findDOMNode} from 'react-dom';
 
 export default class ConfirmPayParking extends Component {
 
@@ -13,7 +14,9 @@ export default class ConfirmPayParking extends Component {
       carList: [],
       selectedValue: 'Не указано',
       balance: 0,
-      rangeValue: 1
+      rangeValue: 1,
+      carTitleValue: '',
+      regNumberValue: ''
     };
     //console.log('one', this);
   }
@@ -84,6 +87,11 @@ export default class ConfirmPayParking extends Component {
 
   changeValue(value) {
     this.setState({selectedValue: value});
+    this.getRegNumberByTitle(value);
+  }
+
+  handleRegNumberChange(e) {
+    this.setState({regNumberValue: e.target.value});
   }
 
   checkCarsList(e) {
@@ -229,6 +237,16 @@ export default class ConfirmPayParking extends Component {
     this.setState({carTitleList: myCarsTitleList});
   }
 
+  getRegNumberByTitle(value) {
+    this.state.carList.filter((car)=>{
+      if(car.title === value) {
+        this.setState({regNumberValue: car.regNumber});
+      } else if (value === 'Не указано') {
+        this.setState({regNumberValue: ''})
+      }
+    })
+  }
+
   componentDidMount() {
     console.log('userCars1', this.state.carTitleList);
     this.getUserCars();
@@ -237,18 +255,13 @@ export default class ConfirmPayParking extends Component {
   }
 
   render() {
-
-
-    var rangeLabel  = 'Range '+ this.state.rangeValue;
+    let rangeLabel  = 'Количество часов: '+ this.state.rangeValue;
     return (
       <div>
-        <div className="confirm-pay-parking">
+         <div className="confirm-pay-parking">
           <div className="text-center">
 
-            <h1>Парковка #{this.getCurrentParking().zoneId}</h1>
-
-            <div>{this.getCurrentParking().address}</div>
-
+            <h1>#{this.getCurrentParking().zoneId}</h1>
             <div onMouseDown={e => this.checkCarsList(e)}>
               <IonSelect label='Паркуемое авто'
                          options={this.state.carTitleList}
@@ -257,10 +270,20 @@ export default class ConfirmPayParking extends Component {
                          handleChange={e => this.changeValue(e)}>
               </IonSelect>
             </div>
-
+            <div className="reg-number">
+              <IonItem>
+                Номер автомобиля
+                <input type="text"
+                       name="regNumber"
+                       placeholder="о123оо"
+                       ref="regNumber"
+                       value={this.state.regNumberValue}
+                       onChange={e => this.handleRegNumberChange(e)}/>
+              </IonItem>
+            </div>
             <div className="balance">
               <IonItem>
-                Баланс <span className="balance-amount">{this.state.balance} руб.</span>
+                Ваш баланс <span className="balance-amount">{this.state.balance} руб.</span>
               </IonItem>
             </div>
             <IonItem divider>{rangeLabel}</IonItem>
@@ -270,11 +293,12 @@ export default class ConfirmPayParking extends Component {
                       min={1}
                       max={24}>
             </IonRange>
-            <IonButton color="positive"
-                       className="confirm-pay-parking-button"
-                       onClick={e => this.startParking(e)}>
-              Начать парковку
-            </IonButton>
+            <div className="confirm-pay-parking-button">
+              <IonButton color="positive"
+                         onClick={e => this.startParking(e)}>
+                Начать парковку
+              </IonButton>
+            </div>
           </div>
 
         </div>

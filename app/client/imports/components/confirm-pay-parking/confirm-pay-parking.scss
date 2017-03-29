@@ -1,3 +1,7 @@
+.confirm-pay-parking {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 .confirm-pay-parking a {
   width: 300px;
   display: block;
@@ -15,4 +19,16 @@
 
 .duration input {
   border: 1px solid #000;
+}
+
+.confirm-pay-parking-button {
+  margin-top: 120px;
+}
+
+.reg-number input {
+  width: 100px;
+  margin-left: 80px;
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid #ccc;
 }

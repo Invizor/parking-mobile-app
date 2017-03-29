@@ -341,7 +341,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1698,6 +1698,16 @@ module.exports = isArray;
 "use strict";
 
 
+module.exports = __webpack_require__(137);
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1736,7 +1746,7 @@ var MARKER_CLUSTERER = exports.MARKER_CLUSTERER = "__SECRET_MARKER_CLUSTERER_DO_
 var INFO_BOX = exports.INFO_BOX = "__SECRET_INFO_BOX_DO_NOT_USE_OR_YOU_WILL_BE_FIRED";
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1778,16 +1788,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(137);
-
 
 /***/ }),
 /* 22 */
@@ -2720,7 +2720,7 @@ var _assign = __webpack_require__(5);
 
 var PooledClass = __webpack_require__(43);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var warning = __webpack_require__(3);
 
 var didWarnForAddedNewProperty = false;
@@ -27081,7 +27081,7 @@ module.exports = shouldUpdateReactComponent;
 
 var _assign = __webpack_require__(5);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var warning = __webpack_require__(3);
 
 var validateDOMNesting = emptyFunction;
@@ -28824,7 +28824,7 @@ module.exports = {
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -35351,7 +35351,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -35650,7 +35650,7 @@ exports.default = helpers;
 exports.__esModule = true;
 exports.getTrackLeft = exports.getTrackAnimateCSS = exports.getTrackCSS = undefined;
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -37187,7 +37187,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -37752,7 +37752,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -37883,7 +37883,7 @@ module.exports = g;
 "use strict";
 
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -38100,7 +38100,7 @@ var _reactionic = __webpack_require__(10);
 
 __webpack_require__(377);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _localStorage = __webpack_require__(12);
 
@@ -38283,6 +38283,8 @@ var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
+var _reactDom = __webpack_require__(19);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38304,7 +38306,9 @@ var ConfirmPayParking = function (_Component) {
       carList: [],
       selectedValue: 'Не указано',
       balance: 0,
-      rangeValue: 1
+      rangeValue: 1,
+      carTitleValue: '',
+      regNumberValue: ''
     };
     //console.log('one', this);
     return _this;
@@ -38380,10 +38384,17 @@ var ConfirmPayParking = function (_Component) {
     key: 'changeValue',
     value: function changeValue(value) {
       this.setState({ selectedValue: value });
+      this.getRegNumberByTitle(value);
+    }
+  }, {
+    key: 'handleRegNumberChange',
+    value: function handleRegNumberChange(e) {
+      this.setState({ regNumberValue: e.target.value });
     }
   }, {
     key: 'checkCarsList',
     value: function checkCarsList(e) {
+      this.setState({ regNumberValue: '' });
       if (this.state.carTitleList === 0) {
         e.preventDefault();
         console.log('999');
@@ -38507,6 +38518,19 @@ var ConfirmPayParking = function (_Component) {
       this.setState({ carTitleList: myCarsTitleList });
     }
   }, {
+    key: 'getRegNumberByTitle',
+    value: function getRegNumberByTitle(value) {
+      var _this4 = this;
+
+      this.state.carList.filter(function (car) {
+        if (car.title === value) {
+          _this4.setState({ regNumberValue: car.regNumber });
+        } else if (value === 'Не указано') {
+          _this4.setState({ regNumberValue: '' });
+        }
+      });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       console.log('userCars1', this.state.carTitleList);
@@ -38517,9 +38541,9 @@ var ConfirmPayParking = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
-      var rangeLabel = 'Range ' + this.state.rangeValue;
+      var rangeLabel = 'Количество часов: ' + this.state.rangeValue;
       return _react2.default.createElement(
         'div',
         null,
@@ -38532,26 +38556,38 @@ var ConfirmPayParking = function (_Component) {
             _react2.default.createElement(
               'h1',
               null,
-              '\u041F\u0430\u0440\u043A\u043E\u0432\u043A\u0430 #',
+              '#',
               this.getCurrentParking().zoneId
             ),
             _react2.default.createElement(
               'div',
-              null,
-              this.getCurrentParking().address
-            ),
-            _react2.default.createElement(
-              'div',
               { onMouseDown: function onMouseDown(e) {
-                  return _this4.checkCarsList(e);
+                  return _this5.checkCarsList(e);
                 } },
               _react2.default.createElement(_reactionic.IonSelect, { label: '\u041F\u0430\u0440\u043A\u0443\u0435\u043C\u043E\u0435 \u0430\u0432\u0442\u043E',
                 options: this.state.carTitleList,
                 defaultValue: '\u041D\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043E',
                 ref: 'carSelect',
                 handleChange: function handleChange(e) {
-                  return _this4.changeValue(e);
+                  return _this5.changeValue(e);
                 } })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'reg-number' },
+              _react2.default.createElement(
+                _reactionic.IonItem,
+                null,
+                '\u041D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F',
+                _react2.default.createElement('input', { type: 'text',
+                  name: 'regNumber',
+                  placeholder: '\u043E123\u043E\u043E',
+                  ref: 'regNumber',
+                  value: this.state.regNumberValue,
+                  onChange: function onChange(e) {
+                    return _this5.handleRegNumberChange(e);
+                  } })
+              )
             ),
             _react2.default.createElement(
               'div',
@@ -38559,7 +38595,7 @@ var ConfirmPayParking = function (_Component) {
               _react2.default.createElement(
                 _reactionic.IonItem,
                 null,
-                '\u0411\u0430\u043B\u0430\u043D\u0441 ',
+                '\u0412\u0430\u0448 \u0431\u0430\u043B\u0430\u043D\u0441 ',
                 _react2.default.createElement(
                   'span',
                   { className: 'balance-amount' },
@@ -38576,18 +38612,21 @@ var ConfirmPayParking = function (_Component) {
             _react2.default.createElement(_reactionic.IonRange, {
               defaultValue: 1,
               handleChange: function handleChange(e) {
-                return _this4.rangeSelection(e);
+                return _this5.rangeSelection(e);
               },
               min: 1,
               max: 24 }),
             _react2.default.createElement(
-              _reactionic.IonButton,
-              { color: 'positive',
-                className: 'confirm-pay-parking-button',
-                onClick: function onClick(e) {
-                  return _this4.startParking(e);
-                } },
-              '\u041D\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443'
+              'div',
+              { className: 'confirm-pay-parking-button' },
+              _react2.default.createElement(
+                _reactionic.IonButton,
+                { color: 'positive',
+                  onClick: function onClick(e) {
+                    return _this5.startParking(e);
+                  } },
+                '\u041D\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443'
+              )
             )
           )
         )
@@ -38680,6 +38719,16 @@ var EditCar = function (_Component) {
         }
       });
       return car[0];
+
+      /* const taskId = this.props.taskId;
+       let task = this.props.tasks.find((element)=> {
+         if(element.id === taskId) {
+           return true;
+         } else {
+           return false;
+         }
+       });
+       return task;*/
     }
   }, {
     key: 'editCarBtnClicked',
@@ -38842,7 +38891,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(10);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 __webpack_require__(380);
 
@@ -38958,8 +39007,7 @@ var MarkerClustererExampleGoogleMap = (0, _reactGoogleMaps.withGoogleMap)(functi
         averageCenter: true,
         enableRetinaIcons: true,
         gridSize: 60,
-        imagePath: "/android_asset/www/img/cluster-icons/m" // for browser version
-        // imagePath="/img/cluster-icons/m" // for mobile version
+        imagePath: window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"
       },
       props.markers.map(function (marker, index) {
         return _react2.default.createElement(_reactGoogleMaps.Marker, {
@@ -39370,14 +39418,14 @@ var ParkingItem = _react2.default.createClass({
 
     return _react2.default.createElement(
       'div',
-      null,
+      { className: 'parking-item' },
       _react2.default.createElement(
         _reactionic.IonList,
         null,
         parking.zoneId ? _react2.default.createElement(
           'h1',
-          { className: 'text-center' },
-          '\u041F\u0430\u0440\u043A\u043E\u0432\u043A\u0430 #',
+          { className: 'parking-title text-center' },
+          '#',
           parking.zoneId
         ) : _react2.default.createElement(
           _reactionic.IonItem,
@@ -39395,8 +39443,8 @@ var ParkingItem = _react2.default.createClass({
           '\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043C\u0435\u0441\u0442 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E'
         ),
         parking.address ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
+          'div',
+          { className: 'address' },
           '\u0410\u0434\u0440\u0435\u0441: ',
           parking.address
         ) : _react2.default.createElement(
@@ -40389,7 +40437,7 @@ var _reactionic = __webpack_require__(10);
 
 __webpack_require__(378);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _localStorage = __webpack_require__(12);
 
@@ -40559,7 +40607,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(10);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _localStorage = __webpack_require__(12);
 
@@ -40687,7 +40735,7 @@ var _reactionic = __webpack_require__(10);
 
 __webpack_require__(386);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 var _localStorage = __webpack_require__(12);
 
@@ -51598,7 +51646,7 @@ var DOMLazyTree = __webpack_require__(55);
 var ExecutionEnvironment = __webpack_require__(9);
 
 var createNodesFromMarkup = __webpack_require__(393);
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var invariant = __webpack_require__(2);
 
 var Danger = {
@@ -52415,7 +52463,7 @@ var ReactInstrumentation = __webpack_require__(22);
 var ReactMultiChild = __webpack_require__(565);
 var ReactServerRenderingTransaction = __webpack_require__(571);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var escapeTextContentForBrowser = __webpack_require__(92);
 var invariant = __webpack_require__(2);
 var isEventSupported = __webpack_require__(144);
@@ -54944,7 +54992,7 @@ var _assign = __webpack_require__(5);
 var ReactUpdates = __webpack_require__(23);
 var Transaction = __webpack_require__(91);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -55421,7 +55469,7 @@ var ReactCurrentOwner = __webpack_require__(31);
 var ReactReconciler = __webpack_require__(44);
 var ReactChildReconciler = __webpack_require__(541);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var flattenChildren = __webpack_require__(592);
 var invariant = __webpack_require__(2);
 
@@ -58123,7 +58171,7 @@ var SyntheticTransitionEvent = __webpack_require__(587);
 var SyntheticUIEvent = __webpack_require__(69);
 var SyntheticWheelEvent = __webpack_require__(588);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var getEventCharCode = __webpack_require__(141);
 var invariant = __webpack_require__(2);
 
@@ -59436,7 +59484,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -59601,7 +59649,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -59730,7 +59778,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -59949,7 +59997,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -60061,9 +60109,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -60218,7 +60266,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -60356,7 +60404,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -60631,7 +60679,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -60785,7 +60833,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -60940,7 +60988,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -61088,7 +61136,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -61244,7 +61292,7 @@ var _markerClustererPlus = __webpack_require__(527);
 
 var _markerClustererPlus2 = _interopRequireDefault(_markerClustererPlus);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 var _enhanceElement = __webpack_require__(24);
 
@@ -61628,7 +61676,7 @@ var _invariant2 = _interopRequireDefault(_invariant);
 
 var _react = __webpack_require__(1);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61782,7 +61830,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _constants = __webpack_require__(19);
+var _constants = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65298,7 +65346,7 @@ module.exports = ReactCSSTransitionGroupChild;
 var PooledClass = __webpack_require__(649);
 var ReactElement = __webpack_require__(46);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var traverseAllChildren = __webpack_require__(261);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -66394,7 +66442,7 @@ var ReactElement = __webpack_require__(46);
 var ReactPropTypeLocationNames = __webpack_require__(152);
 var ReactPropTypesSecret = __webpack_require__(258);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 var getIteratorFn = __webpack_require__(154);
 var warning = __webpack_require__(3);
 
@@ -66997,7 +67045,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = __webpack_require__(27);
 var ReactTransitionChildMapping = __webpack_require__(658);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(21);
 
 /**
  * A basis for animations. When children are declaratively added or removed,
