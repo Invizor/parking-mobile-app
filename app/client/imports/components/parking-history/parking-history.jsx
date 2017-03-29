@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {IonContent, IonList, IonItem} from 'reactionic';
 import Repository from '../../storage/local-storage';
+import RequestToServer from '../../utils/request-to-server';
 
 export default class ParkingHistory extends Component {
-
 
   constructor(props) {
     super(props);
@@ -13,22 +13,14 @@ export default class ParkingHistory extends Component {
   }
 
   getParkingHistory() {
-    let client = new XMLHttpRequest();
-    client.open('GET', 'https://parkimon.ru/api/v1/parking/history', true);
-    client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-    client.send();
-    client.onload = () => {
-      let list = JSON.parse(client.responseText);
-      this.setState({parkingHistory: list.sessions});
-      /*Repository.add_obj("cars", list);
-      this.setState({carList: list.userCars});*/
-    };
+    RequestToServer('GET', 'https://parkimon.ru/api/v1/parking/history', (responseText)=>{
+      this.setState({parkingHistory: responseText.sessions});
+    }, true);
   }
 
   componentDidMount() {
     this.getParkingHistory();
   }
-
 
   render() {
    // console.log("parking history",this.state.parkingHistory);

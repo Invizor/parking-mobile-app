@@ -3,6 +3,7 @@ import {IonButton, IonSelect, IonItem, IonRange} from 'reactionic';
 import createHashHistory from 'history/lib/createHashHistory';
 import "./confirm-pay-parking.scss";
 import Repository from '../../storage/local-storage';
+import RequestToServer from '../../utils/request-to-server';
 import {findDOMNode} from 'react-dom';
 
 export default class ConfirmPayParking extends Component {
@@ -190,39 +191,24 @@ export default class ConfirmPayParking extends Component {
 
 
 
+
+
       const parkingID = this.getParkingId();
       this.getCarByTitle();
-      let client = new XMLHttpRequest();
-      client.open("POST", "https://parkimon.ru/api/v1/parking/start", true);
-      client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-      let params = "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber;
 
-      client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      client.send(params);
-
-      client.onload = () => {
-        let list = JSON.parse(client.responseText);
-        console.log("response text", list);
-
-        let parkingTimer = window.setInterval(()=>{
-          let secondRequest = new XMLHttpRequest();
-          secondRequest.open("GET", "https://parkimon.ru/api/v1/parking/" + list.session._id, true);
-          secondRequest.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-          secondRequest.send();
-          secondRequest.onload = () => {
-            let newList = JSON.parse(secondRequest.responseText);
-            console.log(newList);
-            if (newList.session.status === "done") {
+      RequestToServer("POST", "https://parkimon.ru/api/v1/parking/start", (response) => {
+        console.log('response', response);
+        let parkingTimer = window.setInterval(()=> {
+          RequestToServer("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, (newResponse) => {
+            console.log(newResponse);
+            if (newResponse.session.status === "done") {
               console.log("done");
               clearInterval(parkingTimer);
             }
-          }
+          }, true)
         }, 5000);
+      }, true, "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber);
 
-
-
-
-      };
     }
 
 

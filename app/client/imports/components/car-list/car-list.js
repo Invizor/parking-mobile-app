@@ -26,7 +26,7 @@ class CarList extends React.Component {
   }
 
   getListCar(theUrl) {
-      requestToServer("GET", theUrl, (carsList)=>{
+      requestToServer('GET', theUrl, (carsList)=>{
           Repository.add_obj("cars", carsList);
           this.setState({carList: carsList.userCars});
       }, true);
