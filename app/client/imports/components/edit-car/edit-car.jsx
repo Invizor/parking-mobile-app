@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {IonContent} from 'reactionic';
 import Repostitory from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
+import requestToServer from '../../utils/request-to-server';
 
 class EditCar extends Component {
 
@@ -49,21 +50,13 @@ class EditCar extends Component {
 
 
   editCarBtnClicked(theUrl) {
-    console.log("theUrl", theUrl);
-    let history = createHashHistory();
-    let client = new XMLHttpRequest();
-    client.open("POST", theUrl, true);
 
-    let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
-    console.log('ParamsEditCar', params);
-    client.setRequestHeader("Authorization", 'Bearer ' + String(Repostitory.get_obj("token")));
-    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.send(params);
-    client.onload = () => {
-      let userList = JSON.parse(client.responseText);
-      console.log(userList);
-      history.goBack();
-    };
+      let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
+      let history = createHashHistory();
+
+      requestToServer("POST", theUrl, (userCar)=>{
+          history.goBack();
+      }, true, params);
 
   }
 

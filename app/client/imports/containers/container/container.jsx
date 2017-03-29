@@ -7,6 +7,7 @@ import AutorizationForm from '../../components/autorization-form/autorization-fo
 import Repository from '../../storage/local-storage';
 import userStorage from '../../storage/user-storage';
 import emitterStorage from '../../storage/emitter-storage';
+import requestToServer from '../../utils/request-to-server';
 Object.assign = require('object-assign');
 let EventEmitter = require('events').EventEmitter;
 
@@ -50,26 +51,15 @@ export default class Container extends Component {
   }
 
   getUser(theUrl) {
-    let client = new XMLHttpRequest();
-    client.open('GET', theUrl, true);
-    client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-    client.send();
-    client.onload = () => {
-      let userList = JSON.parse(client.responseText);
-      userStorage.user = userList;
-      Repository.add_obj("user", userList);
-    };
+    requestToServer("GET", theUrl, (userObj)=>{
+        Repository.add_obj("user", userObj);
+    }, true);
   }
 
   getListCar() {
-    let client = new XMLHttpRequest();
-    client.open('GET', 'https://parkimon.ru/api/v1/user-car', true);
-    client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-    client.send();
-    client.onload = () => {
-      let list = JSON.parse(client.responseText);
-      Repository.add_obj("cars", list);
-    };
+    requestToServer("GET", 'https://parkimon.ru/api/v1/user-car', (carsList)=>{
+        Repository.add_obj("cars", carsList);
+    }, true);
   }
 
   componentDidMount() {
