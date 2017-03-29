@@ -38308,6 +38308,7 @@ var ConfirmPayParking = function (_Component) {
   }, {
     key: 'handleRegNumberChange',
     value: function handleRegNumberChange(e) {
+      this.getTitleByRegNumber(e.target.value);
       this.setState({ regNumberValue: e.target.value });
     }
   }, {
@@ -38442,14 +38443,25 @@ var ConfirmPayParking = function (_Component) {
     }
   }, {
     key: 'getRegNumberByTitle',
-    value: function getRegNumberByTitle(value) {
+    value: function getRegNumberByTitle(title) {
       var _this4 = this;
 
       this.state.carList.filter(function (car) {
-        if (car.title === value) {
+        if (car.title === title) {
           _this4.setState({ regNumberValue: car.regNumber });
-        } else if (value === 'Не указано') {
+        } else if (title === 'Не указано') {
           _this4.setState({ regNumberValue: '' });
+        }
+      });
+    }
+  }, {
+    key: 'getTitleByRegNumber',
+    value: function getTitleByRegNumber(regNumber) {
+      var _this5 = this;
+
+      this.state.carList.filter(function (car) {
+        if (car.regNumber == regNumber) {
+          _this5.setState({ selectedValue: car.title });
         }
       });
     }
@@ -38464,7 +38476,7 @@ var ConfirmPayParking = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var rangeLabel = 'Количество часов: ' + this.state.rangeValue;
       return _react2.default.createElement(
@@ -38485,16 +38497,16 @@ var ConfirmPayParking = function (_Component) {
             _react2.default.createElement(
               'div',
               { onMouseDown: function onMouseDown(e) {
-                  return _this5.checkCarsList(e);
+                  return _this6.checkCarsList(e);
                 }, onClick: function onClick(e) {
-                  return _this5.handleRegNumberClick(e);
+                  return _this6.handleRegNumberClick(e);
                 } },
               _react2.default.createElement(_reactionic.IonSelect, { label: '\u041F\u0430\u0440\u043A\u0443\u0435\u043C\u043E\u0435 \u0430\u0432\u0442\u043E',
                 options: this.state.carTitleList,
-                defaultValue: '\u041D\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043E',
+                defaultValue: this.selectedValue,
                 ref: 'carSelect',
                 handleChange: function handleChange(e) {
-                  return _this5.changeValue(e);
+                  return _this6.changeValue(e);
                 } })
             ),
             _react2.default.createElement(
@@ -38506,11 +38518,10 @@ var ConfirmPayParking = function (_Component) {
                 '\u041D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F',
                 _react2.default.createElement('input', { type: 'text',
                   name: 'regNumber',
-                  placeholder: '\u043E123\u043E\u043E',
                   ref: 'regNumber',
                   value: this.state.regNumberValue,
                   onChange: function onChange(e) {
-                    return _this5.handleRegNumberChange(e);
+                    return _this6.handleRegNumberChange(e);
                   } })
               )
             ),
@@ -38537,7 +38548,7 @@ var ConfirmPayParking = function (_Component) {
             _react2.default.createElement(_reactionic.IonRange, {
               defaultValue: 1,
               handleChange: function handleChange(e) {
-                return _this5.rangeSelection(e);
+                return _this6.rangeSelection(e);
               },
               min: 1,
               max: 24 }),
@@ -38546,9 +38557,9 @@ var ConfirmPayParking = function (_Component) {
               { className: 'confirm-pay-parking-button' },
               _react2.default.createElement(
                 _reactionic.IonButton,
-                { color: 'positive',
+                { color: 'positiv',
                   onClick: function onClick(e) {
-                    return _this5.startParking(e);
+                    return _this6.startParking(e);
                   } },
                 '\u041D\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443'
               )

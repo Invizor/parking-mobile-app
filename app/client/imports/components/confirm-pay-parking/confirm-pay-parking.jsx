@@ -91,6 +91,7 @@ export default class ConfirmPayParking extends Component {
   }
 
   handleRegNumberChange(e) {
+    this.getTitleByRegNumber(e.target.value);
     this.setState({regNumberValue: e.target.value});
   }
   handleRegNumberClick(e) {
@@ -240,14 +241,22 @@ export default class ConfirmPayParking extends Component {
     this.setState({carTitleList: myCarsTitleList});
   }
 
-  getRegNumberByTitle(value) {
+  getRegNumberByTitle(title) {
     this.state.carList.filter((car)=>{
-      if(car.title === value) {
+      if(car.title === title) {
         this.setState({regNumberValue: car.regNumber});
-      } else if (value === 'Не указано') {
+      } else if (title === 'Не указано') {
         this.setState({regNumberValue: ''})
       }
     })
+  }
+
+  getTitleByRegNumber(regNumber) {
+    this.state.carList.filter((car)=>{
+      if(car.regNumber == regNumber) {
+        this.setState({selectedValue: car.title});
+      }
+    });
   }
 
   componentDidMount() {
@@ -267,7 +276,7 @@ export default class ConfirmPayParking extends Component {
             <div onMouseDown={e => this.checkCarsList(e)} onClick={e => this.handleRegNumberClick(e)}>
               <IonSelect label='Паркуемое авто'
                          options={this.state.carTitleList}
-                         defaultValue='Не указано'
+                         defaultValue={this.selectedValue}
                          ref="carSelect"
                          handleChange={e => this.changeValue(e)}>
               </IonSelect>
@@ -277,7 +286,6 @@ export default class ConfirmPayParking extends Component {
                 Номер автомобиля
                 <input type="text"
                        name="regNumber"
-                       placeholder="о123оо"
                        ref="regNumber"
                        value={this.state.regNumberValue}
                        onChange={e => this.handleRegNumberChange(e)}/>
@@ -296,7 +304,7 @@ export default class ConfirmPayParking extends Component {
                       max={24}>
             </IonRange>
             <div className="confirm-pay-parking-button">
-              <IonButton color="positive"
+              <IonButton color="positiv"
                          onClick={e => this.startParking(e)}>
                 Начать парковку
               </IonButton>
