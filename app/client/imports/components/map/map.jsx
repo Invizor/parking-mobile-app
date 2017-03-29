@@ -30,7 +30,7 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
       averageCenter
       enableRetinaIcons
       gridSize={60}
-      imagePath={window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"}
+       imagePath={window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"}
     >
       {props.markers.map((marker, index) => (
         <Marker
@@ -120,7 +120,7 @@ export default class Map extends Component {
       console.log('paidParkingList', paidParkingList);*/
       this.setState({markers: paidParkingList});
       Repository.add_obj('paidParkingList', paidParkingList);
-    });
+    }, false);
   }
 
 
