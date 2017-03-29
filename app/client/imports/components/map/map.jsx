@@ -120,7 +120,7 @@ export default class Map extends Component {
       console.log('paidParkingList', paidParkingList);*/
       this.setState({markers: paidParkingList});
       Repository.add_obj('paidParkingList', paidParkingList);
-    });
+    }, false);
   }
 
 

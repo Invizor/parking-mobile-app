@@ -1139,6 +1139,85 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+var Repository = function () {
+    function Repository() {
+        _classCallCheck(this, Repository);
+
+        this.rep = localStorage;
+    }
+
+    _createClass(Repository, null, [{
+        key: "add_obj",
+        value: function add_obj(key, obj) {
+            var str = JSON.stringify(obj);
+            localStorage.setItem(key, str);
+        }
+    }, {
+        key: "get_obj",
+        value: function get_obj(key) {
+            var obj = JSON.parse(localStorage.getItem(key));
+            return obj;
+        }
+    }, {
+        key: "get_all",
+        value: function get_all() {
+            var arr = [];
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                var obj = JSON.parse(localStorage.getItem(key));
+                arr.push(obj);
+            }
+            return arr;
+        }
+    }, {
+        key: "remove_obj",
+        value: function remove_obj(key) {
+            localStorage.removeItem(key);
+        }
+    }, {
+        key: "change_obj",
+        value: function change_obj(key, obj) {
+            localStorage[key] = JSON.stringify(obj);
+        }
+    }, {
+        key: "clearRep",
+        value: function clearRep() {
+            localStorage.clear();
+        }
+    }]);
+
+    return Repository;
+}();
+
+exports.default = Repository;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -1473,85 +1552,6 @@ var ReactComponentTreeHook = {
 
 module.exports = ReactComponentTreeHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
-}();
-
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
-}
-
-var Repository = function () {
-    function Repository() {
-        _classCallCheck(this, Repository);
-
-        this.rep = localStorage;
-    }
-
-    _createClass(Repository, null, [{
-        key: "add_obj",
-        value: function add_obj(key, obj) {
-            var str = JSON.stringify(obj);
-            localStorage.setItem(key, str);
-        }
-    }, {
-        key: "get_obj",
-        value: function get_obj(key) {
-            var obj = JSON.parse(localStorage.getItem(key));
-            return obj;
-        }
-    }, {
-        key: "get_all",
-        value: function get_all() {
-            var arr = [];
-            for (var i = 0; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                var obj = JSON.parse(localStorage.getItem(key));
-                arr.push(obj);
-            }
-            return arr;
-        }
-    }, {
-        key: "remove_obj",
-        value: function remove_obj(key) {
-            localStorage.removeItem(key);
-        }
-    }, {
-        key: "change_obj",
-        value: function change_obj(key, obj) {
-            localStorage[key] = JSON.stringify(obj);
-        }
-    }, {
-        key: "clearRep",
-        value: function clearRep() {
-            localStorage.clear();
-        }
-    }]);
-
-    return Repository;
-}();
-
-exports.default = Repository;
 
 /***/ }),
 /* 14 */
@@ -28732,7 +28732,7 @@ __webpack_require__(382);
 
 var _reactDom = __webpack_require__(21);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -32604,7 +32604,7 @@ module.exports = ReactDOMSelect;
 
 var ReactInvalidSetStateWarningHook = __webpack_require__(567);
 var ReactHostOperationHistoryHook = __webpack_require__(565);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 var ExecutionEnvironment = __webpack_require__(9);
 
 var performanceNow = __webpack_require__(406);
@@ -36664,7 +36664,7 @@ module.exports = REACT_ELEMENT_TYPE;
 
 
 var ReactCurrentOwner = __webpack_require__(30);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 var ReactElement = __webpack_require__(47);
 
 var checkReactTypeSpec = __webpack_require__(668);
@@ -38807,7 +38807,7 @@ var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
 __webpack_require__(384);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39153,7 +39153,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39450,7 +39450,7 @@ var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
 var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39485,9 +39485,8 @@ var MarkerClustererExampleGoogleMap = (0, _reactGoogleMaps.withGoogleMap)(functi
       {
         averageCenter: true,
         enableRetinaIcons: true,
-        gridSize: 60
-        //imagePath="/android_asset/www/img/cluster-icons/m" // for browser version
-        , imagePath: window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m" // for mobile version
+        gridSize: 60,
+        imagePath: window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"
       },
       props.markers.map(function (marker, index) {
         return _react2.default.createElement(_reactGoogleMaps.Marker, {
@@ -39590,7 +39589,7 @@ var Map = function (_Component) {
         console.log('paidParkingList', paidParkingList);*/
         _this2.setState({ markers: paidParkingList });
         _localStorage2.default.add_obj('paidParkingList', paidParkingList);
-      });
+      }, false);
     }
   }, {
     key: "componentDidMount",
@@ -39719,7 +39718,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39837,7 +39836,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40004,7 +40003,7 @@ var _reactionic = __webpack_require__(11);
 
 __webpack_require__(388);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40103,7 +40102,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40265,7 +40264,7 @@ var _autorizationForm = __webpack_require__(162);
 
 var _autorizationForm2 = _interopRequireDefault(_autorizationForm);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40445,7 +40444,7 @@ var _mainTitle = __webpack_require__(285);
 
 var _mainTitle2 = _interopRequireDefault(_mainTitle);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40721,7 +40720,7 @@ var _reactionic = __webpack_require__(11);
 
 __webpack_require__(381);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40845,7 +40844,7 @@ __webpack_require__(383);
 
 var _reactDom = __webpack_require__(21);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -41015,7 +41014,7 @@ var _reactionic = __webpack_require__(11);
 
 var _reactDom = __webpack_require__(21);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -41143,7 +41142,7 @@ __webpack_require__(390);
 
 var _reactDom = __webpack_require__(21);
 
-var _localStorage = __webpack_require__(13);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -41267,10 +41266,30 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = requestToServer;
+
+var _localStorage = __webpack_require__(12);
+
+var _localStorage2 = _interopRequireDefault(_localStorage);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
 function requestToServer(method, URL, callback) {
+  var sendToken = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  var params = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+
+  console.log("sendToken", sendToken);
   var client = new XMLHttpRequest();
   client.open(method, URL);
-  client.send();
+  if (sendToken) {
+    client.setRequestHeader("Authorization", 'Bearer ' + String(_localStorage2.default.get_obj("token")));
+  }
+  if (params.length > 0) {
+    client.send(params);
+  } else {
+    client.send();
+  }
   client.onload = function () {
     var responseText = JSON.parse(client.responseText);
     callback(responseText);
@@ -52633,7 +52652,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 function instantiateChild(childInstances, child, name, selfDebugID) {
@@ -52641,7 +52660,7 @@ function instantiateChild(childInstances, child, name, selfDebugID) {
   var keyUnique = childInstances[name] === undefined;
   if (process.env.NODE_ENV !== 'production') {
     if (!ReactComponentTreeHook) {
-      ReactComponentTreeHook = __webpack_require__(12);
+      ReactComponentTreeHook = __webpack_require__(13);
     }
     if (!keyUnique) {
       process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -54271,7 +54290,7 @@ module.exports = ReactDOMInput;
 
 
 var DOMProperty = __webpack_require__(35);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -54369,7 +54388,7 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -55244,7 +55263,7 @@ module.exports = {
 
 var DOMProperty = __webpack_require__(35);
 var EventPluginRegistry = __webpack_require__(68);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -59319,7 +59338,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 var loggedTypeFailures = {};
@@ -59361,7 +59380,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(12);
+            ReactComponentTreeHook = __webpack_require__(13);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -59494,7 +59513,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 /**
@@ -59510,7 +59529,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (process.env.NODE_ENV !== 'production') {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(12);
+        ReactComponentTreeHook = __webpack_require__(13);
       }
       if (!keyUnique) {
         process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -68083,7 +68102,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 var loggedTypeFailures = {};
@@ -68125,7 +68144,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(12);
+            ReactComponentTreeHook = __webpack_require__(13);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -68173,7 +68192,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 /**
@@ -68189,7 +68208,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (process.env.NODE_ENV !== 'production') {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(12);
+        ReactComponentTreeHook = __webpack_require__(13);
       }
       if (!keyUnique) {
         process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
