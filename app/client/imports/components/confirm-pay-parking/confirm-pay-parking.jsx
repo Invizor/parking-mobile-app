@@ -93,6 +93,9 @@ export default class ConfirmPayParking extends Component {
   handleRegNumberChange(e) {
     this.setState({regNumberValue: e.target.value});
   }
+  handleRegNumberClick(e) {
+    this.getRegNumberByTitle(e.target.value);
+  }
 
   checkCarsList(e) {
     if (this.state.carTitleList === 0) {
@@ -260,9 +263,8 @@ export default class ConfirmPayParking extends Component {
       <div>
          <div className="confirm-pay-parking">
           <div className="text-center">
-
             <h1>#{this.getCurrentParking().zoneId}</h1>
-            <div onMouseDown={e => this.checkCarsList(e)}>
+            <div onMouseDown={e => this.checkCarsList(e)} onClick={e => this.handleRegNumberClick(e)}>
               <IonSelect label='Паркуемое авто'
                          options={this.state.carTitleList}
                          defaultValue='Не указано'
