@@ -4,6 +4,7 @@ import "./car-list.scss";
 import {findDOMNode} from 'react-dom';
 import Repository from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
+import requestToServer from '../../utils/request-to-server';
 import userStorage from '../../storage/user-storage';
 
 class CarList extends React.Component {
@@ -25,15 +26,10 @@ class CarList extends React.Component {
   }
 
   getListCar(theUrl) {
-    let client = new XMLHttpRequest();
-    client.open('GET', theUrl, true);
-    client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token")));
-    client.send();
-    client.onload = () => {
-      let list = JSON.parse(client.responseText);
-      Repository.add_obj("cars", list);
-      this.setState({carList: list.userCars});
-    };
+      requestToServer("GET", theUrl, (carsList)=>{
+          Repository.add_obj("cars", carsList);
+          this.setState({carList: carsList.userCars});
+      }, true);
   }
 
   componentDidMount() {
@@ -41,19 +37,15 @@ class CarList extends React.Component {
   }
 
   deleteCarBtnClicked(index) {
-      let masCars = this.state.carList;  
-      let theUrl = "https://parkimon.ru/api/v1/user-car/remove/"+String(masCars[index]._id); 
-      let client = new XMLHttpRequest();     client.open("GET", theUrl, true); 
-      client.setRequestHeader("Authorization", 'Bearer ' + String(Repository.get_obj("token"))); 
-      client.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
-      client.send();  
-      client.onload = () => {
-        let result = JSON.parse(client.responseText);
-        if (result.success) {
-          masCars.splice(index, 1);
-        }
-        this.setState({carList: masCars});
-      };
+
+      let masCars = this.state.carList;
+       let theUrl = "https://parkimon.ru/api/v1/user-car/remove/"+String(masCars[index]._id);  
+      requestToServer("GET", theUrl, (objResult)=>{ 
+          if (objResult.success) { 
+              masCars.splice(index, 1); 
+          } 
+          this.setState({carList: masCars}); 
+      }, true);
   }
 
   showEditCarPage(carId) {

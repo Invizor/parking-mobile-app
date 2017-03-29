@@ -3,6 +3,7 @@ import {IonContent, IonButton, IonNavBar} from 'reactionic';
 import "./autorization-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repostitory from '../../storage/local-storage';
+import requestToServer from '../../utils/request-to-server';
 import createHashHistory from 'history/lib/createHashHistory';
 import userStorage from '../../storage/user-storage';
 
@@ -20,17 +21,13 @@ class AutorizationForm extends React.Component {
   };
 
   startRegistration(theUrl) {
-    let history = createHashHistory();
-    let client = new XMLHttpRequest();
-    client.open("POST", theUrl, true);
-
     let params = "number=" + String(this.refs.phoneInput.value);
-    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.send(params);
+    let history = createHashHistory();
 
-    client.onload = () => {
+    requestToServer("POST", theUrl, (resultRequest)=>{
       history.push('/verification-form/' + String(this.refs.phoneInput.value));
-    };
+    }, false, params);
+
   }
 
   onRegistrationBtnClicked() {

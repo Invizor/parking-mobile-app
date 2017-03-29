@@ -4,6 +4,7 @@ import "./verification-form.scss";
 import {findDOMNode} from 'react-dom';
 import Repository from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
+import requestToServer from '../../utils/request-to-server';
 
 
 class VerificationForm extends React.Component {
@@ -21,39 +22,33 @@ class VerificationForm extends React.Component {
   };
 
   loginUser(theUrl) {
-    let client = new XMLHttpRequest();
-    client.open("POST", theUrl, true);
-    let code = this.refs.codeInput.value;
-    let userNumber = this.props.params.number;
-
-    let params = "username=" + String(userNumber) + "&" + "verification=" + String(code);
-    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.send(params);
-
-    client.onload = () => {
+      let code = this.refs.codeInput.value;
+      let userNumber = this.props.params.number;
+      let params = "username=" + String(userNumber) + "&" + "verification=" + String(code);
       let history = createHashHistory();
-      let userData = JSON.parse(client.responseText);
-      this.setState({userToken: userData.token});
-      this.setState({user: userData.user});
 
-      if (this.state.userToken != '' && this.state.userToken != undefined) {
-        Repository.add_obj("token", this.state.userToken);
-        Repository.add_obj("user", this.state.user);
+      requestToServer("POST", theUrl, (userData)=>{
+          this.setState({userToken: userData.token});
+          this.setState({user: userData.user});
 
-        let ionUpdatePopup = this.context.ionUpdatePopup;
-        ionUpdatePopup({
-          popupType: 'alert',
-          okText: 'хорошо',
-          title: 'Успех!',
-          template: <span>Вы зарегистрированы</span>,
-          okType: 'button-light',
-          onOk: () => {
-            console.log('REGISTER!');
-          },
-        });
-      }
-      history.push('/container');
-    };
+          if (this.state.userToken != '' && this.state.userToken != undefined) {
+              Repository.add_obj("token", this.state.userToken);
+              Repository.add_obj("user", this.state.user);
+
+              let ionUpdatePopup = this.context.ionUpdatePopup;
+              ionUpdatePopup({
+                  popupType: 'alert',
+                  okText: 'хорошо',
+                  title: 'Успех!',
+                  template: <span>Вы зарегистрированы</span>,
+                  okType: 'button-light',
+                  onOk: () => {
+                      console.log('REGISTER!');
+                  },
+              });
+          }
+          history.push('/container');
+      }, false, params);
   }
 
   onSignInBtnClicked() {

@@ -3,6 +3,7 @@ import {IonContent, IonButton, IonIcon} from 'reactionic';
 import "./add-car-form.scss";
 import Repostitory from '../../storage/local-storage';
 import createHashHistory from 'history/lib/createHashHistory';
+import requestToServer from '../../utils/request-to-server';
 
 class addCarsForm extends React.Component {
 
@@ -11,20 +12,15 @@ class addCarsForm extends React.Component {
     }
 
     addCarToList(theUrl) {
-        let history = createHashHistory();
-        let client = new XMLHttpRequest();
-        client.open("POST", theUrl, true);
 
         let params = "user=" + String(Repostitory.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
         params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
-        client.setRequestHeader("Authorization", 'Bearer ' + String(Repostitory.get_obj("token")));
-        client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        client.send(params);
+        let history = createHashHistory();
 
-        client.onload = () => {
-            let userList = JSON.parse(client.responseText);
+        requestToServer("POST", theUrl, (objResult)=>{
             history.goBack();
-        };
+        }, true, params);
+
     }
 
     render() {
