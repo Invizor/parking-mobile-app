@@ -1,5 +1,5 @@
 let userStorage = {
-    user: {}
+  user: {}
 };
 
 export default userStorage;

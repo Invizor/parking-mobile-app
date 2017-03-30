@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-browser": "webpack && cd mobile-app; cordova run browser",
     "start-android": "webpack && cd mobile-app; cordova run android",
-    "check-code": "./node_modules/eslint/bin/eslint.js ./app/client/imports/components"
+    "check-code": "./node_modules/eslint/bin/eslint.js ./app/client/imports/"
   },
   "author": "",
   "license": "ISC",

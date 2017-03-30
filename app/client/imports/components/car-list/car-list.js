@@ -1,11 +1,11 @@
-import React, {PropTypes, Component} from "react";
+import React, {PropTypes} from "react";
 import {IonContent, IonList, IonItem} from "reactionic";
 import "./car-list.scss";
 import LocalStorage from "../../storage/local-storage";
 import createHashHistory from "history/lib/createHashHistory";
 import requestToServer from "../../utils/request-to-server";
 
-class CarList extends Component {
+class CarList extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -13,10 +13,6 @@ class CarList extends Component {
       carList: []
     };
   }
-
-  static contextTypes = {
-    ionUpdatePopup: PropTypes.func
-  };
 
   addCar() {
     let history = createHashHistory();
@@ -90,5 +86,9 @@ class CarList extends Component {
     );
   }
 }
+
+CarList.contextTypes = {
+  ionUpdatePopup: PropTypes.func
+};
 
 export default CarList;
