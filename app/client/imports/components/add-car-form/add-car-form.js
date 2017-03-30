@@ -13,8 +13,8 @@ class addCarsForm extends React.Component {
 
     addCarToList(theUrl) {
 
-        let params = "user=" + String(Repostitory.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
-        params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
+        let params = "user=" + String(Repostitory.get_obj("user").id) + "&" + "title=" + String(this.refs.titleCar.value);
+        params += "&" + "type=a" + "&" + "regNumber=" + String(this.refs.plateNumber.value);
         let history = createHashHistory();
 
         requestToServer("POST", theUrl, (objResult)=>{
@@ -46,7 +46,7 @@ class addCarsForm extends React.Component {
                     </div>
                     <div className="add-car-button">
                         <button className="button button-positive"
-                                onClick={() => this.addCarToList('https://parkimon.ru/api/v1/user-car/add')}>
+                                onClick={() => this.addCarToList("https://parkimon.ru/api/v1/user-car/add")}>
                             Добавить
                         </button>
                     </div>

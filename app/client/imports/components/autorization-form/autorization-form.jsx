@@ -1,13 +1,11 @@
-import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton, IonNavBar} from 'reactionic';
+import React, {PropTypes, Component} from "react";
+import {IonContent, IonButton,} from "reactionic";
 import "./autorization-form.scss";
-import {findDOMNode} from 'react-dom';
-import Repostitory from '../../storage/local-storage';
+import LocalStorage from '../../storage/local-storage';
 import requestToServer from '../../utils/request-to-server';
 import createHashHistory from 'history/lib/createHashHistory';
-import userStorage from '../../storage/user-storage';
 
-class AutorizationForm extends React.Component {
+class AutorizationForm extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -17,7 +15,7 @@ class AutorizationForm extends React.Component {
   }
 
   static contextTypes = {
-    ionUpdatePopup: React.PropTypes.func
+    ionUpdatePopup: PropTypes.func
   };
 
   startRegistration(theUrl) {
@@ -25,7 +23,7 @@ class AutorizationForm extends React.Component {
     let history = createHashHistory();
 
     requestToServer("POST", theUrl, (resultRequest)=>{
-      history.push('/verification-form/' + String(this.refs.phoneInput.value));
+      history.push("/verification-form/" + String(this.refs.phoneInput.value));
     }, false, params);
 
   }
@@ -33,24 +31,24 @@ class AutorizationForm extends React.Component {
   onRegistrationBtnClicked() {
     let history = createHashHistory();
     let user = this.refs.phoneInput.value;
-    let obj = Repostitory.get_obj("token");
+    let token = LocalStorage.get_obj("token");
 
-    if (obj == undefined || obj == null) {
+    if (!token) {
       let ionUpdatePopup = this.context.ionUpdatePopup;
       ionUpdatePopup({
-        popupType: 'confirm',
-        cancelText: 'Нет',
-        okText: 'Да',
-        title: 'Пожалуйста проверьте:',
+        popupType: "confirm",
+        cancelText: "Нет",
+        okText: "Да",
+        title: "Пожалуйста проверьте:",
         template: <span>Мы отправим код подтверждения на телефон:
                           <p>+7 ({this.refs.phoneInput.value.slice(0, 3)}) {this.refs.phoneInput.value.slice(3)}</p>
                       </span>,
-        cancelType: 'button-light',
+        cancelType: "button-light",
         onOk: () => {
-          this.startRegistration('https://parkimon.ru/api/v1/user/register-mobile');
+          this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
         },
         onCancel: function () {
-          console.log('Cancelled');
+          console.log("Cancelled");
         }
       })
     } else {
