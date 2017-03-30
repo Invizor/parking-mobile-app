@@ -22,10 +22,9 @@ class VerificationForm extends Component {
     let history = createHashHistory();
 
     requestToServer("POST", theUrl, (userData) => {
-      this.setState({userToken: userData.token});
-      this.setState({user: userData.user});
-
-      if (this.state.userToken != "" && this.state.userToken != undefined) {
+      if (userData.success && userData.token && userData.user) {
+        this.setState({userToken: userData.token});
+        this.setState({user: userData.user});
         Repository.add_obj("token", this.state.userToken);
         Repository.add_obj("user", this.state.user);
 
@@ -37,8 +36,18 @@ class VerificationForm extends Component {
           template: <span>Вы зарегистрированы</span>,
           okType: "button-light",
         });
+        history.push("/container");
+      } else {
+        let ionUpdatePopup = this.context.ionUpdatePopup;
+        ionUpdatePopup({
+          popupType: "alert",
+          okText: "ввод",
+          title: "Ошибка!",
+          template: <span>неверный код верификации</span>,
+          okType: "button-light",
+        });
+        this.refs.codeInput.value = "";
       }
-      history.push("/container");
     }, false, params);
   }
 
