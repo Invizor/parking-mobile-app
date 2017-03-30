@@ -207,7 +207,7 @@ export default class ConfirmPayParking extends Component {
             }
           }, true)
         }, 5000);
-      }, true, "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber);
+      }, true, "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber, "&forTime=120");
 
     }
 
