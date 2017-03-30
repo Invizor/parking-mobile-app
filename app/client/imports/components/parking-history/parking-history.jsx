@@ -23,15 +23,15 @@ export default class ParkingHistory extends Component {
   }
 
   render() {
-   // console.log("parking history",this.state.parkingHistory);
+    console.log("parking history",this.state.parkingHistory);
     let counter = 1;
     let parkingList = [];
     this.state.parkingHistory.map((parking, index)=> {
       parkingList.push(
         <IonItem key={index}>
           <div>{counter++}. Парковка: #{parking.zone.zoneId}</div>
-          <div>Дата парковки: {parking.start.substring(0,10)}</div>
-          <div>Время парковки: {parking.start.substring(11,16)}</div>
+          <div>Дата парковки: {parking.created.substring(0,10)}</div>
+          <div>Время парковки: {parking.created.substring(11,16)}</div>
           <div>Номер вашего авто: {parking.transportNumber}</div>
         </IonItem>
       )

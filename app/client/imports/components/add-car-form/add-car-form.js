@@ -1,4 +1,5 @@
 import React from "react";
+import {IonContent} from "reactionic";
 import "./add-car-form.scss";
 import Repostitory from "../../storage/local-storage";
 import createHashHistory from "history/lib/createHashHistory";

@@ -1,11 +1,11 @@
-import React, {PropTypes, Component} from "react";
+import React, {PropTypes} from "react";
 import {IonContent, IonButton,} from "reactionic";
 import "./autorization-form.scss";
-import LocalStorage from '../../storage/local-storage';
-import requestToServer from '../../utils/request-to-server';
-import createHashHistory from 'history/lib/createHashHistory';
+import LocalStorage from "../../storage/local-storage";
+import requestToServer from "../../utils/request-to-server";
+import createHashHistory from "history/lib/createHashHistory";
 
-class AutorizationForm extends Component {
+class AutorizationForm extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -14,15 +14,11 @@ class AutorizationForm extends Component {
     };
   }
 
-  static contextTypes = {
-    ionUpdatePopup: PropTypes.func
-  };
-
   startRegistration(theUrl) {
     let params = "number=" + String(this.refs.phoneInput.value);
     let history = createHashHistory();
 
-    requestToServer("POST", theUrl, (resultRequest)=>{
+    requestToServer("POST", theUrl, ()=>{
       history.push("/verification-form/" + String(this.refs.phoneInput.value));
     }, false, params);
 
@@ -30,7 +26,6 @@ class AutorizationForm extends Component {
 
   onRegistrationBtnClicked() {
     let history = createHashHistory();
-    let user = this.refs.phoneInput.value;
     let token = LocalStorage.get_obj("token");
 
     if (!token) {
@@ -46,11 +41,8 @@ class AutorizationForm extends Component {
         cancelType: "button-light",
         onOk: () => {
           this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
-        },
-        onCancel: function () {
-          console.log("Cancelled");
         }
-      })
+      });
     } else {
       history.goBack(); // исправить, когда появиться главное окно, после авторизации
     }
@@ -82,5 +74,9 @@ class AutorizationForm extends Component {
     );
   }
 }
+
+AutorizationForm.contextTypes = {
+  ionUpdatePopup: PropTypes.func
+};
 
 export default AutorizationForm;

@@ -1,7 +1,8 @@
 .user-balance {
   width: 80px;
   margin-top: 8px;
-  font-size: 18px; }
+  font-size: 18px;
+  text-decoration: underline; }
 .spinner {
   top: 8px;
   position: absolute;

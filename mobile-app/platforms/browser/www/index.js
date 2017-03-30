@@ -943,6 +943,204 @@ function _resetWarned() {
 "use strict";
 
 
+var _ionBackdrop = __webpack_require__(270);
+
+var _ionBackdrop2 = _interopRequireDefault(_ionBackdrop);
+
+var _ionBody = __webpack_require__(672);
+
+var _ionBody2 = _interopRequireDefault(_ionBody);
+
+var _ionButton = __webpack_require__(158);
+
+var _ionButton2 = _interopRequireDefault(_ionButton);
+
+var _ionCard = __webpack_require__(673);
+
+var _ionCard2 = _interopRequireDefault(_ionCard);
+
+var _ionContent = __webpack_require__(674);
+
+var _ionContent2 = _interopRequireDefault(_ionContent);
+
+var _ionFooterBar = __webpack_require__(675);
+
+var _ionFooterBar2 = _interopRequireDefault(_ionFooterBar);
+
+var _ionHeaderBar = __webpack_require__(676);
+
+var _ionHeaderBar2 = _interopRequireDefault(_ionHeaderBar);
+
+var _ionIcon = __webpack_require__(677);
+
+var _ionIcon2 = _interopRequireDefault(_ionIcon);
+
+var _ionItem = __webpack_require__(678);
+
+var _ionItem2 = _interopRequireDefault(_ionItem);
+
+var _ionItemCheckBox = __webpack_require__(679);
+
+var _ionItemCheckBox2 = _interopRequireDefault(_ionItemCheckBox);
+
+var _ionItemRadio = __webpack_require__(680);
+
+var _ionItemRadio2 = _interopRequireDefault(_ionItemRadio);
+
+var _ionItemToggle = __webpack_require__(681);
+
+var _ionItemToggle2 = _interopRequireDefault(_ionItemToggle);
+
+var _ionList = __webpack_require__(682);
+
+var _ionList2 = _interopRequireDefault(_ionList);
+
+var _ionListButton = __webpack_require__(683);
+
+var _ionListButton2 = _interopRequireDefault(_ionListButton);
+
+var _ionLoading = __webpack_require__(271);
+
+var _ionLoading2 = _interopRequireDefault(_ionLoading);
+
+var _ionModal = __webpack_require__(272);
+
+var _ionModal2 = _interopRequireDefault(_ionModal);
+
+var _ionNavBackButton = __webpack_require__(684);
+
+var _ionNavBackButton2 = _interopRequireDefault(_ionNavBackButton);
+
+var _ionNavBar = __webpack_require__(685);
+
+var _ionNavBar2 = _interopRequireDefault(_ionNavBar);
+
+var _ionNavView = __webpack_require__(686);
+
+var _ionNavView2 = _interopRequireDefault(_ionNavView);
+
+var _ionPopup = __webpack_require__(274);
+
+var _ionPopup2 = _interopRequireDefault(_ionPopup);
+
+var _ionPopover = __webpack_require__(273);
+
+var _ionPopover2 = _interopRequireDefault(_ionPopover);
+
+var _ionRange = __webpack_require__(687);
+
+var _ionRange2 = _interopRequireDefault(_ionRange);
+
+var _ionSelect = __webpack_require__(688);
+
+var _ionSelect2 = _interopRequireDefault(_ionSelect);
+
+var _ionSideMenu = __webpack_require__(689);
+
+var _ionSideMenu2 = _interopRequireDefault(_ionSideMenu);
+
+var _ionSideMenuContainer = __webpack_require__(690);
+
+var _ionSideMenuContainer2 = _interopRequireDefault(_ionSideMenuContainer);
+
+var _ionSideMenuContent = __webpack_require__(691);
+
+var _ionSideMenuContent2 = _interopRequireDefault(_ionSideMenuContent);
+
+var _ionSideMenus = __webpack_require__(692);
+
+var _ionSideMenus2 = _interopRequireDefault(_ionSideMenus);
+
+var _ionSlideBox = __webpack_require__(693);
+
+var _ionSlideBox2 = _interopRequireDefault(_ionSlideBox);
+
+var _ionSpinner = __webpack_require__(275);
+
+var _ionSpinner2 = _interopRequireDefault(_ionSpinner);
+
+var _ionSubFooterBar = __webpack_require__(694);
+
+var _ionSubFooterBar2 = _interopRequireDefault(_ionSubFooterBar);
+
+var _ionSubHeaderBar = __webpack_require__(695);
+
+var _ionSubHeaderBar2 = _interopRequireDefault(_ionSubHeaderBar);
+
+var _ionTab = __webpack_require__(696);
+
+var _ionTab2 = _interopRequireDefault(_ionTab);
+
+var _ionTabs = __webpack_require__(697);
+
+var _ionTabs2 = _interopRequireDefault(_ionTabs);
+
+var _ionTitle = __webpack_require__(159);
+
+var _ionTitle2 = _interopRequireDefault(_ionTitle);
+
+var _ionView = __webpack_require__(698);
+
+var _ionView2 = _interopRequireDefault(_ionView);
+
+var _timeout = __webpack_require__(97);
+
+var _timeout2 = _interopRequireDefault(_timeout);
+
+var _keyboard = __webpack_require__(278);
+
+var _keyboard2 = _interopRequireDefault(_keyboard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = {
+  IonBackdrop: _ionBackdrop2.default,
+  IonBody: _ionBody2.default,
+  IonButton: _ionButton2.default,
+  IonCard: _ionCard2.default,
+  IonContent: _ionContent2.default,
+  IonFooterBar: _ionFooterBar2.default,
+  IonHeaderBar: _ionHeaderBar2.default,
+  IonIcon: _ionIcon2.default,
+  IonItem: _ionItem2.default,
+  IonItemCheckBox: _ionItemCheckBox2.default,
+  IonItemRadio: _ionItemRadio2.default,
+  IonItemToggle: _ionItemToggle2.default,
+  IonList: _ionList2.default,
+  IonListButton: _ionListButton2.default,
+  IonLoading: _ionLoading2.default,
+  IonModal: _ionModal2.default,
+  IonNavBackButton: _ionNavBackButton2.default,
+  IonNavBar: _ionNavBar2.default,
+  IonNavView: _ionNavView2.default,
+  IonPopup: _ionPopup2.default,
+  IonPopover: _ionPopover2.default,
+  IonPopoverButton: _ionPopover.IonPopoverButton,
+  IonRange: _ionRange2.default,
+  IonSelect: _ionSelect2.default,
+  IonSideMenu: _ionSideMenu2.default,
+  IonSideMenuContainer: _ionSideMenuContainer2.default,
+  IonSideMenuContent: _ionSideMenuContent2.default,
+  IonSideMenus: _ionSideMenus2.default,
+  IonSlideBox: _ionSlideBox2.default,
+  IonSpinner: _ionSpinner2.default,
+  IonSubFooterBar: _ionSubFooterBar2.default,
+  IonSubHeaderBar: _ionSubHeaderBar2.default,
+  IonTab: _ionTab2.default,
+  IonTabs: _ionTabs2.default,
+  IonTitle: _ionTitle2.default,
+  IonView: _ionView2.default,
+  SetTimeoutMixin: _timeout2.default,
+  IonKeyboard: _keyboard2.default
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1016,7 +1214,7 @@ var Repository = function () {
 exports.default = Repository;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1354,204 +1552,6 @@ var ReactComponentTreeHook = {
 
 module.exports = ReactComponentTreeHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _ionBackdrop = __webpack_require__(270);
-
-var _ionBackdrop2 = _interopRequireDefault(_ionBackdrop);
-
-var _ionBody = __webpack_require__(672);
-
-var _ionBody2 = _interopRequireDefault(_ionBody);
-
-var _ionButton = __webpack_require__(158);
-
-var _ionButton2 = _interopRequireDefault(_ionButton);
-
-var _ionCard = __webpack_require__(673);
-
-var _ionCard2 = _interopRequireDefault(_ionCard);
-
-var _ionContent = __webpack_require__(674);
-
-var _ionContent2 = _interopRequireDefault(_ionContent);
-
-var _ionFooterBar = __webpack_require__(675);
-
-var _ionFooterBar2 = _interopRequireDefault(_ionFooterBar);
-
-var _ionHeaderBar = __webpack_require__(676);
-
-var _ionHeaderBar2 = _interopRequireDefault(_ionHeaderBar);
-
-var _ionIcon = __webpack_require__(677);
-
-var _ionIcon2 = _interopRequireDefault(_ionIcon);
-
-var _ionItem = __webpack_require__(678);
-
-var _ionItem2 = _interopRequireDefault(_ionItem);
-
-var _ionItemCheckBox = __webpack_require__(679);
-
-var _ionItemCheckBox2 = _interopRequireDefault(_ionItemCheckBox);
-
-var _ionItemRadio = __webpack_require__(680);
-
-var _ionItemRadio2 = _interopRequireDefault(_ionItemRadio);
-
-var _ionItemToggle = __webpack_require__(681);
-
-var _ionItemToggle2 = _interopRequireDefault(_ionItemToggle);
-
-var _ionList = __webpack_require__(682);
-
-var _ionList2 = _interopRequireDefault(_ionList);
-
-var _ionListButton = __webpack_require__(683);
-
-var _ionListButton2 = _interopRequireDefault(_ionListButton);
-
-var _ionLoading = __webpack_require__(271);
-
-var _ionLoading2 = _interopRequireDefault(_ionLoading);
-
-var _ionModal = __webpack_require__(272);
-
-var _ionModal2 = _interopRequireDefault(_ionModal);
-
-var _ionNavBackButton = __webpack_require__(684);
-
-var _ionNavBackButton2 = _interopRequireDefault(_ionNavBackButton);
-
-var _ionNavBar = __webpack_require__(685);
-
-var _ionNavBar2 = _interopRequireDefault(_ionNavBar);
-
-var _ionNavView = __webpack_require__(686);
-
-var _ionNavView2 = _interopRequireDefault(_ionNavView);
-
-var _ionPopup = __webpack_require__(274);
-
-var _ionPopup2 = _interopRequireDefault(_ionPopup);
-
-var _ionPopover = __webpack_require__(273);
-
-var _ionPopover2 = _interopRequireDefault(_ionPopover);
-
-var _ionRange = __webpack_require__(687);
-
-var _ionRange2 = _interopRequireDefault(_ionRange);
-
-var _ionSelect = __webpack_require__(688);
-
-var _ionSelect2 = _interopRequireDefault(_ionSelect);
-
-var _ionSideMenu = __webpack_require__(689);
-
-var _ionSideMenu2 = _interopRequireDefault(_ionSideMenu);
-
-var _ionSideMenuContainer = __webpack_require__(690);
-
-var _ionSideMenuContainer2 = _interopRequireDefault(_ionSideMenuContainer);
-
-var _ionSideMenuContent = __webpack_require__(691);
-
-var _ionSideMenuContent2 = _interopRequireDefault(_ionSideMenuContent);
-
-var _ionSideMenus = __webpack_require__(692);
-
-var _ionSideMenus2 = _interopRequireDefault(_ionSideMenus);
-
-var _ionSlideBox = __webpack_require__(693);
-
-var _ionSlideBox2 = _interopRequireDefault(_ionSlideBox);
-
-var _ionSpinner = __webpack_require__(275);
-
-var _ionSpinner2 = _interopRequireDefault(_ionSpinner);
-
-var _ionSubFooterBar = __webpack_require__(694);
-
-var _ionSubFooterBar2 = _interopRequireDefault(_ionSubFooterBar);
-
-var _ionSubHeaderBar = __webpack_require__(695);
-
-var _ionSubHeaderBar2 = _interopRequireDefault(_ionSubHeaderBar);
-
-var _ionTab = __webpack_require__(696);
-
-var _ionTab2 = _interopRequireDefault(_ionTab);
-
-var _ionTabs = __webpack_require__(697);
-
-var _ionTabs2 = _interopRequireDefault(_ionTabs);
-
-var _ionTitle = __webpack_require__(159);
-
-var _ionTitle2 = _interopRequireDefault(_ionTitle);
-
-var _ionView = __webpack_require__(698);
-
-var _ionView2 = _interopRequireDefault(_ionView);
-
-var _timeout = __webpack_require__(97);
-
-var _timeout2 = _interopRequireDefault(_timeout);
-
-var _keyboard = __webpack_require__(278);
-
-var _keyboard2 = _interopRequireDefault(_keyboard);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = {
-  IonBackdrop: _ionBackdrop2.default,
-  IonBody: _ionBody2.default,
-  IonButton: _ionButton2.default,
-  IonCard: _ionCard2.default,
-  IonContent: _ionContent2.default,
-  IonFooterBar: _ionFooterBar2.default,
-  IonHeaderBar: _ionHeaderBar2.default,
-  IonIcon: _ionIcon2.default,
-  IonItem: _ionItem2.default,
-  IonItemCheckBox: _ionItemCheckBox2.default,
-  IonItemRadio: _ionItemRadio2.default,
-  IonItemToggle: _ionItemToggle2.default,
-  IonList: _ionList2.default,
-  IonListButton: _ionListButton2.default,
-  IonLoading: _ionLoading2.default,
-  IonModal: _ionModal2.default,
-  IonNavBackButton: _ionNavBackButton2.default,
-  IonNavBar: _ionNavBar2.default,
-  IonNavView: _ionNavView2.default,
-  IonPopup: _ionPopup2.default,
-  IonPopover: _ionPopover2.default,
-  IonPopoverButton: _ionPopover.IonPopoverButton,
-  IonRange: _ionRange2.default,
-  IonSelect: _ionSelect2.default,
-  IonSideMenu: _ionSideMenu2.default,
-  IonSideMenuContainer: _ionSideMenuContainer2.default,
-  IonSideMenuContent: _ionSideMenuContent2.default,
-  IonSideMenus: _ionSideMenus2.default,
-  IonSlideBox: _ionSlideBox2.default,
-  IonSpinner: _ionSpinner2.default,
-  IonSubFooterBar: _ionSubFooterBar2.default,
-  IonSubHeaderBar: _ionSubHeaderBar2.default,
-  IonTab: _ionTab2.default,
-  IonTabs: _ionTabs2.default,
-  IonTitle: _ionTitle2.default,
-  IonView: _ionView2.default,
-  SetTimeoutMixin: _timeout2.default,
-  IonKeyboard: _keyboard2.default
-};
 
 /***/ }),
 /* 14 */
@@ -2758,7 +2758,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = requestToServer;
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -28686,11 +28686,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 __webpack_require__(381);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -28710,8 +28710,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AutorizationForm = function (_Component) {
-  _inherits(AutorizationForm, _Component);
+var AutorizationForm = function (_React$Component) {
+  _inherits(AutorizationForm, _React$Component);
 
   function AutorizationForm(props, context) {
     _classCallCheck(this, AutorizationForm);
@@ -28732,7 +28732,7 @@ var AutorizationForm = function (_Component) {
       var params = "number=" + String(this.refs.phoneInput.value);
       var history = (0, _createHashHistory2.default)();
 
-      (0, _requestToServer2.default)("POST", theUrl, function (resultRequest) {
+      (0, _requestToServer2.default)("POST", theUrl, function () {
         history.push("/verification-form/" + String(_this2.refs.phoneInput.value));
       }, false, params);
     }
@@ -28742,7 +28742,6 @@ var AutorizationForm = function (_Component) {
       var _this3 = this;
 
       var history = (0, _createHashHistory2.default)();
-      var user = this.refs.phoneInput.value;
       var token = _localStorage2.default.get_obj("token");
 
       if (!token) {
@@ -28768,9 +28767,6 @@ var AutorizationForm = function (_Component) {
           cancelType: "button-light",
           onOk: function onOk() {
             _this3.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
-          },
-          onCancel: function onCancel() {
-            console.log("Cancelled");
           }
         });
       } else {
@@ -28830,11 +28826,12 @@ var AutorizationForm = function (_Component) {
   }]);
 
   return AutorizationForm;
-}(_react.Component);
+}(_react2.default.Component);
 
 AutorizationForm.contextTypes = {
   ionUpdatePopup: _react.PropTypes.func
 };
+
 exports.default = AutorizationForm;
 
 /***/ }),
@@ -32619,7 +32616,7 @@ module.exports = ReactDOMSelect;
 
 var ReactInvalidSetStateWarningHook = __webpack_require__(568);
 var ReactHostOperationHistoryHook = __webpack_require__(566);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 var ExecutionEnvironment = __webpack_require__(9);
 
 var performanceNow = __webpack_require__(405);
@@ -36679,7 +36676,7 @@ module.exports = REACT_ELEMENT_TYPE;
 
 
 var ReactCurrentOwner = __webpack_require__(29);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 var ReactElement = __webpack_require__(48);
 
 var checkReactTypeSpec = __webpack_require__(669);
@@ -38882,7 +38879,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 var _createHashHistory = __webpack_require__(31);
 
@@ -38890,7 +38887,7 @@ var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
 __webpack_require__(383);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39280,9 +39277,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39302,8 +39299,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EditCar = function (_Component) {
-  _inherits(EditCar, _Component);
+var EditCar = function (_React$Component) {
+  _inherits(EditCar, _React$Component);
 
   function EditCar(props, context) {
     _classCallCheck(this, EditCar);
@@ -39318,21 +39315,21 @@ var EditCar = function (_Component) {
   }
 
   _createClass(EditCar, [{
-    key: 'handleTitleChange',
+    key: "handleTitleChange",
     value: function handleTitleChange(e) {
       this.setState({ carTitleValue: e.target.value });
     }
   }, {
-    key: 'handleRegNumberChange',
+    key: "handleRegNumberChange",
     value: function handleRegNumberChange(e) {
       this.setState({ carRegNumberValue: e.target.value });
     }
   }, {
-    key: 'getCar',
+    key: "getCar",
     value: function getCar() {
       var start = this.props.location.pathname.lastIndexOf("/");
       var carId = this.props.location.pathname.substring(start + 1);
-      var carList = _localStorage2.default.get_obj('cars');
+      var carList = _localStorage2.default.get_obj("cars");
       var car = carList.userCars.filter(function (car) {
         if (car._id === carId) {
           return true;
@@ -39343,67 +39340,67 @@ var EditCar = function (_Component) {
       return car[0];
     }
   }, {
-    key: 'editCarBtnClicked',
+    key: "editCarBtnClicked",
     value: function editCarBtnClicked(theUrl) {
 
       var params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
       var history = (0, _createHashHistory2.default)();
 
-      (0, _requestToServer2.default)("POST", theUrl, function (userCar) {
+      (0, _requestToServer2.default)("POST", theUrl, function () {
         history.goBack();
       }, true, params);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
         _reactionic.IonContent,
-        _extends({ customClasses: '' }, this.props),
+        _extends({ customClasses: "" }, this.props),
         _react2.default.createElement(
-          'div',
-          { className: 'car-info' },
+          "div",
+          { className: "car-info" },
           _react2.default.createElement(
-            'div',
-            { className: 'titleAddCar' },
-            '\u0412\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:'
+            "div",
+            { className: "titleAddCar" },
+            "\u0412\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'title-car' },
-            _react2.default.createElement('input', { type: 'text',
-              name: 'title',
-              placeholder: '\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435',
-              ref: 'titleCar',
+            "div",
+            { className: "title-car" },
+            _react2.default.createElement("input", { type: "text",
+              name: "title",
+              placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
+              ref: "titleCar",
               value: this.state.carTitleValue,
               onChange: function onChange(e) {
                 return _this2.handleTitleChange(e);
               } })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'plate-number' },
-            _react2.default.createElement('input', {
-              type: 'text',
-              name: 'plateNumber',
-              placeholder: '\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F',
-              ref: 'plateNumber',
+            "div",
+            { className: "plate-number" },
+            _react2.default.createElement("input", {
+              type: "text",
+              name: "plateNumber",
+              placeholder: "\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
+              ref: "plateNumber",
               value: this.state.carRegNumberValue,
               onChange: function onChange(e) {
                 return _this2.handleRegNumberChange(e);
               } })
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'add-car-button' },
+            "div",
+            { className: "add-car-button" },
             _react2.default.createElement(
-              'button',
-              { className: 'button button-positive',
+              "button",
+              { className: "button button-positive",
                 onClick: function onClick() {
-                  return _this2.editCarBtnClicked('https://parkimon.ru/api/v1/user-car/edit/' + _this2.getCar()._id);
+                  return _this2.editCarBtnClicked("https://parkimon.ru/api/v1/user-car/edit/" + _this2.getCar()._id);
                 } },
-              '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C'
+              "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"
             )
           )
         )
@@ -39412,7 +39409,7 @@ var EditCar = function (_Component) {
   }]);
 
   return EditCar;
-}(_react.Component);
+}(_react2.default.Component);
 
 exports.default = EditCar;
 
@@ -39433,7 +39430,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39493,7 +39490,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 var _reactDom = __webpack_require__(32);
 
@@ -39573,9 +39570,9 @@ var _createHashHistory = __webpack_require__(31);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39841,9 +39838,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -39890,7 +39887,7 @@ var ParkingHistory = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      // console.log("parking history",this.state.parkingHistory);
+      console.log("parking history", this.state.parkingHistory);
       var counter = 1;
       var parkingList = [];
       this.state.parkingHistory.map(function (parking, index) {
@@ -39908,13 +39905,13 @@ var ParkingHistory = function (_Component) {
             'div',
             null,
             '\u0414\u0430\u0442\u0430 \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0438: ',
-            parking.start.substring(0, 10)
+            parking.created.substring(0, 10)
           ),
           _react2.default.createElement(
             'div',
             null,
             '\u0412\u0440\u0435\u043C\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0438: ',
-            parking.start.substring(11, 16)
+            parking.created.substring(11, 16)
           ),
           _react2.default.createElement(
             'div',
@@ -39956,9 +39953,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40121,11 +40118,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 __webpack_require__(387);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40224,7 +40221,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40257,42 +40254,42 @@ var UserBalance = function (_React$Component) {
   }
 
   _createClass(UserBalance, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps() {
       this.render();
     }
   }, {
-    key: 'componentWillMount',
+    key: "componentWillMount",
     value: function componentWillMount() {
       var userBalance = void 0;
-      if (_localStorage2.default.get_obj('user') && _localStorage2.default.get_obj('user')._id) {
-        userBalance = _localStorage2.default.get_obj('user').wallet ? _localStorage2.default.get_obj('user').wallet + ' руб' : '0 руб.';
+      if (_localStorage2.default.get_obj("user") && _localStorage2.default.get_obj("user")._id) {
+        userBalance = _localStorage2.default.get_obj("user").wallet ? _localStorage2.default.get_obj("user").wallet + " руб" : "0 руб.";
       } else {
         userBalance = null;
       }
       this.setState({ userBalance: userBalance });
     }
   }, {
-    key: 'showBalancePage',
+    key: "showBalancePage",
     value: function showBalancePage() {
       var history = (0, _createHashHistory2.default)();
-      history.push('/set-balance/');
+      history.push("/set-balance/");
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'user-balance' },
+        "div",
+        { className: "user-balance" },
         this.state.userBalance ? _react2.default.createElement(
-          'div',
+          "div",
           { onClick: function onClick() {
               return _this2.showBalancePage();
             } },
           this.state.userBalance
-        ) : ''
+        ) : ""
       );
     }
   }]);
@@ -40317,7 +40314,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 var _helpers = __webpack_require__(295);
 
@@ -40370,7 +40367,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 __webpack_require__(390);
 
@@ -40386,7 +40383,7 @@ var _autorizationForm = __webpack_require__(161);
 
 var _autorizationForm2 = _interopRequireDefault(_autorizationForm);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40545,7 +40542,7 @@ var _lodash = __webpack_require__(68);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 var _sideMenu = __webpack_require__(298);
 
@@ -40559,7 +40556,7 @@ var _mainTitle = __webpack_require__(285);
 
 var _mainTitle2 = _interopRequireDefault(_mainTitle);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40831,9 +40828,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactionic = __webpack_require__(11);
+
 __webpack_require__(380);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -40893,7 +40892,7 @@ var addCarsForm = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement(IonContent, _extends({ customClasses: "" }, this.props), _react2.default.createElement("div", { className: "car-info" }, _react2.default.createElement("div", { className: "titleAddCar" }, "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"), _react2.default.createElement("div", { className: "title-car" }, _react2.default.createElement("input", { type: "text",
+      return _react2.default.createElement(_reactionic.IonContent, _extends({ customClasses: "" }, this.props), _react2.default.createElement("div", { className: "car-info" }, _react2.default.createElement("div", { className: "titleAddCar" }, "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"), _react2.default.createElement("div", { className: "title-car" }, _react2.default.createElement("input", { type: "text",
         name: "title",
         placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
         ref: "titleCar" })), _react2.default.createElement("div", { className: "plate-number" }, _react2.default.createElement("input", {
@@ -40949,11 +40948,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 __webpack_require__(382);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -41105,9 +41104,9 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -41225,11 +41224,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactionic = __webpack_require__(13);
+var _reactionic = __webpack_require__(11);
 
 __webpack_require__(389);
 
-var _localStorage = __webpack_require__(11);
+var _localStorage = __webpack_require__(12);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -52689,7 +52688,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 function instantiateChild(childInstances, child, name, selfDebugID) {
@@ -52697,7 +52696,7 @@ function instantiateChild(childInstances, child, name, selfDebugID) {
   var keyUnique = childInstances[name] === undefined;
   if (process.env.NODE_ENV !== 'production') {
     if (!ReactComponentTreeHook) {
-      ReactComponentTreeHook = __webpack_require__(12);
+      ReactComponentTreeHook = __webpack_require__(13);
     }
     if (!keyUnique) {
       process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -54327,7 +54326,7 @@ module.exports = ReactDOMInput;
 
 
 var DOMProperty = __webpack_require__(36);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -54425,7 +54424,7 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -55300,7 +55299,7 @@ module.exports = {
 
 var DOMProperty = __webpack_require__(36);
 var EventPluginRegistry = __webpack_require__(69);
-var ReactComponentTreeHook = __webpack_require__(12);
+var ReactComponentTreeHook = __webpack_require__(13);
 
 var warning = __webpack_require__(3);
 
@@ -59375,7 +59374,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 var loggedTypeFailures = {};
@@ -59417,7 +59416,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(12);
+            ReactComponentTreeHook = __webpack_require__(13);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -59550,7 +59549,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 /**
@@ -59566,7 +59565,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (process.env.NODE_ENV !== 'production') {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(12);
+        ReactComponentTreeHook = __webpack_require__(13);
       }
       if (!keyUnique) {
         process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -68139,7 +68138,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 var loggedTypeFailures = {};
@@ -68181,7 +68180,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (process.env.NODE_ENV !== 'production') {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(12);
+            ReactComponentTreeHook = __webpack_require__(13);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -68229,7 +68228,7 @@ if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 't
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(12);
+  ReactComponentTreeHook = __webpack_require__(13);
 }
 
 /**
@@ -68245,7 +68244,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (process.env.NODE_ENV !== 'production') {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(12);
+        ReactComponentTreeHook = __webpack_require__(13);
       }
       if (!keyUnique) {
         process.env.NODE_ENV !== 'production' ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;

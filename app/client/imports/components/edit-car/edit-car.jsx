@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {IonContent} from 'reactionic';
-import Repostitory from '../../storage/local-storage';
-import createHashHistory from 'history/lib/createHashHistory';
-import requestToServer from '../../utils/request-to-server';
+import React from "react";
+import {IonContent} from "reactionic";
+import Repostitory from "../../storage/local-storage";
+import createHashHistory from "history/lib/createHashHistory";
+import requestToServer from "../../utils/request-to-server";
 
-class EditCar extends Component {
+class EditCar extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -17,6 +17,7 @@ class EditCar extends Component {
   handleTitleChange(e) {
     this.setState({carTitleValue: e.target.value});
   }
+
   handleRegNumberChange(e) {
     this.setState({carRegNumberValue: e.target.value});
   }
@@ -25,9 +26,9 @@ class EditCar extends Component {
   getCar() {
     const start = this.props.location.pathname.lastIndexOf("/");
     const carId = this.props.location.pathname.substring(start + 1);
-    const carList = Repostitory.get_obj('cars');
-    let car = carList.userCars.filter((car)=>{
-      if(car._id === carId) {
+    const carList = Repostitory.get_obj("cars");
+    let car = carList.userCars.filter((car) => {
+      if (car._id === carId) {
         return true;
       } else {
         return false;
@@ -40,12 +41,12 @@ class EditCar extends Component {
 
   editCarBtnClicked(theUrl) {
 
-      let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
-      let history = createHashHistory();
+    let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
+    let history = createHashHistory();
 
-      requestToServer("POST", theUrl, (userCar)=>{
-          history.goBack();
-      }, true, params);
+    requestToServer("POST", theUrl, () => {
+      history.goBack();
+    }, true, params);
 
   }
 
@@ -75,7 +76,7 @@ class EditCar extends Component {
           </div>
           <div className="add-car-button">
             <button className="button button-positive"
-                    onClick={() => this.editCarBtnClicked('https://parkimon.ru/api/v1/user-car/edit/' + this.getCar()._id)}>
+                    onClick={() => this.editCarBtnClicked("https://parkimon.ru/api/v1/user-car/edit/" + this.getCar()._id)}>
               Добавить
             </button>
           </div>

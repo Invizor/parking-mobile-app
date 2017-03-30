@@ -31,7 +31,6 @@ class CarList extends React.Component {
   }
 
   deleteCarBtnClicked(index) {
-
     let carList = this.state.carList;
     let theUrl = "https://parkimon.ru/api/v1/user-car/remove/" + String(carList[index]._id);
     requestToServer("GET", theUrl, (objResult) => {
