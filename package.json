@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-browser": "webpack && cd mobile-app; cordova run browser",
-    "start-android": "webpack && cd mobile-app; cordova run android",
+    "start-browser": "./node_modules/eslint/bin/eslint.js ./app/client/imports/*/*/*.js* webpack && cd mobile-app; cordova run browser",
+    "start-android": "./node_modules/eslint/bin/eslint.js ./app/client/imports/*/*/*.js* webpack && cd mobile-app; cordova run android",
     "check-code": "./node_modules/eslint/bin/eslint.js ./app/client/imports/*/*/*.js*"
   },
   "author": "",

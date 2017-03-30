@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
-import {IonContent, IonList, IonItem} from 'reactionic';
-import Repository from '../../storage/local-storage';
-import RequestToServer from '../../utils/request-to-server';
+import React from "react";
+import {IonContent, IonList, IonItem} from "reactionic";
+import RequestToServer from "../../utils/request-to-server";
 
-export default class ParkingHistory extends Component {
+export default class ParkingHistory extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       parkingHistory: []
-    }
+    };
   }
 
   getParkingHistory() {
-    RequestToServer('GET', 'https://parkimon.ru/api/v1/parking/history', (responseText)=>{
+    RequestToServer("GET", "https://parkimon.ru/api/v1/parking/history", (responseText)=>{
       this.setState({parkingHistory: responseText.sessions});
     }, true);
   }
@@ -27,6 +26,8 @@ export default class ParkingHistory extends Component {
     let counter = 1;
     let parkingList = [];
     this.state.parkingHistory.map((parking, index)=> {
+      console.log("parking.created",parking.created);
+      console.log("parking.start",parking.start);
       parkingList.push(
         <IonItem key={index}>
           <div>{counter++}. Парковка: #{parking.zone.zoneId}</div>
@@ -34,7 +35,7 @@ export default class ParkingHistory extends Component {
           <div>Время парковки: {parking.created.substring(11,16)}</div>
           <div>Номер вашего авто: {parking.transportNumber}</div>
         </IonItem>
-      )
+      );
     });
     return (
       <IonContent customClasses="" {...this.props}>
@@ -44,6 +45,6 @@ export default class ParkingHistory extends Component {
           }
         </IonList>
       </IonContent>
-    )
+    );
   }
 }

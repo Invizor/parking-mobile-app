@@ -10,12 +10,14 @@ export default function requestToServer(method, URL, callback, sendToken = true,
     client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   }
   if (params.length > 0) {
+    console.log("params", params);
     client.send(params);
   } else {
     client.send();
   }
   client.onload = () => {
     const responseText = JSON.parse(client.responseText);
+    console.log("responseText", responseText);
     callback(responseText);
   };
 }

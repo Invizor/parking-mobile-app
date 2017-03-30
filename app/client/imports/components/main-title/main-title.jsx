@@ -1,7 +1,7 @@
-import React, {PropTypes, Component} from 'react';
-import {IonSpinner} from 'reactionic';
-import {findDOMNode} from 'react-dom';
-import './main-title.scss';
+import React from "react";
+import {IonSpinner} from "reactionic";
+import {findDOMNode} from "react-dom";
+import "./main-title.scss";
 
 class UserBalance extends React.Component {
 
@@ -9,8 +9,8 @@ class UserBalance extends React.Component {
     setTimeout(()=>{
       if (this.props.title === "Parkimon") {
         const mySpinner = findDOMNode(this.refs.mySpinner);
-        console.log('mySpinner', mySpinner);
-        mySpinner.style.display= 'none';
+        console.log("mySpinner", mySpinner);
+        mySpinner.style.display= "none";
       }
     }, 3000);
   }
@@ -23,7 +23,7 @@ class UserBalance extends React.Component {
           this.props.title === "Parkimon" ?
           <span className="mySpinner" ref="mySpinner"><IonSpinner icon="spiral"/></span>
           :
-          ''
+          ""
         }
       </div>
     );

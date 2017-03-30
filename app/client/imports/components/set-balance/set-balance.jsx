@@ -1,21 +1,20 @@
-import React, {Component} from 'react';
-import {IonContent, IonButton} from 'reactionic';
-import './set-balance.scss';
-import LocalStorage from '../../storage/local-storage';
+import React from "react";
+import {IonContent, IonButton} from "reactionic";
+import "./set-balance.scss";
+import LocalStorage from "../../storage/local-storage";
 
-export default class SetBalance extends Component {
+export default class SetBalance extends React.Component {
 
   balancePaymentByBankCard() {
 
   }
-
 
   render() {
     return (
         <IonContent customClasses="" {...this.props}>
           <div className="set-balance">
             <div className="balance-info">
-              Ваш баланс: {LocalStorage.get_obj('user').wallet} руб.
+              Ваш баланс: {LocalStorage.get_obj("user").wallet} руб.
             </div>
             <div className="set-balance-title">Укажите сумму в рублях:</div>
             <div className="set-balance-input">
@@ -35,7 +34,7 @@ export default class SetBalance extends Component {
             </IonButton>
           </div>
         </IonContent>
-    )
+    );
   }
 }
 

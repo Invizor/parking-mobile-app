@@ -1,7 +1,7 @@
-import React from 'react';
-import {IonContent, IonList, IonItem, IonIcon} from 'reactionic';
+import React from "react";
+import {IonContent, IonList, IonItem, IonIcon} from "reactionic";
 
-var Index = React.createClass({
+let Index = React.createClass({
   propTypes: {
     ionSetTransitionDirection: React.PropTypes.func
   },
@@ -11,10 +11,10 @@ var Index = React.createClass({
     };
   },
   render() {
-    var items = this.props.pageList.map(function (page) {
-      if (page.path == '/') return null;
+    let items = this.props.pageList.map(function (page) {
+      if (page.path == "/") return null;
       if (page.dontindex) return null;
-      var checkmark = page.done ? "ios-checkmark-outline" : "ios-circle-outline"
+      let checkmark = page.done ? "ios-checkmark-outline" : "ios-circle-outline";
       return (
         <IonItem link={page.path} iconLeft iconRight key={page.path}>
           <IonIcon icon={checkmark}/>

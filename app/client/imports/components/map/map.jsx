@@ -1,6 +1,5 @@
 import {
   default as React,
-  PropTypes,
   Component,
 } from "react";
 
@@ -9,11 +8,9 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import createHashHistory from 'history/lib/createHashHistory';
-import {IonButton} from 'reactionic';
-import Repository from '../../storage/local-storage';
-import {IonContent, IonSpinner} from 'reactionic';
-import requestToServer from '../../utils/request-to-server';
+import createHashHistory from "history/lib/createHashHistory";
+import Repository from "../../storage/local-storage";
+import requestToServer from "../../utils/request-to-server";
 import "./map.scss";
 
 
@@ -32,9 +29,9 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
       gridSize={60}
        imagePath={window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"}
     >
-      {props.markers.map((marker, index) => (
+      {props.markers.map((marker) => (
         <Marker
-          icon='./mapIcon.svg'
+          icon="./mapIcon.svg"
           label={marker.zoneId}
           onClick={() => props.onMarkerClick(marker)}
           position={{lat: marker.geoCenter[0], lng: marker.geoCenter[1]}}
@@ -60,7 +57,7 @@ export default class Map extends Component {
 
 
   onSuccess(e, position) {
-    getGeoLocation(e, position);
+    this.getGeoLocation(e, position);
   }
 
   getGeoLocation(e, position) {
@@ -69,40 +66,40 @@ export default class Map extends Component {
   }
 
   onError(error) {
-    alert('code: ' + error.code + '\n' +
-      'message: ' + error.message + '\n');
+    alert("code: " + error.code + "\n" +
+      "message: " + error.message + "\n");
   }
 
-  onGeoLocBtnClick(e) {
+  onGeoLocBtnClick() {
     this.watchID = navigator.geolocation.getCurrentPosition(this.getGeoLocation, this.onError);
   }
 
-  onShowStateBtnClick(e) {
-    console.log('parkings', this.state.markers);
+  onShowStateBtnClick() {
+    console.log("parkings", this.state.markers);
   }
 
 
   showCoords(e) {
-    this.setState({mapCenter: [e.center.lat, e.center.lng]})
+    this.setState({mapCenter: [e.center.lat, e.center.lng]});
   }
 
 
   getPaidParkings() {
-    requestToServer('GET', 'https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000', (parkingList)=>{
+    requestToServer("GET", "https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000", (parkingList)=>{
       if (!Array.prototype.find) {
         Array.prototype.find = function (predicate) {
           if (this == null) {
-            throw new TypeError('Array.prototype.find called on null or undefined');
+            throw new TypeError("Array.prototype.find called on null or undefined");
           }
-          if (typeof predicate !== 'function') {
-            throw new TypeError('predicate must be a function');
+          if (typeof predicate !== "function") {
+            throw new TypeError("predicate must be a function");
           }
-          var list = Object(this);
-          var length = list.length >>> 0;
-          var thisArg = arguments[1];
-          var value;
+          let list = Object(this);
+          let length = list.length >>> 0;
+          let thisArg = arguments[1];
+          let value;
 
-          for (var i = 0; i < length; i++) {
+          for (let i = 0; i < length; i++) {
             value = list[i];
             if (predicate.call(thisArg, value, i, list)) {
               return value;
@@ -116,17 +113,17 @@ export default class Map extends Component {
           return parking;
         }
       });
-      /*console.log('parkingList', parkingList);
-      console.log('paidParkingList', paidParkingList);*/
+      /*console.log("parkingList", parkingList);
+      console.log("paidParkingList", paidParkingList);*/
       this.setState({markers: paidParkingList});
-      Repository.add_obj('paidParkingList', paidParkingList);
+      Repository.add_obj("paidParkingList", paidParkingList);
     }, false);
   }
 
 
   componentDidMount() {
-    if (Repository.get_obj('paidParkingList')) {
-      this.setState({markers: Repository.get_obj('paidParkingList')});
+    if (Repository.get_obj("paidParkingList")) {
+      this.setState({markers: Repository.get_obj("paidParkingList")});
     } else {
       this.getPaidParkings();
     }
@@ -137,20 +134,16 @@ export default class Map extends Component {
 
   handleMarkerClick(targetMarker) {
     let history = createHashHistory();
-    history.push('/parking-item/' + targetMarker._id);
+    history.push("/parking-item/" + targetMarker._id);
   }
 
-  onClearLocalStorageClick(e) {
+  onClearLocalStorageClick() {
     Repository.clearRep();
   }
 
-  static contextTypes = {
-    ionShowLoading: React.PropTypes.func
-  };
-
   showLoading() {
-    var customTemplate = <div><h2><IonSpinner icon="dots" customClasses="inloader spinner-light"/>Подождите<IonSpinner
-      icon="dots" customClasses="inloader spinner-light"/></h2><p>Парковки загружаются</p></div>
+    let customTemplate = <div><h2><IonSpinner icon="dots" customClasses="inloader spinner-light"/>Подождите<IonSpinner
+      icon="dots" customClasses="inloader spinner-light"/></h2><p>Парковки загружаются</p></div>;
     let ionShowLoading = this.context.ionShowLoading;
     ionShowLoading(true, {
       backdrop: false,
@@ -162,15 +155,15 @@ export default class Map extends Component {
 
 
   render() {
-    //console.log('parkings', this.state.markers);
+    //console.log("parkings", this.state.markers);
     return (
       <div>
         <MarkerClustererExampleGoogleMap
           containerElement={
-            <div style={{height: `100%`}}/>
+            <div style={{height: "100%"}}/>
           }
           mapElement={
-            <div style={{height: `100%`}}/>
+            <div style={{height: "100%"}}/>
           }
           markers={this.state.markers}
           onMarkerClick={this.handleMarkerClick}
@@ -181,3 +174,7 @@ export default class Map extends Component {
     );
   }
 }
+
+Map.contextTypes = {
+  ionShowLoading: React.PropTypes.func
+};

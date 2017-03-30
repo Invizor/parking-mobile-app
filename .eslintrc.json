@@ -15,6 +15,8 @@
         "react"
     ],
     "rules": {
+        "no-console":1,
+        "no-var": 2,
         "indent": [
             "error",
             2
