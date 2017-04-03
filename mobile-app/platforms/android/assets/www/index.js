@@ -38252,7 +38252,6 @@ var AutorizationForm = function (_React$Component) {
       client.open("POST", theUrl, true);
 
       var params = "number=" + String(this.refs.phoneInput.value);
-      console.log(this.refs.phoneInput.value);
       client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       client.send(params);
 
@@ -39953,6 +39952,10 @@ var Container = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var id = document.getElementById('app');
+      app.onMouseDown = function () {
+        return false;
+      };
       if (_localStorage2.default.get_obj('user') == undefined || _localStorage2.default.get_obj('user').success == false) {
         this.getUser('https://parkimon.ru/api/v1/user');
       }
@@ -39962,7 +39965,7 @@ var Container = function (_Component) {
 
       var emitTek = _emitterStorage2.default.emitter;
       if (emitTek != null && emitTek != undefined) {
-        if (_localStorage2.default.get_obj('user') != null) emitTek.emit('radiation', true);else if (_localStorage2.default.get_obj('user') == null) emitTek.emit('radiation', false);
+        if (_localStorage2.default.get_obj('user')._id) emitTek.emit('radiation', true);else if (_localStorage2.default.get_obj('user')._id) emitTek.emit('radiation', false);
       }
       //cordova.plugins.Keyboard.disableScroll(true);
       // cordova.plugins.Keyboard.show();
@@ -40060,6 +40063,8 @@ var Layout = _react2.default.createClass({
     };
   },
   getPageProps: function getPageProps(path) {
+    var _this = this;
+
     var backButton = _react2.default.createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
       color: '#FFFFFF',
       type: 'clear',
@@ -40079,13 +40084,19 @@ var Layout = _react2.default.createClass({
     var pageProps = _lodash2.default.keyBy(pageList, 'path');
 
     // custom pageProps
-    pageProps['/container'].leftHeaderButton = null;
-
+    pageProps['/container'].leftHeaderButton = _react2.default.createElement(_reactionic.IonNavBackButton, {
+      'menu-toggle': 'left',
+      type: 'clear',
+      className: 'side-menu-button',
+      icon: 'ion-navicon',
+      onClick: function onClick() {
+        _this.context.ionSnapper.toggle('left');
+      }
+    });
     return pageProps[path];
   },
-
   componentDidMount: function componentDidMount() {
-    var _this = this;
+    var _this2 = this;
 
     if (_localStorage2.default.get_obj("token") != null && this.state.isUser == false) {
       this.setState({ isUser: true });
@@ -40095,44 +40106,50 @@ var Layout = _react2.default.createClass({
     }
     var emitter = new EventEmitter();
     emitter.on('radiation', function (flag) {
-      _this.setState({ fl: flag });
+      _this2.setState({ fl: flag });
     });
     _emitterStorage2.default.emitter = emitter;
   },
-  componentDidUnmount: function componentDidUnmount() {
+  componentWillUnmount: function componentWillUnmount() {
     emitter = _emitterStorage2.default.emitter;
     emitter.off('radiation', false);
     _emitterStorage2.default.emitter = null;
   },
   render: function render() {
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
+    var globalFl = false;
+    if (_localStorage2.default.get_obj("token")) globalFl = true;
+    if (this.state.fl == true) globalFl = true;
     return _react2.default.createElement(
       _reactionic.IonSideMenuContainer,
-      this.props,
+      _extends({}, this.props, { settings: {
+          disable: 'right',
+          touchToDrag: false
+        } }),
       _react2.default.createElement(
         _reactionic.IonSideMenus,
         null,
         _react2.default.createElement(
           _reactionic.IonSideMenu,
           { customClasses: 'side-menu' },
-          _react2.default.createElement(_sideMenu2.default, { isAutorized: this.state.fl })
-        )
-      ),
-      _react2.default.createElement(
-        _reactionic.IonSideMenuContent,
-        null,
-        _react2.default.createElement(_reactionic.IonNavBar, _extends({ customClasses: 'nav-blue',
-          title: currentPageProps.headerTitle,
-          leftButton: currentPageProps.leftHeaderButton,
-          rightButton: currentPageProps.rightHeaderButton
-        }, this.props)),
+          _react2.default.createElement(_sideMenu2.default, { isAutorized: globalFl, contextMain: this.context })
+        ),
         _react2.default.createElement(
-          _reactionic.IonContent,
-          _extends({ customClasses: '' }, this.props),
+          _reactionic.IonSideMenuContent,
+          null,
+          _react2.default.createElement(_reactionic.IonNavBar, _extends({ customClasses: 'nav-blue',
+            title: currentPageProps.headerTitle,
+            leftButton: currentPageProps.leftHeaderButton,
+            rightButton: currentPageProps.rightHeaderButton
+          }, this.props)),
           _react2.default.createElement(
-            _reactionic.IonView,
+            _reactionic.IonContent,
             _extends({ customClasses: '' }, this.props),
-            _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+            _react2.default.createElement(
+              _reactionic.IonView,
+              _extends({ customClasses: '' }, this.props),
+              _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+            )
           )
         )
       )
@@ -40249,14 +40266,12 @@ var addCarsForm = function (_React$Component) {
 
             var params = "user=" + String(_localStorage2.default.get_obj("user").id) + '&' + "title=" + String(this.refs.titleCar.value);
             params += '&' + "type=a" + '&' + "regNumber=" + String(this.refs.plateNumber.value);
-            console.log('ParamsAddCar=', params);
             client.setRequestHeader("Authorization", 'Bearer ' + String(_localStorage2.default.get_obj("token")));
             client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             client.send(params);
 
             client.onload = function () {
                 var userList = JSON.parse(client.responseText);
-                console.log(userList);
                 history.goBack();
             };
         }
@@ -40423,8 +40438,6 @@ var CarList = function (_React$Component) {
 
         var result = JSON.parse(client.responseText);
 
-        console.log(result);
-
         if (result.success == true) masCars.splice(index, 1);
 
         _this3.setState({ carList: masCars });
@@ -40433,7 +40446,6 @@ var CarList = function (_React$Component) {
   }, {
     key: 'showEditCarPage',
     value: function showEditCarPage(carId) {
-      console.log('carId', carId);
       var history = (0, _createHashHistory2.default)();
       history.push('/edit-car/' + carId);
     }
@@ -40442,9 +40454,7 @@ var CarList = function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      console.log("car-list", this.state.carList);
       var cars = this.state.carList;
-      console.log(cars);
       var myCars = [];
 
       var _loop = function _loop(i) {
@@ -40567,7 +40577,7 @@ var SideMenu = function (_React$Component) {
     }, {
         key: 'goToRoute',
         value: function goToRoute(theUrl) {
-            console.log("goToRoute");
+            this.props.contextMain.ionSnapper.close();
             var history = (0, _createHashHistory2.default)();
             history.push(theUrl);
         }
@@ -40693,11 +40703,9 @@ var VerificationForm = function (_React$Component) {
       client.onload = function () {
         var history = (0, _createHashHistory2.default)();
         var userData = JSON.parse(client.responseText);
-        console.log("userData", userData);
         _this2.setState({ userToken: userData.token });
         _this2.setState({ user: userData.user });
 
-        console.log('userToken=', _this2.state.userToken);
         if (_this2.state.userToken != '' && _this2.state.userToken != undefined) {
           _localStorage2.default.add_obj("token", _this2.state.userToken);
           _localStorage2.default.add_obj("user", _this2.state.user);
