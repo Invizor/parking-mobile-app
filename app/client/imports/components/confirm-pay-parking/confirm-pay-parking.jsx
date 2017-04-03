@@ -142,49 +142,6 @@ export default class ConfirmPayParking extends Component {
     }
 
     else {
-
-      if (window.SelectorCordovaPlugin) {
-        let data = {
-          numbers: [
-            {description: 1},
-            {description: 3},
-            {description: 3},
-            {description: 4},
-            {description: 5},
-            {description: 6},
-            {description: 7},
-            {description: 8},
-
-          ]
-        };
-
-        let config = {
-          title: "Укажите длительность",
-          items:[
-            [data.numbers]
-          ],
-          positiveButtonText: "Готово",
-          negativeButtonText: "Отмена"
-        };
-
-
-
-        window.SelectorCordovaPlugin.showSelector(config, function(/*result*/) {
-        /*  console.log("result: " + JSON.stringify(result) );
-          console.log("User chose number: " + result[0].description + " at array index: " + result[0].index);*/
-
-          //note: as of now in iOS result[1] is ignored
-         // console.log("User chose fruit: " + result[1].description + " at array index: " + result[1].index);
-        }, function() {
-         // console.log("Canceled");
-        });
-      }
-
-
-
-
-
-
       const parkingID = this.getParkingId();
       this.getCarByTitle();
 
@@ -197,12 +154,35 @@ export default class ConfirmPayParking extends Component {
           RequestToServer("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, (newResponse) => {
             console.log(newResponse);
             if (newResponse.session.status === "done") {
+              let startTime = parseInt(newResponse.session.start.substring(11,13)) + 6;
+              let endTime = parseInt(newResponse.session.start.substring(11,13)) + 6 + newResponse.session.forTime / 60;
+              if(startTime < 10) {
+                startTime = "0" + startTime;
+              }
+              if (endTime < 10) {
+                endTime = "0" + endTime;
+              }
+              console.log("start1", newResponse.session.start);
+              newResponse.session.start = newResponse.session.start.replace(newResponse.session.start.substring(0,11) + newResponse.session.start.substring(11,13), newResponse.session.start.substring(0,11) + startTime);
+              newResponse.session.end = newResponse.session.end.replace(newResponse.session.end.substring(0,11) + newResponse.session.end.substring(11,13),newResponse.session.end.substring(0,11) + endTime);
+              console.log("startTime", startTime);
+              console.log("endTime", endTime);
+              Repository.add_obj("parkingSession", newResponse.session);
+              console.log("newResponse", newResponse.session);
               console.log("done");
+              let history = createHashHistory();
+              history.push("/map");
+              clearInterval(parkingTimer);
+            } else if (newResponse.session.status === "error") {
+              console.log("request failed");
               clearInterval(parkingTimer);
             }
           }, true);
-        }, 5000);
-      }, true, "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber + "&forTime=" + this.state.rangeValue * 60);
+        }, 3000);
+      }, true, "zoneId=" + parkingID +
+               "&transportId=" + this.getCarByTitle()._id +
+               "&transportString=" + this.getCarByTitle().regNumber +
+               "&forTime=" + this.state.rangeValue * 60);
 
     }
 

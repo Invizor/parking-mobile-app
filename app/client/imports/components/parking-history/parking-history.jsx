@@ -13,6 +13,7 @@ export default class ParkingHistory extends React.Component {
 
   getParkingHistory() {
     RequestToServer("GET", "https://parkimon.ru/api/v1/parking/history", (responseText)=>{
+      console.log("responseParkingHistory", responseText);
       this.setState({parkingHistory: responseText.sessions});
     }, true);
   }

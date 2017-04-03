@@ -6,7 +6,7 @@ import AutorizationForm from "../../components/autorization-form/autorization-fo
 import Repository from "../../storage/local-storage";
 import emitterStorage from "../../storage/emitter-storage";
 import requestToServer from "../../utils/request-to-server";
-//Object.assign = require("object-assign");
+import ParkingCounter from "../../components/parking-counter/parking-counter";
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -75,6 +75,8 @@ export default class Container extends React.Component {
   }
 
   render() {
+    let parkingSession = Repository.get_obj("parkingSession") ? <ParkingCounter/> : "";
+    console.log("parkingSession", parkingSession);
     return (
       <IonContent customClasses=""
                   {...this.props}>
@@ -82,8 +84,13 @@ export default class Container extends React.Component {
         <div className="content-container">
           {
             Repository.get_obj("token") ?
-              <div className="mapContainer">
-                <Map/>
+              <div>
+                <div className="mapContainer">
+                  <Map/>
+                </div>
+                {
+                  parkingSession
+                }
               </div>
               :
               <div className="autorization-form">

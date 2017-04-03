@@ -2,11 +2,19 @@ import React from "react";
 import {IonContent, IonButton} from "reactionic";
 import "./set-balance.scss";
 import LocalStorage from "../../storage/local-storage";
+import RequestToServer from "../../utils/request-to-server";
 
 export default class SetBalance extends React.Component {
 
   balancePaymentByBankCard() {
 
+  }
+
+  balancePaymentByPhone() {
+    let user = LocalStorage.get_obj("user");
+    RequestToServer("GET", "https://parkimon.ru/api/v1/payment/balance/phone/1", (answer)=>{
+      console.log("answer", answer);
+    });
   }
 
   render() {
@@ -24,7 +32,7 @@ export default class SetBalance extends React.Component {
             </div>
             <IonButton
               color="positive"
-              onClick={() => this.enterButton()}>
+              onClick={() => this.balancePaymentByPhone()}>
               Со счета мобильного телефона
             </IonButton>
             <IonButton

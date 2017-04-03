@@ -50,6 +50,7 @@ class CarList extends React.Component {
 
   render() {
     let cars = this.state.carList;
+    console.log(cars, "cars");
     let myCars = [];
     for (let i = 0; i < cars.length; i++) {
       myCars.push(

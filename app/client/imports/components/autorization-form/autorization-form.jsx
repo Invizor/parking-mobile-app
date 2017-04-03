@@ -49,8 +49,11 @@ class AutorizationForm extends React.Component {
   }
 
   render() {
+    console.log("autorization form console log");
+    alert("hello");
     return (
       <IonContent customClasses="" {...this.props}>
+        HI
         <div className="autorization">
           <div className="first-symbol"> +7</div>
           <div className="phone-input">
