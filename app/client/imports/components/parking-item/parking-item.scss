@@ -1,7 +1,17 @@
-
 .pay-parking {
   margin: 50px auto;
   width: 50%;
+}
+.parking-item {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.parking-item .address {
+  margin-left: 16px;
+  padding: 16px 0;
+  font-size: 16px;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  color: #444;
 }
 
 .pay-parking button {

@@ -1,10 +1,9 @@
-import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton, IonNavBar} from 'reactionic';
+import React, {PropTypes} from "react";
+import {IonContent, IonButton,} from "reactionic";
 import "./autorization-form.scss";
-import {findDOMNode} from 'react-dom';
-import Repostitory from '../../storage/local-storage';
-import createHashHistory from 'history/lib/createHashHistory';
-import userStorage from '../../storage/user-storage';
+import LocalStorage from "../../storage/local-storage";
+import requestToServer from "../../utils/request-to-server";
+import createHashHistory from "history/lib/createHashHistory";
 
 class AutorizationForm extends React.Component {
 
@@ -15,55 +14,46 @@ class AutorizationForm extends React.Component {
     };
   }
 
-  static contextTypes = {
-    ionUpdatePopup: React.PropTypes.func
-  };
-
   startRegistration(theUrl) {
-    let history = createHashHistory();
-    let client = new XMLHttpRequest();
-    client.open("POST", theUrl, true);
-
     let params = "number=" + String(this.refs.phoneInput.value);
-    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.send(params);
+    let history = createHashHistory();
 
-    client.onload = () => {
-      history.push('/verification-form/' + String(this.refs.phoneInput.value));
-    };
+    requestToServer("POST", theUrl, ()=>{
+      history.push("/verification-form/" + String(this.refs.phoneInput.value));
+    }, false, params);
+
   }
 
   onRegistrationBtnClicked() {
     let history = createHashHistory();
-    let user = this.refs.phoneInput.value;
-    let obj = Repostitory.get_obj("token");
+    let token = LocalStorage.get_obj("token");
 
-    if (obj == undefined || obj == null) {
+    if (!token) {
       let ionUpdatePopup = this.context.ionUpdatePopup;
       ionUpdatePopup({
-        popupType: 'confirm',
-        cancelText: 'Нет',
-        okText: 'Да',
-        title: 'Пожалуйста проверьте:',
+        popupType: "confirm",
+        cancelText: "Нет",
+        okText: "Да",
+        title: "Пожалуйста проверьте:",
         template: <span>Мы отправим код подтверждения на телефон:
                           <p>+7 ({this.refs.phoneInput.value.slice(0, 3)}) {this.refs.phoneInput.value.slice(3)}</p>
                       </span>,
-        cancelType: 'button-light',
+        cancelType: "button-light",
         onOk: () => {
-          this.startRegistration('https://parkimon.ru/api/v1/user/register-mobile');
-        },
-        onCancel: function () {
-          console.log('Cancelled');
+          this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
         }
-      })
+      });
     } else {
       history.goBack(); // исправить, когда появиться главное окно, после авторизации
     }
   }
 
   render() {
+    console.log("autorization form console log");
+    alert("hello");
     return (
       <IonContent customClasses="" {...this.props}>
+        HI
         <div className="autorization">
           <div className="first-symbol"> +7</div>
           <div className="phone-input">
@@ -87,5 +77,9 @@ class AutorizationForm extends React.Component {
     );
   }
 }
+
+AutorizationForm.contextTypes = {
+  ionUpdatePopup: PropTypes.func
+};
 
 export default AutorizationForm;

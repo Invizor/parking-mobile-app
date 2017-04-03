@@ -1,7 +1,15 @@
 .user-balance {
   width: 80px;
   margin-top: 8px;
-  font-size: 18px; }
+  font-size: 18px;
+  text-decoration: underline; }
+.spinner {
+  top: 8px;
+  position: absolute;
+  z-index: 10; }
+
+.mySpinner {
+  margin-left: 15px; }
 @charset "UTF-8";
 /*!
   Ionicons, v2.0.1
@@ -10258,15 +10266,14 @@ a.button {
 .popover {
   height: auto; }
 
-.spinner {
-  top: 300px;
-  left: 50%;
-  position: absolute;
-  z-index: 10; }
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
 
-.mapContainer {
+.content-container .mapContainer {
   width: 100%;
-  height: 400px; }
+  height: 100%; }
 
 .main-button {
   position: fixed;
@@ -10305,38 +10312,9 @@ a.button {
 
 .overflow-scroll .has-header {
   top: 0; }
-.unauthorized-user-buttons {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-around;
-  align-items: stretch;
-  height: 58px; }
 
-.unauthorized-user-button a {
-  display: block;
-  min-height: 30px;
-  line-height: 28px;
-  width: 120px; }
-
-.unauthorized-user-button:nth-child(2) a {
-  height: 100%;
-  padding-top: 13px; }
-.authorized-user-buttons {
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-around;
-  align-items: stretch;
-  height: 58px; }
-
-.authorized-user-button a {
-  display: block;
-  min-height: 30px;
-  line-height: 28px;
-  width: 120px; }
-
-.authorized-user-button:nth-child(2) a {
-  height: 100%;
-  padding-top: 13px; }
+.button-clear.button-clear {
+  color: white; }
 .autorization {
   width: 200px;
   margin: 100px auto 0; }
@@ -10401,12 +10379,27 @@ a.button {
   margin: 50px auto;
   width: 50%; }
 
+.parking-item {
+  margin-top: 20px;
+  margin-bottom: 10px; }
+
+.parking-item .address {
+  margin-left: 16px;
+  padding: 16px 0;
+  font-size: 16px;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  color: #444; }
+
 .pay-parking button {
   width: 100%; }
 
 .pay-parking a {
   display: block;
   margin: 30px auto; }
+.confirm-pay-parking {
+  margin-top: 20px;
+  margin-bottom: 10px; }
+
 .confirm-pay-parking a {
   width: 300px;
   display: block;
@@ -10421,9 +10414,19 @@ a.button {
 
 .duration input {
   border: 1px solid #000; }
+
+.confirm-pay-parking-button {
+  margin-top: 120px; }
+
+.reg-number input {
+  width: 100px;
+  margin-left: 80px;
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid #ccc; }
 .set-balance {
-  width: 300px;
-  margin: 100px auto 0;
+  width: 80%;
+  margin: 20px auto 0;
   border: 1px #999999;
   border-radius: 4px; }
 
@@ -10443,11 +10446,15 @@ a.button {
   border-radius: 4px; }
 
 .set-balance-title {
-  width: 80%;
-  display: inline-block;
-  font-size: 20px;
   margin-bottom: 30px;
-  color: #4b8bf4; }
+  font-size: 20px;
+  color: #4b8bf4;
+  text-align: center; }
+
+.balance-info {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 50px; }
 .list-cars {
   width: 100%;
   margin: 0 auto; }

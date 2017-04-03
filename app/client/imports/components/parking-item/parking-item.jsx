@@ -1,16 +1,10 @@
-import React from 'react';
-import {IonContent, IonList, IonItem, IonButton} from 'reactionic';
-import parkingStorage from '../../storage/parking-storage';
-import './parking-item.scss';
+import React from "react";
+import {IonList, IonItem, IonButton} from "reactionic";
+import Repository from "../../storage/local-storage";
+import "./parking-item.scss";
 
 
-let IonItemContainer = React.createClass({
-  render: function () {
-    <IonItem>hi</IonItem>
-  }
-});
-
-var ParkingItem = React.createClass({
+let ParkingItem = React.createClass({
 
   getParkingId() {
     const start = this.props.location.pathname.lastIndexOf("/");
@@ -23,17 +17,17 @@ var ParkingItem = React.createClass({
     if (!Array.prototype.find) {
       Array.prototype.find = function (predicate) {
         if (this == null) {
-          throw new TypeError('Array.prototype.find called on null or undefined');
+          throw new TypeError("Array.prototype.find called on null or undefined");
         }
-        if (typeof predicate !== 'function') {
-          throw new TypeError('predicate must be a function');
+        if (typeof predicate !== "function") {
+          throw new TypeError("predicate must be a function");
         }
-        var list = Object(this);
-        var length = list.length >>> 0;
-        var thisArg = arguments[1];
-        var value;
+        let list = Object(this);
+        let length = list.length >>> 0;
+        let thisArg = arguments[1];
+        let value;
 
-        for (var i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
           value = list[i];
           if (predicate.call(thisArg, value, i, list)) {
             return value;
@@ -42,22 +36,21 @@ var ParkingItem = React.createClass({
         return undefined;
       };
     }
-    const currentParking = parkingStorage.parkings.find((parking) => {
+    const currentParking = Repository.get_obj("paidParkingList").find((parking) => {
       if (parking._id === this.getParkingId()) {
         return parking;
       }
     });
 
-    //console.log('getCurrentParking', currentParking);
+    console.log("getCurrentParking", currentParking);
     return currentParking;
 
 
   },
 
   getParkingInfo() {
-    const parking = this.getCurrentParking();
-    let parkingInfo = [];
-
+   // const parking = this.getCurrentParking();
+   // let parkingInfo = [];
   },
 
   getPayParkingLink() {
@@ -69,11 +62,11 @@ var ParkingItem = React.createClass({
     const parking = this.getCurrentParking();
 
     return (
-      <div>
+      <div className="parking-item">
         <IonList>
           {
             parking.zoneId ?
-              <h1 className="text-center">Парковка #{parking.zoneId}</h1>
+              <h1 className="parking-title text-center">#{parking.zoneId}</h1>
               :
               <IonItem divider>Информация неизвестна</IonItem>
           }
@@ -85,7 +78,7 @@ var ParkingItem = React.createClass({
           }
           {
             parking.address ?
-              <IonItem>Адрес: {parking.address}</IonItem>
+              <div className="address">Адрес: {parking.address}</div>
               :
               <IonItem>Адрес неизвестен</IonItem>
           }
@@ -116,7 +109,7 @@ var ParkingItem = React.createClass({
         </div>
       </div>
 
-    )
+    );
   }
 });
 

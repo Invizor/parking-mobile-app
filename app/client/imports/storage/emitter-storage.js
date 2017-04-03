@@ -1,5 +1,5 @@
 let emitterStorage = {
-    emitter: null
+  emitter: null
 };
 
 export default emitterStorage;

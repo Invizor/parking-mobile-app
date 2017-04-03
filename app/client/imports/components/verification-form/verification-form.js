@@ -1,63 +1,58 @@
-import React, {PropTypes, Component} from 'react';
-import {IonContent, IonButton, IonNavBar} from 'reactionic';
+import React, {Component} from "react";
+import {IonContent, IonButton} from "reactionic";
 import "./verification-form.scss";
-import {findDOMNode} from 'react-dom';
-import Repository from '../../storage/local-storage';
-import createHashHistory from 'history/lib/createHashHistory';
+import Repository from "../../storage/local-storage";
+import createHashHistory from "history/lib/createHashHistory";
+import requestToServer from "../../utils/request-to-server";
 
-
-class VerificationForm extends React.Component {
+class VerificationForm extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      userToken: '',
+      userToken: "",
       user: {}
     };
   }
 
-  static contextTypes = {
-    ionUpdatePopup: React.PropTypes.func
-  };
-
   loginUser(theUrl) {
-    let client = new XMLHttpRequest();
-    client.open("POST", theUrl, true);
     let code = this.refs.codeInput.value;
     let userNumber = this.props.params.number;
-
     let params = "username=" + String(userNumber) + "&" + "verification=" + String(code);
-    client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    client.send(params);
+    let history = createHashHistory();
 
-    client.onload = () => {
-      let history = createHashHistory();
-      let userData = JSON.parse(client.responseText);
-      this.setState({userToken: userData.token});
-      this.setState({user: userData.user});
-
-      if (this.state.userToken != '' && this.state.userToken != undefined) {
+    requestToServer("POST", theUrl, (userData) => {
+      if (userData.success && userData.token && userData.user) {
+        this.setState({userToken: userData.token});
+        this.setState({user: userData.user});
         Repository.add_obj("token", this.state.userToken);
         Repository.add_obj("user", this.state.user);
 
         let ionUpdatePopup = this.context.ionUpdatePopup;
         ionUpdatePopup({
-          popupType: 'alert',
-          okText: 'хорошо',
-          title: 'Успех!',
+          popupType: "alert",
+          okText: "хорошо",
+          title: "Успех!",
           template: <span>Вы зарегистрированы</span>,
-          okType: 'button-light',
-          onOk: () => {
-            console.log('REGISTER!');
-          },
+          okType: "button-light",
         });
+        history.push("/container");
+      } else {
+        let ionUpdatePopup = this.context.ionUpdatePopup;
+        ionUpdatePopup({
+          popupType: "alert",
+          okText: "ввод",
+          title: "Ошибка!",
+          template: <span>неверный код верификации</span>,
+          okType: "button-light",
+        });
+        this.refs.codeInput.value = "";
       }
-      history.push('/container');
-    };
+    }, false, params);
   }
 
   onSignInBtnClicked() {
-    this.loginUser('https://parkimon.ru/api/v1/user/login');
+    this.loginUser("https://parkimon.ru/api/v1/user/login");
   }
 
   render() {
@@ -81,5 +76,10 @@ class VerificationForm extends React.Component {
     );
   }
 }
+
+VerificationForm.contextTypes = {
+  ionUpdatePopup: React.PropTypes.func
+};
+
 
 export default VerificationForm;

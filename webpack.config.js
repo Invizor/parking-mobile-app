@@ -50,4 +50,9 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('mobile-app/www/style/index.css')
   ],
+  externals: {
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  }
 };
