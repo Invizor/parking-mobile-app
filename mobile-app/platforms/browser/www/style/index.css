@@ -10312,6 +10312,9 @@ a.button {
 
 .overflow-scroll .has-header {
   top: 0; }
+
+.button-clear.button-clear {
+  color: white; }
 .autorization {
   width: 200px;
   margin: 100px auto 0; }

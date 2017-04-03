@@ -57,7 +57,7 @@ var Layout = React.createClass({
         menu-toggle="left"
         type="clear"
         className="side-menu-button"
-        icon="ion-navicon"
+        icon="ion-navicon-round"
         onClick={() => {
           this.context.ionSnapper.toggle('left')
         }}
