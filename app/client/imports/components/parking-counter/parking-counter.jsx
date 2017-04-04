@@ -1,6 +1,7 @@
 import React from "react";
 import LocalStorage from "../../storage/local-storage";
 import RemainingTime from "../remaining-time/remaining-time";
+import {findDOMNode} from 'react-dom';
 
 export default class ParkingCounter extends React.Component {
   constructor(props) {
@@ -35,7 +36,13 @@ export default class ParkingCounter extends React.Component {
     let parkingSession = LocalStorage.get_obj("parkingSession");
     let status = (parkingSession && parkingSession.status) ? parkingSession.end.substring(11,19) : "nothing";
 
-    let endParkingTime = new Date("2017-04-03 " + status);
+    let endParkingTime = new Date("2017-04-04 " + status);
+    if( !LocalStorage.get_obj("endParkingTime")) {
+      LocalStorage.add_obj("endParkingTime", endParkingTime);
+    } else {
+      endParkingTime = LocalStorage.get_obj("endParkingTime");
+    }
+    console.log("endParkingTime", endParkingTime);
     let now = new Date();
     now.setHours(endParkingTime.getHours()-now.getHours());
     now.setMinutes(endParkingTime.getMinutes()-now.getMinutes());
@@ -92,10 +99,13 @@ export default class ParkingCounter extends React.Component {
     console.log("remainingHours", this.state.remainingHours);
     console.log("remainingMinutes", this.state.remainingMinutes);
     console.log("remainingSeconds", this.state.remainingSeconds);
-       return (
-        <div>
 
-        </div>
+
+
+    return (
+      <div>
+        <RemainingTime getTime={this.getRemainingTime} />
+      </div>
     );
   }
 }

@@ -24,17 +24,19 @@ export default class RemainingTime extends React.Component {
       remainingMinutes: remainingTime.remainingMinutes,
       remainingSeconds: remainingTime.remainingSeconds
     });*/
-
-    //setInterval(this.props.getTime, 1000);
+    this.props.getTime();
+   // setInterval(this.props.getTime, 1000);
   }
 
   render() {
     let remainingTime = LocalStorage.get_obj("remainingTime");
     console.log("props2", this.props);
-    let remainingTimeDisplay = remainingTime.remainingHours + " : " + remainingTime.remainingMinutes + " : " + remainingTime.remainingSeconds;
+    // let remainingTimeDisplay = remainingTime.remainingHours + " : " + remainingTime.remainingMinutes + " : " + remainingTime.remainingSeconds;
     return (
       <div>
-        <h1>! {this.props.remainingTime.remainingHours} : {this.props.remainingTime.remainingMinutes} : {this.props.remainingTime.remainingSeconds} !</h1>
+        <span ref="hours">5</span>:<span ref="minutes">25</span>:<span ref="seconds">30</span>
+
+        {/*<h1>! {this.props.remainingTime.remainingHours} : {this.props.remainingTime.remainingMinutes} : {this.props.remainingTime.remainingSeconds} !</h1>*/}
         {
 
         }
