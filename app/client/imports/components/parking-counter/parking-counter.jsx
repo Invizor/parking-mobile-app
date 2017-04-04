@@ -35,14 +35,23 @@ export default class ParkingCounter extends React.Component {
   getRemainingTime() {
     let parkingSession = LocalStorage.get_obj("parkingSession");
     let status = (parkingSession && parkingSession.status) ? parkingSession.end.substring(11,19) : "nothing";
-
-    let endParkingTime = new Date("2017-04-04 " + status);
+    console.log("status", status);
+    let endParkingTime = {
+      year: 0,
+      month: 0,
+      day: 0,
+      hours:0,
+      minutes: 0,
+      seconds: 0
+    };
+    console.log("endParkingTime1", endParkingTime);
     if( !LocalStorage.get_obj("endParkingTime")) {
+      endParkingTime = new Date("2017-04-04 " + status);
       LocalStorage.add_obj("endParkingTime", endParkingTime);
     } else {
       endParkingTime = LocalStorage.get_obj("endParkingTime");
     }
-    console.log("endParkingTime", endParkingTime);
+    console.log("endParkingTime2", endParkingTime);
     let now = new Date();
     now.setHours(endParkingTime.getHours()-now.getHours());
     now.setMinutes(endParkingTime.getMinutes()-now.getMinutes());

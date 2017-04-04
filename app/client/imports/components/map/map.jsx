@@ -188,9 +188,13 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
       maxZoom={18}
      // minimumClusterSize={3}
       gridSize={60}
+      //imagePath="/android_asset/www/img/cluster-icons/m"
+      imagePath=  "/img/cluster-icons/m"
     >
       {props.markers.map(marker => (
         <Marker
+          icon="./mapIcon.svg"
+          label={marker.zoneId}
           onClick={() => props.onMarkerClick(marker)}
           position={{lat: marker.geoCenter[0], lng: marker.geoCenter[1]}}
           key={marker._id}
@@ -226,7 +230,7 @@ export default class MarkerClustererExample extends Component {
   }
 
   getPaidParkings() {
-    requestToServer("GET", "https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=100", (parkingList)=>{
+    requestToServer("GET", "https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000", (parkingList)=>{
       console.log("parkingList", parkingList);
       if (!Array.prototype.find) {
         Array.prototype.find = function (predicate) {

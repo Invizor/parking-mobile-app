@@ -1037,59 +1037,83 @@ var _createClass2 = __webpack_require__(12);
 var _createClass3 = _interopRequireDefault(_createClass2);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { "default": obj };
 }
 
 var Repository = function () {
   function Repository() {
-    (0, _classCallCheck3.default)(this, Repository);
+    (0, _classCallCheck3["default"])(this, Repository);
 
     this.rep = localStorage;
   }
 
-  (0, _createClass3.default)(Repository, null, [{
+  (0, _createClass3["default"])(Repository, null, [{
     key: "add_obj",
-    value: function add_obj(key, obj) {
-      var str = (0, _stringify2.default)(obj);
-      localStorage.setItem(key, str);
-    }
+    value: function () {
+      function add_obj(key, obj) {
+        var str = (0, _stringify2["default"])(obj);
+        localStorage.setItem(key, str);
+      }
+
+      return add_obj;
+    }()
   }, {
     key: "get_obj",
-    value: function get_obj(key) {
-      var obj = JSON.parse(localStorage.getItem(key));
-      return obj;
-    }
+    value: function () {
+      function get_obj(key) {
+        var obj = JSON.parse(localStorage.getItem(key));
+        return obj;
+      }
+
+      return get_obj;
+    }()
   }, {
     key: "get_all",
-    value: function get_all() {
-      var arr = [];
-      for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var obj = JSON.parse(localStorage.getItem(key));
-        arr.push(obj);
+    value: function () {
+      function get_all() {
+        var arr = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          var obj = JSON.parse(localStorage.getItem(key));
+          arr.push(obj);
+        }
+        return arr;
       }
-      return arr;
-    }
+
+      return get_all;
+    }()
   }, {
     key: "remove_obj",
-    value: function remove_obj(key) {
-      localStorage.removeItem(key);
-    }
+    value: function () {
+      function remove_obj(key) {
+        localStorage.removeItem(key);
+      }
+
+      return remove_obj;
+    }()
   }, {
     key: "change_obj",
-    value: function change_obj(key, obj) {
-      localStorage[key] = (0, _stringify2.default)(obj);
-    }
+    value: function () {
+      function change_obj(key, obj) {
+        localStorage[key] = (0, _stringify2["default"])(obj);
+      }
+
+      return change_obj;
+    }()
   }, {
     key: "clearRep",
-    value: function clearRep() {
-      localStorage.clear();
-    }
+    value: function () {
+      function clearRep() {
+        localStorage.clear();
+      }
+
+      return clearRep;
+    }()
   }]);
   return Repository;
 }();
 
-exports.default = Repository;
+exports["default"] = Repository;
 
 /***/ }),
 /* 15 */
@@ -2730,14 +2754,14 @@ module.exports = React;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = requestToServer;
+exports["default"] = requestToServer;
 
 var _localStorage = __webpack_require__(14);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { "default": obj };
 }
 
 function requestToServer(method, URL, callback) {
@@ -2747,7 +2771,7 @@ function requestToServer(method, URL, callback) {
   var client = new XMLHttpRequest();
   client.open(method, URL);
   if (sendToken) {
-    client.setRequestHeader("Authorization", "Bearer " + String(_localStorage2.default.get_obj("token")));
+    client.setRequestHeader("Authorization", "Bearer " + String(_localStorage2["default"].get_obj("token")));
   }
   if (method == "POST") {
     client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -28680,15 +28704,15 @@ var _createHashHistory = __webpack_require__(30);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var AutorizationForm = function (_React$Component) {
-  (0, _inherits3.default)(AutorizationForm, _React$Component);
+  (0, _inherits3["default"])(AutorizationForm, _React$Component);
 
   function AutorizationForm(props, context) {
-    (0, _classCallCheck3.default)(this, AutorizationForm);
+    (0, _classCallCheck3["default"])(this, AutorizationForm);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AutorizationForm.__proto__ || (0, _getPrototypeOf2.default)(AutorizationForm)).call(this, props, context));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (AutorizationForm.__proto__ || (0, _getPrototypeOf2["default"])(AutorizationForm)).call(this, props, context));
 
     _this.state = {
       usersMarkers: []
@@ -28696,115 +28720,135 @@ var AutorizationForm = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(AutorizationForm, [{
+  (0, _createClass3["default"])(AutorizationForm, [{
     key: "startRegistration",
-    value: function startRegistration(theUrl) {
-      var _this2 = this;
+    value: function () {
+      function startRegistration(theUrl) {
+        var _this2 = this;
 
-      var params = "number=" + String(this.refs.phoneInput.value);
-      var history = (0, _createHashHistory2.default)();
+        var params = "number=" + String(this.refs.phoneInput.value);
+        var history = (0, _createHashHistory2["default"])();
 
-      (0, _requestToServer2.default)("POST", theUrl, function () {
-        history.push("/verification-form/" + String(_this2.refs.phoneInput.value));
-      }, false, params);
-    }
+        (0, _requestToServer2["default"])("POST", theUrl, function () {
+          history.push("/verification-form/" + String(_this2.refs.phoneInput.value));
+        }, false, params);
+      }
+
+      return startRegistration;
+    }()
   }, {
     key: "onRegistrationBtnClicked",
-    value: function onRegistrationBtnClicked() {
-      var _this3 = this;
+    value: function () {
+      function onRegistrationBtnClicked() {
+        var _this3 = this;
 
-      var history = (0, _createHashHistory2.default)();
-      var token = _localStorage2.default.get_obj("token");
+        var history = (0, _createHashHistory2["default"])();
+        var token = _localStorage2["default"].get_obj("token");
 
-      if (!token) {
-        var ionUpdatePopup = this.context.ionUpdatePopup;
-        ionUpdatePopup({
-          popupType: "confirm",
-          cancelText: "Нет",
-          okText: "Да",
-          title: "Пожалуйста проверьте:",
-          template: _react2.default.createElement(
-            "span",
-            null,
-            "\u041C\u044B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043C \u043A\u043E\u0434 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u044F \u043D\u0430 \u0442\u0435\u043B\u0435\u0444\u043E\u043D:",
-            _react2.default.createElement(
-              "p",
+        if (!token) {
+          var ionUpdatePopup = this.context.ionUpdatePopup;
+          ionUpdatePopup({
+            popupType: "confirm",
+            cancelText: "Нет",
+            okText: "Да",
+            title: "Пожалуйста проверьте:",
+            template: _react2["default"].createElement(
+              "span",
               null,
-              "+7 (",
-              this.refs.phoneInput.value.slice(0, 3),
-              ") ",
-              this.refs.phoneInput.value.slice(3)
-            )
-          ),
-          cancelType: "button-light",
-          onOk: function onOk() {
-            _this3.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
-          }
-        });
-      } else {
-        history.goBack(); // исправить, когда появиться главное окно, после авторизации
+              "\u041C\u044B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043C \u043A\u043E\u0434 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u044F \u043D\u0430 \u0442\u0435\u043B\u0435\u0444\u043E\u043D:",
+              _react2["default"].createElement(
+                "p",
+                null,
+                "+7 (",
+                this.refs.phoneInput.value.slice(0, 3),
+                ") ",
+                this.refs.phoneInput.value.slice(3)
+              )
+            ),
+            cancelType: "button-light",
+            onOk: function () {
+              function onOk() {
+                _this3.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
+              }
+
+              return onOk;
+            }()
+          });
+        } else {
+          history.goBack(); // исправить, когда появиться главное окно, после авторизации
+        }
       }
-    }
+
+      return onRegistrationBtnClicked;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this4 = this;
+    value: function () {
+      function render() {
+        var _this4 = this;
 
-      console.log("autorization form console log");
-      return _react2.default.createElement(
-        _reactionic.IonContent,
-        (0, _extends3.default)({ customClasses: "" }, this.props),
-        _react2.default.createElement(
-          "div",
-          { className: "autorization" },
-          _react2.default.createElement(
+        console.log("autorization form console log");
+        return _react2["default"].createElement(
+          _reactionic.IonContent,
+          (0, _extends3["default"])({ customClasses: "" }, this.props),
+          _react2["default"].createElement(
             "div",
-            { className: "first-symbol" },
-            " +7"
+            { className: "autorization" },
+            _react2["default"].createElement(
+              "div",
+              { className: "first-symbol" },
+              " +7"
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "phone-input" },
+              _react2["default"].createElement("input", { type: "text",
+                name: "phone",
+                placeholder: "(900) 123-45-67",
+                ref: "phoneInput" })
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "autorization-btn" },
+              _react2["default"].createElement(
+                _reactionic.IonButton,
+                {
+                  color: "positive",
+                  onClick: function () {
+                    function onClick() {
+                      return _this4.onRegistrationBtnClicked();
+                    }
+
+                    return onClick;
+                  }() },
+                "\u0412\u043E\u0439\u0442\u0438"
+              )
+            )
           ),
-          _react2.default.createElement(
+          _react2["default"].createElement(
             "div",
-            { className: "phone-input" },
-            _react2.default.createElement("input", { type: "text",
-              name: "phone",
-              placeholder: "(900) 123-45-67",
-              ref: "phoneInput" })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "autorization-btn" },
-            _react2.default.createElement(
-              _reactionic.IonButton,
-              {
-                color: "positive",
-                onClick: function onClick() {
-                  return _this4.onRegistrationBtnClicked();
-                } },
-              "\u0412\u043E\u0439\u0442\u0438"
+            { className: "warningAuth" },
+            "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u0432\u043E\u0439\u0442\u0438/\u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0432\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 ",
+            _react2["default"].createElement(
+              "a",
+              { href: "none.html" },
+              "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u0441\u0435\u0440\u0432\u0438\u0441\u0430"
             )
           )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "warningAuth" },
-          "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u0432\u043E\u0439\u0442\u0438/\u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0432\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 ",
-          _react2.default.createElement(
-            "a",
-            { href: "none.html" },
-            "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u0441\u0435\u0440\u0432\u0438\u0441\u0430"
-          )
-        )
-      );
-    }
+        );
+      }
+
+      return render;
+    }()
   }]);
   return AutorizationForm;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
 AutorizationForm.contextTypes = {
   ionUpdatePopup: _react.PropTypes.func
 };
 
-exports.default = AutorizationForm;
+exports["default"] = AutorizationForm;
 
 /***/ }),
 /* 164 */
@@ -28820,7 +28864,7 @@ var emitterStorage = {
   emitter: null
 };
 
-exports.default = emitterStorage;
+exports["default"] = emitterStorage;
 
 /***/ }),
 /* 165 */
@@ -38274,50 +38318,54 @@ var _editCar = __webpack_require__(280);
 
 var _editCar2 = _interopRequireDefault(_editCar);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var main = function main() {
+var main = function () {
+  function main() {
 
-  var pageList = [{ path: '/', component: _index2.default, title: 'React Ionic', done: true }, { path: '/autorization-form', component: _autorizationForm2.default, title: 'Авторизация', done: true }, { path: '/verification-form/:number', component: _verificationForm2.default, title: 'Верификация', done: true }, { path: '/list-car', component: _carList2.default, title: 'Список автомобилей', done: true }, { path: '/add-car', component: _addCarForm2.default, title: 'Добавление машины', done: true }, { path: '/parking-item/:id', component: _parkingItem2.default, title: 'Информация о парковке', done: true }, { path: '/container', component: _container2.default, title: 'Parkimon', done: true }, { path: '/set-balance', component: _setBalance2.default, title: 'Пополнение баланса', done: true }, { path: '/confirm-pay-parking/:id', component: _confirmPayParking2.default, title: 'Условия парковки', done: true }, { path: '/parking-history', component: _parkingHistory2.default, title: 'История парковок', done: true }, { path: '/edit-car/:id', component: _editCar2.default, title: 'Редактирование автомобиля', done: true }];
+    var pageList = [{ path: '/', component: _index2['default'], title: 'React Ionic', done: true }, { path: '/autorization-form', component: _autorizationForm2['default'], title: 'Авторизация', done: true }, { path: '/verification-form/:number', component: _verificationForm2['default'], title: 'Верификация', done: true }, { path: '/list-car', component: _carList2['default'], title: 'Список автомобилей', done: true }, { path: '/add-car', component: _addCarForm2['default'], title: 'Добавление машины', done: true }, { path: '/parking-item/:id', component: _parkingItem2['default'], title: 'Информация о парковке', done: true }, { path: '/container', component: _container2['default'], title: 'Parkimon', done: true }, { path: '/set-balance', component: _setBalance2['default'], title: 'Пополнение баланса', done: true }, { path: '/confirm-pay-parking/:id', component: _confirmPayParking2['default'], title: 'Условия парковки', done: true }, { path: '/parking-history', component: _parkingHistory2['default'], title: 'История парковок', done: true }, { path: '/edit-car/:id', component: _editCar2['default'], title: 'Редактирование автомобиля', done: true }];
 
-  var tabRoutes;
-  var pageRoutes = pageList.map(function (page) {
-    if (page.childRoutes) {
-      tabRoutes = page.childRoutes.map(function (cpage) {
-        return _react2.default.createElement(_reactRouter.Route, { path: cpage.path, component: cpage.component, key: cpage.path });
-      });
-    } else {
-      return _react2.default.createElement(_reactRouter.Route, { path: page.path, component: page.component, key: page.path });
-    }
-  });
+    var tabRoutes;
+    var pageRoutes = pageList.map(function (page) {
+      if (page.childRoutes) {
+        tabRoutes = page.childRoutes.map(function (cpage) {
+          return _react2['default'].createElement(_reactRouter.Route, { path: cpage.path, component: cpage.component, key: cpage.path });
+        });
+      } else {
+        return _react2['default'].createElement(_reactRouter.Route, { path: page.path, component: page.component, key: page.path });
+      }
+    });
 
-  var PageList = pageList.map(function (page, idx, pageArray) {
-    // strip the page components
-    delete page.component;
-    return page;
-  });
+    var PageList = pageList.map(function (page, idx, pageArray) {
+      // strip the page components
+      delete page.component;
+      return page;
+    });
 
-  var mainRoute = _react2.default.createElement(
-    _reactRouter.Route,
-    { component: _main2.default },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _index2.default }),
-    pageRoutes
-  );
+    var mainRoute = _react2['default'].createElement(
+      _reactRouter.Route,
+      { component: _main2['default'] },
+      _react2['default'].createElement(_reactRouter.IndexRoute, { component: _index2['default'] }),
+      pageRoutes
+    );
 
-  var routes = _react2.default.createElement(
-    _reactRouter.Route,
-    { path: '/', component: _app2.default, pageList: PageList },
-    mainRoute,
-    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _nomatch2.default })
-  );
+    var routes = _react2['default'].createElement(
+      _reactRouter.Route,
+      { path: '/', component: _app2['default'], pageList: PageList },
+      mainRoute,
+      _react2['default'].createElement(_reactRouter.Route, { path: '*', component: _nomatch2['default'] })
+    );
 
-  //alert("hello");
-  _reactDom2.default.render(_react2.default.createElement(
-    _reactRouter.Router,
-    { history: _reactRouter.hashHistory },
-    routes
-  ), document.getElementById('app'));
-};
+    //alert("hello");
+    _reactDom2['default'].render(_react2['default'].createElement(
+      _reactRouter.Router,
+      { history: _reactRouter.hashHistory },
+      routes
+    ), document.getElementById('app'));
+  }
+
+  return main;
+}();
 
 main();
 
@@ -38372,15 +38420,15 @@ var _requestToServer = __webpack_require__(32);
 
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ConfirmPayParking = function (_Component) {
-  (0, _inherits3.default)(ConfirmPayParking, _Component);
+  (0, _inherits3["default"])(ConfirmPayParking, _Component);
 
   function ConfirmPayParking(props) {
-    (0, _classCallCheck3.default)(this, ConfirmPayParking);
+    (0, _classCallCheck3["default"])(this, ConfirmPayParking);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ConfirmPayParking.__proto__ || (0, _getPrototypeOf2.default)(ConfirmPayParking)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (ConfirmPayParking.__proto__ || (0, _getPrototypeOf2["default"])(ConfirmPayParking)).call(this, props));
 
     _this.state = {
       carTitleList: ["Не выбрано"],
@@ -38394,335 +38442,435 @@ var ConfirmPayParking = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(ConfirmPayParking, [{
+  (0, _createClass3["default"])(ConfirmPayParking, [{
     key: "rangeSelection",
-    value: function rangeSelection(value) {
-      this.setState({ rangeValue: value });
-    }
+    value: function () {
+      function rangeSelection(value) {
+        this.setState({ rangeValue: value });
+      }
+
+      return rangeSelection;
+    }()
   }, {
     key: "getParkingId",
-    value: function getParkingId() {
-      var start = this.props.location.pathname.lastIndexOf("/");
-      var parkingId = this.props.location.pathname.substring(start + 1);
-      return parkingId;
-    }
+    value: function () {
+      function getParkingId() {
+        var start = this.props.location.pathname.lastIndexOf("/");
+        var parkingId = this.props.location.pathname.substring(start + 1);
+        return parkingId;
+      }
+
+      return getParkingId;
+    }()
   }, {
     key: "getCarByTitle",
-    value: function getCarByTitle() {
-      var _this2 = this;
+    value: function () {
+      function getCarByTitle() {
+        var _this2 = this;
 
-      var carId = this.state.carList.filter(function (car) {
-        if (car.title === _this2.state.selectedValue) {
-          return _react2.default.createElement("car", null);
-        }
-      });
-      return carId[0];
-    }
+        var carId = this.state.carList.filter(function (car) {
+          if (car.title === _this2.state.selectedValue) {
+            return _react2["default"].createElement("car", null);
+          }
+        });
+        return carId[0];
+      }
+
+      return getCarByTitle;
+    }()
   }, {
     key: "getBalance",
-    value: function getBalance() {
-      var balance = _localStorage2.default.get_obj("user").wallet;
-      this.setState({ balance: balance });
-    }
+    value: function () {
+      function getBalance() {
+        var balance = _localStorage2["default"].get_obj("user").wallet;
+        this.setState({ balance: balance });
+      }
+
+      return getBalance;
+    }()
   }, {
     key: "getCurrentParking",
-    value: function getCurrentParking() {
-      var _this3 = this;
+    value: function () {
+      function getCurrentParking() {
+        var _this3 = this;
 
-      if (!Array.prototype.find) {
-        Array.prototype.find = function (predicate) {
-          if (this == null) {
-            throw new TypeError("Array.prototype.find called on null or undefined");
-          }
-          if (typeof predicate !== "function") {
-            throw new TypeError("predicate must be a function");
-          }
-          var list = Object(this);
-          var length = list.length >>> 0;
-          var thisArg = arguments[1];
-          var value = void 0;
-
-          for (var i = 0; i < length; i++) {
-            value = list[i];
-            if (predicate.call(thisArg, value, i, list)) {
-              return value;
+        if (!Array.prototype.find) {
+          Array.prototype.find = function (predicate) {
+            if (this == null) {
+              throw new TypeError("Array.prototype.find called on null or undefined");
             }
-          }
-          return undefined;
-        };
-      }
-      var currentParking = _localStorage2.default.get_obj("paidParkingList").find(function (parking) {
-        if (parking._id === _this3.getParkingId()) {
-          return parking;
-        }
-      });
+            if (typeof predicate !== "function") {
+              throw new TypeError("predicate must be a function");
+            }
+            var list = Object(this);
+            var length = list.length >>> 0;
+            var thisArg = arguments[1];
+            var value = void 0;
 
-      //console.log('getCurrentParking', currentParking);
-      return currentParking;
-    }
+            for (var i = 0; i < length; i++) {
+              value = list[i];
+              if (predicate.call(thisArg, value, i, list)) {
+                return value;
+              }
+            }
+            return undefined;
+          };
+        }
+        var currentParking = _localStorage2["default"].get_obj("paidParkingList").find(function (parking) {
+          if (parking._id === _this3.getParkingId()) {
+            return parking;
+          }
+        });
+
+        //console.log('getCurrentParking', currentParking);
+        return currentParking;
+      }
+
+      return getCurrentParking;
+    }()
   }, {
     key: "changeValue",
-    value: function changeValue(value) {
-      this.setState({ selectedValue: value });
-      this.getRegNumberByTitle(value);
-    }
+    value: function () {
+      function changeValue(value) {
+        this.setState({ selectedValue: value });
+        this.getRegNumberByTitle(value);
+      }
+
+      return changeValue;
+    }()
   }, {
     key: "handleRegNumberChange",
-    value: function handleRegNumberChange(e) {
-      this.getTitleByRegNumber(e.target.value);
-      this.setState({ regNumberValue: e.target.value });
-    }
+    value: function () {
+      function handleRegNumberChange(e) {
+        this.getTitleByRegNumber(e.target.value);
+        this.setState({ regNumberValue: e.target.value });
+      }
+
+      return handleRegNumberChange;
+    }()
   }, {
     key: "handleRegNumberClick",
-    value: function handleRegNumberClick(e) {
-      this.getRegNumberByTitle(e.target.value);
-    }
+    value: function () {
+      function handleRegNumberClick(e) {
+        this.getRegNumberByTitle(e.target.value);
+      }
+
+      return handleRegNumberClick;
+    }()
   }, {
     key: "checkCarsList",
-    value: function checkCarsList(e) {
-      if (this.state.carTitleList === 0) {
-        e.preventDefault();
-        var ionUpdatePopup = this.context.ionUpdatePopup;
-        ionUpdatePopup({
-          popupType: "alert",
-          title: "Нет добавленных автомобилей",
-          template: "Вам нужно добавить автомобиль",
-          okText: "Добавить",
-          onOk: function onOk() {
-            var history = (0, _createHashHistory2.default)();
-            history.push("/set-balance");
-          }
-        });
+    value: function () {
+      function checkCarsList(e) {
+        if (this.state.carTitleList === 0) {
+          e.preventDefault();
+          var ionUpdatePopup = this.context.ionUpdatePopup;
+          ionUpdatePopup({
+            popupType: "alert",
+            title: "Нет добавленных автомобилей",
+            template: "Вам нужно добавить автомобиль",
+            okText: "Добавить",
+            onOk: function () {
+              function onOk() {
+                var history = (0, _createHashHistory2["default"])();
+                history.push("/set-balance");
+              }
+
+              return onOk;
+            }()
+          });
+        }
       }
-    }
+
+      return checkCarsList;
+    }()
   }, {
     key: "startParking",
-    value: function startParking() {
-      //console.log(this.state.selectedValue);
-      var ionUpdatePopup = this.context.ionUpdatePopup;
-      if (this.state.selectedValue === "Не указано") {
-        ionUpdatePopup({
-          popupType: "alert",
-          okText: "Ok",
-          title: "Машина не выбрана!",
-          template: _react2.default.createElement(
-            "span",
-            null,
-            "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043C\u0430\u0448\u0438\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u0443\u044E \u0445\u043E\u0442\u0438\u0442\u0435 \u043F\u0440\u0438\u043F\u0430\u0440\u043A\u043E\u0432\u0430\u0442\u044C!"
-          ),
-          cancelType: "button-light",
-          onOk: function onOk() {}
-        });
-      } else if (this.state.balance <= 0) {
-        ionUpdatePopup({
-          popupType: "confirm",
-          cancelText: "Нет",
-          okText: "Да",
-          title: "У вас недостаточно средств",
-          template: _react2.default.createElement(
-            "span",
-            null,
-            "\u0425\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u0431\u0430\u043B\u0430\u043D\u0441?"
-          ),
-          cancelType: "button-light",
-          onOk: function onOk() {
-            var history = (0, _createHashHistory2.default)();
-            history.push("/set-balance");
-          },
-          onCancel: function onCancel() {
-            //console.log("Cancelled");
-          }
-        });
-      } else {
-        var parkingID = this.getParkingId();
-        this.getCarByTitle();
+    value: function () {
+      function startParking() {
+        //console.log(this.state.selectedValue);
+        var ionUpdatePopup = this.context.ionUpdatePopup;
+        if (this.state.selectedValue === "Не указано") {
+          ionUpdatePopup({
+            popupType: "alert",
+            okText: "Ok",
+            title: "Машина не выбрана!",
+            template: _react2["default"].createElement(
+              "span",
+              null,
+              "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043C\u0430\u0448\u0438\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u0443\u044E \u0445\u043E\u0442\u0438\u0442\u0435 \u043F\u0440\u0438\u043F\u0430\u0440\u043A\u043E\u0432\u0430\u0442\u044C!"
+            ),
+            cancelType: "button-light",
+            onOk: function () {
+              function onOk() {}
 
-        console.log("parkingID", parkingID);
-        console.log(" this.getCarByTitle().regNumber", this.getCarByTitle().regNumber);
-        console.log(" this.getCarByTitle()._id", this.getCarByTitle()._id);
-        (0, _requestToServer2.default)("POST", "https://parkimon.ru/api/v1/parking/start", function (response) {
-          console.log("response", response);
-          var parkingTimer = window.setInterval(function () {
-            (0, _requestToServer2.default)("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, function (newResponse) {
-              console.log(newResponse);
-              if (newResponse.session.status === "done") {
-                var startTime = parseInt(newResponse.session.start.substring(11, 13)) + 6;
-                var endTime = parseInt(newResponse.session.start.substring(11, 13)) + 6 + newResponse.session.forTime / 60;
-                if (startTime < 10) {
-                  startTime = "0" + startTime;
-                }
-                if (endTime < 10) {
-                  endTime = "0" + endTime;
-                }
-                console.log("start1", newResponse.session.start);
-                newResponse.session.start = newResponse.session.start.replace(newResponse.session.start.substring(0, 11) + newResponse.session.start.substring(11, 13), newResponse.session.start.substring(0, 11) + startTime);
-                newResponse.session.end = newResponse.session.end.replace(newResponse.session.end.substring(0, 11) + newResponse.session.end.substring(11, 13), newResponse.session.end.substring(0, 11) + endTime);
-                console.log("startTime", startTime);
-                console.log("endTime", endTime);
-                _localStorage2.default.add_obj("parkingSession", newResponse.session);
-                console.log("newResponse", newResponse.session);
-                console.log("done");
-                var history = (0, _createHashHistory2.default)();
-                history.push("/map");
-                clearInterval(parkingTimer);
-              } else if (newResponse.session.status === "error") {
-                console.log("request failed");
-                clearInterval(parkingTimer);
+              return onOk;
+            }()
+          });
+        } else if (this.state.balance <= 0) {
+          ionUpdatePopup({
+            popupType: "confirm",
+            cancelText: "Нет",
+            okText: "Да",
+            title: "У вас недостаточно средств",
+            template: _react2["default"].createElement(
+              "span",
+              null,
+              "\u0425\u043E\u0442\u0438\u0442\u0435 \u043F\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u0431\u0430\u043B\u0430\u043D\u0441?"
+            ),
+            cancelType: "button-light",
+            onOk: function () {
+              function onOk() {
+                var history = (0, _createHashHistory2["default"])();
+                history.push("/set-balance");
               }
-            }, true);
-          }, 3000);
-        }, true, "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber + "&forTime=" + this.state.rangeValue * 60);
+
+              return onOk;
+            }(),
+            onCancel: function () {
+              function onCancel() {
+                //console.log("Cancelled");
+              }
+
+              return onCancel;
+            }()
+          });
+        } else {
+          var parkingID = this.getParkingId();
+          this.getCarByTitle();
+
+          console.log("parkingID", parkingID);
+          console.log(" this.getCarByTitle().regNumber", this.getCarByTitle().regNumber);
+          console.log(" this.getCarByTitle()._id", this.getCarByTitle()._id);
+          (0, _requestToServer2["default"])("POST", "https://parkimon.ru/api/v1/parking/start", function (response) {
+            console.log("response", response);
+            var parkingTimer = window.setInterval(function () {
+              (0, _requestToServer2["default"])("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, function (newResponse) {
+                console.log(newResponse);
+                if (newResponse.session.status === "done") {
+                  var startTime = parseInt(newResponse.session.start.substring(11, 13)) + 6;
+                  var endTime = parseInt(newResponse.session.start.substring(11, 13)) + 6 + newResponse.session.forTime / 60;
+                  if (startTime < 10) {
+                    startTime = "0" + startTime;
+                  }
+                  if (endTime < 10) {
+                    endTime = "0" + endTime;
+                  }
+                  console.log("start1", newResponse.session.start);
+                  newResponse.session.start = newResponse.session.start.replace(newResponse.session.start.substring(0, 11) + newResponse.session.start.substring(11, 13), newResponse.session.start.substring(0, 11) + startTime);
+                  newResponse.session.end = newResponse.session.end.replace(newResponse.session.end.substring(0, 11) + newResponse.session.end.substring(11, 13), newResponse.session.end.substring(0, 11) + endTime);
+                  console.log("startTime", startTime);
+                  console.log("endTime", endTime);
+                  _localStorage2["default"].add_obj("parkingSession", newResponse.session);
+                  console.log("newResponse", newResponse.session);
+                  console.log("done");
+                  var history = (0, _createHashHistory2["default"])();
+                  history.push("/map");
+                  clearInterval(parkingTimer);
+                } else if (newResponse.session.status === "error") {
+                  console.log("request failed");
+                  clearInterval(parkingTimer);
+                }
+              }, true);
+            }, 3000);
+          }, true, "zoneId=" + parkingID + "&transportId=" + this.getCarByTitle()._id + "&transportString=" + this.getCarByTitle().regNumber + "&forTime=" + this.state.rangeValue * 60);
+        }
       }
-    }
+
+      return startParking;
+    }()
   }, {
     key: "getUserCars",
-    value: function getUserCars() {
-      var myCars = _localStorage2.default.get_obj("cars");
-      this.setState({ carList: myCars.userCars });
-      var myCarsTitleList = myCars.userCars.map(function (car) {
-        return car.title;
-      });
-      myCarsTitleList.unshift("Не указано");
-      console.log("myCarsTitleList", myCarsTitleList);
-      this.setState({ carTitleList: myCarsTitleList });
-    }
+    value: function () {
+      function getUserCars() {
+        var myCars = _localStorage2["default"].get_obj("cars");
+        this.setState({ carList: myCars.userCars });
+        var myCarsTitleList = myCars.userCars.map(function (car) {
+          return car.title;
+        });
+        myCarsTitleList.unshift("Не указано");
+        console.log("myCarsTitleList", myCarsTitleList);
+        this.setState({ carTitleList: myCarsTitleList });
+      }
+
+      return getUserCars;
+    }()
   }, {
     key: "getRegNumberByTitle",
-    value: function getRegNumberByTitle(title) {
-      var _this4 = this;
+    value: function () {
+      function getRegNumberByTitle(title) {
+        var _this4 = this;
 
-      this.state.carList.filter(function (car) {
-        if (car.title === title) {
-          _this4.setState({ regNumberValue: car.regNumber });
-        } else if (title === "Не указано") {
-          _this4.setState({ regNumberValue: "" });
-        }
-      });
-    }
+        this.state.carList.filter(function (car) {
+          if (car.title === title) {
+            _this4.setState({ regNumberValue: car.regNumber });
+          } else if (title === "Не указано") {
+            _this4.setState({ regNumberValue: "" });
+          }
+        });
+      }
+
+      return getRegNumberByTitle;
+    }()
   }, {
     key: "getTitleByRegNumber",
-    value: function getTitleByRegNumber(regNumber) {
-      var _this5 = this;
+    value: function () {
+      function getTitleByRegNumber(regNumber) {
+        var _this5 = this;
 
-      this.state.carList.filter(function (car) {
-        if (car.regNumber == regNumber) {
-          _this5.setState({ selectedValue: car.title });
-        }
-      });
-    }
+        this.state.carList.filter(function (car) {
+          if (car.regNumber == regNumber) {
+            _this5.setState({ selectedValue: car.title });
+          }
+        });
+      }
+
+      return getTitleByRegNumber;
+    }()
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log("userCars1", this.state.carTitleList);
-      this.getUserCars();
-      this.getBalance();
-      console.log("userCars2", this.state.carTitleList);
-    }
+    value: function () {
+      function componentDidMount() {
+        console.log("userCars1", this.state.carTitleList);
+        this.getUserCars();
+        this.getBalance();
+        console.log("userCars2", this.state.carTitleList);
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this6 = this;
+    value: function () {
+      function render() {
+        var _this6 = this;
 
-      var rangeLabel = "Количество часов: " + this.state.rangeValue;
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
+        var rangeLabel = "Количество часов: " + this.state.rangeValue;
+        return _react2["default"].createElement(
           "div",
-          { className: "confirm-pay-parking" },
-          _react2.default.createElement(
+          null,
+          _react2["default"].createElement(
             "div",
-            { className: "text-center" },
-            _react2.default.createElement(
-              "h1",
-              null,
-              "#",
-              this.getCurrentParking().zoneId
-            ),
-            _react2.default.createElement(
+            { className: "confirm-pay-parking" },
+            _react2["default"].createElement(
               "div",
-              { onMouseDown: function onMouseDown(e) {
-                  return _this6.checkCarsList(e);
-                }, onClick: function onClick(e) {
-                  return _this6.handleRegNumberClick(e);
-                } },
-              _react2.default.createElement(_reactionic.IonSelect, { label: "\u041F\u0430\u0440\u043A\u0443\u0435\u043C\u043E\u0435 \u0430\u0432\u0442\u043E",
-                options: this.state.carTitleList,
-                defaultValue: this.selectedValue,
-                ref: "carSelect",
-                handleChange: function handleChange(e) {
-                  return _this6.changeValue(e);
-                } })
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "reg-number" },
-              _react2.default.createElement(
-                _reactionic.IonItem,
+              { className: "text-center" },
+              _react2["default"].createElement(
+                "h1",
                 null,
-                "\u041D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
-                _react2.default.createElement("input", { type: "text",
-                  name: "regNumber",
-                  ref: "regNumber",
-                  value: this.state.regNumberValue,
-                  onChange: function onChange(e) {
-                    return _this6.handleRegNumberChange(e);
-                  } })
-              )
-            ),
-            _react2.default.createElement(
-              "div",
-              { className: "balance" },
-              _react2.default.createElement(
-                _reactionic.IonItem,
-                null,
-                "\u0412\u0430\u0448 \u0431\u0430\u043B\u0430\u043D\u0441 ",
-                _react2.default.createElement(
-                  "span",
-                  { className: "balance-amount" },
-                  this.state.balance,
-                  " \u0440\u0443\u0431."
+                "#",
+                this.getCurrentParking().zoneId
+              ),
+              _react2["default"].createElement(
+                "div",
+                { onMouseDown: function () {
+                    function onMouseDown(e) {
+                      return _this6.checkCarsList(e);
+                    }
+
+                    return onMouseDown;
+                  }(), onClick: function () {
+                    function onClick(e) {
+                      return _this6.handleRegNumberClick(e);
+                    }
+
+                    return onClick;
+                  }() },
+                _react2["default"].createElement(_reactionic.IonSelect, { label: "\u041F\u0430\u0440\u043A\u0443\u0435\u043C\u043E\u0435 \u0430\u0432\u0442\u043E",
+                  options: this.state.carTitleList,
+                  defaultValue: this.selectedValue,
+                  ref: "carSelect",
+                  handleChange: function () {
+                    function handleChange(e) {
+                      return _this6.changeValue(e);
+                    }
+
+                    return handleChange;
+                  }() })
+              ),
+              _react2["default"].createElement(
+                "div",
+                { className: "reg-number" },
+                _react2["default"].createElement(
+                  _reactionic.IonItem,
+                  null,
+                  "\u041D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
+                  _react2["default"].createElement("input", { type: "text",
+                    name: "regNumber",
+                    ref: "regNumber",
+                    value: this.state.regNumberValue,
+                    onChange: function () {
+                      function onChange(e) {
+                        return _this6.handleRegNumberChange(e);
+                      }
+
+                      return onChange;
+                    }() })
                 )
-              )
-            ),
-            _react2.default.createElement(
-              _reactionic.IonItem,
-              { divider: true },
-              rangeLabel
-            ),
-            _react2.default.createElement(_reactionic.IonRange, {
-              defaultValue: 1,
-              handleChange: function handleChange(e) {
-                return _this6.rangeSelection(e);
-              },
-              min: 1,
-              max: 24 }),
-            _react2.default.createElement(
-              "div",
-              { className: "confirm-pay-parking-button" },
-              _react2.default.createElement(
-                _reactionic.IonButton,
-                { color: "positiv",
-                  onClick: function onClick(e) {
-                    return _this6.startParking(e);
-                  } },
-                "\u041D\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443"
+              ),
+              _react2["default"].createElement(
+                "div",
+                { className: "balance" },
+                _react2["default"].createElement(
+                  _reactionic.IonItem,
+                  null,
+                  "\u0412\u0430\u0448 \u0431\u0430\u043B\u0430\u043D\u0441 ",
+                  _react2["default"].createElement(
+                    "span",
+                    { className: "balance-amount" },
+                    this.state.balance,
+                    " \u0440\u0443\u0431."
+                  )
+                )
+              ),
+              _react2["default"].createElement(
+                _reactionic.IonItem,
+                { divider: true },
+                rangeLabel
+              ),
+              _react2["default"].createElement(_reactionic.IonRange, {
+                defaultValue: 1,
+                handleChange: function () {
+                  function handleChange(e) {
+                    return _this6.rangeSelection(e);
+                  }
+
+                  return handleChange;
+                }(),
+                min: 1,
+                max: 24 }),
+              _react2["default"].createElement(
+                "div",
+                { className: "confirm-pay-parking-button" },
+                _react2["default"].createElement(
+                  _reactionic.IonButton,
+                  { color: "positiv",
+                    onClick: function () {
+                      function onClick(e) {
+                        return _this6.startParking(e);
+                      }
+
+                      return onClick;
+                    }() },
+                  "\u041D\u0430\u0447\u0430\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443"
+                )
               )
             )
           )
-        )
-      );
-    }
+        );
+      }
+
+      return render;
+    }()
   }]);
   return ConfirmPayParking;
 }(_react.Component);
 
-exports.default = ConfirmPayParking;
+exports["default"] = ConfirmPayParking;
 
 
 ConfirmPayParking.contextTypes = {
-  ionUpdatePopup: _react2.default.PropTypes.func,
-  showSelector: _react2.default.PropTypes.func
+  ionUpdatePopup: _react2["default"].PropTypes.func,
+  showSelector: _react2["default"].PropTypes.func
 };
 
 /***/ }),
@@ -38778,15 +38926,15 @@ var _requestToServer = __webpack_require__(32);
 
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var EditCar = function (_React$Component) {
-  (0, _inherits3.default)(EditCar, _React$Component);
+  (0, _inherits3["default"])(EditCar, _React$Component);
 
   function EditCar(props, context) {
-    (0, _classCallCheck3.default)(this, EditCar);
+    (0, _classCallCheck3["default"])(this, EditCar);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditCar.__proto__ || (0, _getPrototypeOf2.default)(EditCar)).call(this, props, context));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (EditCar.__proto__ || (0, _getPrototypeOf2["default"])(EditCar)).call(this, props, context));
 
     _this.state = {
       carTitleValue: _this.getCar().title,
@@ -38795,103 +38943,135 @@ var EditCar = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(EditCar, [{
+  (0, _createClass3["default"])(EditCar, [{
     key: "handleTitleChange",
-    value: function handleTitleChange(e) {
-      this.setState({ carTitleValue: e.target.value });
-    }
+    value: function () {
+      function handleTitleChange(e) {
+        this.setState({ carTitleValue: e.target.value });
+      }
+
+      return handleTitleChange;
+    }()
   }, {
     key: "handleRegNumberChange",
-    value: function handleRegNumberChange(e) {
-      this.setState({ carRegNumberValue: e.target.value });
-    }
+    value: function () {
+      function handleRegNumberChange(e) {
+        this.setState({ carRegNumberValue: e.target.value });
+      }
+
+      return handleRegNumberChange;
+    }()
   }, {
     key: "getCar",
-    value: function getCar() {
-      var start = this.props.location.pathname.lastIndexOf("/");
-      var carId = this.props.location.pathname.substring(start + 1);
-      var carList = _localStorage2.default.get_obj("cars");
-      var car = carList.userCars.filter(function (car) {
-        if (car._id === carId) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      return car[0];
-    }
+    value: function () {
+      function getCar() {
+        var start = this.props.location.pathname.lastIndexOf("/");
+        var carId = this.props.location.pathname.substring(start + 1);
+        var carList = _localStorage2["default"].get_obj("cars");
+        var car = carList.userCars.filter(function (car) {
+          if (car._id === carId) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        return car[0];
+      }
+
+      return getCar;
+    }()
   }, {
     key: "editCarBtnClicked",
-    value: function editCarBtnClicked(theUrl) {
+    value: function () {
+      function editCarBtnClicked(theUrl) {
 
-      var params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
-      var history = (0, _createHashHistory2.default)();
+        var params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
+        var history = (0, _createHashHistory2["default"])();
 
-      (0, _requestToServer2.default)("POST", theUrl, function () {
-        history.goBack();
-      }, true, params);
-    }
+        (0, _requestToServer2["default"])("POST", theUrl, function () {
+          history.goBack();
+        }, true, params);
+      }
+
+      return editCarBtnClicked;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this2 = this;
+    value: function () {
+      function render() {
+        var _this2 = this;
 
-      return _react2.default.createElement(
-        _reactionic.IonContent,
-        (0, _extends3.default)({ customClasses: "" }, this.props),
-        _react2.default.createElement(
-          "div",
-          { className: "car-info" },
-          _react2.default.createElement(
+        return _react2["default"].createElement(
+          _reactionic.IonContent,
+          (0, _extends3["default"])({ customClasses: "" }, this.props),
+          _react2["default"].createElement(
             "div",
-            { className: "titleAddCar" },
-            "\u0412\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "title-car" },
-            _react2.default.createElement("input", { type: "text",
-              name: "title",
-              placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
-              ref: "titleCar",
-              value: this.state.carTitleValue,
-              onChange: function onChange(e) {
-                return _this2.handleTitleChange(e);
-              } })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "plate-number" },
-            _react2.default.createElement("input", {
-              type: "text",
-              name: "plateNumber",
-              placeholder: "\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
-              ref: "plateNumber",
-              value: this.state.carRegNumberValue,
-              onChange: function onChange(e) {
-                return _this2.handleRegNumberChange(e);
-              } })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "add-car-button" },
-            _react2.default.createElement(
-              "button",
-              { className: "button button-positive",
-                onClick: function onClick() {
-                  return _this2.editCarBtnClicked("https://parkimon.ru/api/v1/user-car/edit/" + _this2.getCar()._id);
-                } },
-              "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"
+            { className: "car-info" },
+            _react2["default"].createElement(
+              "div",
+              { className: "titleAddCar" },
+              "\u0412\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "title-car" },
+              _react2["default"].createElement("input", { type: "text",
+                name: "title",
+                placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
+                ref: "titleCar",
+                value: this.state.carTitleValue,
+                onChange: function () {
+                  function onChange(e) {
+                    return _this2.handleTitleChange(e);
+                  }
+
+                  return onChange;
+                }() })
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "plate-number" },
+              _react2["default"].createElement("input", {
+                type: "text",
+                name: "plateNumber",
+                placeholder: "\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
+                ref: "plateNumber",
+                value: this.state.carRegNumberValue,
+                onChange: function () {
+                  function onChange(e) {
+                    return _this2.handleRegNumberChange(e);
+                  }
+
+                  return onChange;
+                }() })
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "add-car-button" },
+              _react2["default"].createElement(
+                "button",
+                { className: "button button-positive",
+                  onClick: function () {
+                    function onClick() {
+                      return _this2.editCarBtnClicked("https://parkimon.ru/api/v1/user-car/edit/" + _this2.getCar()._id);
+                    }
+
+                    return onClick;
+                  }() },
+                "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"
+              )
             )
           )
-        )
-      );
-    }
+        );
+      }
+
+      return render;
+    }()
   }]);
   return EditCar;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = EditCar;
+exports["default"] = EditCar;
 
 /***/ }),
 /* 281 */
@@ -38914,46 +39094,54 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(19);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var Index = _react2.default.createClass({
+var Index = _react2["default"].createClass({
   displayName: "Index",
 
   propTypes: {
-    ionSetTransitionDirection: _react2.default.PropTypes.func
+    ionSetTransitionDirection: _react2["default"].PropTypes.func
   },
-  getDefaultProps: function getDefaultProps() {
-    return {
-      ionSetTransitionDirection: null
-    };
-  },
-  render: function render() {
-    var items = this.props.pageList.map(function (page) {
-      if (page.path == "/") return null;
-      if (page.dontindex) return null;
-      var checkmark = page.done ? "ios-checkmark-outline" : "ios-circle-outline";
-      return _react2.default.createElement(
-        _reactionic.IonItem,
-        { link: page.path, iconLeft: true, iconRight: true, key: page.path },
-        _react2.default.createElement(_reactionic.IonIcon, { icon: checkmark }),
-        page.headerTitle,
-        _react2.default.createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })
+  getDefaultProps: function () {
+    function getDefaultProps() {
+      return {
+        ionSetTransitionDirection: null
+      };
+    }
+
+    return getDefaultProps;
+  }(),
+  render: function () {
+    function render() {
+      var items = this.props.pageList.map(function (page) {
+        if (page.path == "/") return null;
+        if (page.dontindex) return null;
+        var checkmark = page.done ? "ios-checkmark-outline" : "ios-circle-outline";
+        return _react2["default"].createElement(
+          _reactionic.IonItem,
+          { link: page.path, iconLeft: true, iconRight: true, key: page.path },
+          _react2["default"].createElement(_reactionic.IonIcon, { icon: checkmark }),
+          page.headerTitle,
+          _react2["default"].createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })
+        );
+      });
+      return _react2["default"].createElement(
+        _reactionic.IonContent,
+        (0, _extends3["default"])({ customClasses: ""
+        }, this.props),
+        _react2["default"].createElement(
+          _reactionic.IonList,
+          null,
+          items
+        )
       );
-    });
-    return _react2.default.createElement(
-      _reactionic.IonContent,
-      (0, _extends3.default)({ customClasses: ""
-      }, this.props),
-      _react2.default.createElement(
-        _reactionic.IonList,
-        null,
-        items
-      )
-    );
-  }
+    }
+
+    return render;
+  }()
 });
 
-exports.default = Index;
+exports["default"] = Index;
 
 /***/ }),
 /* 282 */
@@ -38996,48 +39184,56 @@ var _reactDom = __webpack_require__(37);
 
 __webpack_require__(379);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var UserBalance = function (_React$Component) {
-  (0, _inherits3.default)(UserBalance, _React$Component);
+  (0, _inherits3["default"])(UserBalance, _React$Component);
 
   function UserBalance() {
-    (0, _classCallCheck3.default)(this, UserBalance);
-    return (0, _possibleConstructorReturn3.default)(this, (UserBalance.__proto__ || (0, _getPrototypeOf2.default)(UserBalance)).apply(this, arguments));
+    (0, _classCallCheck3["default"])(this, UserBalance);
+    return (0, _possibleConstructorReturn3["default"])(this, (UserBalance.__proto__ || (0, _getPrototypeOf2["default"])(UserBalance)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(UserBalance, [{
+  (0, _createClass3["default"])(UserBalance, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
+    value: function () {
+      function componentDidMount() {
+        var _this2 = this;
 
-      setTimeout(function () {
-        if (_this2.props.title === "Parkimon") {
-          var mySpinner = (0, _reactDom.findDOMNode)(_this2.refs.mySpinner);
-          console.log("mySpinner", mySpinner);
-          mySpinner.style.display = "none";
-        }
-      }, 3000);
-    }
+        setTimeout(function () {
+          if (_this2.props.title === "Parkimon") {
+            var mySpinner = (0, _reactDom.findDOMNode)(_this2.refs.mySpinner);
+            console.log("mySpinner", mySpinner);
+            mySpinner.style.display = "none";
+          }
+        }, 3000);
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "main-title" },
-        this.props.title,
-        this.props.title === "Parkimon" ? _react2.default.createElement(
-          "span",
-          { className: "mySpinner", ref: "mySpinner" },
-          _react2.default.createElement(_reactionic.IonSpinner, { icon: "spiral" })
-        ) : ""
-      );
-    }
+    value: function () {
+      function render() {
+        return _react2["default"].createElement(
+          "div",
+          { className: "main-title" },
+          this.props.title,
+          this.props.title === "Parkimon" ? _react2["default"].createElement(
+            "span",
+            { className: "mySpinner", ref: "mySpinner" },
+            _react2["default"].createElement(_reactionic.IonSpinner, { icon: "spiral" })
+          ) : ""
+        );
+      }
+
+      return render;
+    }()
   }]);
   return UserBalance;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = UserBalance;
+exports["default"] = UserBalance;
 
 /***/ }),
 /* 283 */
@@ -39094,7 +39290,7 @@ var _MarkerClusterer = __webpack_require__(607);
 
 var _MarkerClusterer2 = _interopRequireDefault(_MarkerClusterer);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
@@ -39256,26 +39452,34 @@ export default class Map extends Component {
 }*/
 
 var MarkerClustererExampleGoogleMap = (0, _reactGoogleMaps.withGoogleMap)(function (props) {
-  return _react2.default.createElement(
+  return _react2["default"].createElement(
     _reactGoogleMaps.GoogleMap,
     {
       defaultZoom: 14,
       defaultCenter: { lat: 45.0287579, lng: 38.9680473 }
     },
-    _react2.default.createElement(
-      _MarkerClusterer2.default,
+    _react2["default"].createElement(
+      _MarkerClusterer2["default"],
       {
         averageCenter: true,
         enableRetinaIcons: true,
         maxZoom: 18
         // minimumClusterSize={3}
         , gridSize: 60
+        //imagePath="/android_asset/www/img/cluster-icons/m"
+        , imagePath: "/img/cluster-icons/m"
       },
       props.markers.map(function (marker) {
-        return _react2.default.createElement(_reactGoogleMaps.Marker, {
-          onClick: function onClick() {
-            return props.onMarkerClick(marker);
-          },
+        return _react2["default"].createElement(_reactGoogleMaps.Marker, {
+          icon: "./mapIcon.svg",
+          label: marker.zoneId,
+          onClick: function () {
+            function onClick() {
+              return props.onMarkerClick(marker);
+            }
+
+            return onClick;
+          }(),
           position: { lat: marker.geoCenter[0], lng: marker.geoCenter[1] },
           key: marker._id
         });
@@ -39285,109 +39489,125 @@ var MarkerClustererExampleGoogleMap = (0, _reactGoogleMaps.withGoogleMap)(functi
 });
 
 var MarkerClustererExample = function (_Component) {
-  (0, _inherits3.default)(MarkerClustererExample, _Component);
+  (0, _inherits3["default"])(MarkerClustererExample, _Component);
 
   function MarkerClustererExample() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3.default)(this, MarkerClustererExample);
+    (0, _classCallCheck3["default"])(this, MarkerClustererExample);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = MarkerClustererExample.__proto__ || (0, _getPrototypeOf2.default)(MarkerClustererExample)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3["default"])(this, (_ref = MarkerClustererExample.__proto__ || (0, _getPrototypeOf2["default"])(MarkerClustererExample)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       markers: []
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    }, _temp), (0, _possibleConstructorReturn3["default"])(_this, _ret);
   }
 
-  (0, _createClass3.default)(MarkerClustererExample, [{
+  (0, _createClass3["default"])(MarkerClustererExample, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
+    value: function () {
+      function componentDidMount() {
 
-      if (_localStorage2.default.get_obj("paidParkingList")) {
-        this.setState({ markers: _localStorage2.default.get_obj("paidParkingList") });
-      } else {
-        this.getPaidParkings();
+        if (_localStorage2["default"].get_obj("paidParkingList")) {
+          this.setState({ markers: _localStorage2["default"].get_obj("paidParkingList") });
+        } else {
+          this.getPaidParkings();
+        }
+        // this.showLoading();
+
+
+        /* fetch(`https://gist.githubusercontent.com/farrrr/dfda7dd7fccfec5474d3/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json`)
+           .then(res => res.json())
+           .then(data => {
+             this.setState({ markers: data.photos });
+             console.log("this.state.markers", this.state.markers);
+           });*/
       }
-      // this.showLoading();
 
-
-      /* fetch(`https://gist.githubusercontent.com/farrrr/dfda7dd7fccfec5474d3/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json`)
-         .then(res => res.json())
-         .then(data => {
-           this.setState({ markers: data.photos });
-           console.log("this.state.markers", this.state.markers);
-         });*/
-    }
+      return componentDidMount;
+    }()
   }, {
     key: "getPaidParkings",
-    value: function getPaidParkings() {
-      var _this2 = this;
+    value: function () {
+      function getPaidParkings() {
+        var _this2 = this;
 
-      (0, _requestToServer2.default)("GET", "https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=100", function (parkingList) {
-        console.log("parkingList", parkingList);
-        if (!Array.prototype.find) {
-          Array.prototype.find = function (predicate) {
-            if (this == null) {
-              throw new TypeError("Array.prototype.find called on null or undefined");
-            }
-            if (typeof predicate !== "function") {
-              throw new TypeError("predicate must be a function");
-            }
-            var list = Object(this);
-            var length = list.length >>> 0;
-            var thisArg = arguments[1];
-            var value = void 0;
-
-            for (var i = 0; i < length; i++) {
-              value = list[i];
-              if (predicate.call(thisArg, value, i, list)) {
-                return value;
+        (0, _requestToServer2["default"])("GET", "https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000", function (parkingList) {
+          console.log("parkingList", parkingList);
+          if (!Array.prototype.find) {
+            Array.prototype.find = function (predicate) {
+              if (this == null) {
+                throw new TypeError("Array.prototype.find called on null or undefined");
               }
-            }
-            return undefined;
-          };
-        }
-        var paidParkingList = parkingList.parkings.filter(function (parking) {
-          if (parking.price.length) {
-            return parking;
+              if (typeof predicate !== "function") {
+                throw new TypeError("predicate must be a function");
+              }
+              var list = Object(this);
+              var length = list.length >>> 0;
+              var thisArg = arguments[1];
+              var value = void 0;
+
+              for (var i = 0; i < length; i++) {
+                value = list[i];
+                if (predicate.call(thisArg, value, i, list)) {
+                  return value;
+                }
+              }
+              return undefined;
+            };
           }
-        });
-        //console.log("parkingList", parkingList);
-        console.log("paidParkingList", paidParkingList);
-        _this2.setState({ markers: paidParkingList });
-        _localStorage2.default.add_obj("paidParkingList", paidParkingList);
-      }, false);
-    }
+          var paidParkingList = parkingList.parkings.filter(function (parking) {
+            if (parking.price.length) {
+              return parking;
+            }
+          });
+          //console.log("parkingList", parkingList);
+          console.log("paidParkingList", paidParkingList);
+          _this2.setState({ markers: paidParkingList });
+          _localStorage2["default"].add_obj("paidParkingList", paidParkingList);
+        }, false);
+      }
+
+      return getPaidParkings;
+    }()
   }, {
     key: "handleMarkerClick",
-    value: function handleMarkerClick(targetMarker) {
-      var history = (0, _createHashHistory2.default)();
-      history.push("/parking-item/" + targetMarker._id);
-    }
+    value: function () {
+      function handleMarkerClick(targetMarker) {
+        var history = (0, _createHashHistory2["default"])();
+        history.push("/parking-item/" + targetMarker._id);
+      }
+
+      return handleMarkerClick;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      console.log("this.state.markers", this.state.markers);
-      return _react2.default.createElement(MarkerClustererExampleGoogleMap, {
-        containerElement: _react2.default.createElement("div", { style: { height: "100%" } }),
-        mapElement: _react2.default.createElement("div", { style: { height: "100%" } }),
-        markers: this.state.markers,
-        onMarkerClick: this.handleMarkerClick
-      });
-    }
+    value: function () {
+      function render() {
+        console.log("this.state.markers", this.state.markers);
+        return _react2["default"].createElement(MarkerClustererExampleGoogleMap, {
+          containerElement: _react2["default"].createElement("div", { style: { height: "100%" } }),
+          mapElement: _react2["default"].createElement("div", { style: { height: "100%" } }),
+          markers: this.state.markers,
+          onMarkerClick: this.handleMarkerClick
+        });
+      }
+
+      return render;
+    }()
   }]);
   return MarkerClustererExample;
 }(_react.Component);
 
-exports.default = MarkerClustererExample;
+exports["default"] = MarkerClustererExample;
 
 
 Map.contextTypes = {
-  ionShowLoading: _react2.default.PropTypes.func
+  ionShowLoading: _react2["default"].PropTypes.func
 };
 
 /***/ }),
@@ -39405,20 +39625,24 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var NoMatch = _react2.default.createClass({
+var NoMatch = _react2["default"].createClass({
   displayName: "NoMatch",
-  render: function render() {
-    return _react2.default.createElement(
-      "h1",
-      null,
-      "Not found"
-    );
-  }
+  render: function () {
+    function render() {
+      return _react2["default"].createElement(
+        "h1",
+        null,
+        "Not found"
+      );
+    }
+
+    return render;
+  }()
 });
 
-exports.default = NoMatch;
+exports["default"] = NoMatch;
 
 /***/ }),
 /* 285 */
@@ -39465,15 +39689,15 @@ var _remainingTime2 = _interopRequireDefault(_remainingTime);
 
 var _reactDom = __webpack_require__(37);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ParkingCounter = function (_React$Component) {
-  (0, _inherits3.default)(ParkingCounter, _React$Component);
+  (0, _inherits3["default"])(ParkingCounter, _React$Component);
 
   function ParkingCounter(props) {
-    (0, _classCallCheck3.default)(this, ParkingCounter);
+    (0, _classCallCheck3["default"])(this, ParkingCounter);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ParkingCounter.__proto__ || (0, _getPrototypeOf2.default)(ParkingCounter)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (ParkingCounter.__proto__ || (0, _getPrototypeOf2["default"])(ParkingCounter)).call(this, props));
 
     _this.state = {
       remainingTime: {
@@ -39485,99 +39709,124 @@ var ParkingCounter = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(ParkingCounter, [{
+  (0, _createClass3["default"])(ParkingCounter, [{
     key: "getParkingSession",
-    value: function getParkingSession() {
-      var parkingSession = _localStorage2.default.get_obj("parkingSession");
-      // console.log("parkingSession", parkingSession);
-      // this.setState({parkingSession: parkingSession});
-    }
+    value: function () {
+      function getParkingSession() {
+        var parkingSession = _localStorage2["default"].get_obj("parkingSession");
+        // console.log("parkingSession", parkingSession);
+        // this.setState({parkingSession: parkingSession});
+      }
+
+      return getParkingSession;
+    }()
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.getParkingSession();
-      if (!_localStorage2.default.get_obj("remainingTime")) {
-        _localStorage2.default.add_obj("remainingTime", this.getRemainingTime());
+    value: function () {
+      function componentDidMount() {
+        this.getParkingSession();
+        if (!_localStorage2["default"].get_obj("remainingTime")) {
+          _localStorage2["default"].add_obj("remainingTime", this.getRemainingTime());
+        }
+        //console.log("localStorageRemaining", LocalStorage.get_obj("remainingTime"));
+        //setInterval(this.getRemainingTime, 1000);
+        //this.getRemainingTime();
       }
-      //console.log("localStorageRemaining", LocalStorage.get_obj("remainingTime"));
-      //setInterval(this.getRemainingTime, 1000);
-      //this.getRemainingTime();
-    }
+
+      return componentDidMount;
+    }()
   }, {
     key: "getRemainingTime",
-    value: function getRemainingTime() {
-      var parkingSession = _localStorage2.default.get_obj("parkingSession");
-      var status = parkingSession && parkingSession.status ? parkingSession.end.substring(11, 19) : "nothing";
+    value: function () {
+      function getRemainingTime() {
+        var parkingSession = _localStorage2["default"].get_obj("parkingSession");
+        var status = parkingSession && parkingSession.status ? parkingSession.end.substring(11, 19) : "nothing";
+        console.log("status", status);
+        var endParkingTime = {
+          year: 0,
+          month: 0,
+          day: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        };
+        console.log("endParkingTime1", endParkingTime);
+        if (!_localStorage2["default"].get_obj("endParkingTime")) {
+          endParkingTime = new Date("2017-04-04 " + status);
+          _localStorage2["default"].add_obj("endParkingTime", endParkingTime);
+        } else {
+          endParkingTime = _localStorage2["default"].get_obj("endParkingTime");
+        }
+        console.log("endParkingTime2", endParkingTime);
+        var now = new Date();
+        now.setHours(endParkingTime.getHours() - now.getHours());
+        now.setMinutes(endParkingTime.getMinutes() - now.getMinutes());
+        now.setSeconds(endParkingTime.getSeconds() - now.getSeconds());
 
-      var endParkingTime = new Date("2017-04-04 " + status);
-      if (!_localStorage2.default.get_obj("endParkingTime")) {
-        _localStorage2.default.add_obj("endParkingTime", endParkingTime);
-      } else {
-        endParkingTime = _localStorage2.default.get_obj("endParkingTime");
+        /*switch(timeType) {
+          case "h" :
+            return now.getHours();
+          case "m" :
+            return now.getMinutes();
+          case "s" :
+            return now.getSeconds();
+        }*/
+
+        console.log("now.getHours()", now.getHours());
+        console.log("now.getMinutes()", now.getMinutes());
+        console.log("now.getSeconds()", now.getSeconds());
+        /*this.setState({
+          remainingHours : now.getHours(),
+          remainingMinutes : now.getMinutes(),
+          remainingSeconds : now.getSeconds()
+        });*/
+        return {
+          remainingHours: now.getHours(),
+          remainingMinutes: now.getMinutes(),
+          remainingSeconds: now.getSeconds()
+        };
       }
-      console.log("endParkingTime", endParkingTime);
-      var now = new Date();
-      now.setHours(endParkingTime.getHours() - now.getHours());
-      now.setMinutes(endParkingTime.getMinutes() - now.getMinutes());
-      now.setSeconds(endParkingTime.getSeconds() - now.getSeconds());
 
-      /*switch(timeType) {
-        case "h" :
-          return now.getHours();
-        case "m" :
-          return now.getMinutes();
-        case "s" :
-          return now.getSeconds();
-      }*/
-
-      console.log("now.getHours()", now.getHours());
-      console.log("now.getMinutes()", now.getMinutes());
-      console.log("now.getSeconds()", now.getSeconds());
-      /*this.setState({
-        remainingHours : now.getHours(),
-        remainingMinutes : now.getMinutes(),
-        remainingSeconds : now.getSeconds()
-      });*/
-      return {
-        remainingHours: now.getHours(),
-        remainingMinutes: now.getMinutes(),
-        remainingSeconds: now.getSeconds()
-      };
-    }
+      return getRemainingTime;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      // console.log("parkingSession2", this.state.parkingSession);
-      // console.log("parkingSessionStatus", this.state.parkingSession.status);
-      //let endParkingHMS = status.split(":");
-      //console.log(endParkingHMS);
-      // let realTime = new Date();
-      //  let endParkingTime = new Date("2017-04-03 " + status);
-      // let remainingTime = endParkingTime;
+    value: function () {
+      function render() {
+        // console.log("parkingSession2", this.state.parkingSession);
+        // console.log("parkingSessionStatus", this.state.parkingSession.status);
+        //let endParkingHMS = status.split(":");
+        //console.log(endParkingHMS);
+        // let realTime = new Date();
+        //  let endParkingTime = new Date("2017-04-03 " + status);
+        // let remainingTime = endParkingTime;
 
 
-      /*    console.log("realTime", realTime);
-          console.log("endParkingTime", endParkingTime);*/
-      if (!_localStorage2.default.get_obj("remainingTime")) {
-        _localStorage2.default.add_obj("remainingTime", this.getRemainingTime());
+        /*    console.log("realTime", realTime);
+            console.log("endParkingTime", endParkingTime);*/
+        if (!_localStorage2["default"].get_obj("remainingTime")) {
+          _localStorage2["default"].add_obj("remainingTime", this.getRemainingTime());
+        }
+        //console.log("localStorageRemaining", LocalStorage.get_obj("remainingTime"));
+        //let hours = parseInt(this.getRemainingTime("h"));
+        console.log("remainingHours", this.state.remainingHours);
+        console.log("remainingMinutes", this.state.remainingMinutes);
+        console.log("remainingSeconds", this.state.remainingSeconds);
+
+        return _react2["default"].createElement(
+          "div",
+          null,
+          _react2["default"].createElement(_remainingTime2["default"], { getTime: this.getRemainingTime })
+        );
       }
-      //console.log("localStorageRemaining", LocalStorage.get_obj("remainingTime"));
-      //let hours = parseInt(this.getRemainingTime("h"));
-      console.log("remainingHours", this.state.remainingHours);
-      console.log("remainingMinutes", this.state.remainingMinutes);
-      console.log("remainingSeconds", this.state.remainingSeconds);
 
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(_remainingTime2.default, { getTime: this.getRemainingTime })
-      );
-    }
+      return render;
+    }()
   }]);
   return ParkingCounter;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = ParkingCounter;
+exports["default"] = ParkingCounter;
 
 /***/ }),
 /* 286 */
@@ -39624,15 +39873,15 @@ var _requestToServer = __webpack_require__(32);
 
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var ParkingHistory = function (_React$Component) {
-  (0, _inherits3.default)(ParkingHistory, _React$Component);
+  (0, _inherits3["default"])(ParkingHistory, _React$Component);
 
   function ParkingHistory(props) {
-    (0, _classCallCheck3.default)(this, ParkingHistory);
+    (0, _classCallCheck3["default"])(this, ParkingHistory);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ParkingHistory.__proto__ || (0, _getPrototypeOf2.default)(ParkingHistory)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (ParkingHistory.__proto__ || (0, _getPrototypeOf2["default"])(ParkingHistory)).call(this, props));
 
     _this.state = {
       parkingHistory: []
@@ -39640,75 +39889,87 @@ var ParkingHistory = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(ParkingHistory, [{
+  (0, _createClass3["default"])(ParkingHistory, [{
     key: "getParkingHistory",
-    value: function getParkingHistory() {
-      var _this2 = this;
+    value: function () {
+      function getParkingHistory() {
+        var _this2 = this;
 
-      (0, _requestToServer2.default)("GET", "https://parkimon.ru/api/v1/parking/history", function (responseText) {
-        console.log("responseParkingHistory", responseText);
-        _this2.setState({ parkingHistory: responseText.sessions });
-      }, true);
-    }
+        (0, _requestToServer2["default"])("GET", "https://parkimon.ru/api/v1/parking/history", function (responseText) {
+          console.log("responseParkingHistory", responseText);
+          _this2.setState({ parkingHistory: responseText.sessions });
+        }, true);
+      }
+
+      return getParkingHistory;
+    }()
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.getParkingHistory();
-    }
+    value: function () {
+      function componentDidMount() {
+        this.getParkingHistory();
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      console.log("parking history", this.state.parkingHistory);
-      var counter = 1;
-      var parkingList = [];
-      this.state.parkingHistory.map(function (parking, index) {
-        console.log("parking.created", parking.created);
-        console.log("parking.start", parking.start);
-        parkingList.push(_react2.default.createElement(
-          _reactionic.IonItem,
-          { key: index },
-          _react2.default.createElement(
-            "div",
+    value: function () {
+      function render() {
+        console.log("parking history", this.state.parkingHistory);
+        var counter = 1;
+        var parkingList = [];
+        this.state.parkingHistory.map(function (parking, index) {
+          console.log("parking.created", parking.created);
+          console.log("parking.start", parking.start);
+          parkingList.push(_react2["default"].createElement(
+            _reactionic.IonItem,
+            { key: index },
+            _react2["default"].createElement(
+              "div",
+              null,
+              counter++,
+              ". \u041F\u0430\u0440\u043A\u043E\u0432\u043A\u0430: #",
+              parking.zone.zoneId
+            ),
+            _react2["default"].createElement(
+              "div",
+              null,
+              "\u0414\u0430\u0442\u0430 \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0438: ",
+              parking.created.substring(0, 10)
+            ),
+            _react2["default"].createElement(
+              "div",
+              null,
+              "\u0412\u0440\u0435\u043C\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0438: ",
+              parking.created.substring(11, 16)
+            ),
+            _react2["default"].createElement(
+              "div",
+              null,
+              "\u041D\u043E\u043C\u0435\u0440 \u0432\u0430\u0448\u0435\u0433\u043E \u0430\u0432\u0442\u043E: ",
+              parking.transportNumber
+            )
+          ));
+        });
+        return _react2["default"].createElement(
+          _reactionic.IonContent,
+          (0, _extends3["default"])({ customClasses: "" }, this.props),
+          _react2["default"].createElement(
+            _reactionic.IonList,
             null,
-            counter++,
-            ". \u041F\u0430\u0440\u043A\u043E\u0432\u043A\u0430: #",
-            parking.zone.zoneId
-          ),
-          _react2.default.createElement(
-            "div",
-            null,
-            "\u0414\u0430\u0442\u0430 \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0438: ",
-            parking.created.substring(0, 10)
-          ),
-          _react2.default.createElement(
-            "div",
-            null,
-            "\u0412\u0440\u0435\u043C\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0438: ",
-            parking.created.substring(11, 16)
-          ),
-          _react2.default.createElement(
-            "div",
-            null,
-            "\u041D\u043E\u043C\u0435\u0440 \u0432\u0430\u0448\u0435\u0433\u043E \u0430\u0432\u0442\u043E: ",
-            parking.transportNumber
+            parkingList
           )
-        ));
-      });
-      return _react2.default.createElement(
-        _reactionic.IonContent,
-        (0, _extends3.default)({ customClasses: "" }, this.props),
-        _react2.default.createElement(
-          _reactionic.IonList,
-          null,
-          parkingList
-        )
-      );
-    }
+        );
+      }
+
+      return render;
+    }()
   }]);
   return ParkingHistory;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = ParkingHistory;
+exports["default"] = ParkingHistory;
 
 /***/ }),
 /* 287 */
@@ -39733,143 +39994,163 @@ var _localStorage2 = _interopRequireDefault(_localStorage);
 
 __webpack_require__(381);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var ParkingItem = _react2.default.createClass({
+var ParkingItem = _react2["default"].createClass({
   displayName: "ParkingItem",
-  getParkingId: function getParkingId() {
-    var start = this.props.location.pathname.lastIndexOf("/");
-    var parkingId = this.props.location.pathname.substring(start + 1);
-    return parkingId;
-  },
-  getCurrentParking: function getCurrentParking() {
-    var _this = this;
-
-    if (!Array.prototype.find) {
-      Array.prototype.find = function (predicate) {
-        if (this == null) {
-          throw new TypeError("Array.prototype.find called on null or undefined");
-        }
-        if (typeof predicate !== "function") {
-          throw new TypeError("predicate must be a function");
-        }
-        var list = Object(this);
-        var length = list.length >>> 0;
-        var thisArg = arguments[1];
-        var value = void 0;
-
-        for (var i = 0; i < length; i++) {
-          value = list[i];
-          if (predicate.call(thisArg, value, i, list)) {
-            return value;
-          }
-        }
-        return undefined;
-      };
+  getParkingId: function () {
+    function getParkingId() {
+      var start = this.props.location.pathname.lastIndexOf("/");
+      var parkingId = this.props.location.pathname.substring(start + 1);
+      return parkingId;
     }
-    var currentParking = _localStorage2.default.get_obj("paidParkingList").find(function (parking) {
-      if (parking._id === _this.getParkingId()) {
-        return parking;
+
+    return getParkingId;
+  }(),
+  getCurrentParking: function () {
+    function getCurrentParking() {
+      var _this = this;
+
+      if (!Array.prototype.find) {
+        Array.prototype.find = function (predicate) {
+          if (this == null) {
+            throw new TypeError("Array.prototype.find called on null or undefined");
+          }
+          if (typeof predicate !== "function") {
+            throw new TypeError("predicate must be a function");
+          }
+          var list = Object(this);
+          var length = list.length >>> 0;
+          var thisArg = arguments[1];
+          var value = void 0;
+
+          for (var i = 0; i < length; i++) {
+            value = list[i];
+            if (predicate.call(thisArg, value, i, list)) {
+              return value;
+            }
+          }
+          return undefined;
+        };
       }
-    });
+      var currentParking = _localStorage2["default"].get_obj("paidParkingList").find(function (parking) {
+        if (parking._id === _this.getParkingId()) {
+          return parking;
+        }
+      });
 
-    console.log("getCurrentParking", currentParking);
-    return currentParking;
-  },
-  getParkingInfo: function getParkingInfo() {
-    // const parking = this.getCurrentParking();
-    // let parkingInfo = [];
-  },
-  getPayParkingLink: function getPayParkingLink() {
-    return "/confirm-pay-parking/" + this.getParkingId();
-  },
-  render: function render() {
-    var parking = this.getCurrentParking();
+      console.log("getCurrentParking", currentParking);
+      return currentParking;
+    }
 
-    return _react2.default.createElement(
-      "div",
-      { className: "parking-item" },
-      _react2.default.createElement(
-        _reactionic.IonList,
-        null,
-        parking.zoneId ? _react2.default.createElement(
-          "h1",
-          { className: "parking-title text-center" },
-          "#",
-          parking.zoneId
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          { divider: true },
-          "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
-        ),
-        parking.totalPlaces ? _react2.default.createElement(
-          _reactionic.IonItem,
-          { divider: true },
-          "\u0412\u0441\u0435\u0433\u043E \u043C\u0435\u0441\u0442: ",
-          parking.totalPlaces
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          { divider: true },
-          "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043C\u0435\u0441\u0442 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-        ),
-        parking.address ? _react2.default.createElement(
-          "div",
-          { className: "address" },
-          "\u0410\u0434\u0440\u0435\u0441: ",
-          parking.address
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0410\u0434\u0440\u0435\u0441 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u0435\u043D"
-        ),
-        parking.workingTime.length ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F: ",
-          parking.workingTime[0].open,
-          ":00 \u0447"
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-        ),
-        parking.workingTime.length ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F: ",
-          parking.workingTime[0].close,
-          ":00 \u0447 "
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-        ),
-        parking.price.length ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0426\u0435\u043D\u0430: ",
-          parking.price[0].cost
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0426\u0435\u043D\u0430 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
-        )
-      ),
-      _react2.default.createElement(
+    return getCurrentParking;
+  }(),
+  getParkingInfo: function () {
+    function getParkingInfo() {
+      // const parking = this.getCurrentParking();
+      // let parkingInfo = [];
+    }
+
+    return getParkingInfo;
+  }(),
+  getPayParkingLink: function () {
+    function getPayParkingLink() {
+      return "/confirm-pay-parking/" + this.getParkingId();
+    }
+
+    return getPayParkingLink;
+  }(),
+  render: function () {
+    function render() {
+      var parking = this.getCurrentParking();
+
+      return _react2["default"].createElement(
         "div",
-        { className: "pay-parking" },
-        _react2.default.createElement(
-          _reactionic.IonButton,
-          { color: "positive",
-            link: this.getPayParkingLink() },
-          "\u041E\u043F\u043B\u0430\u0442\u0438\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443"
+        { className: "parking-item" },
+        _react2["default"].createElement(
+          _reactionic.IonList,
+          null,
+          parking.zoneId ? _react2["default"].createElement(
+            "h1",
+            { className: "parking-title text-center" },
+            "#",
+            parking.zoneId
+          ) : _react2["default"].createElement(
+            _reactionic.IonItem,
+            { divider: true },
+            "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
+          ),
+          parking.totalPlaces ? _react2["default"].createElement(
+            _reactionic.IonItem,
+            { divider: true },
+            "\u0412\u0441\u0435\u0433\u043E \u043C\u0435\u0441\u0442: ",
+            parking.totalPlaces
+          ) : _react2["default"].createElement(
+            _reactionic.IonItem,
+            { divider: true },
+            "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043C\u0435\u0441\u0442 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+          ),
+          parking.address ? _react2["default"].createElement(
+            "div",
+            { className: "address" },
+            "\u0410\u0434\u0440\u0435\u0441: ",
+            parking.address
+          ) : _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0410\u0434\u0440\u0435\u0441 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u0435\u043D"
+          ),
+          parking.workingTime.length ? _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F: ",
+            parking.workingTime[0].open,
+            ":00 \u0447"
+          ) : _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+          ),
+          parking.workingTime.length ? _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F: ",
+            parking.workingTime[0].close,
+            ":00 \u0447 "
+          ) : _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+          ),
+          parking.price.length ? _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0426\u0435\u043D\u0430: ",
+            parking.price[0].cost
+          ) : _react2["default"].createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0426\u0435\u043D\u0430 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
+          )
+        ),
+        _react2["default"].createElement(
+          "div",
+          { className: "pay-parking" },
+          _react2["default"].createElement(
+            _reactionic.IonButton,
+            { color: "positive",
+              link: this.getPayParkingLink() },
+            "\u041E\u043F\u043B\u0430\u0442\u0438\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443"
+          )
         )
-      )
-    );
-  }
+      );
+    }
+
+    return render;
+  }()
 });
 
-exports.default = ParkingItem;
+exports["default"] = ParkingItem;
 
 /***/ }),
 /* 288 */
@@ -39910,15 +40191,15 @@ var _localStorage = __webpack_require__(14);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var RemainingTime = function (_React$Component) {
-  (0, _inherits3.default)(RemainingTime, _React$Component);
+  (0, _inherits3["default"])(RemainingTime, _React$Component);
 
   function RemainingTime(props) {
-    (0, _classCallCheck3.default)(this, RemainingTime);
+    (0, _classCallCheck3["default"])(this, RemainingTime);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (RemainingTime.__proto__ || (0, _getPrototypeOf2.default)(RemainingTime)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (RemainingTime.__proto__ || (0, _getPrototypeOf2["default"])(RemainingTime)).call(this, props));
 
     _this.state = {
       remainingHours: 0,
@@ -39929,56 +40210,68 @@ var RemainingTime = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(RemainingTime, [{
+  (0, _createClass3["default"])(RemainingTime, [{
     key: "getMyTime",
-    value: function getMyTime() {
-      this.props.getTime();
-    }
+    value: function () {
+      function getMyTime() {
+        this.props.getTime();
+      }
+
+      return getMyTime;
+    }()
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      /*let remainingTime = LocalStorage.get_obj("remainingTime");
-      this.setState({
-        remainingHours: remainingTime.remainingHours,
-        remainingMinutes: remainingTime.remainingMinutes,
-        remainingSeconds: remainingTime.remainingSeconds
-      });*/
-      this.props.getTime();
-      // setInterval(this.props.getTime, 1000);
-    }
+    value: function () {
+      function componentDidMount() {
+        /*let remainingTime = LocalStorage.get_obj("remainingTime");
+        this.setState({
+          remainingHours: remainingTime.remainingHours,
+          remainingMinutes: remainingTime.remainingMinutes,
+          remainingSeconds: remainingTime.remainingSeconds
+        });*/
+        this.props.getTime();
+        // setInterval(this.props.getTime, 1000);
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var remainingTime = _localStorage2.default.get_obj("remainingTime");
-      console.log("props2", this.props);
-      // let remainingTimeDisplay = remainingTime.remainingHours + " : " + remainingTime.remainingMinutes + " : " + remainingTime.remainingSeconds;
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "span",
-          { ref: "hours" },
-          "5"
-        ),
-        ":",
-        _react2.default.createElement(
-          "span",
-          { ref: "minutes" },
-          "25"
-        ),
-        ":",
-        _react2.default.createElement(
-          "span",
-          { ref: "seconds" },
-          "30"
-        )
-      );
-    }
+    value: function () {
+      function render() {
+        var remainingTime = _localStorage2["default"].get_obj("remainingTime");
+        console.log("props2", this.props);
+        // let remainingTimeDisplay = remainingTime.remainingHours + " : " + remainingTime.remainingMinutes + " : " + remainingTime.remainingSeconds;
+        return _react2["default"].createElement(
+          "div",
+          null,
+          _react2["default"].createElement(
+            "span",
+            { ref: "hours" },
+            "5"
+          ),
+          ":",
+          _react2["default"].createElement(
+            "span",
+            { ref: "minutes" },
+            "25"
+          ),
+          ":",
+          _react2["default"].createElement(
+            "span",
+            { ref: "seconds" },
+            "30"
+          )
+        );
+      }
+
+      return render;
+    }()
   }]);
   return RemainingTime;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = RemainingTime;
+exports["default"] = RemainingTime;
 
 /***/ }),
 /* 289 */
@@ -40031,83 +40324,103 @@ var _requestToServer = __webpack_require__(32);
 
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var SetBalance = function (_React$Component) {
-  (0, _inherits3.default)(SetBalance, _React$Component);
+  (0, _inherits3["default"])(SetBalance, _React$Component);
 
   function SetBalance() {
-    (0, _classCallCheck3.default)(this, SetBalance);
-    return (0, _possibleConstructorReturn3.default)(this, (SetBalance.__proto__ || (0, _getPrototypeOf2.default)(SetBalance)).apply(this, arguments));
+    (0, _classCallCheck3["default"])(this, SetBalance);
+    return (0, _possibleConstructorReturn3["default"])(this, (SetBalance.__proto__ || (0, _getPrototypeOf2["default"])(SetBalance)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(SetBalance, [{
+  (0, _createClass3["default"])(SetBalance, [{
     key: "balancePaymentByBankCard",
-    value: function balancePaymentByBankCard() {}
+    value: function () {
+      function balancePaymentByBankCard() {}
+
+      return balancePaymentByBankCard;
+    }()
   }, {
     key: "balancePaymentByPhone",
-    value: function balancePaymentByPhone() {
-      var user = _localStorage2.default.get_obj("user");
-      (0, _requestToServer2.default)("GET", "https://parkimon.ru/api/v1/payment/balance/phone/1", function (answer) {
-        console.log("answer", answer);
-      });
-    }
+    value: function () {
+      function balancePaymentByPhone() {
+        var user = _localStorage2["default"].get_obj("user");
+        (0, _requestToServer2["default"])("GET", "https://parkimon.ru/api/v1/payment/balance/phone/1", function (answer) {
+          console.log("answer", answer);
+        });
+      }
+
+      return balancePaymentByPhone;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this2 = this;
+    value: function () {
+      function render() {
+        var _this2 = this;
 
-      return _react2.default.createElement(
-        _reactionic.IonContent,
-        (0, _extends3.default)({ customClasses: "" }, this.props),
-        _react2.default.createElement(
-          "div",
-          { className: "set-balance" },
-          _react2.default.createElement(
+        return _react2["default"].createElement(
+          _reactionic.IonContent,
+          (0, _extends3["default"])({ customClasses: "" }, this.props),
+          _react2["default"].createElement(
             "div",
-            { className: "balance-info" },
-            "\u0412\u0430\u0448 \u0431\u0430\u043B\u0430\u043D\u0441: ",
-            _localStorage2.default.get_obj("user").wallet,
-            " \u0440\u0443\u0431."
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "set-balance-title" },
-            "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0443\u043C\u043C\u0443 \u0432 \u0440\u0443\u0431\u043B\u044F\u0445:"
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "set-balance-input" },
-            _react2.default.createElement("input", { type: "text",
-              name: "sum",
-              ref: "setBalanceInput" })
-          ),
-          _react2.default.createElement(
-            _reactionic.IonButton,
-            {
-              color: "positive",
-              onClick: function onClick() {
-                return _this2.balancePaymentByPhone();
-              } },
-            "\u0421\u043E \u0441\u0447\u0435\u0442\u0430 \u043C\u043E\u0431\u0438\u043B\u044C\u043D\u043E\u0433\u043E \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430"
-          ),
-          _react2.default.createElement(
-            _reactionic.IonButton,
-            {
-              color: "positive",
-              onClick: function onClick() {
-                return _this2.balancePaymentByBankCard();
-              } },
-            "\u0411\u0430\u043D\u043A\u043E\u0432\u0441\u043A\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0439"
+            { className: "set-balance" },
+            _react2["default"].createElement(
+              "div",
+              { className: "balance-info" },
+              "\u0412\u0430\u0448 \u0431\u0430\u043B\u0430\u043D\u0441: ",
+              _localStorage2["default"].get_obj("user").wallet,
+              " \u0440\u0443\u0431."
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "set-balance-title" },
+              "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0443\u043C\u043C\u0443 \u0432 \u0440\u0443\u0431\u043B\u044F\u0445:"
+            ),
+            _react2["default"].createElement(
+              "div",
+              { className: "set-balance-input" },
+              _react2["default"].createElement("input", { type: "text",
+                name: "sum",
+                ref: "setBalanceInput" })
+            ),
+            _react2["default"].createElement(
+              _reactionic.IonButton,
+              {
+                color: "positive",
+                onClick: function () {
+                  function onClick() {
+                    return _this2.balancePaymentByPhone();
+                  }
+
+                  return onClick;
+                }() },
+              "\u0421\u043E \u0441\u0447\u0435\u0442\u0430 \u043C\u043E\u0431\u0438\u043B\u044C\u043D\u043E\u0433\u043E \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430"
+            ),
+            _react2["default"].createElement(
+              _reactionic.IonButton,
+              {
+                color: "positive",
+                onClick: function () {
+                  function onClick() {
+                    return _this2.balancePaymentByBankCard();
+                  }
+
+                  return onClick;
+                }() },
+              "\u0411\u0430\u043D\u043A\u043E\u0432\u0441\u043A\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0439"
+            )
           )
-        )
-      );
-    }
+        );
+      }
+
+      return render;
+    }()
   }]);
   return SetBalance;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = SetBalance;
+exports["default"] = SetBalance;
 
 /***/ }),
 /* 290 */
@@ -40154,15 +40467,15 @@ var _createHashHistory = __webpack_require__(30);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var UserBalance = function (_React$Component) {
-  (0, _inherits3.default)(UserBalance, _React$Component);
+  (0, _inherits3["default"])(UserBalance, _React$Component);
 
   function UserBalance(props, context) {
-    (0, _classCallCheck3.default)(this, UserBalance);
+    (0, _classCallCheck3["default"])(this, UserBalance);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (UserBalance.__proto__ || (0, _getPrototypeOf2.default)(UserBalance)).call(this, props, context));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (UserBalance.__proto__ || (0, _getPrototypeOf2["default"])(UserBalance)).call(this, props, context));
 
     _this.state = {
       userBalance: null
@@ -40170,50 +40483,70 @@ var UserBalance = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(UserBalance, [{
+  (0, _createClass3["default"])(UserBalance, [{
     key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps() {
-      this.render();
-    }
+    value: function () {
+      function componentWillReceiveProps() {
+        this.render();
+      }
+
+      return componentWillReceiveProps;
+    }()
   }, {
     key: "componentWillMount",
-    value: function componentWillMount() {
-      var userBalance = void 0;
-      if (_localStorage2.default.get_obj("user") && _localStorage2.default.get_obj("user")._id) {
-        userBalance = _localStorage2.default.get_obj("user").wallet ? _localStorage2.default.get_obj("user").wallet + " руб" : "0 руб.";
-      } else {
-        userBalance = null;
+    value: function () {
+      function componentWillMount() {
+        var userBalance = void 0;
+        if (_localStorage2["default"].get_obj("user") && _localStorage2["default"].get_obj("user")._id) {
+          userBalance = _localStorage2["default"].get_obj("user").wallet ? _localStorage2["default"].get_obj("user").wallet + " руб" : "0 руб.";
+        } else {
+          userBalance = null;
+        }
+        this.setState({ userBalance: userBalance });
       }
-      this.setState({ userBalance: userBalance });
-    }
+
+      return componentWillMount;
+    }()
   }, {
     key: "showBalancePage",
-    value: function showBalancePage() {
-      var history = (0, _createHashHistory2.default)();
-      history.push("/set-balance/");
-    }
+    value: function () {
+      function showBalancePage() {
+        var history = (0, _createHashHistory2["default"])();
+        history.push("/set-balance/");
+      }
+
+      return showBalancePage;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this2 = this;
+    value: function () {
+      function render() {
+        var _this2 = this;
 
-      return _react2.default.createElement(
-        "div",
-        { className: "user-balance" },
-        this.state.userBalance ? _react2.default.createElement(
+        return _react2["default"].createElement(
           "div",
-          { onClick: function onClick() {
-              return _this2.showBalancePage();
-            } },
-          this.state.userBalance
-        ) : ""
-      );
-    }
+          { className: "user-balance" },
+          this.state.userBalance ? _react2["default"].createElement(
+            "div",
+            { onClick: function () {
+                function onClick() {
+                  return _this2.showBalancePage();
+                }
+
+                return onClick;
+              }() },
+            this.state.userBalance
+          ) : ""
+        );
+      }
+
+      return render;
+    }()
   }]);
   return UserBalance;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = UserBalance;
+exports["default"] = UserBalance;
 
 /***/ }),
 /* 291 */
@@ -40234,35 +40567,47 @@ var _reactionic = __webpack_require__(19);
 
 var _helpers = __webpack_require__(294);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var App = _react2.default.createClass({
+var App = _react2["default"].createClass({
   displayName: "App",
 
-  getInitialState: function getInitialState() {
-    return { platformOverride: this.props.location.query.platformOverride };
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-    var newPlatformOverride = newProps.location.query.platformOverride;
-    if (newPlatformOverride) {
-      if (newPlatformOverride !== this.state.platformOverride) {
-        this.setState({ platformOverride: newPlatformOverride });
+  getInitialState: function () {
+    function getInitialState() {
+      return { platformOverride: this.props.location.query.platformOverride };
+    }
+
+    return getInitialState;
+  }(),
+  componentWillReceiveProps: function () {
+    function componentWillReceiveProps(newProps) {
+      var newPlatformOverride = newProps.location.query.platformOverride;
+      if (newPlatformOverride) {
+        if (newPlatformOverride !== this.state.platformOverride) {
+          this.setState({ platformOverride: newPlatformOverride });
+        }
       }
     }
-  },
-  render: function render() {
 
-    var platform = (0, _helpers.getPlatform)(this.state.platformOverride);
+    return componentWillReceiveProps;
+  }(),
+  render: function () {
+    function render() {
 
-    return _react2.default.createElement(
-      _reactionic.IonBody,
-      { platform: platform, location: this.props.location },
-      _react2.default.cloneElement(this.props.children, { pageList: this.props.route.pageList })
-    );
-  }
+      var platform = (0, _helpers.getPlatform)(this.state.platformOverride);
+
+      return _react2["default"].createElement(
+        _reactionic.IonBody,
+        { platform: platform, location: this.props.location },
+        _react2["default"].cloneElement(this.props.children, { pageList: this.props.route.pageList })
+      );
+    }
+
+    return render;
+  }()
 });
 
-exports.default = App;
+exports["default"] = App;
 
 /***/ }),
 /* 292 */
@@ -40331,119 +40676,151 @@ var _parkingCounter = __webpack_require__(285);
 
 var _parkingCounter2 = _interopRequireDefault(_parkingCounter);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Container = function (_React$Component) {
-  (0, _inherits3.default)(Container, _React$Component);
+  (0, _inherits3["default"])(Container, _React$Component);
 
   function Container(props) {
-    (0, _classCallCheck3.default)(this, Container);
-    return (0, _possibleConstructorReturn3.default)(this, (Container.__proto__ || (0, _getPrototypeOf2.default)(Container)).call(this, props));
+    (0, _classCallCheck3["default"])(this, Container);
+    return (0, _possibleConstructorReturn3["default"])(this, (Container.__proto__ || (0, _getPrototypeOf2["default"])(Container)).call(this, props));
   }
 
-  (0, _createClass3.default)(Container, [{
+  (0, _createClass3["default"])(Container, [{
     key: "onSuccess",
-    value: function onSuccess(position) {
-      console.log("Latitude: " + position.coords.latitude);
-      console.log("Longitude: " + position.coords.longitude);
-      this.geoLocation = [position.coords.latitude, position.coords.longitude];
-    }
+    value: function () {
+      function onSuccess(position) {
+        console.log("Latitude: " + position.coords.latitude);
+        console.log("Longitude: " + position.coords.longitude);
+        this.geoLocation = [position.coords.latitude, position.coords.longitude];
+      }
+
+      return onSuccess;
+    }()
   }, {
     key: "getGeoLocation",
-    value: function getGeoLocation() {
-      var _this2 = this;
+    value: function () {
+      function getGeoLocation() {
+        var _this2 = this;
 
-      setTimeout(function () {
-        _this2.geoLocation = [
-          /* position.coords.latitude,
-           position.coords.longitude*/
-        ];
-      }, 3000);
-    }
+        setTimeout(function () {
+          _this2.geoLocation = [
+            /* position.coords.latitude,
+             position.coords.longitude*/
+          ];
+        }, 3000);
+      }
+
+      return getGeoLocation;
+    }()
 
     // onError Callback receives a PositionError object
     //
 
   }, {
     key: "onError",
-    value: function onError(error) {
-      alert("code: " + error.code + "\n" + "message: " + error.message + "\n");
-    }
+    value: function () {
+      function onError(error) {
+        alert("code: " + error.code + "\n" + "message: " + error.message + "\n");
+      }
+
+      return onError;
+    }()
   }, {
     key: "onClickChangeCoords",
-    value: function onClickChangeCoords() {
-      console.log("old coords: ", this.geoLocation);
-      this.geoLocation = [45.000000, 38.000000];
-      console.log("new coords: ", this.geoLocation);
-    }
+    value: function () {
+      function onClickChangeCoords() {
+        console.log("old coords: ", this.geoLocation);
+        this.geoLocation = [45.000000, 38.000000];
+        console.log("new coords: ", this.geoLocation);
+      }
+
+      return onClickChangeCoords;
+    }()
   }, {
     key: "getUser",
-    value: function getUser(theUrl) {
-      (0, _requestToServer2.default)("GET", theUrl, function (userObj) {
-        _localStorage2.default.add_obj("user", userObj);
-      }, true);
-    }
+    value: function () {
+      function getUser(theUrl) {
+        (0, _requestToServer2["default"])("GET", theUrl, function (userObj) {
+          _localStorage2["default"].add_obj("user", userObj);
+        }, true);
+      }
+
+      return getUser;
+    }()
   }, {
     key: "getListCar",
-    value: function getListCar() {
-      (0, _requestToServer2.default)("GET", "https://parkimon.ru/api/v1/user-car", function (carsList) {
-        _localStorage2.default.add_obj("cars", carsList);
-      }, true);
-    }
+    value: function () {
+      function getListCar() {
+        (0, _requestToServer2["default"])("GET", "https://parkimon.ru/api/v1/user-car", function (carsList) {
+          _localStorage2["default"].add_obj("cars", carsList);
+        }, true);
+      }
+
+      return getListCar;
+    }()
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      /* app.onMouseDown = () => {
-         return false;
-       };*/
-      if (_localStorage2.default.get_obj("user") == undefined || _localStorage2.default.get_obj("user").success == false) {
-        this.getUser("https://parkimon.ru/api/v1/user");
-      }
-      if (_localStorage2.default.get_obj("user") && _localStorage2.default.get_obj("user")._id) {
-        this.getListCar();
+    value: function () {
+      function componentDidMount() {
+        /* app.onMouseDown = () => {
+           return false;
+         };*/
+        if (_localStorage2["default"].get_obj("user") == undefined || _localStorage2["default"].get_obj("user").success == false) {
+          this.getUser("https://parkimon.ru/api/v1/user");
+        }
+        if (_localStorage2["default"].get_obj("user") && _localStorage2["default"].get_obj("user")._id) {
+          this.getListCar();
+        }
+
+        var emitTek = _emitterStorage2["default"].emitter;
+        if (emitTek != null && emitTek != undefined) {
+          if (_localStorage2["default"].get_obj("user")._id) emitTek.emit("radiation", true);else if (_localStorage2["default"].get_obj("user")._id) emitTek.emit("radiation", false);
+        }
+        //cordova.plugins.Keyboard.disableScroll(true);
+        // cordova.plugins.Keyboard.show();
       }
 
-      var emitTek = _emitterStorage2.default.emitter;
-      if (emitTek != null && emitTek != undefined) {
-        if (_localStorage2.default.get_obj("user")._id) emitTek.emit("radiation", true);else if (_localStorage2.default.get_obj("user")._id) emitTek.emit("radiation", false);
-      }
-      //cordova.plugins.Keyboard.disableScroll(true);
-      // cordova.plugins.Keyboard.show();
-    }
+      return componentDidMount;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var parkingSession = _localStorage2.default.get_obj("parkingSession") ? _react2.default.createElement(_parkingCounter2.default, null) : "";
-      console.log("parkingSession", parkingSession);
-      return _react2.default.createElement(
-        _reactionic.IonContent,
-        (0, _extends3.default)({ customClasses: ""
-        }, this.props),
-        _react2.default.createElement(
-          "div",
-          { className: "content-container" },
-          _localStorage2.default.get_obj("token") ? _react2.default.createElement(
+    value: function () {
+      function render() {
+        var parkingSession = _localStorage2["default"].get_obj("parkingSession") ? _react2["default"].createElement(_parkingCounter2["default"], null) : "";
+        console.log("parkingSession", parkingSession);
+        return _react2["default"].createElement(
+          _reactionic.IonContent,
+          (0, _extends3["default"])({ customClasses: ""
+          }, this.props),
+          _react2["default"].createElement(
             "div",
-            null,
-            _react2.default.createElement(
+            { className: "content-container" },
+            _localStorage2["default"].get_obj("token") ? _react2["default"].createElement(
               "div",
-              { className: "mapContainer" },
-              _react2.default.createElement(_map2.default, null)
-            ),
-            parkingSession
-          ) : _react2.default.createElement(
-            "div",
-            { className: "autorization-form" },
-            _react2.default.createElement(_autorizationForm2.default, null)
+              null,
+              _react2["default"].createElement(
+                "div",
+                { className: "mapContainer" },
+                _react2["default"].createElement(_map2["default"], null)
+              ),
+              parkingSession
+            ) : _react2["default"].createElement(
+              "div",
+              { className: "autorization-form" },
+              _react2["default"].createElement(_autorizationForm2["default"], null)
+            )
           )
-        )
-      );
-    }
+        );
+      }
+
+      return render;
+    }()
   }]);
   return Container;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = Container;
+exports["default"] = Container;
 
 /***/ }),
 /* 293 */
@@ -40492,143 +40869,167 @@ var _emitterStorage = __webpack_require__(164);
 
 var _emitterStorage2 = _interopRequireDefault(_emitterStorage);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 //import { DemoPopover } from '../popover';
 var EventEmitter = __webpack_require__(373);
 
 
-var Layout = _react2.default.createClass({
+var Layout = _react2['default'].createClass({
   displayName: 'Layout',
 
   contextTypes: {
-    ionSnapper: _react2.default.PropTypes.object,
-    ionShowPopover: _react2.default.PropTypes.func,
-    ionPlatform: _react2.default.PropTypes.object,
-    router: _react2.default.PropTypes.object.isRequired,
-    location: _react2.default.PropTypes.object
+    ionSnapper: _react2['default'].PropTypes.object,
+    ionShowPopover: _react2['default'].PropTypes.func,
+    ionPlatform: _react2['default'].PropTypes.object,
+    router: _react2['default'].PropTypes.object.isRequired,
+    location: _react2['default'].PropTypes.object
   },
-  getInitialState: function getInitialState() {
-    return {
-      isUser: false,
-      fl: false,
-      userBalance: 0
-    };
-  },
-  getPageProps: function getPageProps(path) {
-    var _this = this;
+  getInitialState: function () {
+    function getInitialState() {
+      return {
+        isUser: false,
+        fl: false,
+        userBalance: 0
+      };
+    }
 
-    var backButton = _react2.default.createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
-      color: '#FFFFFF',
-      type: 'clear',
-      customClasses: 'button-stage',
-      title: 'Back'
-    });
+    return getInitialState;
+  }(),
+  getPageProps: function () {
+    function getPageProps(path) {
+      var _this = this;
 
-    var balance = _react2.default.createElement(_userBalance2.default, null);
+      var backButton = _react2['default'].createElement(_reactionic.IonNavBackButton, { icon: 'ion-ios-arrow-back',
+        color: '#FFFFFF',
+        type: 'clear',
+        customClasses: 'button-stage',
+        title: 'Back'
+      });
 
-    // add defaults to pageListItems
-    var pageList = this.props.pageList.map(function (page) {
-      page.headerTitle = _react2.default.createElement(_mainTitle2.default, { title: page.title });
-      page.rightHeaderButton = balance;
-      page.leftHeaderButton = backButton;
-      return page;
-    });
-    var pageProps = _lodash2.default.keyBy(pageList, 'path');
+      var balance = _react2['default'].createElement(_userBalance2['default'], null);
 
-    // custom pageProps
-    pageProps['/container'].leftHeaderButton = _react2.default.createElement(_reactionic.IonButton, {
-      'menu-toggle': 'left',
-      type: 'clear',
-      className: 'side-menu-button',
-      icon: 'ion-navicon-round',
-      onClick: function onClick() {
-        _this.context.ionSnapper.toggle('left');
+      // add defaults to pageListItems
+      var pageList = this.props.pageList.map(function (page) {
+        page.headerTitle = _react2['default'].createElement(_mainTitle2['default'], { title: page.title });
+        page.rightHeaderButton = balance;
+        page.leftHeaderButton = backButton;
+        return page;
+      });
+      var pageProps = _lodash2['default'].keyBy(pageList, 'path');
+
+      // custom pageProps
+      pageProps['/container'].leftHeaderButton = _react2['default'].createElement(_reactionic.IonButton, {
+        'menu-toggle': 'left',
+        type: 'clear',
+        className: 'side-menu-button',
+        icon: 'ion-navicon-round',
+        onClick: function () {
+          function onClick() {
+            _this.context.ionSnapper.toggle('left');
+          }
+
+          return onClick;
+        }()
+      });
+      return pageProps[path];
+    }
+
+    return getPageProps;
+  }(),
+  componentDidMount: function () {
+    function componentDidMount() {
+      var _this2 = this;
+
+      if (_localStorage2['default'].get_obj("token") != null && this.state.isUser == false) {
+        this.setState({ isUser: true });
       }
-    });
-    return pageProps[path];
-  },
-  componentDidMount: function componentDidMount() {
-    var _this2 = this;
+      if (_localStorage2['default'].get_obj("token") == null && this.state.isUser == true) {
+        this.setState({ isUser: false });
+      }
+      var emitter = new EventEmitter();
+      emitter.on('radiation', function (flag) {
+        _this2.setState({ fl: flag });
+      });
+      _emitterStorage2['default'].emitter = emitter;
+    }
 
-    if (_localStorage2.default.get_obj("token") != null && this.state.isUser == false) {
-      this.setState({ isUser: true });
+    return componentDidMount;
+  }(),
+  componentWillUnmount: function () {
+    function componentWillUnmount() {
+      emitter = _emitterStorage2['default'].emitter;
+      emitter.off('radiation', false);
+      _emitterStorage2['default'].emitter = null;
     }
-    if (_localStorage2.default.get_obj("token") == null && this.state.isUser == true) {
-      this.setState({ isUser: false });
-    }
-    var emitter = new EventEmitter();
-    emitter.on('radiation', function (flag) {
-      _this2.setState({ fl: flag });
-    });
-    _emitterStorage2.default.emitter = emitter;
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    emitter = _emitterStorage2.default.emitter;
-    emitter.off('radiation', false);
-    _emitterStorage2.default.emitter = null;
-  },
-  render: function render() {
-    var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
-    var globalFl = false;
-    if (_localStorage2.default.get_obj("token")) globalFl = true;
-    if (this.state.fl == true) globalFl = true;
-    return _react2.default.createElement(
-      _reactionic.IonSideMenuContainer,
-      (0, _extends3.default)({}, this.props, { settings: {
-          disable: 'right',
-          touchToDrag: false
-        } }),
-      _react2.default.createElement(
-        _reactionic.IonSideMenus,
-        null,
-        _react2.default.createElement(
-          _reactionic.IonSideMenu,
-          { customClasses: 'side-menu' },
-          _react2.default.createElement(_sideMenu2.default, { isAutorized: globalFl, contextMain: this.context })
-        ),
-        _react2.default.createElement(
-          _reactionic.IonSideMenuContent,
+
+    return componentWillUnmount;
+  }(),
+  render: function () {
+    function render() {
+      var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
+      var globalFl = false;
+      if (_localStorage2['default'].get_obj("token")) globalFl = true;
+      if (this.state.fl == true) globalFl = true;
+      return _react2['default'].createElement(
+        _reactionic.IonSideMenuContainer,
+        (0, _extends3['default'])({}, this.props, { settings: {
+            disable: 'right',
+            touchToDrag: false
+          } }),
+        _react2['default'].createElement(
+          _reactionic.IonSideMenus,
           null,
-          _react2.default.createElement(_reactionic.IonNavBar, (0, _extends3.default)({ customClasses: 'nav-blue',
-            title: currentPageProps.headerTitle,
-            leftButton: currentPageProps.leftHeaderButton,
-            rightButton: currentPageProps.rightHeaderButton
-          }, this.props)),
-          _react2.default.createElement(
-            _reactionic.IonContent,
-            (0, _extends3.default)({ customClasses: '' }, this.props),
-            _react2.default.createElement(
-              _reactionic.IonView,
-              (0, _extends3.default)({ customClasses: '' }, this.props),
-              _react2.default.cloneElement(this.props.children, { pageList: this.props.pageList })
+          _react2['default'].createElement(
+            _reactionic.IonSideMenu,
+            { customClasses: 'side-menu' },
+            _react2['default'].createElement(_sideMenu2['default'], { isAutorized: globalFl, contextMain: this.context })
+          ),
+          _react2['default'].createElement(
+            _reactionic.IonSideMenuContent,
+            null,
+            _react2['default'].createElement(_reactionic.IonNavBar, (0, _extends3['default'])({ customClasses: 'nav-blue',
+              title: currentPageProps.headerTitle,
+              leftButton: currentPageProps.leftHeaderButton,
+              rightButton: currentPageProps.rightHeaderButton
+            }, this.props)),
+            _react2['default'].createElement(
+              _reactionic.IonContent,
+              (0, _extends3['default'])({ customClasses: '' }, this.props),
+              _react2['default'].createElement(
+                _reactionic.IonView,
+                (0, _extends3['default'])({ customClasses: '' }, this.props),
+                _react2['default'].cloneElement(this.props.children, { pageList: this.props.pageList })
+              )
             )
           )
         )
       )
-    )
 
-    /*
-     <IonSideMenuContainer {...this.props}>
-      <IonSideMenuContent>
-     <IonNavBar customClasses="bar-dark"
-     title={currentPageProps.headerTitle}
-     leftButton={currentPageProps.leftHeaderButton}
-     rightButton={currentPageProps.rightHeaderButton}
-     {...this.props}
-     />
-      <IonNavView customClasses="" {...this.props}>
-     <IonView customClasses="" {...this.props}>
-     {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
-     </IonView>
-     </IonNavView>
-     </IonSideMenuContent>
-     </IonSideMenuContainer>*/
-    ;
-  }
+      /*
+       <IonSideMenuContainer {...this.props}>
+        <IonSideMenuContent>
+       <IonNavBar customClasses="bar-dark"
+       title={currentPageProps.headerTitle}
+       leftButton={currentPageProps.leftHeaderButton}
+       rightButton={currentPageProps.rightHeaderButton}
+       {...this.props}
+       />
+        <IonNavView customClasses="" {...this.props}>
+       <IonView customClasses="" {...this.props}>
+       {React.cloneElement(this.props.children, { pageList: this.props.pageList })}
+       </IonView>
+       </IonNavView>
+       </IonSideMenuContent>
+       </IonSideMenuContainer>*/
+      ;
+    }
+
+    return render;
+  }()
 });
 
-exports.default = Layout;
+exports['default'] = Layout;
 
 /***/ }),
 /* 294 */
@@ -40646,75 +41047,83 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var getPlatform = function getPlatform(platformOverride) {
-  var isCordova = typeof Meteor !== 'undefined' && Meteor.isCordova;
-  var iOS = {
-    isIOS: true,
-    isAndroid: false,
-    isCordova: isCordova,
-    transitionTimeOut: 450,
-    name: 'iOS'
-  };
-  var android = {
-    isIOS: false,
-    isAndroid: true,
-    isCordova: isCordova,
-    transitionTimeOut: 320,
-    name: 'Android'
-  };
+var getPlatform = function () {
+  function getPlatform(platformOverride) {
+    var isCordova = typeof Meteor !== 'undefined' && Meteor.isCordova;
+    var iOS = {
+      isIOS: true,
+      isAndroid: false,
+      isCordova: isCordova,
+      transitionTimeOut: 450,
+      name: 'iOS'
+    };
+    var android = {
+      isIOS: false,
+      isAndroid: true,
+      isCordova: isCordova,
+      transitionTimeOut: 320,
+      name: 'Android'
+    };
 
-  if (platformOverride === 'iOS') {
-    return iOS;
+    if (platformOverride === 'iOS') {
+      return iOS;
+    }
+
+    if (typeof cordova !== 'undefined' && cordova.platformId === 'ios') {
+      return iOS;
+    }
+
+    if (!!navigator.userAgent.match(/iPad/i) || !!navigator.userAgent.match(/iPhone/i) || !!navigator.userAgent.match(/iPod/i)) {
+      return iOS;
+    }
+
+    if (platformOverride === 'Android') {
+      return android;
+    }
+
+    if (typeof cordova !== 'undefined' && cordova.platformId === 'android') {
+      return android;
+    }
+
+    if (navigator.userAgent.indexOf('Android') > 0) {
+      return android;
+    }
+
+    return {
+      isIOS: false,
+      isAndroid: false,
+      isCordova: isCordova,
+      transitionTimeOut: 450,
+      name: 'Web'
+    };
   }
 
-  if (typeof cordova !== 'undefined' && cordova.platformId === 'ios') {
-    return iOS;
-  }
+  return getPlatform;
+}();
 
-  if (!!navigator.userAgent.match(/iPad/i) || !!navigator.userAgent.match(/iPhone/i) || !!navigator.userAgent.match(/iPod/i)) {
-    return iOS;
-  }
-
-  if (platformOverride === 'Android') {
-    return android;
-  }
-
-  if (typeof cordova !== 'undefined' && cordova.platformId === 'android') {
-    return android;
-  }
-
-  if (navigator.userAgent.indexOf('Android') > 0) {
-    return android;
-  }
-
-  return {
-    isIOS: false,
-    isAndroid: false,
-    isCordova: isCordova,
-    transitionTimeOut: 450,
-    name: 'Web'
-  };
-};
-
-var AbsoluteMiddle = _react2.default.createClass({
+var AbsoluteMiddle = _react2['default'].createClass({
   displayName: 'AbsoluteMiddle',
-  render: function render() {
-    return _react2.default.createElement(
-      'div',
-      { className: 'stretch' },
-      _react2.default.createElement(
+  render: function () {
+    function render() {
+      return _react2['default'].createElement(
         'div',
-        { className: 'row row-center stretch' },
-        _react2.default.createElement(
+        { className: 'stretch' },
+        _react2['default'].createElement(
           'div',
-          { className: 'col text-center' },
-          this.props.children
+          { className: 'row row-center stretch' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'col text-center' },
+            this.props.children
+          )
         )
-      )
-    );
-  }
+      );
+    }
+
+    return render;
+  }()
 });
 
 exports.getPlatform = getPlatform;
@@ -40776,51 +41185,63 @@ var _requestToServer = __webpack_require__(32);
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { "default": obj };
 }
 
 var addCarsForm = function (_React$Component) {
-  (0, _inherits3.default)(addCarsForm, _React$Component);
+  (0, _inherits3["default"])(addCarsForm, _React$Component);
 
   function addCarsForm(props, context) {
-    (0, _classCallCheck3.default)(this, addCarsForm);
-    return (0, _possibleConstructorReturn3.default)(this, (addCarsForm.__proto__ || (0, _getPrototypeOf2.default)(addCarsForm)).call(this, props, context));
+    (0, _classCallCheck3["default"])(this, addCarsForm);
+    return (0, _possibleConstructorReturn3["default"])(this, (addCarsForm.__proto__ || (0, _getPrototypeOf2["default"])(addCarsForm)).call(this, props, context));
   }
 
-  (0, _createClass3.default)(addCarsForm, [{
+  (0, _createClass3["default"])(addCarsForm, [{
     key: "addCarToList",
-    value: function addCarToList(theUrl) {
+    value: function () {
+      function addCarToList(theUrl) {
 
-      var params = "user=" + String(_localStorage2.default.get_obj("user").id) + "&" + "title=" + String(this.refs.titleCar.value);
-      params += "&" + "type=a" + "&" + "regNumber=" + String(this.refs.plateNumber.value);
-      var history = (0, _createHashHistory2.default)();
+        var params = "user=" + String(_localStorage2["default"].get_obj("user").id) + "&" + "title=" + String(this.refs.titleCar.value);
+        params += "&" + "type=a" + "&" + "regNumber=" + String(this.refs.plateNumber.value);
+        var history = (0, _createHashHistory2["default"])();
 
-      (0, _requestToServer2.default)("POST", theUrl, function () {
-        history.goBack();
-      }, true, params);
-    }
+        (0, _requestToServer2["default"])("POST", theUrl, function () {
+          history.goBack();
+        }, true, params);
+      }
+
+      return addCarToList;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this2 = this;
+    value: function () {
+      function render() {
+        var _this2 = this;
 
-      return _react2.default.createElement(_reactionic.IonContent, (0, _extends3.default)({ customClasses: "" }, this.props), _react2.default.createElement("div", { className: "car-info" }, _react2.default.createElement("div", { className: "titleAddCar" }, "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"), _react2.default.createElement("div", { className: "title-car" }, _react2.default.createElement("input", { type: "text",
-        name: "title",
-        placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
-        ref: "titleCar" })), _react2.default.createElement("div", { className: "plate-number" }, _react2.default.createElement("input", {
-        type: "text",
-        name: "plateNumber",
-        placeholder: "\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
-        ref: "plateNumber" })), _react2.default.createElement("div", { className: "add-car-button" }, _react2.default.createElement("button", { className: "button button-positive",
-        onClick: function onClick() {
-          return _this2.addCarToList("https://parkimon.ru/api/v1/user-car/add");
-        } }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"))));
-    }
+        return _react2["default"].createElement(_reactionic.IonContent, (0, _extends3["default"])({ customClasses: "" }, this.props), _react2["default"].createElement("div", { className: "car-info" }, _react2["default"].createElement("div", { className: "titleAddCar" }, "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C:"), _react2["default"].createElement("div", { className: "title-car" }, _react2["default"].createElement("input", { type: "text",
+          name: "title",
+          placeholder: "\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
+          ref: "titleCar" })), _react2["default"].createElement("div", { className: "plate-number" }, _react2["default"].createElement("input", {
+          type: "text",
+          name: "plateNumber",
+          placeholder: "\u043D\u043E\u043C\u0435\u0440 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044F",
+          ref: "plateNumber" })), _react2["default"].createElement("div", { className: "add-car-button" }, _react2["default"].createElement("button", { className: "button button-positive",
+          onClick: function () {
+            function onClick() {
+              return _this2.addCarToList("https://parkimon.ru/api/v1/user-car/add");
+            }
+
+            return onClick;
+          }() }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"))));
+      }
+
+      return render;
+    }()
   }]);
   return addCarsForm;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = addCarsForm;
+exports["default"] = addCarsForm;
 
 /***/ }),
 /* 296 */
@@ -40878,16 +41299,16 @@ var _requestToServer = __webpack_require__(32);
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { "default": obj };
 }
 
 var CarList = function (_React$Component) {
-  (0, _inherits3.default)(CarList, _React$Component);
+  (0, _inherits3["default"])(CarList, _React$Component);
 
   function CarList(props, context) {
-    (0, _classCallCheck3.default)(this, CarList);
+    (0, _classCallCheck3["default"])(this, CarList);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CarList.__proto__ || (0, _getPrototypeOf2.default)(CarList)).call(this, props, context));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (CarList.__proto__ || (0, _getPrototypeOf2["default"])(CarList)).call(this, props, context));
 
     _this.state = {
       carList: []
@@ -40895,82 +41316,122 @@ var CarList = function (_React$Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(CarList, [{
+  (0, _createClass3["default"])(CarList, [{
     key: "addCar",
-    value: function addCar() {
-      var history = (0, _createHashHistory2.default)();
-      history.push("/add-car");
-    }
+    value: function () {
+      function addCar() {
+        var history = (0, _createHashHistory2["default"])();
+        history.push("/add-car");
+      }
+
+      return addCar;
+    }()
   }, {
     key: "getListCar",
-    value: function getListCar(theUrl) {
-      var _this2 = this;
+    value: function () {
+      function getListCar(theUrl) {
+        var _this2 = this;
 
-      (0, _requestToServer2.default)("GET", theUrl, function (carsList) {
-        _localStorage2.default.add_obj("cars", carsList);
-        _this2.setState({ carList: carsList.userCars });
-      }, true);
-    }
+        (0, _requestToServer2["default"])("GET", theUrl, function (carsList) {
+          _localStorage2["default"].add_obj("cars", carsList);
+          _this2.setState({ carList: carsList.userCars });
+        }, true);
+      }
+
+      return getListCar;
+    }()
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.getListCar("https://parkimon.ru/api/v1/user-car");
-    }
+    value: function () {
+      function componentDidMount() {
+        this.getListCar("https://parkimon.ru/api/v1/user-car");
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: "deleteCarBtnClicked",
-    value: function deleteCarBtnClicked(index) {
-      var _this3 = this;
+    value: function () {
+      function deleteCarBtnClicked(index) {
+        var _this3 = this;
 
-      var carList = this.state.carList;
-      var theUrl = "https://parkimon.ru/api/v1/user-car/remove/" + String(carList[index]._id);
-      (0, _requestToServer2.default)("GET", theUrl, function (objResult) {
-        if (objResult.success) {
-          carList.splice(index, 1);
-        }
-        _this3.setState({ carList: carList });
-      }, true);
-    }
+        var carList = this.state.carList;
+        var theUrl = "https://parkimon.ru/api/v1/user-car/remove/" + String(carList[index]._id);
+        (0, _requestToServer2["default"])("GET", theUrl, function (objResult) {
+          if (objResult.success) {
+            carList.splice(index, 1);
+          }
+          _this3.setState({ carList: carList });
+        }, true);
+      }
+
+      return deleteCarBtnClicked;
+    }()
   }, {
     key: "showEditCarPage",
-    value: function showEditCarPage(carId) {
-      var history = (0, _createHashHistory2.default)();
-      history.push("/edit-car/" + carId);
-    }
+    value: function () {
+      function showEditCarPage(carId) {
+        var history = (0, _createHashHistory2["default"])();
+        history.push("/edit-car/" + carId);
+      }
+
+      return showEditCarPage;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this4 = this;
+    value: function () {
+      function render() {
+        var _this4 = this;
 
-      var cars = this.state.carList;
-      console.log(cars, "cars");
-      var myCars = [];
+        var cars = this.state.carList;
+        console.log(cars, "cars");
+        var myCars = [];
 
-      var _loop = function _loop(i) {
-        myCars.push(_react2.default.createElement(_reactionic.IonItem, { key: i }, _react2.default.createElement("div", { className: "car-item-container" }, _react2.default.createElement("div", { className: "item-info" }, _react2.default.createElement("h2", null, cars[i].title), _react2.default.createElement("p", null, cars[i].regNumber)), _react2.default.createElement("div", { className: "item-buttons" }, _react2.default.createElement("img", { className: "img-delete item-button", src: "./img/delete.png",
-          onClick: function onClick() {
-            return _this4.deleteCarBtnClicked(i);
-          } }), _react2.default.createElement("img", { className: "img-edit item-button", src: "./img/edit.png",
-          onClick: function onClick() {
-            return _this4.showEditCarPage(cars[i]._id);
-          } })))));
-      };
+        var _loop = function () {
+          function _loop(i) {
+            myCars.push(_react2["default"].createElement(_reactionic.IonItem, { key: i }, _react2["default"].createElement("div", { className: "car-item-container" }, _react2["default"].createElement("div", { className: "item-info" }, _react2["default"].createElement("h2", null, cars[i].title), _react2["default"].createElement("p", null, cars[i].regNumber)), _react2["default"].createElement("div", { className: "item-buttons" }, _react2["default"].createElement("img", { className: "img-delete item-button", src: "./img/delete.png",
+              onClick: function () {
+                function onClick() {
+                  return _this4.deleteCarBtnClicked(i);
+                }
 
-      for (var i = 0; i < cars.length; i++) {
-        _loop(i);
+                return onClick;
+              }() }), _react2["default"].createElement("img", { className: "img-edit item-button", src: "./img/edit.png",
+              onClick: function () {
+                function onClick() {
+                  return _this4.showEditCarPage(cars[i]._id);
+                }
+
+                return onClick;
+              }() })))));
+          }
+
+          return _loop;
+        }();
+
+        for (var i = 0; i < cars.length; i++) {
+          _loop(i);
+        }
+        return _react2["default"].createElement(_reactionic.IonContent, (0, _extends3["default"])({ customClasses: "" }, this.props), _react2["default"].createElement("div", { className: "list-cars" }, _react2["default"].createElement("div", { className: "titleListCar" }, "\u0412\u0430\u0448\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u044B\u0435 \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u0430:"), _react2["default"].createElement(_reactionic.IonList, { className: "content-list-cars" }, myCars), _react2["default"].createElement("div", { className: "button-add-car" }, _react2["default"].createElement("img", { className: "addCarButton", src: "./img/addCar.png", onClick: function () {
+            function onClick() {
+              return _this4.addCar();
+            }
+
+            return onClick;
+          }() }))));
       }
-      return _react2.default.createElement(_reactionic.IonContent, (0, _extends3.default)({ customClasses: "" }, this.props), _react2.default.createElement("div", { className: "list-cars" }, _react2.default.createElement("div", { className: "titleListCar" }, "\u0412\u0430\u0448\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u044B\u0435 \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u0430:"), _react2.default.createElement(_reactionic.IonList, { className: "content-list-cars" }, myCars), _react2.default.createElement("div", { className: "button-add-car" }, _react2.default.createElement("img", { className: "addCarButton", src: "./img/addCar.png", onClick: function onClick() {
-          return _this4.addCar();
-        } }))));
-    }
+
+      return render;
+    }()
   }]);
   return CarList;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
 CarList.contextTypes = {
   ionUpdatePopup: _react.PropTypes.func
 };
 
-exports.default = CarList;
+exports["default"] = CarList;
 
 /***/ }),
 /* 297 */
@@ -41018,57 +41479,89 @@ var _createHashHistory = __webpack_require__(30);
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { "default": obj };
 }
 
 var SideMenu = function (_React$Component) {
-  (0, _inherits3.default)(SideMenu, _React$Component);
+  (0, _inherits3["default"])(SideMenu, _React$Component);
 
   function SideMenu(props, context) {
-    (0, _classCallCheck3.default)(this, SideMenu);
-    return (0, _possibleConstructorReturn3.default)(this, (SideMenu.__proto__ || (0, _getPrototypeOf2.default)(SideMenu)).call(this, props, context));
+    (0, _classCallCheck3["default"])(this, SideMenu);
+    return (0, _possibleConstructorReturn3["default"])(this, (SideMenu.__proto__ || (0, _getPrototypeOf2["default"])(SideMenu)).call(this, props, context));
   }
 
-  (0, _createClass3.default)(SideMenu, [{
+  (0, _createClass3["default"])(SideMenu, [{
     key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps() {
-      this.render();
-    }
+    value: function () {
+      function componentWillReceiveProps() {
+        this.render();
+      }
+
+      return componentWillReceiveProps;
+    }()
   }, {
     key: "userAutorized",
-    value: function userAutorized() {
-      var _this2 = this;
+    value: function () {
+      function userAutorized() {
+        var _this2 = this;
 
-      return _react2.default.createElement("div", null, _react2.default.createElement("div", { className: "bar bar-header bar-stable" }, _react2.default.createElement("h1", { className: "title" }, _localStorage2.default.get_obj("user").username)), _react2.default.createElement("div", { className: "content has-header side-menu" }, _react2.default.createElement("div", { className: "list" }, _react2.default.createElement("div", { className: "item item-icon-right", onClick: function onClick() {
-          _this2.goToRoute("/list-car");
-        } }, "\u041C\u043E\u0438 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u0438 ", _react2.default.createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))), _react2.default.createElement("div", { className: "content has-header side-menu" }, _react2.default.createElement("div", { className: "list" }, _react2.default.createElement("div", { className: "item item-icon-right", onClick: function onClick() {
-          _this2.goToRoute("/parking-history");
-        } }, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043E\u043A ", _react2.default.createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))), _react2.default.createElement("div", { className: "content has-header side-menu" }, _react2.default.createElement("div", { className: "list" }, _react2.default.createElement("div", { className: "item item-icon-right" }, "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430 ", _react2.default.createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))), _react2.default.createElement("div", { className: "content has-header side-menu" }, _react2.default.createElement("div", { className: "list" }, _react2.default.createElement("div", { className: "item item-icon-right", onClick: function onClick() {
-          _this2.goToRoute("/set-balance");
-        } }, "\u041F\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435 \u0431\u0430\u043B\u0430\u043D\u0441\u0430 ", _react2.default.createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))));
-    }
+        return _react2["default"].createElement("div", null, _react2["default"].createElement("div", { className: "bar bar-header bar-stable" }, _react2["default"].createElement("h1", { className: "title" }, _localStorage2["default"].get_obj("user").username)), _react2["default"].createElement("div", { className: "content has-header side-menu" }, _react2["default"].createElement("div", { className: "list" }, _react2["default"].createElement("div", { className: "item item-icon-right", onClick: function () {
+            function onClick() {
+              _this2.goToRoute("/list-car");
+            }
+
+            return onClick;
+          }() }, "\u041C\u043E\u0438 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u0438 ", _react2["default"].createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))), _react2["default"].createElement("div", { className: "content has-header side-menu" }, _react2["default"].createElement("div", { className: "list" }, _react2["default"].createElement("div", { className: "item item-icon-right", onClick: function () {
+            function onClick() {
+              _this2.goToRoute("/parking-history");
+            }
+
+            return onClick;
+          }() }, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043E\u043A ", _react2["default"].createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))), _react2["default"].createElement("div", { className: "content has-header side-menu" }, _react2["default"].createElement("div", { className: "list" }, _react2["default"].createElement("div", { className: "item item-icon-right" }, "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0430 ", _react2["default"].createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))), _react2["default"].createElement("div", { className: "content has-header side-menu" }, _react2["default"].createElement("div", { className: "list" }, _react2["default"].createElement("div", { className: "item item-icon-right", onClick: function () {
+            function onClick() {
+              _this2.goToRoute("/set-balance");
+            }
+
+            return onClick;
+          }() }, "\u041F\u043E\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435 \u0431\u0430\u043B\u0430\u043D\u0441\u0430 ", _react2["default"].createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))));
+      }
+
+      return userAutorized;
+    }()
   }, {
     key: "goToRoute",
-    value: function goToRoute(theUrl) {
-      this.props.contextMain.ionSnapper.close();
-      var history = (0, _createHashHistory2.default)();
-      history.push(theUrl);
-    }
+    value: function () {
+      function goToRoute(theUrl) {
+        this.props.contextMain.ionSnapper.close();
+        var history = (0, _createHashHistory2["default"])();
+        history.push(theUrl);
+      }
+
+      return goToRoute;
+    }()
   }, {
     key: "userGost",
-    value: function userGost() {
-      return _react2.default.createElement("div", null, _react2.default.createElement("div", { className: "bar bar-header bar-stable" }, _react2.default.createElement("h1", { className: "title" }, "\u0413\u043E\u0441\u0442\u044C")), _react2.default.createElement("div", { className: "content has-header side-menu" }, _react2.default.createElement("div", { className: "list" }, _react2.default.createElement("div", { className: "item item-icon-right" }, "\u041E \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0438 ", _react2.default.createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))));
-    }
+    value: function () {
+      function userGost() {
+        return _react2["default"].createElement("div", null, _react2["default"].createElement("div", { className: "bar bar-header bar-stable" }, _react2["default"].createElement("h1", { className: "title" }, "\u0413\u043E\u0441\u0442\u044C")), _react2["default"].createElement("div", { className: "content has-header side-menu" }, _react2["default"].createElement("div", { className: "list" }, _react2["default"].createElement("div", { className: "item item-icon-right" }, "\u041E \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0438 ", _react2["default"].createElement(_reactionic.IonIcon, { icon: "ios-arrow-right" })))));
+      }
+
+      return userGost;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      return _react2.default.createElement("div", null, this.props.isAutorized && this.userAutorized(), !this.props.isAutorized && this.userGost());
-    }
+    value: function () {
+      function render() {
+        return _react2["default"].createElement("div", null, this.props.isAutorized && this.userAutorized(), !this.props.isAutorized && this.userGost());
+      }
+
+      return render;
+    }()
   }]);
   return SideMenu;
-}(_react2.default.Component);
+}(_react2["default"].Component);
 
-exports.default = SideMenu;
+exports["default"] = SideMenu;
 
 /***/ }),
 /* 298 */
@@ -41126,16 +41619,16 @@ var _requestToServer = __webpack_require__(32);
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { "default": obj };
 }
 
 var VerificationForm = function (_Component) {
-  (0, _inherits3.default)(VerificationForm, _Component);
+  (0, _inherits3["default"])(VerificationForm, _Component);
 
   function VerificationForm(props, context) {
-    (0, _classCallCheck3.default)(this, VerificationForm);
+    (0, _classCallCheck3["default"])(this, VerificationForm);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (VerificationForm.__proto__ || (0, _getPrototypeOf2.default)(VerificationForm)).call(this, props, context));
+    var _this = (0, _possibleConstructorReturn3["default"])(this, (VerificationForm.__proto__ || (0, _getPrototypeOf2["default"])(VerificationForm)).call(this, props, context));
 
     _this.state = {
       userToken: "",
@@ -41144,73 +41637,89 @@ var VerificationForm = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(VerificationForm, [{
+  (0, _createClass3["default"])(VerificationForm, [{
     key: "loginUser",
-    value: function loginUser(theUrl) {
-      var _this2 = this;
+    value: function () {
+      function loginUser(theUrl) {
+        var _this2 = this;
 
-      var code = this.refs.codeInput.value;
-      var userNumber = this.props.params.number;
-      var params = "username=" + String(userNumber) + "&" + "verification=" + String(code);
-      var history = (0, _createHashHistory2.default)();
+        var code = this.refs.codeInput.value;
+        var userNumber = this.props.params.number;
+        var params = "username=" + String(userNumber) + "&" + "verification=" + String(code);
+        var history = (0, _createHashHistory2["default"])();
 
-      (0, _requestToServer2.default)("POST", theUrl, function (userData) {
-        if (userData.success && userData.token && userData.user) {
-          _this2.setState({ userToken: userData.token });
-          _this2.setState({ user: userData.user });
-          _localStorage2.default.add_obj("token", _this2.state.userToken);
-          _localStorage2.default.add_obj("user", _this2.state.user);
+        (0, _requestToServer2["default"])("POST", theUrl, function (userData) {
+          if (userData.success && userData.token && userData.user) {
+            _this2.setState({ userToken: userData.token });
+            _this2.setState({ user: userData.user });
+            _localStorage2["default"].add_obj("token", _this2.state.userToken);
+            _localStorage2["default"].add_obj("user", _this2.state.user);
 
-          var ionUpdatePopup = _this2.context.ionUpdatePopup;
-          ionUpdatePopup({
-            popupType: "alert",
-            okText: "хорошо",
-            title: "Успех!",
-            template: _react2.default.createElement("span", null, "\u0412\u044B \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u044B"),
-            okType: "button-light"
-          });
-          history.push("/container");
-        } else {
-          var _ionUpdatePopup = _this2.context.ionUpdatePopup;
-          _ionUpdatePopup({
-            popupType: "alert",
-            okText: "ввод",
-            title: "Ошибка!",
-            template: _react2.default.createElement("span", null, "\u043D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043A\u043E\u0434 \u0432\u0435\u0440\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0438"),
-            okType: "button-light"
-          });
-          _this2.refs.codeInput.value = "";
-        }
-      }, false, params);
-    }
+            var ionUpdatePopup = _this2.context.ionUpdatePopup;
+            ionUpdatePopup({
+              popupType: "alert",
+              okText: "хорошо",
+              title: "Успех!",
+              template: _react2["default"].createElement("span", null, "\u0412\u044B \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u044B"),
+              okType: "button-light"
+            });
+            history.push("/container");
+          } else {
+            var _ionUpdatePopup = _this2.context.ionUpdatePopup;
+            _ionUpdatePopup({
+              popupType: "alert",
+              okText: "ввод",
+              title: "Ошибка!",
+              template: _react2["default"].createElement("span", null, "\u043D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043A\u043E\u0434 \u0432\u0435\u0440\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0438"),
+              okType: "button-light"
+            });
+            _this2.refs.codeInput.value = "";
+          }
+        }, false, params);
+      }
+
+      return loginUser;
+    }()
   }, {
     key: "onSignInBtnClicked",
-    value: function onSignInBtnClicked() {
-      this.loginUser("https://parkimon.ru/api/v1/user/login");
-    }
+    value: function () {
+      function onSignInBtnClicked() {
+        this.loginUser("https://parkimon.ru/api/v1/user/login");
+      }
+
+      return onSignInBtnClicked;
+    }()
   }, {
     key: "render",
-    value: function render() {
-      var _this3 = this;
+    value: function () {
+      function render() {
+        var _this3 = this;
 
-      return _react2.default.createElement(_reactionic.IonContent, (0, _extends3.default)({ customClasses: "" }, this.props), _react2.default.createElement("div", { className: "verification" }, _react2.default.createElement("div", { className: "verification-title" }, "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 sms \u043A\u043E\u0434:"), _react2.default.createElement("div", { className: "verification-code" }, _react2.default.createElement("input", { type: "text",
-        name: "code",
-        placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C \u043A\u043E\u0434",
-        ref: "codeInput" })), _react2.default.createElement(_reactionic.IonButton, {
-        color: "positive",
-        onClick: function onClick() {
-          return _this3.onSignInBtnClicked();
-        } }, "\u0412\u0432\u0435\u0441\u0442\u0438")));
-    }
+        return _react2["default"].createElement(_reactionic.IonContent, (0, _extends3["default"])({ customClasses: "" }, this.props), _react2["default"].createElement("div", { className: "verification" }, _react2["default"].createElement("div", { className: "verification-title" }, "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 sms \u043A\u043E\u0434:"), _react2["default"].createElement("div", { className: "verification-code" }, _react2["default"].createElement("input", { type: "text",
+          name: "code",
+          placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C \u043A\u043E\u0434",
+          ref: "codeInput" })), _react2["default"].createElement(_reactionic.IonButton, {
+          color: "positive",
+          onClick: function () {
+            function onClick() {
+              return _this3.onSignInBtnClicked();
+            }
+
+            return onClick;
+          }() }, "\u0412\u0432\u0435\u0441\u0442\u0438")));
+      }
+
+      return render;
+    }()
   }]);
   return VerificationForm;
 }(_react.Component);
 
 VerificationForm.contextTypes = {
-  ionUpdatePopup: _react2.default.PropTypes.func
+  ionUpdatePopup: _react2["default"].PropTypes.func
 };
 
-exports.default = VerificationForm;
+exports["default"] = VerificationForm;
 
 /***/ }),
 /* 299 */
