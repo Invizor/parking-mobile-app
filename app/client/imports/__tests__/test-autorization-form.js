@@ -1,18 +1,22 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { expect } from 'chai';
+import { shallow, mount, render } from 'enzyme';
 import AutorizationForm from '../components/autorization-form/autorization-form';
 
-jest.dontMock('AutorizationForm');
+
 
 describe('AutorizationForm', () => {
   it('should render:', () => {
-    const renderedComponent = shallow(
-      <AutorizationForm />
-    );
+   // const renderedComponent = shallow(
+   //   <AutorizationForm />
+   // );
 
     // Выведем отрендеренный компонент
     //console.log(renderedComponent.debug());
-    expect(true).toBe(true);
+    it("contains spec with an expectation", function() {
+      expect(true).to.equal(true);
+      //expect(shallow(<Foo />).contains(<div className="foo" />)).toBe(true);
+    });
     //expect(renderedComponent.find('.autorization')).to.have.length(1);
     //expect(renderedComponent.find('h1').text()).toBe('Home');
    // expect(renderedComponent.find('input').length).toBe(1);
