@@ -4,6 +4,8 @@ import "./autorization-form.scss";
 import LocalStorage from "../../storage/local-storage";
 import requestToServer from "../../utils/request-to-server";
 import createHashHistory from "history/lib/createHashHistory";
+import MaskedInput from 'react-text-mask';
+
 
 class AutorizationForm extends React.Component {
 
@@ -14,12 +16,12 @@ class AutorizationForm extends React.Component {
     };
   }
 
-  startRegistration(theUrl) {
-    let params = "number=" + String(this.refs.phoneInput.value);
+  startRegistration(theUrl, phone) {
+    let params = "number=" + String(phone);
     let history = createHashHistory();
 
     requestToServer("POST", theUrl, ()=>{
-      history.push("/verification-form/" + String(this.refs.phoneInput.value));
+      history.push("/verification-form/" + String(phone));
     }, false, params);
 
   }
@@ -27,6 +29,12 @@ class AutorizationForm extends React.Component {
   onRegistrationBtnClicked() {
     let history = createHashHistory();
     let token = LocalStorage.get_obj("token");
+
+    let startPhone = this.refs.phoneInput.inputElement.value;
+    let endPhone = "";
+    for(let i = 0; i < startPhone.length ;i++){
+      if(startPhone[i]>='0' && startPhone[i]<='9')endPhone+=startPhone[i];
+    }
 
     if (!token) {
       let ionUpdatePopup = this.context.ionUpdatePopup;
@@ -36,11 +44,11 @@ class AutorizationForm extends React.Component {
         okText: "Да",
         title: "Пожалуйста проверьте:",
         template: <span>Мы отправим код подтверждения на телефон:
-                          <p>+7 ({this.refs.phoneInput.value.slice(0, 3)}) {this.refs.phoneInput.value.slice(3)}</p>
+                          <p>+7 {this.refs.phoneInput.inputElement.value}</p>
                       </span>,
         cancelType: "button-light",
         onOk: () => {
-          this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile");
+          this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile",endPhone);
         }
       });
     } else {
@@ -49,27 +57,30 @@ class AutorizationForm extends React.Component {
   }
 
   render() {
-    console.log("autorization form console log");
     return (
       <IonContent customClasses="" {...this.props}>
-        <div className="autorization">
-          <div className="first-symbol"> +7</div>
-          <div className="phone-input">
-            <input type="text"
-                   name="phone"
-                   placeholder="(900) 123-45-67"
-                   ref="phoneInput"/>
+        <div className="form-autorization">
+          <div className="autorization">
+            <div className="first-symbol"> +7</div>
+            <div className="phone-input">
+              <MaskedInput id="phone"
+                     type="text"
+                     name="phone"
+                     placeholder="(900) 123-4567"
+                     ref="phoneInput"
+                     mask={['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} />
+            </div>
+            <div className="autorization-btn">
+              <IonButton
+                color="positive"
+                onClick={() => this.onRegistrationBtnClicked()}>
+                Войти
+              </IonButton>
+            </div>
           </div>
-          <div className="autorization-btn">
-            <IonButton
-              color="positive"
-              onClick={() => this.onRegistrationBtnClicked()}>
-              Войти
-            </IonButton>
+          <div className="warningAuth">
+            Нажимая войти/зарегистрироваться вы принимаете <a href="none.html">Условия использования сервиса</a>
           </div>
-        </div>
-        <div className="warningAuth">
-          Нажимая войти/зарегистрироваться вы принимаете <a href="none.html">Условия использования сервиса</a>
         </div>
       </IonContent>
     );

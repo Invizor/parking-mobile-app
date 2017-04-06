@@ -10315,43 +10315,66 @@ a.button {
 
 .button-clear.button-clear {
   color: white; }
+.form-autorization {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between; }
+
 .autorization {
-  width: 200px;
-  margin: 100px auto 0; }
+  width: 80%;
+  margin: 120px auto 0; }
 
 .autorization input {
   width: 90%;
-  margin: 5px 5px 20px 5px;
+  font-size: 18px;
+  margin: 5px 0 20px 0;
   border: 1px solid #4b8bf4;
-  border-radius: 3px; }
+  border-radius: 3px;
+  height: 60px; }
+
+.autorization input#phone {
+  width: 100%;
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  text-align: center;
+  height: 60px; }
 
 .autorization button {
-  width: 90%;
+  width: 100%;
+  font-size: 20px;
   display: inline-block;
-  margin: 5px 5px 5px 5px; }
+  margin: 5px 0 5px 0;
+  height: 60px; }
 
-.first-symbol {
+.autorization .first-symbol {
   width: 10%;
+  margin-right: 0;
+  font-size: 18px;
   display: inline-block;
-  vertical-align: -1px; }
+  vertical-align: -1px;
+  height: 60px; }
 
 .phone-input {
   width: 90%;
-  display: inline-block; }
+  display: inline-block;
+  height: 60px; }
 
 .warningAuth {
-  width: 80%;
+  width: 100%;
+  background-color: #ff3b30;
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto; }
+  margin: 0 auto 40px; }
 
 .warningAuth a {
   text-decoration: underline; }
+
+.popup {
+  font-size: 18px;
+  text-align: center; }
 .verification {
   width: 200px;
   margin: 100px auto 0; }
