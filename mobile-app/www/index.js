@@ -2768,7 +2768,6 @@ function requestToServer(method, URL, callback) {
   var sendToken = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var params = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
 
-  console.log("url", URL);
   var client = new XMLHttpRequest();
   client.open(method, URL);
   if (sendToken) {
@@ -40615,7 +40614,6 @@ var SetBalance = function (_React$Component) {
     value: function () {
       function balancePaymentByPhone() {
         var amount = (0, _reactDom.findDOMNode)(this.refs.setBalanceInput);
-        console.log("ref", amount.value);
         var user = _localStorage2["default"].get_obj("user");
         (0, _requestToServer2["default"])("GET", "https://parkimon.ru/api/v1/payment/balance/phone/" + amount.value, function (answer) {
           console.log("answer", answer);
@@ -41755,13 +41753,13 @@ var CarList = function (_React$Component) {
         for (var i = 0; i < cars.length; i++) {
           _loop(i);
         }
-        return _react2["default"].createElement(_reactionic.IonContent, (0, _extends3["default"])({ customClasses: "" }, this.props), _react2["default"].createElement("div", { className: "list-cars" }, _react2["default"].createElement("div", { className: "titleListCar" }, "\u0412\u0430\u0448\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u044B\u0435 \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u0430:"), _react2["default"].createElement(_reactionic.IonList, { className: "content-list-cars" }, myCars), _react2["default"].createElement("div", { className: "button-add-car" }, _react2["default"].createElement("img", { className: "addCarButton", src: "./img/addCar.png", onClick: function () {
+        return _react2["default"].createElement(_reactionic.IonContent, (0, _extends3["default"])({ customClasses: "" }, this.props), _react2["default"].createElement("div", { className: "list-cars" }, _react2["default"].createElement("div", { className: "titleListCar" }, "\u0412\u0430\u0448\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u044B\u0435 \u0441\u0440\u0435\u0434\u0441\u0442\u0432\u0430:"), _react2["default"].createElement(_reactionic.IonList, { className: "content-list-cars" }, myCars), _react2["default"].createElement("div", { className: "add-car-input", onClick: function () {
             function onClick() {
               return _this4.addCar();
             }
 
             return onClick;
-          }() }))));
+          }() }, _react2["default"].createElement("div", { className: "add-car-button" }, _react2["default"].createElement("img", { className: "addCarButton", src: "./img/addCarNew.png", width: "35", height: "35" })), _react2["default"].createElement("div", { className: "add-label" }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"))));
       }
 
       return render;

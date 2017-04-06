@@ -80,8 +80,13 @@ class CarList extends React.Component {
           <IonList className="content-list-cars">
             {myCars}
           </IonList>
-          <div className="button-add-car">
-            <img className="addCarButton" src="./img/addCar.png" onClick={() => this.addCar()}/>
+          <div className="add-car-input" onClick={() => this.addCar()}>
+            <div className="add-car-button">
+              <img className="addCarButton" src="./img/addCarNew.png" width="35" height="35"/>
+            </div>
+            <div className="add-label">
+              Добавить
+            </div>
           </div>
         </div>
       </IonContent>
