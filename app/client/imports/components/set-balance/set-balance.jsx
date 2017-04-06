@@ -3,6 +3,7 @@ import {IonContent, IonButton} from "reactionic";
 import "./set-balance.scss";
 import LocalStorage from "../../storage/local-storage";
 import RequestToServer from "../../utils/request-to-server";
+import {findDOMNode} from "react-dom";
 
 export default class SetBalance extends React.Component {
 
@@ -11,8 +12,9 @@ export default class SetBalance extends React.Component {
   }
 
   balancePaymentByPhone() {
+    const amount = findDOMNode(this.refs.setBalanceInput);
     let user = LocalStorage.get_obj("user");
-    RequestToServer("GET", "https://parkimon.ru/api/v1/payment/balance/phone/1", (answer)=>{
+    RequestToServer("GET", "https://parkimon.ru/api/v1/payment/balance/phone/" + amount.value, (answer)=>{
       console.log("answer", answer);
     });
   }

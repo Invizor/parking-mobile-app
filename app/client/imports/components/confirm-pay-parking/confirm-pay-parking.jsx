@@ -145,15 +145,16 @@ export default class ConfirmPayParking extends Component {
       const parkingID = this.getParkingId();
       this.getCarByTitle();
 
-      console.log("parkingID", parkingID);
+     /* console.log("parkingID", parkingID);
       console.log(" this.getCarByTitle().regNumber",  this.getCarByTitle().regNumber);
-      console.log(" this.getCarByTitle()._id",  this.getCarByTitle()._id);
+      console.log(" this.getCarByTitle()._id",  this.getCarByTitle()._id);*/
       RequestToServer("POST", "https://parkimon.ru/api/v1/parking/start", (response) => {
         console.log("response", response);
         let parkingTimer = window.setInterval(()=> {
           RequestToServer("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, (newResponse) => {
             console.log(newResponse);
             if (newResponse.session.status === "done") {
+              newResponse.session.status = "parking";
               let startTime = parseInt(newResponse.session.start.substring(11,13)) + 6;
               let endTime = parseInt(newResponse.session.start.substring(11,13)) + 6 + newResponse.session.forTime / 60;
               if(startTime < 10) {
@@ -162,17 +163,54 @@ export default class ConfirmPayParking extends Component {
               if (endTime < 10) {
                 endTime = "0" + endTime;
               }
-              console.log("start1", newResponse.session.start);
               newResponse.session.start = newResponse.session.start.replace(newResponse.session.start.substring(0,11) + newResponse.session.start.substring(11,13), newResponse.session.start.substring(0,11) + startTime);
               newResponse.session.end = newResponse.session.end.replace(newResponse.session.end.substring(0,11) + newResponse.session.end.substring(11,13),newResponse.session.end.substring(0,11) + endTime);
-              console.log("startTime", startTime);
-              console.log("endTime", endTime);
-              Repository.add_obj("parkingSession", newResponse.session);
+              let newParkingSession = newResponse.session;
+
+
+              let status =  newParkingSession.end.substring(11, 19);
+              let remainingTimeDateArray = newParkingSession.end.substring(0, 10).split("-");
+              let remainingTimeArray = status.split(":");
+              // console.log("parkingSession2", parkingSession);
+              let endParkingTime = {
+                year: remainingTimeDateArray[0],
+                month: remainingTimeDateArray[1],
+                day: remainingTimeDateArray[2],
+                hours: remainingTimeArray[0],
+                minutes: remainingTimeArray[1],
+                seconds: remainingTimeArray[2]
+              };
+              newParkingSession.endParkingTime = endParkingTime;
+
+              console.log("THE NEW", newParkingSession);
+
+
+              if(Repository.get_obj("parkingSession") && Repository.get_obj("parkingSession").length) {
+                let existingParkingSessions = Repository.get_obj("parkingSession");
+                existingParkingSessions.push(newParkingSession);
+                Repository.change_obj("parkingSession", existingParkingSessions);
+              } else {
+                let parkingSession = [];
+                parkingSession.push(newParkingSession);
+                newParkingSession = parkingSession;
+                Repository.add_obj("parkingSession", newParkingSession);
+              }
               console.log("newResponse", newResponse.session);
               console.log("done");
-              let history = createHashHistory();
-              history.push("/map");
               clearInterval(parkingTimer);
+              let ionUpdatePopup = this.context.ionUpdatePopup;
+                ionUpdatePopup({
+                  popupType: "alert",
+                  okText: "Ok",
+                  title: "Парковка началась!",
+                  template: <span>Парковка началась!</span>,
+                  cancelType: "button-light",
+                  onOk: () => {
+                    let history = createHashHistory();
+                    history.push("/container");
+                  }
+                });
+
             } else if (newResponse.session.status === "error") {
               console.log("request failed");
               clearInterval(parkingTimer);
@@ -266,7 +304,7 @@ export default class ConfirmPayParking extends Component {
                       max={24}>
             </IonRange>
             <div className="confirm-pay-parking-button">
-              <IonButton color="positiv"
+              <IonButton color="positive"
                          onClick={e => this.startParking(e)}>
                 Начать парковку
               </IonButton>

@@ -1,121 +1,138 @@
 import React from "react";
 import LocalStorage from "../../storage/local-storage";
-import RemainingTime from "../remaining-time/remaining-time";
-import {findDOMNode} from 'react-dom';
+import "./parking-counter.scss";
 
 export default class ParkingCounter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      remainingTime: {
-        remainingHours: 0,
-        remainingMinutes: 0,
-        remainingSeconds: 0
-      }
+      shownAlert: false,
+      remain: {},
+      parkingSession: {}
+      /*remainingTime: {
+       year: 0,
+       month: 0,
+       day: 0,
+       hours: 0,
+       minutes: 0,
+       seconds: 0
+       }*/
     };
   }
 
   getParkingSession() {
-    const parkingSession = LocalStorage.get_obj("parkingSession");
-   // console.log("parkingSession", parkingSession);
-   // this.setState({parkingSession: parkingSession});
+    const parkingSession = LocalStorage.get_obj("parkingSession")[this.props.number];
+    this.setState({parkingSession: parkingSession});
+    // console.log("parkingSession", parkingSession);
+    // this.setState({parkingSession: parkingSession});
   }
 
 
   componentDidMount() {
     this.getParkingSession();
-    if(!LocalStorage.get_obj("remainingTime")) {
-      LocalStorage.add_obj("remainingTime", this.getRemainingTime());
-    }
-    //console.log("localStorageRemaining", LocalStorage.get_obj("remainingTime"));
-    //setInterval(this.getRemainingTime, 1000);
-    //this.getRemainingTime();
+
+    this.getRemainingTime();
+    this.timer = setInterval(() => {
+      this.getRemainingTime();
+    }, 1000);
+
+  }
+
+  componentWillUnmount() {
+
+    // Этот метод вызывается сразу после того, как компонент удален
+    // со страницы и уничтожен. Мы можем удалить интервал здесь:
+
+    clearInterval(this.timer);
   }
 
   getRemainingTime() {
-    let parkingSession = LocalStorage.get_obj("parkingSession");
-    let status = (parkingSession && parkingSession.status) ? parkingSession.end.substring(11,19) : "nothing";
-    console.log("status", status);
-    let endParkingTime = {
-      year: 0,
-      month: 0,
-      day: 0,
-      hours:0,
-      minutes: 0,
-      seconds: 0
-    };
-    console.log("endParkingTime1", endParkingTime);
-    if( !LocalStorage.get_obj("endParkingTime")) {
-      endParkingTime = new Date("2017-04-04 " + status);
-      LocalStorage.add_obj("endParkingTime", endParkingTime);
-    } else {
-      endParkingTime = LocalStorage.get_obj("endParkingTime");
-    }
-    console.log("endParkingTime2", endParkingTime);
+    let parkingSession = LocalStorage.get_obj("parkingSession")[this.props.number];
+    let remainingParkingTime = {};
+
     let now = new Date();
-    now.setHours(endParkingTime.getHours()-now.getHours());
-    now.setMinutes(endParkingTime.getMinutes()-now.getMinutes());
-    now.setSeconds(endParkingTime.getSeconds()-now.getSeconds());
+    now.setHours(parkingSession.endParkingTime.hours - now.getHours());
+    now.setMinutes(parkingSession.endParkingTime.minutes - now.getMinutes());
+    now.setSeconds(parkingSession.endParkingTime.seconds - now.getSeconds());
 
-    /*switch(timeType) {
-      case "h" :
-        return now.getHours();
-      case "m" :
-        return now.getMinutes();
-      case "s" :
-        return now.getSeconds();
-    }*/
+    remainingParkingTime.hours = now.getHours() < 10 ? "0" + now.getHours() : now.getHours();
+    remainingParkingTime.minutes = now.getMinutes() < 10 ? "0" + now.getMinutes() : now.getMinutes();
+    remainingParkingTime.seconds = now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
+    this.setState({remain: remainingParkingTime});
+    let ionUpdatePopup = this.context.ionUpdatePopup;
+    if (this.state.remain.hours === "00" && this.state.remain.minutes === "00" && this.state.remain.seconds === "00") {
 
+      LocalStorage.remove_obj("parkingSession");
+      LocalStorage.remove_obj("endParkingTime");
 
+      ionUpdatePopup({
+        popupType: "alert",
+        title: "Внимание!",
+        template: "Время парковки завершено!",
+        okText: "Ок",
+        onOk: function () {
 
-    console.log("now.getHours()", now.getHours());
-    console.log("now.getMinutes()", now.getMinutes());
-    console.log("now.getSeconds()", now.getSeconds());
-    /*this.setState({
-      remainingHours : now.getHours(),
-      remainingMinutes : now.getMinutes(),
-      remainingSeconds : now.getSeconds()
-    });*/
-    return {
-      remainingHours : now.getHours(),
-      remainingMinutes : now.getMinutes(),
-      remainingSeconds : now.getSeconds()
-    };
+        }
+      });
+    } else {
+      if (remainingParkingTime.hours <= 0 && remainingParkingTime.minutes < 15 && !this.state.shownAlert) {
+        ionUpdatePopup({
+          popupType: "confirm",
+          cancelText: "Нет",
+          okText: "Да",
+          title: "Время парковки завершается!",
+          template: <span>Хотите продлить время парковки?</span>,
+          cancelType: "button-light",
+          onOk: () => {
 
-
+          },
+          onCancel: function () {
+            //console.log("Cancelled");
+          }
+        });
+        this.setState({shownAlert: true});
+      }
+    }
   }
 
 
   render() {
-   // console.log("parkingSession2", this.state.parkingSession);
-   // console.log("parkingSessionStatus", this.state.parkingSession.status);
-    //let endParkingHMS = status.split(":");
-    //console.log(endParkingHMS);
-   // let realTime = new Date();
-  //  let endParkingTime = new Date("2017-04-03 " + status);
-   // let remainingTime = endParkingTime;
 
-
-
-
-/*    console.log("realTime", realTime);
-    console.log("endParkingTime", endParkingTime);*/
-    if(!LocalStorage.get_obj("remainingTime")) {
-      LocalStorage.add_obj("remainingTime", this.getRemainingTime());
+    let counterMarkup;
+    if (this.props.singleParking) {
+      counterMarkup = (
+        <div>
+          <div className="remaining-time">
+            <div>
+              Оставшееся время
+            </div>
+            <div className="remaining-hours">
+              <span>{this.state.remain.hours}</span>:<span>{this.state.remain.minutes}</span>:<span>{this.state.remain.seconds}</span>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      counterMarkup = (
+          <div className="remaining-time">
+            <div>
+              Оставшееся время: <span>{this.state.remain.hours}</span>:<span>{this.state.remain.minutes}</span>:<span>{this.state.remain.seconds}</span>
+            </div>
+            <div>
+              Номер машины: <span>{this.state.parkingSession.transportNumber}</span>
+            </div>
+          </div>
+      );
     }
-    //console.log("localStorageRemaining", LocalStorage.get_obj("remainingTime"));
-    //let hours = parseInt(this.getRemainingTime("h"));
-    console.log("remainingHours", this.state.remainingHours);
-    console.log("remainingMinutes", this.state.remainingMinutes);
-    console.log("remainingSeconds", this.state.remainingSeconds);
-
-
-
     return (
       <div>
-        <RemainingTime getTime={this.getRemainingTime} />
+        {counterMarkup}
       </div>
     );
   }
 }
+
+ParkingCounter.contextTypes = {
+  ionUpdatePopup: React.PropTypes.func
+};
 

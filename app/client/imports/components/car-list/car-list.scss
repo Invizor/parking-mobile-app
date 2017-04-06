@@ -41,10 +41,11 @@
 .item .img-edit{
   width: 20px;
   height: 20px;
-  margin: 5px 5px 5px 5px;
+  margin: 5px 30px 5px 5px;
   float: right;
   cursor: pointer;
 }
+
 
 .list-cars .titleListCar {
   width: 80%;
@@ -59,4 +60,27 @@
   width: 30px;
   height: 30px;
   margin: 5px 5px 5px 5px;
+}
+
+.add-car-input {
+  margin-left: auto;
+  margin-right: auto;
+  width: 285px;
+  display: flex;
+  height: 62px;
+  padding-top: 14px;
+  padding-left: 47px;
+  border: 1px solid #484848;
+  background: #F8FEF6;
+}
+
+.add-car-button {
+
+}
+
+.add-label {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 28px;
+  padding-top: 6px;
 }
