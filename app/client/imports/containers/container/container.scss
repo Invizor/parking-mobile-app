@@ -5,9 +5,14 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.content-container .mapContainer{
+.content-container .map-container{
   width: 100%;
+}
+.content-container .min-height{
   height: 80%;
+}
+.content-container .full-height{
+  height: 100%;
 }
 
 .main-button {
@@ -58,5 +63,14 @@
 
 .button-clear.button-clear {
   color: white;
+}
+
+.nav-bar-transition-android button {
+  margin-right: 20px;
+}
+
+.ion-navicon-round {
+  display: block;
+  margin-right: 20px;
 }
 

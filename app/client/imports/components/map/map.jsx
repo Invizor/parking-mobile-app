@@ -17,7 +17,7 @@ import "./map.scss";
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
 
 
-/*const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
+const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
     defaultZoom={14}
     center={{lat: 45.0287579, lng: 38.9680473}}
@@ -27,8 +27,8 @@ import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
       averageCenter
       enableRetinaIcons
       gridSize={60}
-      //imagePath="/android_asset/www/img/cluster-icons/m"
-      //imagePath="/img/cluster-icons/m"
+      maxZoom={18}
+      imagePath={window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"}
     >
       {props.markers.map((marker) => (
         <Marker
@@ -114,8 +114,8 @@ export default class Map extends Component {
           return parking;
         }
       });
-      /!*console.log("parkingList", parkingList);
-      console.log("paidParkingList", paidParkingList);*!/
+      /*console.log("parkingList", parkingList);
+      console.log("paidParkingList", paidParkingList);*/
       this.setState({markers: paidParkingList});
       Repository.add_obj("paidParkingList", paidParkingList);
     }, false);
@@ -174,9 +174,9 @@ export default class Map extends Component {
 
     );
   }
-}*/
+}
 
-
+/*
 const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
     defaultZoom={14}
@@ -219,19 +219,20 @@ export default class MarkerClustererExample extends Component {
     // this.showLoading();
 
 
-   /* fetch(`https://gist.githubusercontent.com/farrrr/dfda7dd7fccfec5474d3/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json`)
+   /!* fetch(`https://gist.githubusercontent.com/farrrr/dfda7dd7fccfec5474d3/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json`)
       .then(res => res.json())
       .then(data => {
         this.setState({ markers: data.photos });
         console.log("this.state.markers", this.state.markers);
-      });*/
+      });*!/
 
 
   }
 
   getPaidParkings() {
     requestToServer("GET", "https://parkimon.ru/api/v1/geolocation/near?lon=45.029453&lat=38.969549&distance=2000", (parkingList)=>{
-      console.log("parkingList", parkingList);
+
+     // console.log("parkingList", parkingList);
       if (!Array.prototype.find) {
         Array.prototype.find = function (predicate) {
           if (this == null) {
@@ -260,7 +261,7 @@ export default class MarkerClustererExample extends Component {
         }
       });
       //console.log("parkingList", parkingList);
-      console.log("paidParkingList", paidParkingList);
+     // console.log("paidParkingList", paidParkingList);
       this.setState({markers: paidParkingList});
       Repository.add_obj("paidParkingList", paidParkingList);
     }, false);
@@ -288,7 +289,7 @@ export default class MarkerClustererExample extends Component {
       />
     );
   }
-}
+}*/
 
 
 Map.contextTypes = {

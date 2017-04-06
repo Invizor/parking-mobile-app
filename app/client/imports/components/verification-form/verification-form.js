@@ -61,7 +61,7 @@ class VerificationForm extends Component {
         <div className="verification">
           <div className="verification-title">Введите sms код:</div>
           <div className="verification-code">
-            <input type="text"
+            <input type="number"
                    name="code"
                    placeholder="введите здесь код"
                    ref="codeInput"/>

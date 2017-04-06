@@ -49,7 +49,6 @@ class AutorizationForm extends React.Component {
   }
 
   render() {
-    console.log("autorization form console log");
     return (
       <IonContent customClasses="" {...this.props}>
         <div className="autorization">

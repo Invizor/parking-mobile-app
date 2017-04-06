@@ -14,6 +14,20 @@ class SideMenu extends React.Component {
   }
 
   userAutorized() {
+
+    let parkingCounterList = Repository.get_obj("parkingSession") && Repository.get_obj("parkingSession").length > 1 ?
+      <div className="content has-header side-menu">
+        <div className="list">
+          <div className="item item-icon-right" onClick={() => {
+            this.goToRoute("/parking-counter-list");
+          }}>
+            Припаркованные авто <IonIcon icon="ios-arrow-right"/>
+          </div>
+        </div>
+      </div>
+      :
+      "";
+
     return (
       <div>
         <div className="bar bar-header bar-stable">
@@ -53,6 +67,12 @@ class SideMenu extends React.Component {
             </div>
           </div>
         </div>
+        {
+          parkingCounterList
+        }
+
+
+
       </div>
     );
   }

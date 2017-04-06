@@ -9,7 +9,6 @@ class UserBalance extends React.Component {
     setTimeout(()=>{
       if (this.props.title === "Parkimon") {
         const mySpinner = findDOMNode(this.refs.mySpinner);
-        console.log("mySpinner", mySpinner);
         mySpinner.style.display= "none";
       }
     }, 3000);

@@ -10271,9 +10271,14 @@ a.button {
   flex-direction: column;
   justify-content: space-between; }
 
-.content-container .mapContainer {
-  width: 100%;
+.content-container .map-container {
+  width: 100%; }
+
+.content-container .min-height {
   height: 80%; }
+
+.content-container .full-height {
+  height: 100%; }
 
 .main-button {
   position: fixed;
@@ -10315,6 +10320,9 @@ a.button {
 
 .button-clear.button-clear {
   color: white; }
+
+.nav-bar-transition-android button {
+  margin-right: 20px; }
 .autorization {
   width: 200px;
   margin: 100px auto 0; }
@@ -10352,6 +10360,13 @@ a.button {
 
 .warningAuth a {
   text-decoration: underline; }
+.single-parking .remaining-time {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 30px; }
+
+.single-parking .remaining-hours {
+  margin-top: 20px; }
 .verification {
   width: 200px;
   margin: 100px auto 0; }
