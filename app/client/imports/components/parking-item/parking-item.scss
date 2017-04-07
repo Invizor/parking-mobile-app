@@ -14,11 +14,15 @@
   color: #444;
 }
 
-.pay-parking button {
-  width: 100%;
+.pay-parking{
+  width: 80%;
 }
 
-.pay-parking a {
-  display: block;
-  margin: 30px auto;
+.pay-parking button {
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
+  text-align: center;
+  top: 50%;
+  margin: 30px auto 0;
 }

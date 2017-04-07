@@ -1,8 +1,8 @@
 import React from "react";
-import {IonList, IonItem, IonButton} from "reactionic";
+import {IonList, IonItem, IonButton, IonContent} from "reactionic";
 import Repository from "../../storage/local-storage";
 import "./parking-item.scss";
-
+import createHashHistory from "history/lib/createHashHistory";
 
 let ParkingItem = React.createClass({
 
@@ -54,7 +54,8 @@ let ParkingItem = React.createClass({
   },
 
   getPayParkingLink() {
-    return "/confirm-pay-parking/" + this.getParkingId();
+    let history = createHashHistory();
+    history.push("/confirm-pay-parking/" + this.getParkingId());
   },
 
 
@@ -62,53 +63,54 @@ let ParkingItem = React.createClass({
     const parking = this.getCurrentParking();
 
     return (
-      <div className="parking-item">
-        <IonList>
-          {
-            parking.zoneId ?
-              <h1 className="parking-title text-center">#{parking.zoneId}</h1>
-              :
-              <IonItem divider>Информация неизвестна</IonItem>
-          }
-          {
-            parking.totalPlaces ?
-              <IonItem divider>Всего мест: {parking.totalPlaces}</IonItem>
-              :
-              <IonItem divider>Количество мест неизвестно</IonItem>
-          }
-          {
-            parking.address ?
-              <div className="address">Адрес: {parking.address}</div>
-              :
-              <IonItem>Адрес неизвестен</IonItem>
-          }
-          {
-            parking.workingTime.length ?
-              <IonItem>Время открытия: {parking.workingTime[0].open}:00 ч</IonItem>
-              :
-              <IonItem>Время открытия неизвестно</IonItem>
-          }
-          {
-            parking.workingTime.length ?
-              <IonItem>Время закрытия: {parking.workingTime[0].close}:00 ч </IonItem>
-              :
-              <IonItem>Время закрытия неизвестно</IonItem>
-          }
-          {
-            parking.price.length ?
-              <IonItem>Цена: {parking.price[0].cost}</IonItem>
-              :
-              <IonItem>Цена неизвестна</IonItem>
-          }
-        </IonList>
-        <div className="pay-parking">
-          <IonButton color="positive"
-                     link={this.getPayParkingLink()}>
-            Оплатить парковку
-          </IonButton>
+      <IonContent customClasses="" {...this.props}>
+        <div className="parking-item">
+          <IonList>
+            {
+              parking.zoneId ?
+                <h1 className="parking-title text-center">#{parking.zoneId}</h1>
+                :
+                <IonItem divider>Информация неизвестна</IonItem>
+            }
+            {
+              parking.totalPlaces ?
+                <IonItem divider>Всего мест: {parking.totalPlaces}</IonItem>
+                :
+                <IonItem divider>Количество мест неизвестно</IonItem>
+            }
+            {
+              parking.address ?
+                <div className="address">Адрес: {parking.address}</div>
+                :
+                <IonItem>Адрес неизвестен</IonItem>
+            }
+            {
+              parking.workingTime.length ?
+                <IonItem>Время открытия: {parking.workingTime[0].open}:00 ч</IonItem>
+                :
+                <IonItem>Время открытия неизвестно</IonItem>
+            }
+            {
+              parking.workingTime.length ?
+                <IonItem>Время закрытия: {parking.workingTime[0].close}:00 ч </IonItem>
+                :
+                <IonItem>Время закрытия неизвестно</IonItem>
+            }
+            {
+              parking.price.length ?
+                <IonItem>Цена: {parking.price[0].cost}</IonItem>
+                :
+                <IonItem>Цена неизвестна</IonItem>
+            }
+          </IonList>
+          <div className="pay-parking">
+            <IonButton color="positive"
+                       onClick={() => this.getPayParkingLink()}>
+              Оплатить парковку
+            </IonButton>
+          </div>
         </div>
-      </div>
-
+      </IonContent>
     );
   }
 });
