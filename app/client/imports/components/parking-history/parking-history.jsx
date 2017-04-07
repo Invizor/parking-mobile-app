@@ -1,6 +1,7 @@
 import React from "react";
 import {IonContent, IonList, IonItem} from "reactionic";
 import RequestToServer from "../../utils/request-to-server";
+import "./parking-history.scss";
 
 export default class ParkingHistory extends React.Component {
 
@@ -31,20 +32,22 @@ export default class ParkingHistory extends React.Component {
       console.log("parking.start",parking.start);
       parkingList.push(
         <IonItem key={index}>
-          <div>{counter++}. Парковка: #{parking.zone.zoneId}</div>
-          <div>Дата парковки: {parking.created.substring(0,10)}</div>
-          <div>Время парковки: {parking.created.substring(11,16)}</div>
-          <div>Номер вашего авто: {parking.transportNumber}</div>
+          <div className="parking">{counter++}. Парковка: #{parking.zone.zoneId}</div>
+          <div className="date-parking">Дата парковки: {parking.created.substring(0,10)}</div>
+          <div className="time-parking">Время парковки: {parking.created.substring(11,16)}</div>
+          <div className="number-car">Номер вашего авто: {parking.transportNumber}</div>
         </IonItem>
       );
     });
     return (
       <IonContent customClasses="" {...this.props}>
-        <IonList>
-          {
-            parkingList
-          }
-        </IonList>
+        <div className="list-history-parking">
+          <IonList>
+            {
+              parkingList
+            }
+          </IonList>
+        </div>
       </IonContent>
     );
   }

@@ -1,36 +1,43 @@
 .set-balance {
   width: 80%;
-  margin: 20px auto 0;
-  border: 1px #999999;
-  border-radius: 4px;
+  height: 100%;
+  margin: auto;
+}
+
+.set-balance .balance-info {
+   height: 40px;
+   text-align: center;
+   font-size: 18px;
+   color: #4b8bf4;
+   margin: 40px auto 0;
+}
+.set-balance .set-balance-title {
+  height: 40px;
+  font-size: 18px;
+  color: #4b8bf4;
+  text-align: center;
+  margin: 40px auto 0;
 }
 
 .set-balance input {
   width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid #000;
+  height: 60px;
+  display: inline-block;
+  font-size: 18px;
+  border: 1px solid #4b8bf4;
+  border-radius: 3px;
+  margin: 20px auto 0;
+  text-align: center;
 }
 
 .set-balance button {
   width: 100%;
-  margin-bottom: 20px;
-}
-
-.set-balance-input {
-  width: 100%;
+  height: 60px;
   display: inline-block;
-  border: 1px #999999;
-  border-radius: 4px;
+  font-size: 18px;
+  color: #4b8bf4;
+  margin: 20px auto 0;
+  line-height: 1.0;
 }
 
-.set-balance-title {
-  margin-bottom: 30px;
-  font-size: 20px;
-  color: #4b8bf4;
-  text-align: center;
-}
-.balance-info {
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 50px
-}
+

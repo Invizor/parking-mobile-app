@@ -10,6 +10,8 @@
 
 .mySpinner {
   margin-left: 15px; }
+.side-menu-button {
+  margin: auto; }
 @charset "UTF-8";
 /*!
   Ionicons, v2.0.1
@@ -10271,9 +10273,14 @@ a.button {
   flex-direction: column;
   justify-content: space-between; }
 
-.content-container .mapContainer {
-  width: 100%;
+.content-container .map-container {
+  width: 100%; }
+
+.content-container .min-height {
   height: 80%; }
+
+.content-container .full-height {
+  height: 100%; }
 
 .main-button {
   position: fixed;
@@ -10315,6 +10322,13 @@ a.button {
 
 .button-clear.button-clear {
   color: white; }
+
+.nav-bar-transition-android button {
+  margin-right: 20px; }
+
+.ion-navicon-round {
+  display: block;
+  margin-right: 20px; }
 .form-autorization {
   width: 100%;
   height: 100%;
@@ -10324,6 +10338,7 @@ a.button {
 
 .autorization {
   width: 80%;
+  height: 70%;
   margin: 120px auto 0; }
 
 .autorization input {
@@ -10363,7 +10378,6 @@ a.button {
 
 .warningAuth {
   width: 100%;
-  background-color: #ff3b30;
   display: inline-block;
   font-size: 14px;
   text-align: center;
@@ -10375,29 +10389,42 @@ a.button {
 .popup {
   font-size: 18px;
   text-align: center; }
-.verification {
-  width: 200px;
-  margin: 100px auto 0; }
+.single-parking .remaining-time {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 30px; }
 
-.verification input {
+.single-parking .remaining-hours {
+  margin-top: 20px; }
+.verification {
+  width: 100%;
+  height: 100%; }
+
+.verification .verification-code {
   width: 80%;
+  height: 60px;
+  margin: 120px auto 20px; }
+
+.verification .verification-button {
+  width: 80%;
+  height: 60px;
+  margin: 0 auto 20px; }
+
+.verification-code input {
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
+  text-align: center;
   display: inline-block;
   border: 1px solid #4b8bf4;
-  border-radius: 3px;
-  margin: 5px 5px 20px 5px; }
+  border-radius: 3p; }
 
-.verification button {
-  width: 80%;
+.verification-button button {
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
   display: inline-block;
-  margin: 5px 5px 5px 5px; }
-
-.verification-title {
-  width: 80%;
-  display: inline-block;
-  font-size: 20px;
-  position: absolute;
-  top: 10px;
-  color: #4b8bf4; }
+  text-align: center; }
 .pay-parking {
   margin: 50px auto;
   width: 50%; }
@@ -10449,44 +10476,53 @@ a.button {
   border: 1px solid #ccc; }
 .set-balance {
   width: 80%;
-  margin: 20px auto 0;
-  border: 1px #999999;
-  border-radius: 4px; }
+  height: 100%;
+  margin: auto; }
+
+.set-balance .balance-info {
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: #4b8bf4;
+  margin: 40px auto 0; }
+
+.set-balance .set-balance-title {
+  height: 40px;
+  font-size: 18px;
+  color: #4b8bf4;
+  text-align: center;
+  margin: 40px auto 0; }
 
 .set-balance input {
   width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid #000; }
+  height: 60px;
+  display: inline-block;
+  font-size: 18px;
+  border: 1px solid #4b8bf4;
+  border-radius: 3px;
+  margin: 20px auto 0;
+  text-align: center; }
 
 .set-balance button {
   width: 100%;
-  margin-bottom: 20px; }
-
-.set-balance-input {
-  width: 100%;
+  height: 60px;
   display: inline-block;
-  border: 1px #999999;
-  border-radius: 4px; }
-
-.set-balance-title {
-  margin-bottom: 30px;
-  font-size: 20px;
-  color: #4b8bf4;
-  text-align: center; }
-
-.balance-info {
-  text-align: center;
   font-size: 18px;
-  margin-bottom: 50px; }
+  color: #4b8bf4;
+  margin: 20px auto 0;
+  line-height: 1.0; }
 .list-cars {
   width: 100%;
-  margin: 0 auto; }
+  height: 100%;
+  font-size: 18px; }
 
 .car-item-container {
+  height: 60px;
   display: flex;
   justify-content: space-between; }
 
 .list-cars .content-list-cars {
+  width: 100%;
   left: 0;
   right: 0;
   margin: 0 auto; }
@@ -10496,14 +10532,15 @@ a.button {
 
 .item h2 {
   width: 90%;
+  font-size: 18px;
   text-align: left;
   margin: 5px 5px 5px 5px; }
 
 .item p {
   width: 90%;
+  font-size: 18px;
   text-align: left;
-  margin: 5px 5px 5px 5px;
-  font-size: 18px; }
+  margin: 5px 5px 5px 5px; }
 
 .item .img-delete {
   width: 20px;
@@ -10515,41 +10552,70 @@ a.button {
 .item .img-edit {
   width: 20px;
   height: 20px;
-  margin: 5px 5px 5px 5px;
+  margin: 5px 15px 5px 5px;
   float: right;
   cursor: pointer; }
 
 .list-cars .titleListCar {
-  width: 80%;
+  text-align: center;
+  width: 100%;
+  height: 40px;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   color: #4b8bf4;
-  text-align: left;
-  margin: 5px 5px 5px 5px; }
+  margin: 20px 5px 5px 5px; }
 
-.list-cars .button-add-car .addCarButton {
-  width: 30px;
-  height: 30px;
-  margin: 5px 5px 5px 5px; }
+.list-cars .add-car-button {
+  width: 80%;
+  height: 60px;
+  margin: 20px auto 0; }
+
+.add-car-button button {
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
+  display: inline-block; }
 .car-info {
-  width: 300px;
-  margin: 100px auto 0; }
+  width: 80%;
+  margin: 20px auto 0; }
 
 .car-info .add-car-button button {
-  width: 80%;
+  width: 100%;
+  height: 60px;
   display: inline-block;
-  margin: 5px 0 5px 0; }
+  font-size: 18px;
+  margin: 20px auto 0; }
 
 .car-info input {
-  margin-bottom: 10px;
-  width: 80%;
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  font-size: 18px;
   display: inline-block;
   border: 1px solid #0c60ee;
-  border-radius: 3px; }
+  border-radius: 3px;
+  margin: 20px auto 0; }
 
 .car-info .titleAddCar {
+  width: 100%;
+  height: 40px;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   color: #4b8bf4;
-  margin: 5px 5px 5px 5px;
-  text-align: left; }
+  margin: 20px auto 0;
+  text-align: center; }
+.list-history-parking .item {
+  height: 120px;
+  width: 100%; }
+
+.list-history-parking .item .parking {
+  font-size: 18px; }
+
+.list-history-parking .item .date-parking {
+  font-size: 18px; }
+
+.list-history-parking .item .time-parking {
+  font-size: 18px; }
+
+.list-history-parking .item .number-car {
+  font-size: 18px; }

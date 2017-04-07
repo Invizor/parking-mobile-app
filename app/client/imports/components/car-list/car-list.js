@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import {IonContent, IonList, IonItem} from "reactionic";
+import {IonContent, IonList, IonItem, IonButton} from "reactionic";
 import "./car-list.scss";
 import LocalStorage from "../../storage/local-storage";
 import createHashHistory from "history/lib/createHashHistory";
@@ -80,13 +80,10 @@ class CarList extends React.Component {
           <IonList className="content-list-cars">
             {myCars}
           </IonList>
-          <div className="add-car-input" onClick={() => this.addCar()}>
-            <div className="add-car-button">
-              <img className="addCarButton" src="./img/addCarNew.png" width="35" height="35"/>
-            </div>
-            <div className="add-label">
-              Добавить
-            </div>
+          <div className="add-car-button">
+            <IonButton  color="positive" onClick={() => this.addCar()}>
+              Добавить автомобиль
+            </IonButton>
           </div>
         </div>
       </IonContent>

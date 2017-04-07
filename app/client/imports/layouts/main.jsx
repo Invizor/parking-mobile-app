@@ -12,7 +12,7 @@ import MainTitle from '../components/main-title/main-title';
 import Repository from '../storage/local-storage';
 var EventEmitter = require('event-emitter');
 import emitterStorage from '../storage/emitter-storage';
-
+import "./main.scss";
 
 var Layout = React.createClass({
   contextTypes: {

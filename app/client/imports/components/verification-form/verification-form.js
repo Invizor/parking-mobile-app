@@ -59,18 +59,19 @@ class VerificationForm extends Component {
     return (
       <IonContent customClasses="" {...this.props}>
         <div className="verification">
-          <div className="verification-title">Введите sms код:</div>
           <div className="verification-code">
-            <input type="number"
+            <input type="text"
                    name="code"
-                   placeholder="введите здесь код"
+                   placeholder="введите здесь sms код"
                    ref="codeInput"/>
           </div>
-          <IonButton
-            color="positive"
-            onClick={() => this.onSignInBtnClicked()}>
-            Ввести
-          </IonButton>
+          <div className="verification-button">
+            <IonButton
+              color="positive"
+              onClick={() => this.onSignInBtnClicked()}>
+              Ввести
+            </IonButton>
+          </div>
         </div>
       </IonContent>
     );
