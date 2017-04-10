@@ -1221,7 +1221,7 @@ module.exports = {
 
 var _prodInvariant = __webpack_require__(49);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 
 var invariant = __webpack_require__(2);
 var warning = __webpack_require__(3);
@@ -2404,6 +2404,259 @@ $exports.store = store;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+exports.__esModule = true;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _warning = __webpack_require__(41);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _invariant = __webpack_require__(7);
+
+var _invariant2 = _interopRequireDefault(_invariant);
+
+var _Actions = __webpack_require__(115);
+
+var _PathUtils = __webpack_require__(116);
+
+var _ExecutionEnvironment = __webpack_require__(184);
+
+var _DOMUtils = __webpack_require__(183);
+
+var _DOMStateStorage = __webpack_require__(413);
+
+var _createDOMHistory = __webpack_require__(414);
+
+var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
+
+function isAbsolutePath(path) {
+  return typeof path === 'string' && path.charAt(0) === '/';
+}
+
+function ensureSlash() {
+  var path = _DOMUtils.getHashPath();
+
+  if (isAbsolutePath(path)) return true;
+
+  _DOMUtils.replaceHashPath('/' + path);
+
+  return false;
+}
+
+function addQueryStringValueToPath(path, key, value) {
+  return path + (path.indexOf('?') === -1 ? '?' : '&') + (key + '=' + value);
+}
+
+function stripQueryStringValueFromPath(path, key) {
+  return path.replace(new RegExp('[?&]?' + key + '=[a-zA-Z0-9]+'), '');
+}
+
+function getQueryStringValueFromPath(path, key) {
+  var match = path.match(new RegExp('\\?.*?\\b' + key + '=(.+?)\\b'));
+  return match && match[1];
+}
+
+var DefaultQueryKey = '_k';
+
+function createHashHistory() {
+  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Hash history needs a DOM') : _invariant2['default'](false) : undefined;
+
+  var queryKey = options.queryKey;
+
+  if (queryKey === undefined || !!queryKey) queryKey = typeof queryKey === 'string' ? queryKey : DefaultQueryKey;
+
+  function getCurrentLocation() {
+    var path = _DOMUtils.getHashPath();
+
+    var key = undefined,
+        state = undefined;
+    if (queryKey) {
+      key = getQueryStringValueFromPath(path, queryKey);
+      path = stripQueryStringValueFromPath(path, queryKey);
+
+      if (key) {
+        state = _DOMStateStorage.readState(key);
+      } else {
+        state = null;
+        key = history.createKey();
+        _DOMUtils.replaceHashPath(addQueryStringValueToPath(path, queryKey, key));
+      }
+    } else {
+      key = state = null;
+    }
+
+    var location = _PathUtils.parsePath(path);
+
+    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
+  }
+
+  function startHashChangeListener(_ref) {
+    var transitionTo = _ref.transitionTo;
+
+    function hashChangeListener() {
+      if (!ensureSlash()) return; // Always make sure hashes are preceeded with a /.
+
+      transitionTo(getCurrentLocation());
+    }
+
+    ensureSlash();
+    _DOMUtils.addEventListener(window, 'hashchange', hashChangeListener);
+
+    return function () {
+      _DOMUtils.removeEventListener(window, 'hashchange', hashChangeListener);
+    };
+  }
+
+  function finishTransition(location) {
+    var basename = location.basename;
+    var pathname = location.pathname;
+    var search = location.search;
+    var state = location.state;
+    var action = location.action;
+    var key = location.key;
+
+    if (action === _Actions.POP) return; // Nothing to do.
+
+    var path = (basename || '') + pathname + search;
+
+    if (queryKey) {
+      path = addQueryStringValueToPath(path, queryKey, key);
+      _DOMStateStorage.saveState(key, state);
+    } else {
+      // Drop key and state.
+      location.key = location.state = null;
+    }
+
+    var currentHash = _DOMUtils.getHashPath();
+
+    if (action === _Actions.PUSH) {
+      if (currentHash !== path) {
+        window.location.hash = path;
+      } else {
+        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'You cannot PUSH the same path using hash history') : undefined;
+      }
+    } else if (currentHash !== path) {
+      // REPLACE
+      _DOMUtils.replaceHashPath(path);
+    }
+  }
+
+  var history = _createDOMHistory2['default'](_extends({}, options, {
+    getCurrentLocation: getCurrentLocation,
+    finishTransition: finishTransition,
+    saveState: _DOMStateStorage.saveState
+  }));
+
+  var listenerCount = 0,
+      stopHashChangeListener = undefined;
+
+  function listenBefore(listener) {
+    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
+
+    var unlisten = history.listenBefore(listener);
+
+    return function () {
+      unlisten();
+
+      if (--listenerCount === 0) stopHashChangeListener();
+    };
+  }
+
+  function listen(listener) {
+    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
+
+    var unlisten = history.listen(listener);
+
+    return function () {
+      unlisten();
+
+      if (--listenerCount === 0) stopHashChangeListener();
+    };
+  }
+
+  function push(location) {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+    history.push(location);
+  }
+
+  function replace(location) {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+    history.replace(location);
+  }
+
+  var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
+
+  function go(n) {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : undefined;
+
+    history.go(n);
+  }
+
+  function createHref(path) {
+    return '#' + history.createHref(path);
+  }
+
+  // deprecated
+  function registerTransitionHook(hook) {
+    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
+
+    history.registerTransitionHook(hook);
+  }
+
+  // deprecated
+  function unregisterTransitionHook(hook) {
+    history.unregisterTransitionHook(hook);
+
+    if (--listenerCount === 0) stopHashChangeListener();
+  }
+
+  // deprecated
+  function pushState(state, path) {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+    history.pushState(state, path);
+  }
+
+  // deprecated
+  function replaceState(state, path) {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+    history.replaceState(state, path);
+  }
+
+  return _extends({}, history, {
+    listenBefore: listenBefore,
+    listen: listen,
+    push: push,
+    replace: replace,
+    go: go,
+    createHref: createHref,
+
+    registerTransitionHook: registerTransitionHook, // deprecated - warning is in createHistory
+    unregisterTransitionHook: unregisterTransitionHook, // deprecated - warning is in createHistory
+    pushState: pushState, // deprecated - warning is in createHistory
+    replaceState: replaceState // deprecated - warning is in createHistory
+  });
+}
+
+exports['default'] = createHashHistory;
+module.exports = exports['default'];
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -2674,7 +2927,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2742,7 +2995,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2776,259 +3029,6 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-exports.__esModule = true;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _warning = __webpack_require__(41);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var _invariant = __webpack_require__(7);
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-var _Actions = __webpack_require__(115);
-
-var _PathUtils = __webpack_require__(116);
-
-var _ExecutionEnvironment = __webpack_require__(184);
-
-var _DOMUtils = __webpack_require__(183);
-
-var _DOMStateStorage = __webpack_require__(413);
-
-var _createDOMHistory = __webpack_require__(414);
-
-var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
-
-function isAbsolutePath(path) {
-  return typeof path === 'string' && path.charAt(0) === '/';
-}
-
-function ensureSlash() {
-  var path = _DOMUtils.getHashPath();
-
-  if (isAbsolutePath(path)) return true;
-
-  _DOMUtils.replaceHashPath('/' + path);
-
-  return false;
-}
-
-function addQueryStringValueToPath(path, key, value) {
-  return path + (path.indexOf('?') === -1 ? '?' : '&') + (key + '=' + value);
-}
-
-function stripQueryStringValueFromPath(path, key) {
-  return path.replace(new RegExp('[?&]?' + key + '=[a-zA-Z0-9]+'), '');
-}
-
-function getQueryStringValueFromPath(path, key) {
-  var match = path.match(new RegExp('\\?.*?\\b' + key + '=(.+?)\\b'));
-  return match && match[1];
-}
-
-var DefaultQueryKey = '_k';
-
-function createHashHistory() {
-  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Hash history needs a DOM') : _invariant2['default'](false) : undefined;
-
-  var queryKey = options.queryKey;
-
-  if (queryKey === undefined || !!queryKey) queryKey = typeof queryKey === 'string' ? queryKey : DefaultQueryKey;
-
-  function getCurrentLocation() {
-    var path = _DOMUtils.getHashPath();
-
-    var key = undefined,
-        state = undefined;
-    if (queryKey) {
-      key = getQueryStringValueFromPath(path, queryKey);
-      path = stripQueryStringValueFromPath(path, queryKey);
-
-      if (key) {
-        state = _DOMStateStorage.readState(key);
-      } else {
-        state = null;
-        key = history.createKey();
-        _DOMUtils.replaceHashPath(addQueryStringValueToPath(path, queryKey, key));
-      }
-    } else {
-      key = state = null;
-    }
-
-    var location = _PathUtils.parsePath(path);
-
-    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
-  }
-
-  function startHashChangeListener(_ref) {
-    var transitionTo = _ref.transitionTo;
-
-    function hashChangeListener() {
-      if (!ensureSlash()) return; // Always make sure hashes are preceeded with a /.
-
-      transitionTo(getCurrentLocation());
-    }
-
-    ensureSlash();
-    _DOMUtils.addEventListener(window, 'hashchange', hashChangeListener);
-
-    return function () {
-      _DOMUtils.removeEventListener(window, 'hashchange', hashChangeListener);
-    };
-  }
-
-  function finishTransition(location) {
-    var basename = location.basename;
-    var pathname = location.pathname;
-    var search = location.search;
-    var state = location.state;
-    var action = location.action;
-    var key = location.key;
-
-    if (action === _Actions.POP) return; // Nothing to do.
-
-    var path = (basename || '') + pathname + search;
-
-    if (queryKey) {
-      path = addQueryStringValueToPath(path, queryKey, key);
-      _DOMStateStorage.saveState(key, state);
-    } else {
-      // Drop key and state.
-      location.key = location.state = null;
-    }
-
-    var currentHash = _DOMUtils.getHashPath();
-
-    if (action === _Actions.PUSH) {
-      if (currentHash !== path) {
-        window.location.hash = path;
-      } else {
-        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'You cannot PUSH the same path using hash history') : undefined;
-      }
-    } else if (currentHash !== path) {
-      // REPLACE
-      _DOMUtils.replaceHashPath(path);
-    }
-  }
-
-  var history = _createDOMHistory2['default'](_extends({}, options, {
-    getCurrentLocation: getCurrentLocation,
-    finishTransition: finishTransition,
-    saveState: _DOMStateStorage.saveState
-  }));
-
-  var listenerCount = 0,
-      stopHashChangeListener = undefined;
-
-  function listenBefore(listener) {
-    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
-
-    var unlisten = history.listenBefore(listener);
-
-    return function () {
-      unlisten();
-
-      if (--listenerCount === 0) stopHashChangeListener();
-    };
-  }
-
-  function listen(listener) {
-    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
-
-    var unlisten = history.listen(listener);
-
-    return function () {
-      unlisten();
-
-      if (--listenerCount === 0) stopHashChangeListener();
-    };
-  }
-
-  function push(location) {
-    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-
-    history.push(location);
-  }
-
-  function replace(location) {
-    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-
-    history.replace(location);
-  }
-
-  var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
-
-  function go(n) {
-    process.env.NODE_ENV !== 'production' ? _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : undefined;
-
-    history.go(n);
-  }
-
-  function createHref(path) {
-    return '#' + history.createHref(path);
-  }
-
-  // deprecated
-  function registerTransitionHook(hook) {
-    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
-
-    history.registerTransitionHook(hook);
-  }
-
-  // deprecated
-  function unregisterTransitionHook(hook) {
-    history.unregisterTransitionHook(hook);
-
-    if (--listenerCount === 0) stopHashChangeListener();
-  }
-
-  // deprecated
-  function pushState(state, path) {
-    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-
-    history.pushState(state, path);
-  }
-
-  // deprecated
-  function replaceState(state, path) {
-    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
-
-    history.replaceState(state, path);
-  }
-
-  return _extends({}, history, {
-    listenBefore: listenBefore,
-    listen: listen,
-    push: push,
-    replace: replace,
-    go: go,
-    createHref: createHref,
-
-    registerTransitionHook: registerTransitionHook, // deprecated - warning is in createHistory
-    unregisterTransitionHook: unregisterTransitionHook, // deprecated - warning is in createHistory
-    pushState: pushState, // deprecated - warning is in createHistory
-    replaceState: replaceState // deprecated - warning is in createHistory
-  });
-}
-
-exports['default'] = createHashHistory;
-module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 32 */
@@ -3951,7 +3951,7 @@ exports.parsePath = parsePath;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -4011,7 +4011,7 @@ function parsePath(path) {
 
 var _assign = __webpack_require__(6);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 
 var warning = __webpack_require__(3);
 var canDefineProperty = __webpack_require__(158);
@@ -23150,7 +23150,7 @@ module.exports = ReactBrowserEventEmitter;
 
 
 
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 var getEventTarget = __webpack_require__(145);
 
@@ -24823,7 +24823,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -25065,7 +25065,7 @@ var _requestToServer = __webpack_require__(26);
 
 var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -27002,7 +27002,7 @@ module.exports = ReactErrorUtils;
 
 var _prodInvariant = __webpack_require__(5);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var ReactInstanceMap = __webpack_require__(59);
 var ReactInstrumentation = __webpack_require__(21);
 var ReactUpdates = __webpack_require__(22);
@@ -28498,7 +28498,7 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -28524,7 +28524,7 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -29083,7 +29083,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactGoogleMaps = __webpack_require__(621);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -32067,7 +32067,7 @@ var _prodInvariant = __webpack_require__(5),
 
 var React = __webpack_require__(25);
 var ReactComponentEnvironment = __webpack_require__(138);
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var ReactErrorUtils = __webpack_require__(140);
 var ReactInstanceMap = __webpack_require__(59);
 var ReactInstrumentation = __webpack_require__(21);
@@ -33928,7 +33928,7 @@ var DOMLazyTree = __webpack_require__(56);
 var DOMProperty = __webpack_require__(36);
 var React = __webpack_require__(25);
 var ReactBrowserEventEmitter = __webpack_require__(70);
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactDOMContainerInfo = __webpack_require__(555);
 var ReactDOMFeatureFlags = __webpack_require__(557);
@@ -34632,7 +34632,7 @@ module.exports = accumulateInto;
 
 var _prodInvariant = __webpack_require__(5);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInstanceMap = __webpack_require__(59);
 
@@ -35186,7 +35186,7 @@ module.exports = setTextContent;
 
 var _prodInvariant = __webpack_require__(5);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var REACT_ELEMENT_TYPE = __webpack_require__(569);
 
 var getIteratorFn = __webpack_require__(605);
@@ -35842,7 +35842,7 @@ exports.readState = readState;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -35968,7 +35968,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -36221,7 +36221,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -36516,7 +36516,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -37261,7 +37261,7 @@ module.exports = REACT_ELEMENT_TYPE;
 
 
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var ReactComponentTreeHook = __webpack_require__(13);
 var ReactElement = __webpack_require__(48);
 
@@ -37640,7 +37640,7 @@ module.exports = onlyChild;
 
 var _prodInvariant = __webpack_require__(49);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var REACT_ELEMENT_TYPE = __webpack_require__(266);
 
 var getIteratorFn = __webpack_require__(159);
@@ -39485,7 +39485,7 @@ var _localStorage = __webpack_require__(9);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -39690,7 +39690,7 @@ var _localStorage = __webpack_require__(9);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -39870,7 +39870,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactionic = __webpack_require__(12);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -40310,7 +40310,7 @@ var _localStorage = __webpack_require__(9);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -40826,6 +40826,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -40837,6 +40839,10 @@ var _localStorage = __webpack_require__(9);
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
 __webpack_require__(391);
+
+var _createHashHistory = __webpack_require__(28);
+
+var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40886,88 +40892,97 @@ var ParkingItem = _react2.default.createClass({
     // let parkingInfo = [];
   },
   getPayParkingLink: function getPayParkingLink() {
-    return "/confirm-pay-parking/" + this.getParkingId();
+    var history = (0, _createHashHistory2.default)();
+    history.push("/confirm-pay-parking/" + this.getParkingId());
   },
   render: function render() {
+    var _this2 = this;
+
     var parking = this.getCurrentParking();
 
     return _react2.default.createElement(
-      "div",
-      { className: "parking-item" },
-      _react2.default.createElement(
-        _reactionic.IonList,
-        null,
-        parking.zoneId ? _react2.default.createElement(
-          "h1",
-          { className: "parking-title text-center" },
-          "#",
-          parking.zoneId
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          { divider: true },
-          "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
-        ),
-        parking.totalPlaces ? _react2.default.createElement(
-          _reactionic.IonItem,
-          { divider: true },
-          "\u0412\u0441\u0435\u0433\u043E \u043C\u0435\u0441\u0442: ",
-          parking.totalPlaces
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          { divider: true },
-          "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043C\u0435\u0441\u0442 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-        ),
-        parking.address ? _react2.default.createElement(
-          "div",
-          { className: "address" },
-          "\u0410\u0434\u0440\u0435\u0441: ",
-          parking.address
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0410\u0434\u0440\u0435\u0441 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u0435\u043D"
-        ),
-        parking.workingTime.length ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F: ",
-          parking.workingTime[0].open,
-          ":00 \u0447"
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-        ),
-        parking.workingTime.length ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F: ",
-          parking.workingTime[0].close,
-          ":00 \u0447 "
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
-        ),
-        parking.price.length ? _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0426\u0435\u043D\u0430: ",
-          parking.price[0].cost
-        ) : _react2.default.createElement(
-          _reactionic.IonItem,
-          null,
-          "\u0426\u0435\u043D\u0430 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
-        )
-      ),
+      _reactionic.IonContent,
+      _extends({ customClasses: "" }, this.props),
       _react2.default.createElement(
         "div",
-        { className: "pay-parking" },
+        { className: "parking-item" },
         _react2.default.createElement(
-          _reactionic.IonButton,
-          { color: "positive",
-            link: this.getPayParkingLink() },
-          "\u041E\u043F\u043B\u0430\u0442\u0438\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443"
+          _reactionic.IonList,
+          null,
+          parking.zoneId ? _react2.default.createElement(
+            "h1",
+            { className: "parking-title text-center" },
+            "#",
+            parking.zoneId
+          ) : _react2.default.createElement(
+            _reactionic.IonItem,
+            { divider: true },
+            "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
+          ),
+          parking.totalPlaces ? _react2.default.createElement(
+            _reactionic.IonItem,
+            { divider: true },
+            "\u0412\u0441\u0435\u0433\u043E \u043C\u0435\u0441\u0442: ",
+            parking.totalPlaces
+          ) : _react2.default.createElement(
+            _reactionic.IonItem,
+            { divider: true },
+            "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043C\u0435\u0441\u0442 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+          ),
+          parking.address ? _react2.default.createElement(
+            "div",
+            { className: "address" },
+            "\u0410\u0434\u0440\u0435\u0441: ",
+            parking.address
+          ) : _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0410\u0434\u0440\u0435\u0441 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u0435\u043D"
+          ),
+          parking.workingTime.length ? _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F: ",
+            parking.workingTime[0].open,
+            ":00 \u0447"
+          ) : _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+          ),
+          parking.workingTime.length ? _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F: ",
+            parking.workingTime[0].close,
+            ":00 \u0447 "
+          ) : _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0412\u0440\u0435\u043C\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+          ),
+          parking.price.length ? _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0426\u0435\u043D\u0430: ",
+            parking.price[0].cost
+          ) : _react2.default.createElement(
+            _reactionic.IonItem,
+            null,
+            "\u0426\u0435\u043D\u0430 \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430"
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "pay-parking" },
+          _react2.default.createElement(
+            _reactionic.IonButton,
+            { color: "positive",
+              onClick: function onClick() {
+                return _this2.getPayParkingLink();
+              } },
+            "\u041E\u043F\u043B\u0430\u0442\u0438\u0442\u044C \u043F\u0430\u0440\u043A\u043E\u0432\u043A\u0443"
+          )
         )
       )
     );
@@ -41119,7 +41134,7 @@ var _localStorage = __webpack_require__(9);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -41385,7 +41400,7 @@ var _localStorage2 = _interopRequireDefault(_localStorage);
 
 __webpack_require__(393);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -41484,7 +41499,7 @@ var _localStorage = __webpack_require__(9);
 
 var _localStorage2 = _interopRequireDefault(_localStorage);
 
-var _createHashHistory = __webpack_require__(31);
+var _createHashHistory = __webpack_require__(28);
 
 var _createHashHistory2 = _interopRequireDefault(_createHashHistory);
 
@@ -52213,7 +52228,7 @@ var EventPropagators = __webpack_require__(58);
 var ExecutionEnvironment = __webpack_require__(10);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(22);
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 var getEventTarget = __webpack_require__(145);
 var isEventSupported = __webpack_require__(146);
@@ -56359,7 +56374,7 @@ var ReactComponentEnvironment = __webpack_require__(138);
 var ReactInstanceMap = __webpack_require__(59);
 var ReactInstrumentation = __webpack_require__(21);
 
-var ReactCurrentOwner = __webpack_require__(30);
+var ReactCurrentOwner = __webpack_require__(31);
 var ReactReconciler = __webpack_require__(45);
 var ReactChildReconciler = __webpack_require__(552);
 
@@ -58120,7 +58135,7 @@ var ReactDOMComponentTree = __webpack_require__(8);
 var ReactBrowserEventEmitter = __webpack_require__(70);
 var ReactInstanceMap = __webpack_require__(59);
 var ReactUpdates = __webpack_require__(22);
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 var ReactShallowRenderer = __webpack_require__(584);
 
 var findDOMNode = __webpack_require__(240);
@@ -58855,7 +58870,7 @@ var EventPropagators = __webpack_require__(58);
 var ExecutionEnvironment = __webpack_require__(10);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInputSelection = __webpack_require__(234);
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 var getActiveElement = __webpack_require__(182);
 var isTextInputElement = __webpack_require__(247);
@@ -59055,7 +59070,7 @@ var EventPropagators = __webpack_require__(58);
 var ReactDOMComponentTree = __webpack_require__(8);
 var SyntheticAnimationEvent = __webpack_require__(590);
 var SyntheticClipboardEvent = __webpack_require__(591);
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 var SyntheticFocusEvent = __webpack_require__(594);
 var SyntheticKeyboardEvent = __webpack_require__(596);
 var SyntheticMouseEvent = __webpack_require__(90);
@@ -59281,7 +59296,7 @@ module.exports = SimpleEventPlugin;
 
 
 
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 /**
  * @interface Event
@@ -59325,7 +59340,7 @@ module.exports = SyntheticAnimationEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 /**
  * @interface Event
@@ -59368,7 +59383,7 @@ module.exports = SyntheticClipboardEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 /**
  * @interface Event
@@ -59491,7 +59506,7 @@ module.exports = SyntheticFocusEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 /**
  * @interface Event
@@ -59672,7 +59687,7 @@ module.exports = SyntheticTouchEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(28);
+var SyntheticEvent = __webpack_require__(29);
 
 /**
  * @interface Event
@@ -64811,7 +64826,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -64869,7 +64884,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _warning = __webpack_require__(29);
+var _warning = __webpack_require__(30);
 
 var _warning2 = _interopRequireDefault(_warning);
 

@@ -8,7 +8,7 @@
 
 .autorization {
   width: 80%;
-  height: 70%;
+  height: calc(70% - 120px);
   margin: 120px auto 0;
 }
 .autorization input {
@@ -48,6 +48,7 @@
 }
 .warningAuth {
   width: 100%;
+  height: calc(30% - 40px);
   display: inline-block;
   font-size:14px;
   text-align: center;
