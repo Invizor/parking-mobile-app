@@ -63,7 +63,8 @@ class VerificationForm extends Component {
             <input type="text"
                    name="code"
                    placeholder="введите здесь sms код"
-                   ref="codeInput"/>
+                   ref="codeInput"
+            />
           </div>
           <div className="verification-button">
             <IonButton

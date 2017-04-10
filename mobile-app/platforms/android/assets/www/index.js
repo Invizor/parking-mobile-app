@@ -25081,6 +25081,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+document.addEventListener('deviceready', function () {
+  document.addEventListener('backbutton', function (event) {
+    //this.setState({flShowInput: true});
+    console.log("YEAH", true);
+  }, false);
+}, false);
+
 var AutorizationForm = function (_React$Component) {
   _inherits(AutorizationForm, _React$Component);
 
@@ -25090,7 +25097,8 @@ var AutorizationForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AutorizationForm.__proto__ || Object.getPrototypeOf(AutorizationForm)).call(this, props, context));
 
     _this.state = {
-      usersMarkers: []
+      usersMarkers: [],
+      flShowInput: true
     };
     return _this;
   }
@@ -25147,10 +25155,30 @@ var AutorizationForm = function (_React$Component) {
       }
     }
   }, {
+    key: "onFocusInput",
+    value: function onFocusInput() {
+      this.setState({ flShowInput: false });
+    }
+  }, {
+    key: "unFocusInput",
+    value: function unFocusInput() {
+      this.setState({ flShowInput: true });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
+      var warning = this.state.flShowInput ? _react2.default.createElement(
+        "div",
+        { className: "warningAuth" },
+        "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u0432\u043E\u0439\u0442\u0438/\u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0432\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 ",
+        _react2.default.createElement(
+          "a",
+          { href: "none.html" },
+          "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u0441\u0435\u0440\u0432\u0438\u0441\u0430"
+        )
+      ) : _react2.default.createElement("div", null);
       return _react2.default.createElement(
         _reactionic.IonContent,
         _extends({ customClasses: "" }, this.props),
@@ -25173,7 +25201,14 @@ var AutorizationForm = function (_React$Component) {
                 name: "phone",
                 placeholder: "(900) 123-4567",
                 ref: "phoneInput",
-                mask: ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/] })
+                mask: ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+                onFocus: function onFocus() {
+                  return _this3.onFocusInput();
+                },
+                onBlur: function onBlur() {
+                  return _this3.unFocusInput();
+                }
+              })
             ),
             _react2.default.createElement(
               "div",
@@ -25189,16 +25224,7 @@ var AutorizationForm = function (_React$Component) {
               )
             )
           ),
-          _react2.default.createElement(
-            "div",
-            { className: "warningAuth" },
-            "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u0432\u043E\u0439\u0442\u0438/\u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0432\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 ",
-            _react2.default.createElement(
-              "a",
-              { href: "none.html" },
-              "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u0441\u0435\u0440\u0432\u0438\u0441\u0430"
-            )
-          )
+          warning
         )
       );
     }
@@ -41599,7 +41625,8 @@ var VerificationForm = function (_Component) {
             _react2.default.createElement("input", { type: "text",
               name: "code",
               placeholder: "\u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u0434\u0435\u0441\u044C sms \u043A\u043E\u0434",
-              ref: "codeInput" })
+              ref: "codeInput"
+            })
           ),
           _react2.default.createElement(
             "div",

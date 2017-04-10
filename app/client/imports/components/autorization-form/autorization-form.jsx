@@ -6,13 +6,13 @@ import requestToServer from "../../utils/request-to-server";
 import createHashHistory from "history/lib/createHashHistory";
 import MaskedInput from 'react-text-mask';
 
-
 class AutorizationForm extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      usersMarkers: []
+      usersMarkers: [],
+      flShowInput: true
     };
   }
 
@@ -56,7 +56,23 @@ class AutorizationForm extends React.Component {
     }
   }
 
+  onFocusInput(){
+    this.setState({flShowInput:false})
+  }
+
+  unFocusInput(){
+    this.setState({flShowInput:true})
+  }
+
   render() {
+
+    let warning = this.state.flShowInput ?
+      <div className="warningAuth">
+        Нажимая войти/зарегистрироваться вы принимаете <a href="none.html">Условия использования сервиса</a>
+      </div>
+      :
+      <div>
+      </div>;
     return (
       <IonContent customClasses="" {...this.props}>
         <div className="form-autorization">
@@ -68,7 +84,10 @@ class AutorizationForm extends React.Component {
                      name="phone"
                      placeholder="(900) 123-4567"
                      ref="phoneInput"
-                     mask={['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} />
+                     mask={['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                     onFocus={() => this.onFocusInput()}
+                     onBlur={() => this.unFocusInput()}
+              />
             </div>
             <div className="autorization-btn">
               <IonButton
@@ -78,9 +97,7 @@ class AutorizationForm extends React.Component {
               </IonButton>
             </div>
           </div>
-          <div className="warningAuth">
-            Нажимая войти/зарегистрироваться вы принимаете <a href="none.html">Условия использования сервиса</a>
-          </div>
+          {warning}
         </div>
       </IonContent>
     );
