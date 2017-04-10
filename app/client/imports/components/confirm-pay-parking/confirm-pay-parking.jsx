@@ -4,6 +4,8 @@ import createHashHistory from "history/lib/createHashHistory";
 import "./confirm-pay-parking.scss";
 import Repository from "../../storage/local-storage";
 import RequestToServer from "../../utils/request-to-server";
+import LocalStorage from "../../storage/local-storage";
+
 
 export default class ConfirmPayParking extends Component {
 
@@ -145,14 +147,96 @@ export default class ConfirmPayParking extends Component {
       const parkingID = this.getParkingId();
       this.getCarByTitle();
 
-     /* console.log("parkingID", parkingID);
+      console.log("parkingID", parkingID);
       console.log(" this.getCarByTitle().regNumber",  this.getCarByTitle().regNumber);
-      console.log(" this.getCarByTitle()._id",  this.getCarByTitle()._id);*/
+      console.log(" this.getCarByTitle()._id",  this.getCarByTitle()._id);
       RequestToServer("POST", "https://parkimon.ru/api/v1/parking/start", (response) => {
         console.log("response", response);
+        /*let testParkingTimer = window.setInterval(()=>{
+          console.log("HELLO");
+          let client2 = new XMLHttpRequest();
+          client2.open("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id);
+          client2.setRequestHeader("Authorization", "Bearer " + String(LocalStorage.get_obj("token")));
+          client2.send();
+          client2.onload = () => {
+            const newResponse = JSON.parse(client2.responseText);
+            console.log("responseText", newResponse);
+          }
+        }, 5000);*/
         let parkingTimer = window.setInterval(()=> {
-          RequestToServer("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, (newResponse) => {
-            console.log(newResponse);
+          let client = new XMLHttpRequest();
+          client.open("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id);
+          client.setRequestHeader("Authorization", "Bearer " + String(LocalStorage.get_obj("token")));
+          client.send();
+          client.onload = () => {
+            const newResponse = JSON.parse(client.responseText);
+            console.log("responseText11111", newResponse);
+            if (newResponse.session.status === "done") {
+              newResponse.session.status = "parking";
+              let startTime = parseInt(newResponse.session.start.substring(11,13)) + 6;
+              let endTime = parseInt(newResponse.session.start.substring(11,13)) + 6 + newResponse.session.forTime / 60;
+              if(startTime < 10) {
+                startTime = "0" + startTime;
+              }
+              if (endTime < 10) {
+                endTime = "0" + endTime;
+              }
+              newResponse.session.start = newResponse.session.start.replace(newResponse.session.start.substring(0,11) + newResponse.session.start.substring(11,13), newResponse.session.start.substring(0,11) + startTime);
+              newResponse.session.end = newResponse.session.end.replace(newResponse.session.end.substring(0,11) + newResponse.session.end.substring(11,13),newResponse.session.end.substring(0,11) + endTime);
+              let newParkingSession = newResponse.session;
+
+
+              let status =  newParkingSession.end.substring(11, 19);
+              let remainingTimeDateArray = newParkingSession.end.substring(0, 10).split("-");
+              let remainingTimeArray = status.split(":");
+              // console.log("parkingSession2", parkingSession);
+              let endParkingTime = {
+                year: remainingTimeDateArray[0],
+                month: remainingTimeDateArray[1],
+                day: remainingTimeDateArray[2],
+                hours: remainingTimeArray[0],
+                minutes: remainingTimeArray[1],
+                seconds: remainingTimeArray[2]
+              };
+              newParkingSession.endParkingTime = endParkingTime;
+
+              console.log("THE NEW", newParkingSession);
+
+
+              if(Repository.get_obj("parkingSession") && Repository.get_obj("parkingSession").length) {
+                let existingParkingSessions = Repository.get_obj("parkingSession");
+                existingParkingSessions.push(newParkingSession);
+                Repository.change_obj("parkingSession", existingParkingSessions);
+              } else {
+                let parkingSession = [];
+                parkingSession.push(newParkingSession);
+                newParkingSession = parkingSession;
+                Repository.add_obj("parkingSession", newParkingSession);
+              }
+              console.log("newResponse", newResponse.session);
+              console.log("done");
+              clearInterval(parkingTimer);
+              let ionUpdatePopup = this.context.ionUpdatePopup;
+              ionUpdatePopup({
+                popupType: "alert",
+                okText: "Ok",
+                title: "Парковка началась!",
+                template: <span>Парковка началась!</span>,
+                cancelType: "button-light",
+                onOk: () => {
+                  let history = createHashHistory();
+                  history.push("/container");
+                }
+              });
+
+            } else if (newResponse.session.status === "error") {
+              console.log("request failed");
+              clearInterval(parkingTimer);
+            }
+          };
+
+       /*   RequestToServer("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id, (newResponse) => {
+            //console.log(newResponse);
             if (newResponse.session.status === "done") {
               newResponse.session.status = "parking";
               let startTime = parseInt(newResponse.session.start.substring(11,13)) + 6;
@@ -215,8 +299,8 @@ export default class ConfirmPayParking extends Component {
               console.log("request failed");
               clearInterval(parkingTimer);
             }
-          }, true);
-        }, 3000);
+          }, true);*/
+        }, 5000);
       }, true, "zoneId=" + parkingID +
                "&transportId=" + this.getCarByTitle()._id +
                "&transportString=" + this.getCarByTitle().regNumber +
@@ -283,12 +367,18 @@ export default class ConfirmPayParking extends Component {
             </div>
             <div className="reg-number">
               <IonItem>
-                Номер автомобиля
-                <input type="text"
-                       name="regNumber"
-                       ref="regNumber"
-                       value={this.state.regNumberValue}
-                       onChange={e => this.handleRegNumberChange(e)}/>
+                <div className="car-number">
+                  <div className="car-number-title">
+                    Номер автомобиля
+                  </div>
+                  <div className="car-number-field">
+                    <input type="text"
+                           name="regNumber"
+                           ref="regNumber"
+                           value={this.state.regNumberValue}
+                           onChange={e => this.handleRegNumberChange(e)}/>
+                  </div>
+                </div>
               </IonItem>
             </div>
             <div className="balance">

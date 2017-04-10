@@ -4,6 +4,7 @@ import "./set-balance.scss";
 import LocalStorage from "../../storage/local-storage";
 import RequestToServer from "../../utils/request-to-server";
 import {findDOMNode} from "react-dom";
+import emitterStorage from '../../storage/emitter-storage';
 
 export default class SetBalance extends React.Component {
 
@@ -16,7 +17,23 @@ export default class SetBalance extends React.Component {
     let user = LocalStorage.get_obj("user");
     RequestToServer("GET", "https://parkimon.ru/api/v1/payment/balance/phone/" + amount.value, (answer)=>{
       console.log("answer", answer);
+      let user = LocalStorage.get_obj("user");
+      user.wallet += parseInt(amount.value);
+      LocalStorage.change_obj("user", user);
+      amount.value = "";
+
+      let emitTek = emitterStorage.emitter;
+      if (emitTek) {
+        if (LocalStorage.get_obj("user")._id) {
+          emitTek.emit("walletUpdate", true);
+        }
+      }
     });
+  }
+
+  componentDidMount() {
+    let emitTek = emitterStorage.emitter;
+    emitTek.emit("hideLink", true);
   }
 
   render() {

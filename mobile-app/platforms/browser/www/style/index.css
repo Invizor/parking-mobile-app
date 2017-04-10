@@ -1,7 +1,9 @@
 .user-balance {
   width: 80px;
   margin-top: 8px;
-  font-size: 18px;
+  font-size: 18px; }
+
+.user-balance-underline {
   text-decoration: underline; }
 .spinner {
   top: 8px;
@@ -10483,6 +10485,13 @@ a.button {
   border: 1px solid #4b8bf4;
   border-radius: 3px;
   text-align: center; }
+
+.car-number {
+  display: flex;
+  justify-content: space-between; }
+
+.input-label {
+  width: 0; }
 .set-balance {
   width: 80%;
   margin: auto; }
@@ -10534,6 +10543,9 @@ a.button {
   right: 0;
   margin: 0 auto; }
 
+.item-info {
+  width: 70%; }
+
 .item {
   min-height: 30px; }
 
@@ -10544,7 +10556,6 @@ a.button {
   margin: 5px 5px 5px 5px; }
 
 .item p {
-  width: 90%;
   font-size: 18px;
   text-align: left;
   margin: 5px 5px 5px 5px; }

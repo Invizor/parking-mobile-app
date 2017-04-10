@@ -2,8 +2,16 @@ import React from "react";
 import Repository from "../../storage/local-storage";
 import ParkingCounter from "../parking-counter/parking-counter";
 import Map from "../map/map";
+var EventEmitter = require('event-emitter');
+import emitterStorage from '../../storage/emitter-storage';
 
 export default class AutorizedUserScreen extends React.Component {
+
+  componentDidMount() {
+   /* let emitTek = emitterStorage.emitter;
+    emitTek.emit("hideLink", true);*/
+  }
+
 
   render() {
     //console.log('Repository.get_obj("parkingSession")', Repository.get_obj("parkingSession"));

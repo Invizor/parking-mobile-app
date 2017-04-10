@@ -26,7 +26,8 @@ var Layout = React.createClass({
     return {
       isUser: false,
       fl: false,
-      userBalance: 0
+      userBalance: 0,
+      userBalanceClassName: "user-balance user-balance-underline"
     }
   },
   getPageProps: function (path) {
@@ -39,7 +40,7 @@ var Layout = React.createClass({
       />
     );
 
-    const balance = <UserBalance />;
+    const balance = <UserBalance userBalanceClassName = {this.state.userBalanceClassName}/>;
 
 
     // add defaults to pageListItems
@@ -71,11 +72,29 @@ var Layout = React.createClass({
     if (Repository.get_obj("token") == null && this.state.isUser == true) {
       this.setState({isUser: false});
     }
+
     let emitter = new EventEmitter();
     emitter.on('radiation', (flag) => {
       this.setState({fl: flag});
     });
     emitterStorage.emitter = emitter;
+
+    emitter.on("hideLink", () => {
+      this.setState({
+        userBalanceClassName: "user-balance"
+      })
+    });
+    emitterStorage.emitter = emitter;
+
+
+    emitter.on("showLink", () => {
+      console.log("showLink");
+      this.setState({
+        userBalanceClassName: "user-balance user-balance-underline"
+      })
+    });
+    emitterStorage.emitter = emitter;
+
   },
   componentWillUnmount(){
     emitter = emitterStorage.emitter;

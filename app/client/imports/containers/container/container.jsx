@@ -65,12 +65,11 @@ export default class Container extends React.Component {
     }
     if (Repository.get_obj("user") && Repository.get_obj("user")._id) {
       this.getListCar();
-    }
-
-    let emitTek = emitterStorage.emitter;
-    if (emitTek != null && emitTek != undefined) {
-      if (Repository.get_obj("user")._id) emitTek.emit("radiation", true);
-      else if (Repository.get_obj("user")._id) emitTek.emit("radiation", false);
+      let emitTek = emitterStorage.emitter;
+      if (emitTek != null && emitTek != undefined) {
+        if (Repository.get_obj("user")._id) emitTek.emit("radiation", true);
+        else if (Repository.get_obj("user")._id) emitTek.emit("radiation", false);
+      }
     }
     //cordova.plugins.Keyboard.disableScroll(true);
     // cordova.plugins.Keyboard.show();

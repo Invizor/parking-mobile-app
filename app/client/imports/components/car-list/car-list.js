@@ -74,9 +74,6 @@ class CarList extends React.Component {
       <IonContent customClasses="" {...this.props}>
 
         <div className="list-cars">
-          <div className="titleListCar">
-            Ваши транспортные средства:
-          </div>
           <IonList className="content-list-cars">
             {myCars}
           </IonList>
