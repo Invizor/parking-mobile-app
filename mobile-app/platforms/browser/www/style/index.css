@@ -10339,7 +10339,7 @@ a.button {
 
 .autorization {
   width: 80%;
-  height: calc(80% - 120px);
+  height: calc(70% - 120px);
   margin: 120px auto 0; }
 
 .autorization input {
@@ -10379,7 +10379,7 @@ a.button {
 
 .warningAuth {
   width: 100%;
-  height: calc(20% - 40px);
+  height: calc(30% - 40px);
   display: inline-block;
   font-size: 14px;
   text-align: center;

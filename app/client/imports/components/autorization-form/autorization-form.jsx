@@ -80,7 +80,7 @@ class AutorizationForm extends React.Component {
             <div className="first-symbol"> +7</div>
             <div className="phone-input">
               <MaskedInput id="phone"
-                     type="text"
+                     type="tel"
                      name="phone"
                      placeholder="(900) 123-4567"
                      ref="phoneInput"

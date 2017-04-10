@@ -60,7 +60,7 @@ class VerificationForm extends Component {
       <IonContent customClasses="" {...this.props}>
         <div className="verification">
           <div className="verification-code">
-            <input type="text"
+            <input type="number"
                    name="code"
                    placeholder="введите здесь sms код"
                    ref="codeInput"

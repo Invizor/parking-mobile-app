@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-keyboard": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        }
     },
     "dependent_plugins": {}
 }
