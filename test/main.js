@@ -4,15 +4,14 @@ import { shallow, mount, render } from 'enzyme';
 import AutorizationForm from '../app/client/imports/components/autorization-form/autorization-form'
 'use strict';
 
-//console.log(AutorizationForm);
+console.log(AutorizationForm);
 
 describe('<AutorizationForm/ >', () => {
   it('should render phone-input', () => {
     const wrapper = shallow(<AutorizationForm />);
-    console.log(wrapper);
-
+    //console.log(wrapper);
+    expect(true).to.equal(true);
   });
-
 });
 
 /*describe('hello world', () => {

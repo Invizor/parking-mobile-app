@@ -16,6 +16,7 @@ module.exports = function(config) {
       'karma-webpack',
       'karma-mocha',
       'karma-chai',
+      'karma-mocha-reporter'
     ],
     preprocessors: {
       'test/main.js': ['webpack']
@@ -27,13 +28,14 @@ module.exports = function(config) {
         },
         module: {
           loaders: [
-            { test: /\.jsx?$/,
+            {
+              test: /\.jsx?$/,
               loader: 'babel-loader',
-              include: path.resolve(__dirname, "app"),
-              query:
-                {
-                  presets:['react', 'es2015', 'stage-0']
-                }
+              exclude: /node_modules/,
+              query: {
+                cacheDirectory: true,
+                presets: ['react', 'es2015']
+              }
             },
             {
               test: /\.scss$/,
