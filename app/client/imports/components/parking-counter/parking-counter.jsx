@@ -36,6 +36,7 @@ export default class ParkingCounter extends React.Component {
       this.getRemainingTime();
     }, 1000);
 
+
   }
 
   componentWillUnmount() {
@@ -98,6 +99,28 @@ export default class ParkingCounter extends React.Component {
 
   render() {
 
+
+    let parking = LocalStorage.get_obj("paidParkingList").filter((parking) => {
+      if (this.state.parkingSession.zone === parking._id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+
+    let oneParking = "";
+
+    if (parking[0] && parking[0].address) {
+      oneParking = parking[0].address;
+    } else {
+      oneParking = "";
+    }
+
+    //console.log("oneParking", oneParking);
+    // console.log("address", oneParking.address);
+
+
     let counterMarkup;
     if (this.props.singleParking) {
       counterMarkup = (
@@ -114,14 +137,18 @@ export default class ParkingCounter extends React.Component {
       );
     } else {
       counterMarkup = (
-          <div className="remaining-time">
-            <div>
-              Оставшееся время: <span>{this.state.remain.hours}</span>:<span>{this.state.remain.minutes}</span>:<span>{this.state.remain.seconds}</span>
-            </div>
-            <div>
-              Номер машины: <span>{this.state.parkingSession.transportNumber}</span>
-            </div>
+        <div className="remaining-time">
+          <div>
+            Оставшееся время:
+            <span>{this.state.remain.hours}</span>:<span>{this.state.remain.minutes}</span>:<span>{this.state.remain.seconds}</span>
           </div>
+          <div>
+            Номер машины: <span>{this.state.parkingSession.transportNumber}</span>
+          </div>
+          <div>
+            Адрес: {oneParking}
+          </div>
+        </div>
       );
     }
     return (

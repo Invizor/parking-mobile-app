@@ -2,20 +2,19 @@ import React from "react";
 import Repository from "../../storage/local-storage";
 import "./user-balance.scss";
 import createHashHistory from "history/lib/createHashHistory";
-var EventEmitter = require('event-emitter');
-import emitterStorage from '../../storage/emitter-storage';
+import EventEmitter from "event-emitter";
+import emitterStorage from "../../storage/emitter-storage";
 
 class UserBalance extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      userBalance: null,
-      userBalanceClassName: "user-balance user-balance-underline"
+      userBalance: null
     };
   }
 
-  walletUpdate(flag) {
+  walletUpdate() {
     const newWallet = Repository.get_obj("user").wallet;
     this.setState({userBalance: newWallet});
   }
@@ -26,17 +25,14 @@ class UserBalance extends React.Component {
 
   componentDidMount() {
     let emitter = new EventEmitter();
-    emitter.on('walletUpdate', () => {
-      this.walletUpdate()
-    });
+    emitter.on("walletUpdate", this.walletUpdate.bind(this));
     emitterStorage.emitter = emitter;
-
   }
 
   componentWillUnmount() {
-    /*  let emitter = emitterStorage.emitter;
-     emitter.off('walletUpdate', false);
-     emitterStorage.emitter = null;*/
+    let emitter = emitterStorage.emitter;
+    emitter.off("radiation", this.walletUpdate.bind(this));
+    emitterStorage.emitter = null;
   }
 
   componentWillMount() {
@@ -50,8 +46,10 @@ class UserBalance extends React.Component {
   }
 
   showBalancePage() {
-    let history = createHashHistory();
-    history.push("/set-balance/");
+    if (!this.props.activeBalanceLink) {
+      let history = createHashHistory();
+      history.push("/set-balance/");
+    }
   }
 
   getClassName() {
@@ -61,10 +59,12 @@ class UserBalance extends React.Component {
   }
 
   render() {
+    let userBalanceClassName = this.props.activeBalanceLink ? "user-balance" : "user-balance  user-balance-underline";
     return (
-      <div className={this.props.userBalanceClassName}>
-        {this.state.userBalance ? <div onClick={() => this.showBalancePage()}>{this.state.userBalance} руб.</div> : ""}
+      <div className={userBalanceClassName}>
+        {this.state.userBalance ? <div onClick={() => this.showBalancePage()}>{this.props.userBalance} руб.</div> : ""}
       </div>
+
     );
   }
 }

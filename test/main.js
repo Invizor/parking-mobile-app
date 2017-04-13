@@ -6,7 +6,7 @@ import AutorizationForm from '../app/client/imports/components/autorization-form
 
 console.log(AutorizationForm);
 
-describe('<AutorizationForm/ >', () => {
+describe('<AutorizationForm />', () => {
   it('should render phone-input', () => {
     const wrapper = shallow(<AutorizationForm />);
     //console.log(wrapper);

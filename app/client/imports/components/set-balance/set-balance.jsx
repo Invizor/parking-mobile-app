@@ -4,37 +4,48 @@ import "./set-balance.scss";
 import LocalStorage from "../../storage/local-storage";
 import RequestToServer from "../../utils/request-to-server";
 import {findDOMNode} from "react-dom";
-import emitterStorage from '../../storage/emitter-storage';
+import emitterStorage from "../../storage/emitter-storage";
+import EventEmitterMixin from "react-event-emitter-mixin";
 
-export default class SetBalance extends React.Component {
+let SetBalance = React.createClass({
+
+  mixins:[EventEmitterMixin],
+
+  getInitialState: function() {
+    return {
+      wallet: 0
+    }
+  },
 
   balancePaymentByBankCard() {
 
-  }
+  },
+
 
   balancePaymentByPhone() {
     const amount = findDOMNode(this.refs.setBalanceInput);
-    let user = LocalStorage.get_obj("user");
     RequestToServer("GET", "https://parkimon.ru/api/v1/payment/balance/phone/" + amount.value, (answer)=>{
       console.log("answer", answer);
       let user = LocalStorage.get_obj("user");
       user.wallet += parseInt(amount.value);
       LocalStorage.change_obj("user", user);
       amount.value = "";
+      this.eventEmitter("emit","updateWallet");
 
-      let emitTek = emitterStorage.emitter;
-      if (emitTek) {
-        if (LocalStorage.get_obj("user")._id) {
-          emitTek.emit("walletUpdate", true);
-        }
-      }
     });
-  }
+  },
+
+  componentWillMount() {
+
+  },
 
   componentDidMount() {
-    let emitTek = emitterStorage.emitter;
-    emitTek.emit("hideLink", true);
-  }
+    this.eventEmitter("emit","openBalancePage");
+  },
+
+  componentWillUnmount() {
+    this.eventEmitter("emit","closeBalancePage");
+  },
 
   render() {
     return (
@@ -63,5 +74,7 @@ export default class SetBalance extends React.Component {
         </IonContent>
     );
   }
-}
+});
+
+export default SetBalance;
 
