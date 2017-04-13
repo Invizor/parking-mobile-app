@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
-import AutorizationForm from '../app/client/imports/components/autorization-form/autorization-form'
+import AutorizationForm from '../app/client/imports/components/authorization-form/autorization-form'
 'use strict';
 
 console.log(AutorizationForm);

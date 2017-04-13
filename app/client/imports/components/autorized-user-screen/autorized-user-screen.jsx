@@ -45,7 +45,7 @@ export default class AutorizedUserScreen extends React.Component {
     let mapContainerClassName = Repository.get_obj("parkingSession") ? "map-container min-height" : "map-container full-height";
 
     return (
-      <div>
+      <div className="main-page">
         <div className={mapContainerClassName}>
           <Map/>
         </div>

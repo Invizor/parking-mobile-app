@@ -4,7 +4,6 @@ import "./set-balance.scss";
 import LocalStorage from "../../storage/local-storage";
 import RequestToServer from "../../utils/request-to-server";
 import {findDOMNode} from "react-dom";
-import emitterStorage from "../../storage/emitter-storage";
 import EventEmitterMixin from "react-event-emitter-mixin";
 
 let SetBalance = React.createClass({
@@ -14,7 +13,7 @@ let SetBalance = React.createClass({
   getInitialState: function() {
     return {
       wallet: 0
-    }
+    };
   },
 
   balancePaymentByBankCard() {

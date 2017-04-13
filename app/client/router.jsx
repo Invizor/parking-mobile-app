@@ -5,7 +5,7 @@ import Index from './imports/components/index/index';
 import App from './imports/containers/app/app';
 import Layout from './imports/layouts/main';
 import Container from './imports/containers/container/container';
-import AutorizationForm from './imports/components/autorization-form/autorization-form';
+import AutorizationForm from './imports/components/authorization-form/autorization-form';
 import VerificationForm from './imports/components/verification-form/verification-form';
 import ParkingItem from './imports/components/parking-item/parking-item';
 import ConfirmPayParking from './imports/components/confirm-pay-parking/confirm-pay-parking';

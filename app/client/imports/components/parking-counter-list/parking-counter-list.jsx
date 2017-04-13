@@ -2,6 +2,7 @@ import React from "react";
 import {IonList, IonItem} from "reactionic";
 import LocalStorage from "../../storage/local-storage";
 import ParkingCounter from "../parking-counter/parking-counter";
+import "./parking-counter-list.scss";
 
 export default class ParkingCounterList extends React.Component {
 
@@ -30,9 +31,12 @@ export default class ParkingCounterList extends React.Component {
       let parkingSessionList = LocalStorage.get_obj("parkingSession");
       parkingCounterList = parkingSessionList.map((parkingCounter, index) => {
         return (
-          <IonItem key={index}>
-            <ParkingCounter number={index}/>
-          </IonItem>);
+            <IonItem key={index}>
+              <div className="parking-counter-item">
+              <ParkingCounter number={index}/>
+              </div>
+            </IonItem>
+        );
       });
     } else {
       parkingCounterList = "Нет припаркованных автомобилей";

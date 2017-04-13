@@ -137,7 +137,7 @@ export default class ParkingCounter extends React.Component {
       );
     } else {
       counterMarkup = (
-        <div className="remaining-time">
+        <div className="remaining-time parking-counter-list">
           <div>
             Оставшееся время:
             <span>{this.state.remain.hours}</span>:<span>{this.state.remain.minutes}</span>:<span>{this.state.remain.seconds}</span>
