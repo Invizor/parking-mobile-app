@@ -42,11 +42,9 @@ export default class Container extends React.Component {
   }
 
   getUser(theUrl) {
-    /*requestToServer("GET", theUrl, (userObj) => {
-      if (user.Obj._id == 5) {
+    requestToServer("GET", theUrl, (userObj) => {
         Repository.add_obj("user", userObj);
-      }
-    }, true);*/
+    }, true);
   }
 
   getListCar() {

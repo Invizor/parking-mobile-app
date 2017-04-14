@@ -36,7 +36,7 @@ class VerificationForm extends Component {
           template: <span>Вы зарегистрированы</span>,
           okType: "button-light",
         });
-        history.push("/container");
+        history.goBack(2);
       } else {
         let ionUpdatePopup = this.context.ionUpdatePopup;
         ionUpdatePopup({

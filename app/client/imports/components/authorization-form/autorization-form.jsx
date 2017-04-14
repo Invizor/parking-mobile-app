@@ -50,7 +50,6 @@ class AutorizationForm extends React.Component {
                       </span>,
         cancelType: "button-light",
         onOk: () => {
-          console.log("OK-was-enter");
           this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile",endPhone);
         }
       });

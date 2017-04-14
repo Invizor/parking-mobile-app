@@ -62,9 +62,8 @@ class UserBalance extends React.Component {
     let userBalanceClassName = this.props.activeBalanceLink ? "user-balance" : "user-balance  user-balance-underline";
     return (
       <div className={userBalanceClassName}>
-        {this.state.userBalance ? <div onClick={() => this.showBalancePage()}>{this.props.userBalance} руб.</div> : ""}
+        {this.state.userBalance ? <div onClick={() => this.showBalancePage()}>{this.state.userBalance} руб.</div> : ""}
       </div>
-
     );
   }
 }
