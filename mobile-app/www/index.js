@@ -25107,7 +25107,8 @@ var AutorizationForm = function (_React$Component) {
 
     _this.state = {
       usersMarkers: [],
-      flShowInput: true
+      flShowInput: true,
+      flShowPopup: false
     };
     return _this;
   }
@@ -25137,6 +25138,7 @@ var AutorizationForm = function (_React$Component) {
       }
 
       if (!token) {
+        console.log("INTO_context=", this);
         var ionUpdatePopup = this.context.ionUpdatePopup;
         ionUpdatePopup({
           popupType: "confirm",
@@ -39565,50 +39567,50 @@ var _editCar2 = _interopRequireDefault(_editCar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var main = function main() {
+var pageList = [{ path: '/', component: _index2.default, title: 'React Ionic', done: true }, { path: '/autorization-form', component: _autorizationForm2.default, title: 'Авторизация', done: true }, { path: '/verification-form/:number', component: _verificationForm2.default, title: 'Верификация', done: true }, { path: '/list-car', component: _carList2.default, title: 'Список автомобилей', done: true }, { path: '/add-car', component: _addCarForm2.default, title: 'Добавление машины', done: true }, { path: '/parking-item/:id', component: _parkingItem2.default, title: 'Информация о парковке', done: true }, { path: '/container', component: _container2.default, title: 'Parkimon', done: true }, { path: '/set-balance', component: _setBalance2.default, title: 'Пополнение баланса', done: true }, { path: '/confirm-pay-parking/:id', component: _confirmPayParking2.default, title: 'Условия парковки', done: true }, { path: '/parking-history', component: _parkingHistory2.default, title: 'История парковок', done: true }, { path: '/edit-car/:id', component: _editCar2.default, title: 'Редактирование автомобиля', done: true }, { path: '/parking-counter-list', component: _parkingCounterList2.default, title: 'Припаркованные авто', done: true }];
 
-  var pageList = [{ path: '/', component: _index2.default, title: 'React Ionic', done: true }, { path: '/autorization-form', component: _autorizationForm2.default, title: 'Авторизация', done: true }, { path: '/verification-form/:number', component: _verificationForm2.default, title: 'Верификация', done: true }, { path: '/list-car', component: _carList2.default, title: 'Список автомобилей', done: true }, { path: '/add-car', component: _addCarForm2.default, title: 'Добавление машины', done: true }, { path: '/parking-item/:id', component: _parkingItem2.default, title: 'Информация о парковке', done: true }, { path: '/container', component: _container2.default, title: 'Parkimon', done: true }, { path: '/set-balance', component: _setBalance2.default, title: 'Пополнение баланса', done: true }, { path: '/confirm-pay-parking/:id', component: _confirmPayParking2.default, title: 'Условия парковки', done: true }, { path: '/parking-history', component: _parkingHistory2.default, title: 'История парковок', done: true }, { path: '/edit-car/:id', component: _editCar2.default, title: 'Редактирование автомобиля', done: true }, { path: '/parking-counter-list', component: _parkingCounterList2.default, title: 'Припаркованные авто', done: true }];
+var tabRoutes;
+var pageRoutes = pageList.map(function (page) {
+  if (page.childRoutes) {
+    tabRoutes = page.childRoutes.map(function (cpage) {
+      return _react2.default.createElement(_reactRouter.Route, { path: cpage.path, component: cpage.component, key: cpage.path });
+    });
+  } else {
+    return _react2.default.createElement(_reactRouter.Route, { path: page.path, component: page.component, key: page.path });
+  }
+});
 
-  var tabRoutes;
-  var pageRoutes = pageList.map(function (page) {
-    if (page.childRoutes) {
-      tabRoutes = page.childRoutes.map(function (cpage) {
-        return _react2.default.createElement(_reactRouter.Route, { path: cpage.path, component: cpage.component, key: cpage.path });
-      });
-    } else {
-      return _react2.default.createElement(_reactRouter.Route, { path: page.path, component: page.component, key: page.path });
-    }
-  });
+var PageList = pageList.map(function (page, idx, pageArray) {
+  // strip the page components
+  delete page.component;
+  return page;
+});
 
-  var PageList = pageList.map(function (page, idx, pageArray) {
-    // strip the page components
-    delete page.component;
-    return page;
-  });
+var mainRoute = _react2.default.createElement(
+  _reactRouter.Route,
+  { component: _main2.default },
+  _react2.default.createElement(_reactRouter.IndexRoute, { component: _index2.default }),
+  pageRoutes
+);
 
-  var mainRoute = _react2.default.createElement(
-    _reactRouter.Route,
-    { component: _main2.default },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _index2.default }),
-    pageRoutes
-  );
+var routes = _react2.default.createElement(
+  _reactRouter.Route,
+  { path: '/', component: _app2.default, pageList: PageList },
+  mainRoute,
+  _react2.default.createElement(_reactRouter.Route, { path: '*', component: _nomatch2.default })
+);
 
-  var routes = _react2.default.createElement(
-    _reactRouter.Route,
-    { path: '/', component: _app2.default, pageList: PageList },
-    mainRoute,
-    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _nomatch2.default })
-  );
+//alert("hello");
+/*ReactDOM.render(
+  <Router history={hashHistory}>{routes}</Router>,
+  document.getElementById('app')
+);*/
 
-  //alert("hello");
-  _reactDom2.default.render(_react2.default.createElement(
-    _reactRouter.Router,
-    { history: _reactRouter.hashHistory },
-    routes
-  ), document.getElementById('app'));
-};
-
-main();
+(0, _reactDom.render)(_react2.default.createElement(
+  _reactRouter.Router,
+  { history: _reactRouter.hashHistory },
+  routes
+), document.getElementById('app'));
 
 /***/ }),
 /* 285 */
@@ -42296,6 +42298,8 @@ var Layout = _react2.default.createClass({
     _emitterStorage2.default.emitter = null;
   },
   render: function render() {
+    console.log("LayoutTHIS=", this);
+
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
     var globalFl = false;
     if (_localStorage2.default.get_obj("token")) globalFl = true;

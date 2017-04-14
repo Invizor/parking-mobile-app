@@ -42,7 +42,6 @@ var Layout = React.createClass({
 
     const balance = <UserBalance userBalanceClassName = {this.state.userBalanceClassName}/>;
 
-
     // add defaults to pageListItems
     var pageList = this.props.pageList.map(function (page) {
       page.headerTitle = <MainTitle title={page.title}/>;
@@ -102,6 +101,7 @@ var Layout = React.createClass({
     emitterStorage.emitter = null;
   },
   render() {
+
     var currentPageProps = this.getPageProps(this.props.routes[this.props.routes.length - 1].path);
     let globalFl = false;
     if (Repository.get_obj("token")) globalFl = true;
@@ -117,9 +117,9 @@ var Layout = React.createClass({
           </IonSideMenu>
           <IonSideMenuContent >
             <IonNavBar customClasses="nav-blue"
-                       title={currentPageProps.headerTitle}
-                       leftButton={currentPageProps.leftHeaderButton}
-                       rightButton={currentPageProps.rightHeaderButton}
+                       title={currentPageProps ? currentPageProps.headerTitle : "noneTitle"}
+                       leftButton={currentPageProps ? currentPageProps.leftHeaderButton : null}
+                       rightButton={currentPageProps ? currentPageProps.rightHeaderButton : null}
                        {...this.props}
             />
             <IonContent customClasses="" {...this.props} >

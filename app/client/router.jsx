@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import { render } from 'react-dom'
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import Index from './imports/components/index/index';
 import App from './imports/containers/app/app';
@@ -17,7 +18,8 @@ import ParkingHistory from './imports/components/parking-history/parking-history
 import ParkingCounterList from './imports/components/parking-counter-list/parking-counter-list';
 import EditCar from './imports/components/edit-car/edit-car';
 
-let main = () => {
+
+
 
   var pageList = [
     {path: '/', component: Index, title: 'React Ionic', done: true},
@@ -68,10 +70,13 @@ let main = () => {
 
 
   //alert("hello");
-  ReactDOM.render(
+  /*ReactDOM.render(
     <Router history={hashHistory}>{routes}</Router>,
     document.getElementById('app')
-  );
-};
+  );*/
 
-main();
+  render((
+    <Router history={hashHistory}>{routes}</Router>
+  ), document.getElementById('app'))
+
+

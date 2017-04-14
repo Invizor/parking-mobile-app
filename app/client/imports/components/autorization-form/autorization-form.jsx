@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import {IonContent, IonButton,} from "reactionic";
+import {IonContent, IonButton} from "reactionic";
 import "./autorization-form.scss";
 import LocalStorage from "../../storage/local-storage";
 import requestToServer from "../../utils/request-to-server";
@@ -12,7 +12,8 @@ class AutorizationForm extends React.Component {
     super(props, context);
     this.state = {
       usersMarkers: [],
-      flShowInput: true
+      flShowInput: true,
+      flShowPopup: false
     };
   }
 
@@ -37,6 +38,7 @@ class AutorizationForm extends React.Component {
     }
 
     if (!token) {
+      console.log("INTO_context=",this);
       let ionUpdatePopup = this.context.ionUpdatePopup;
       ionUpdatePopup({
         popupType: "confirm",
@@ -48,6 +50,7 @@ class AutorizationForm extends React.Component {
                       </span>,
         cancelType: "button-light",
         onOk: () => {
+          console.log("OK-was-enter");
           this.startRegistration("https://parkimon.ru/api/v1/user/register-mobile",endPhone);
         }
       });

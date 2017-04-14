@@ -19,7 +19,10 @@ module.exports = function(config) {
       'karma-mocha-reporter'
     ],
     preprocessors: {
-      'test/main.js': ['webpack']
+      'test/main.js': ['webpack'],
+      'app/**/*.js*': ['webpack'],
+      'app/**/*.css': ['webpack'],
+      'app/**/*.scss': ['webpack'],
     },
     webpack:
       {
