@@ -18,7 +18,7 @@ let Index = React.createClass({
       return (
         <IonItem link={page.path} iconLeft iconRight key={page.path}>
           <IonIcon icon={checkmark}/>
-          {page.headerTitle}
+          {page ? page.headerTitle : "noneTitle"}
           <IonIcon icon="ios-arrow-right"/>
         </IonItem>
       );
