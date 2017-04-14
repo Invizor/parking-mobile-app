@@ -163,6 +163,7 @@ export default class ConfirmPayParking extends Component {
             console.log("responseText", newResponse);
           }
         }, 5000);*/
+        let counter = 0;
         let parkingTimer = window.setInterval(()=> {
           let client = new XMLHttpRequest();
           client.open("GET", "https://parkimon.ru/api/v1/parking/" + response.session._id);
@@ -170,7 +171,6 @@ export default class ConfirmPayParking extends Component {
           client.send();
           client.onload = () => {
             const newResponse = JSON.parse(client.responseText);
-            console.log("responseText11111", newResponse);
             if (newResponse.session.status === "done") {
               newResponse.session.status = "parking";
               let startTime = parseInt(newResponse.session.start.substring(11,13)) + 6;
@@ -232,6 +232,12 @@ export default class ConfirmPayParking extends Component {
             } else if (newResponse.session.status === "error") {
               console.log("request failed");
               clearInterval(parkingTimer);
+            } else if (newResponse.session.status === "new") {
+              counter++;
+              console.log("counter", counter);
+              if (counter === 3) {
+                clearInterval(parkingTimer);
+              }
             }
           };
 

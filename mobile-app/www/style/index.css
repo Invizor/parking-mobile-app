@@ -10652,6 +10652,7 @@ a.button {
   font-size: 18px; }
 
 .list-history-parking .item .number-car {
-  font-size: 18px; }
+  font-size: 18px;
+  white-space: normal; }
 .parking-counter-item {
   white-space: normal; }

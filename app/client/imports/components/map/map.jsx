@@ -11,6 +11,7 @@ import {
 import createHashHistory from "history/lib/createHashHistory";
 import Repository from "../../storage/local-storage";
 import requestToServer from "../../utils/request-to-server";
+import EventEmitterMixin from "react-event-emitter-mixin";
 import "./map.scss";
 
 
@@ -43,9 +44,20 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
-export default class Map extends Component {
+let Map = React.createClass({
 
-  constructor(props) {
+  mixins: [EventEmitterMixin],
+
+  getInitialState: function() {
+    return {
+      markers: [],
+      mapCenter: this.geoLocation,
+      parkingMarkers: [],
+      geoLocation: [45.0287579, 38.9680473]
+    }
+  },
+
+  /*constructor(props) {
     super(props);
     this.state = {
       markers: [],
@@ -54,35 +66,35 @@ export default class Map extends Component {
       geoLocation: [45.0287579, 38.9680473]
     };
     this.getGeoLocation = this.getGeoLocation.bind(this);
-  }
+  }*/
 
 
   onSuccess(e, position) {
     this.getGeoLocation(e, position);
-  }
+  },
 
   getGeoLocation(e, position) {
     console.log(position);
     this.setState({mapCenter: [position.coords.latitude, position.coords.longitude]});
-  }
+  },
 
   onError(error) {
     alert("code: " + error.code + "\n" +
       "message: " + error.message + "\n");
-  }
+  },
 
   onGeoLocBtnClick() {
     this.watchID = navigator.geolocation.getCurrentPosition(this.getGeoLocation, this.onError);
-  }
+  },
 
   onShowStateBtnClick() {
     console.log("parkings", this.state.markers);
-  }
+  },
 
 
   showCoords(e) {
     this.setState({mapCenter: [e.center.lat, e.center.lng]});
-  }
+  },
 
 
   getPaidParkings() {
@@ -118,8 +130,9 @@ export default class Map extends Component {
       console.log("paidParkingList", paidParkingList);*/
       this.setState({markers: paidParkingList});
       Repository.add_obj("paidParkingList", paidParkingList);
+      this.eventEmitter("emit","parkingsLoaded");
     }, false);
-  }
+  },
 
 
   componentDidMount() {
@@ -131,16 +144,16 @@ export default class Map extends Component {
    // this.showLoading();
 
 
-  }
+  },
 
   handleMarkerClick(targetMarker) {
     let history = createHashHistory();
     history.push("/parking-item/" + targetMarker._id);
-  }
+  },
 
   onClearLocalStorageClick() {
     Repository.clearRep();
-  }
+  },
 
   showLoading() {
     let customTemplate = <div><h2><IonSpinner icon="dots" customClasses="inloader spinner-light"/>Подождите<IonSpinner
@@ -152,7 +165,7 @@ export default class Map extends Component {
       duration: 3000,
       customTemplate: customTemplate
     });
-  }
+  },
 
 
   render() {
@@ -174,7 +187,7 @@ export default class Map extends Component {
 
     );
   }
-}
+});
 
 /*
 const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
@@ -295,3 +308,5 @@ export default class MarkerClustererExample extends Component {
 Map.contextTypes = {
   ionShowLoading: React.PropTypes.func
 };
+
+export default Map;
