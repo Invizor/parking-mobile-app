@@ -10331,6 +10331,29 @@ a.button {
 .ion-navicon-round {
   display: block;
   margin-right: 20px; }
+
+.main-page {
+  height: 100%;
+  background: #4b8bf4;
+  color: #FFF; }
+.single-parking .remaining-time {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 30px; }
+
+.single-parking .remaining-hours {
+  margin-top: 20px; }
+
+.parking-counter-list {
+  margin-top: 10px; }
+.parking-cars {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 20px; }
+
+.parking-class-number {
+  color: #FFF;
+  border-bottom: 1px solid #FFF; }
 .form-autorization {
   width: 100%;
   display: flex;
@@ -10391,13 +10414,6 @@ a.button {
 .popup {
   font-size: 18px;
   text-align: center; }
-.single-parking .remaining-time {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 30px; }
-
-.single-parking .remaining-hours {
-  margin-top: 20px; }
 .verification {
   width: 100%;
   height: calc(100% - 120px); }
@@ -10637,3 +10653,5 @@ a.button {
 
 .list-history-parking .item .number-car {
   font-size: 18px; }
+.parking-counter-item {
+  white-space: normal; }

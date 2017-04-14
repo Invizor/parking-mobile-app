@@ -1,5 +1,4 @@
 import React from "react";
-import LocalStorage from "../../storage/local-storage";
 
 export default class RemainingTime extends React.Component {
   constructor(props) {
@@ -29,7 +28,6 @@ export default class RemainingTime extends React.Component {
   }
 
   render() {
-    let remainingTime = LocalStorage.get_obj("remainingTime");
     console.log("props2", this.props);
     // let remainingTimeDisplay = remainingTime.remainingHours + " : " + remainingTime.remainingMinutes + " : " + remainingTime.remainingSeconds;
     return (
@@ -42,7 +40,7 @@ export default class RemainingTime extends React.Component {
         }
 
       </div>
-    )
+    );
 
   }
 

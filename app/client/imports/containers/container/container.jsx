@@ -1,12 +1,9 @@
 import React from "react";
 import {IonContent} from "reactionic";
 import "./container.scss";
-import Map from "../../components/map/map";
-import AutorizationForm from "../../components/autorization-form/autorization-form";
 import Repository from "../../storage/local-storage";
 import emitterStorage from "../../storage/emitter-storage";
 import requestToServer from "../../utils/request-to-server";
-import ParkingCounter from "../../components/parking-counter/parking-counter";
 import AutorizedUserScreen from "../../components/autorized-user-screen/autorized-user-screen";
 import UnAutorizedUserScreen from "../../components/unauthorized-user-screen/unauthorized-user-screen";
 

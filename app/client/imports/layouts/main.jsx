@@ -5,16 +5,18 @@ import {
   IonNavView, IonView, IonContent, IonNavBar, IonNavBackButton, IonFooterBar, IonButton, IonIcon,
   IonSideMenuContainer, IonSideMenus, IonSideMenu, IonSideMenuContent, IonPopoverButton
 } from 'reactionic';
-//import { DemoPopover } from '../popover';
 import SideMenu from '../components/side-menu/side-menu';
 import UserBalance from '../components/user-balance/user-balance';
 import MainTitle from '../components/main-title/main-title';
 import Repository from '../storage/local-storage';
-var EventEmitter = require('event-emitter');
+import EventEmitter from "event-emitter";
 import emitterStorage from '../storage/emitter-storage';
+import EventEmitterMixin from "react-event-emitter-mixin";
 import "./main.scss";
 
 var Layout = React.createClass({
+
+  mixins:[EventEmitterMixin],
   contextTypes: {
     ionSnapper: React.PropTypes.object,
     ionShowPopover: React.PropTypes.func,
@@ -27,9 +29,25 @@ var Layout = React.createClass({
       isUser: false,
       fl: false,
       userBalance: 0,
-      userBalanceClassName: "user-balance user-balance-underline"
+      activeBalanceLink: false,
     }
   },
+
+  componentWillMount(){
+    this.eventEmitter('on','openBalancePage',()=>{
+        this.setState({activeBalanceLink: !this.state.activeBalanceLink});
+    });
+
+    this.eventEmitter('on','closeBalancePage',()=>{
+      this.setState({activeBalanceLink: !this.state.activeBalanceLink});
+    });
+
+    this.eventEmitter('on','updateWallet',()=>{
+      this.setState({userBalance: Repository.get_obj("user").wallet});
+    });
+  },
+
+
   getPageProps: function (path) {
     var backButton = (
       <IonNavBackButton icon="ion-ios-arrow-back"
@@ -39,8 +57,11 @@ var Layout = React.createClass({
                         title="Back"
       />
     );
-
-    const balance = <UserBalance userBalanceClassName = {this.state.userBalanceClassName}/>;
+    let userBalance;
+    if (Repository.get_obj("user") && Repository.get_obj("user").wallet) {
+      userBalance = Repository.get_obj("user").wallet;
+    }
+    const balance = <UserBalance activeBalanceLink = {this.state.activeBalanceLink} userBalance = {userBalance}/>;
 
     // add defaults to pageListItems
     var pageList = this.props.pageList.map(function (page) {
@@ -78,21 +99,7 @@ var Layout = React.createClass({
     });
     emitterStorage.emitter = emitter;
 
-    emitter.on("hideLink", () => {
-      this.setState({
-        userBalanceClassName: "user-balance"
-      })
-    });
-    emitterStorage.emitter = emitter;
 
-
-    emitter.on("showLink", () => {
-      console.log("showLink");
-      this.setState({
-        userBalanceClassName: "user-balance user-balance-underline"
-      })
-    });
-    emitterStorage.emitter = emitter;
 
   },
   componentWillUnmount(){
