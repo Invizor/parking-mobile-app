@@ -10,7 +10,7 @@ import Index from '../app/client/imports/components/index/index';
 import App from '../app/client/imports/containers/app/app';
 import Layout from '../app/client/imports/layouts/main';
 import Container from '../app/client/imports/containers/container/container';
-import AutorizationForm from '../app/client/imports/components/autorization-form/autorization-form';
+import AutorizationForm from '../app/client/imports/components/authorization-form/autorization-form';
 import VerificationForm from '../app/client/imports/components/verification-form/verification-form';
 import ParkingItem from '../app/client/imports/components/parking-item/parking-item';
 import ConfirmPayParking from '../app/client/imports/components/confirm-pay-parking/confirm-pay-parking';
