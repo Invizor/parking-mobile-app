@@ -39,13 +39,6 @@ class SideMenu extends React.Component {
         </div>
         <div className="content has-header side-menu">
           <div className="list">
-            <div className="item item-icon-right">
-              Быстрая парковка <IonIcon icon="ios-arrow-right"/>
-            </div>
-          </div>
-        </div>
-        <div className="content has-header side-menu">
-          <div className="list">
             <div className="item item-icon-right" onClick={() => {
               this.goToRoute("/set-balance");
             }}>
@@ -77,6 +70,13 @@ class SideMenu extends React.Component {
       <div>
         <div className="bar bar-header bar-stable">
           <h1 className="title">Гость</h1>
+        </div>
+        <div className="content has-header side-menu">
+          <div className="list">
+            <div className="item item-icon-right">
+              Быстрая парковка <IonIcon icon="ios-arrow-right"/>
+            </div>
+          </div>
         </div>
         <div className="content has-header side-menu">
           <div className="list">

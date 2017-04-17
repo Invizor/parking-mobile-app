@@ -11,22 +11,55 @@ class addCarsForm extends React.Component {
     super(props, context);
   }
 
+  //валидация введенной информации об автомобиле
+  validationInputs(){
+    let title = this.refs.titleCar.value;
+    let carNumber = this.refs.plateNumber.value.toUpperCase();
+    if(title.length > 20){
+      let ionUpdatePopup = this.context.ionUpdatePopup;
+      ionUpdatePopup({
+        popupType: "alert",
+        okText: "ввод",
+        title: "Ошибка!",
+        template: <span>Название автомобиля должно быть не длиннее 20 символов!</span>,
+        okType: "button-light",
+      });
+      return false;
+    } else
+    if(carNumber.length != 6 || !(carNumber[0]>='А' && carNumber[0]<='Я') || !(carNumber[1]>=0 && carNumber[1]<=9)
+      || !(carNumber[2]>=0 && carNumber[2]<=9) || !(carNumber[3]>=0 && carNumber[3]<=9)
+      || !(carNumber[4]>='А' && carNumber[4]<='Я') || !(carNumber[5]>='А' && carNumber[5]<='Я')){
+      let ionUpdatePopup = this.context.ionUpdatePopup;
+      ionUpdatePopup({
+        popupType: "alert",
+        okText: "ввод",
+        title: "Ошибка!",
+        template: <span>Введите номер в формате: А123БВ</span>,
+        okType: "button-light",
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   addCarToList(theUrl) {
 
-    let params = "user=" + String(Repostitory.get_obj("user").id) + "&" + "title=" + String(this.refs.titleCar.value);
-    params += "&" + "type=a" + "&" + "regNumber=" + String(this.refs.plateNumber.value);
-    let history = createHashHistory();
+    if(this.validationInputs()) {
+      let params = "user=" + String(Repostitory.get_obj("user").id) + "&" + "title=" + String(this.refs.titleCar.value);
+      params += "&" + "type=a" + "&" + "regNumber=" + String(this.refs.plateNumber.value.toUpperCase());
+      let history = createHashHistory();
 
-    requestToServer("POST", theUrl, () => {
-      history.goBack();
-    }, true, params);
+      requestToServer("POST", theUrl, () => {
+        history.goBack();
+      }, true, params);
+    }
 
   }
 
   render() {
     return (
       <IonContent customClasses="" {...this.props}>
-
         <div className="car-info">
           <div className="titleAddCar">
             Добавьте ваш автомобиль:
@@ -56,5 +89,10 @@ class addCarsForm extends React.Component {
     );
   }
 }
+
+
+addCarsForm.contextTypes = {
+  ionUpdatePopup: React.PropTypes.func
+};
 
 export default addCarsForm;

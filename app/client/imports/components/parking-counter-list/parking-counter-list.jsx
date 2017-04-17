@@ -39,15 +39,16 @@ export default class ParkingCounterList extends React.Component {
         );
       });
     } else {
-      parkingCounterList = "Нет припаркованных автомобилей";
+      parkingCounterList = <div className="no-parking-cars">"Нет припаркованных автомобилей"</div>;
     }
 
 
     return (
-      <IonList>
-        {parkingCounterList}
-      </IonList>
-
+      <div className="list-parking-cars">
+        <IonList>
+          {parkingCounterList}
+        </IonList>
+      </div>
     );
   }
 }

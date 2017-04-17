@@ -1,7 +1,8 @@
 .user-balance {
   width: 100px;
   margin-top: 8px;
-  font-size: 18px; }
+  font-size: 18px;
+  text-align: right; }
 
 .user-balance-underline {
   text-decoration: underline; }
@@ -10515,7 +10516,7 @@ a.button {
 .set-balance .balance-info {
   height: 40px;
   text-align: center;
-  font-size: 18px;
+  font-size: 22px;
   color: #4b8bf4;
   margin: 40px auto 0; }
 
@@ -10654,5 +10655,13 @@ a.button {
 .list-history-parking .item .number-car {
   font-size: 18px;
   white-space: normal; }
-.parking-counter-item {
+.list-parking-cars .parking-counter-item {
   white-space: normal; }
+
+.list-parking-cars .item {
+  font-size: 18px; }
+
+.list-parking-cars .no-parking-cars {
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0 20px; }

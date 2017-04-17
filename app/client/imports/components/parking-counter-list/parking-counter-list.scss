@@ -1,3 +1,14 @@
-.parking-counter-item {
+.list-parking-cars .parking-counter-item {
   white-space: normal;
 }
+
+.list-parking-cars .item {
+  font-size: 18px;
+}
+
+.list-parking-cars .no-parking-cars {
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0 20px;
+}
+

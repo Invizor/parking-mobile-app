@@ -7,6 +7,13 @@ import requestToServer from "../../utils/request-to-server";
 import AutorizedUserScreen from "../../components/autorized-user-screen/autorized-user-screen";
 import UnAutorizedUserScreen from "../../components/unauthorized-user-screen/unauthorized-user-screen";
 
+//получаем текущую платформу: Android, browser, или прочие
+document.addEventListener("deviceready", () => {
+  if(!Repository.get_obj("platform")) {
+    Repository.add_obj("platform", device.platform);
+  }
+}, false);
+
 export default class Container extends React.Component {
   constructor(props) {
     super(props);

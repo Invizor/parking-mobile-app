@@ -335,7 +335,7 @@ export default class ConfirmPayParking extends Component {
       if(car.title === title) {
         this.setState({regNumberValue: car.regNumber});
       } else if (title === "Не указано") {
-        this.setState({regNumberValue: ""});
+        //this.setState({regNumberValue: ""}); /// закоментил чтобы поле не очищалось
       }
     });
   }

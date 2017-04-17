@@ -38,7 +38,6 @@ class AutorizationForm extends React.Component {
     }
 
     if (!token) {
-      console.log("INTO_context=",this);
       let ionUpdatePopup = this.context.ionUpdatePopup;
       ionUpdatePopup({
         popupType: "confirm",

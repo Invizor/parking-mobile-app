@@ -22,7 +22,6 @@ class EditCar extends React.Component {
     this.setState({carRegNumberValue: e.target.value});
   }
 
-
   getCar() {
     const start = this.props.location.pathname.lastIndexOf("/");
     const carId = this.props.location.pathname.substring(start + 1);
@@ -41,7 +40,7 @@ class EditCar extends React.Component {
 
   editCarBtnClicked(theUrl) {
 
-    let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue + "&type=a";
+    let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue.toUpperCase() + "&type=a";
     let history = createHashHistory();
 
     requestToServer("POST", theUrl, () => {
@@ -77,7 +76,7 @@ class EditCar extends React.Component {
           <div className="add-car-button">
             <button className="button button-positive"
                     onClick={() => this.editCarBtnClicked("https://parkimon.ru/api/v1/user-car/edit/" + this.getCar()._id)}>
-              Добавить
+              Изменить
             </button>
           </div>
         </div>

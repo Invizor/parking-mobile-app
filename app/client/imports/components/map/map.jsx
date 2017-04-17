@@ -29,7 +29,8 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
       enableRetinaIcons
       gridSize={60}
       maxZoom={18}
-      imagePath={window.SelectorCordovaPlugin ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"}
+      imagePath={(Repository.get_obj("platform") == "Android") ? "/android_asset/www/img/cluster-icons/m" : "/img/cluster-icons/m"}
+      //imagePath="/android_asset/www/img/cluster-icons/m"
     >
       {props.markers.map((marker) => (
         <Marker
