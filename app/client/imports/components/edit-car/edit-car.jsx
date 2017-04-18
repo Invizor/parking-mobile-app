@@ -3,7 +3,7 @@ import {IonContent} from "reactionic";
 import Repostitory from "../../storage/local-storage";
 import createHashHistory from "history/lib/createHashHistory";
 import requestToServer from "../../utils/request-to-server";
-import { isNumberCar } from "../../utils/is-number-car";
+import isNumberCar from "../../utils/is-number-car";
 
 class EditCar extends React.Component {
 
@@ -117,5 +117,9 @@ class EditCar extends React.Component {
     );
   }
 }
+
+EditCar.contextTypes = {
+  ionUpdatePopup: React.PropTypes.func
+};
 
 export default EditCar;

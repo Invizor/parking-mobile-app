@@ -2,6 +2,12 @@
   width: 100%;
 }
 
+.text-center h1{
+  font-size: 44px;
+  margin: 0 auto 0;
+  padding: 16px;
+}
+
 .confirm-pay-parking-button {
   width: 80%;
   margin: 40px auto 10px;
@@ -19,28 +25,31 @@
 }
 
 .balance-amount {
-  position: absolute;
-  right: 0;
+  float: right;
 }
 
 .duration input {
   border: 1px solid #000;
 }
 
-.reg-number input {
-  width: 100px;
+.car-number {
+  display: flex;
+  justify-content: space-between;
+}
+
+.car-number-field{
+  width: 140px;
+}
+
+.car-number-field input {
+  width: 140px;
   font-size: 18px;
-  margin-left: 80px;
   padding: 5px;
+  float: right;
   display: inline-block;
   border: 1px solid #4b8bf4;
   border-radius: 3px;
   text-align: center;
-}
-
-.car-number {
-  display: flex;
-  justify-content: space-between;
 }
 
 .input-label {

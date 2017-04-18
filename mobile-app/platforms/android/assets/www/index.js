@@ -40505,6 +40505,8 @@ var _requestToServer2 = _interopRequireDefault(_requestToServer);
 
 var _isNumberCar = __webpack_require__(166);
 
+var _isNumberCar2 = _interopRequireDefault(_isNumberCar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -40560,7 +40562,7 @@ var EditCar = function (_React$Component) {
           okType: "button-light"
         });
         return false;
-      } else if (!(0, _isNumberCar.isNumberCar)(carNumber)) {
+      } else if (!(0, _isNumberCar2.default)(carNumber)) {
         var _ionUpdatePopup = this.context.ionUpdatePopup;
         _ionUpdatePopup({
           popupType: "alert",
@@ -40666,6 +40668,10 @@ var EditCar = function (_React$Component) {
 
   return EditCar;
 }(_react2.default.Component);
+
+EditCar.contextTypes = {
+  ionUpdatePopup: _react2.default.PropTypes.func
+};
 
 exports.default = EditCar;
 
@@ -40795,7 +40801,7 @@ var MainTitle = _react2.default.createClass({
       "div",
       { className: "main-title" },
       this.props.title,
-      _localStorage2.default.get_obj("user") && this.props.title === "Parkimon" && this.state.showSpinner ? _react2.default.createElement(
+      _localStorage2.default.get_obj("token") && this.props.title === "Parkimon" && this.state.showSpinner ? _react2.default.createElement(
         "span",
         { className: "mySpinner" },
         _react2.default.createElement(_reactionic.IonSpinner, { icon: "spiral" })
@@ -42426,11 +42432,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 //получаем текущую платформу: Android, browser, или прочие
-document.addEventListener("deviceready", function () {
-  if (!_localStorage2.default.get_obj("platform")) {
-    _localStorage2.default.add_obj("platform", device.platform);
-  }
-}, false);
+
 
 var Container = function (_React$Component) {
   _inherits(Container, _React$Component);
@@ -42496,6 +42498,11 @@ var Container = function (_React$Component) {
       /* app.onMouseDown = () => {
          return false;
        };*/
+      document.addEventListener("deviceready", function () {
+        if (!_localStorage2.default.get_obj("platform")) {
+          _localStorage2.default.add_obj("platform", device.platform);
+        }
+      }, false);
       if (_localStorage2.default.get_obj("user") == undefined || _localStorage2.default.get_obj("user").success == false) {
         this.getUser("https://parkimon.ru/api/v1/user");
       }

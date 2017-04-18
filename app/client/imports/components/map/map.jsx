@@ -14,9 +14,13 @@ import requestToServer from "../../utils/request-to-server";
 import EventEmitterMixin from "react-event-emitter-mixin";
 import "./map.scss";
 
+var markerIcon = {
+  url: './mapIcon.svg',
+  scaledSize: new google.maps.Size(74, 96),
+  labelOrigin: new google.maps.Point(36,38)
+};
 
 import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
-
 
 const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
@@ -34,7 +38,7 @@ const MarkerClustererExampleGoogleMap = withGoogleMap(props => (
     >
       {props.markers.map((marker) => (
         <Marker
-          icon="./mapIcon.svg"
+          icon= {markerIcon}
           label={marker.zoneId}
           onClick={() => props.onMarkerClick(marker)}
           position={{lat: marker.geoCenter[0], lng: marker.geoCenter[1]}}

@@ -10449,8 +10449,12 @@ a.button {
   width: 50%; }
 
 .parking-item {
-  margin-top: 20px;
   margin-bottom: 10px; }
+
+.parking-item .parking-title {
+  margin: 0 auto 0;
+  padding: 16px;
+  font-size: 44px; }
 
 .parking-item .address {
   margin-left: 16px;
@@ -10472,6 +10476,11 @@ a.button {
 .text-center {
   width: 100%; }
 
+.text-center h1 {
+  font-size: 44px;
+  margin: 0 auto 0;
+  padding: 16px; }
+
 .confirm-pay-parking-button {
   width: 80%;
   margin: 40px auto 10px; }
@@ -10487,25 +10496,27 @@ a.button {
   text-align: justify; }
 
 .balance-amount {
-  position: absolute;
-  right: 0; }
+  float: right; }
 
 .duration input {
   border: 1px solid #000; }
 
-.reg-number input {
-  width: 100px;
+.car-number {
+  display: flex;
+  justify-content: space-between; }
+
+.car-number-field {
+  width: 140px; }
+
+.car-number-field input {
+  width: 140px;
   font-size: 18px;
-  margin-left: 80px;
   padding: 5px;
+  float: right;
   display: inline-block;
   border: 1px solid #4b8bf4;
   border-radius: 3px;
   text-align: center; }
-
-.car-number {
-  display: flex;
-  justify-content: space-between; }
 
 .input-label {
   width: 0; }

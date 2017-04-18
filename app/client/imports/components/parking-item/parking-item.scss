@@ -3,9 +3,14 @@
   width: 50%;
 }
 .parking-item {
-  margin-top: 20px;
   margin-bottom: 10px;
 }
+.parking-item .parking-title{
+  margin: 0 auto 0;
+  padding: 16px;
+  font-size: 44px;
+}
+
 .parking-item .address {
   margin-left: 16px;
   padding: 16px 0;
