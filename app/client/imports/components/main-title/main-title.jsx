@@ -40,7 +40,7 @@ let MainTitle = React.createClass({
       <div className="main-title">
         {this.props.title}
         {
-          LocalStorage.get_obj("user") && this.props.title === "Parkimon" && this.state.showSpinner ?
+          LocalStorage.get_obj("token") && this.props.title === "Parkimon" && this.state.showSpinner ?
           <span className="mySpinner"><IonSpinner icon="spiral"/></span>
           :
           ""
