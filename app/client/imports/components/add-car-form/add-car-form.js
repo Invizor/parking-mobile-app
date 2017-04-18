@@ -4,6 +4,7 @@ import "./add-car-form.scss";
 import Repostitory from "../../storage/local-storage";
 import createHashHistory from "history/lib/createHashHistory";
 import requestToServer from "../../utils/request-to-server";
+import isNumberCar from "../../utils/is-number-car";
 
 class addCarsForm extends React.Component {
 
@@ -26,15 +27,13 @@ class addCarsForm extends React.Component {
       });
       return false;
     } else
-    if(carNumber.length != 6 || !(carNumber[0]>='А' && carNumber[0]<='Я') || !(carNumber[1]>=0 && carNumber[1]<=9)
-      || !(carNumber[2]>=0 && carNumber[2]<=9) || !(carNumber[3]>=0 && carNumber[3]<=9)
-      || !(carNumber[4]>='А' && carNumber[4]<='Я') || !(carNumber[5]>='А' && carNumber[5]<='Я')){
+    if(!isNumberCar(carNumber)){
       let ionUpdatePopup = this.context.ionUpdatePopup;
       ionUpdatePopup({
         popupType: "alert",
         okText: "ввод",
         title: "Ошибка!",
-        template: <span>Введите номер в формате: А123БВ</span>,
+        template: <span>Введите номер в формате: А123БВ45 или А123БВ456</span>,
         okType: "button-light",
       });
       return false;

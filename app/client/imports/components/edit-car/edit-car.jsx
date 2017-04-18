@@ -3,6 +3,7 @@ import {IonContent} from "reactionic";
 import Repostitory from "../../storage/local-storage";
 import createHashHistory from "history/lib/createHashHistory";
 import requestToServer from "../../utils/request-to-server";
+import { isNumberCar } from "../../utils/is-number-car";
 
 class EditCar extends React.Component {
 
@@ -20,6 +21,36 @@ class EditCar extends React.Component {
 
   handleRegNumberChange(e) {
     this.setState({carRegNumberValue: e.target.value});
+  }
+
+  //валидация введенной информации об автомобиле
+  validationInputs(){
+    let title = this.refs.titleCar.value;
+    let carNumber = this.refs.plateNumber.value.toUpperCase();
+    if(title.length > 20){
+      let ionUpdatePopup = this.context.ionUpdatePopup;
+      ionUpdatePopup({
+        popupType: "alert",
+        okText: "ввод",
+        title: "Ошибка!",
+        template: <span>Название автомобиля должно быть не длиннее 20 символов!</span>,
+        okType: "button-light",
+      });
+      return false;
+    } else
+    if(!isNumberCar(carNumber)){
+      let ionUpdatePopup = this.context.ionUpdatePopup;
+      ionUpdatePopup({
+        popupType: "alert",
+        okText: "ввод",
+        title: "Ошибка!",
+        template: <span>Введите номер в формате: А123БВ45 или А123БВ456</span>,
+        okType: "button-light",
+      });
+      return false;
+    } else {
+      return true;
+    }
   }
 
   getCar() {
@@ -40,13 +71,14 @@ class EditCar extends React.Component {
 
   editCarBtnClicked(theUrl) {
 
-    let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue.toUpperCase() + "&type=a";
-    let history = createHashHistory();
+    if(this.validationInputs()) {
+      let params = "title=" + this.state.carTitleValue + "&regNumber=" + this.state.carRegNumberValue.toUpperCase() + "&type=a";
+      let history = createHashHistory();
 
-    requestToServer("POST", theUrl, () => {
-      history.goBack();
-    }, true, params);
-
+      requestToServer("POST", theUrl, () => {
+        history.goBack();
+      }, true, params);
+    }
   }
 
   render() {

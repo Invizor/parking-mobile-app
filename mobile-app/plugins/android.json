@@ -8,24 +8,24 @@
     },
     "installed_plugins": {
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "ru.parkimon.app"
         }
     },
     "dependent_plugins": {
         "com.googlemaps.ios": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "ru.parkimon.app"
         },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "ru.parkimon.app"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "ru.parkimon.app"
         },
         "cordova-plugin-googlemaps": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "ru.parkimon.app"
         },
         "cordova-wheel-selector-plugin": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "ru.parkimon.app"
         }
     }
 }
