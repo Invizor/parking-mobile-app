@@ -8,11 +8,7 @@ import AutorizedUserScreen from "../../components/autorized-user-screen/autorize
 import UnAutorizedUserScreen from "../../components/unauthorized-user-screen/unauthorized-user-screen";
 
 //получаем текущую платформу: Android, browser, или прочие
-document.addEventListener("deviceready", () => {
-  if(!Repository.get_obj("platform")) {
-    Repository.add_obj("platform", device.platform);
-  }
-}, false);
+
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -64,6 +60,11 @@ export default class Container extends React.Component {
    /* app.onMouseDown = () => {
       return false;
     };*/
+    document.addEventListener("deviceready", () => {
+      if(!Repository.get_obj("platform")) {
+        Repository.add_obj("platform", device.platform);
+      }
+    }, false);
     if (Repository.get_obj("user") == undefined || Repository.get_obj("user").success == false) {
       this.getUser("https://parkimon.ru/api/v1/user");
     }
