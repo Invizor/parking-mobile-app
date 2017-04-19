@@ -30,9 +30,9 @@ class UserBalance extends React.Component {
   }
 
   componentWillUnmount() {
-    let emitter = emitterStorage.emitter;
+    /*let emitter = emitterStorage.emitter;
     emitter.off("radiation", this.walletUpdate.bind(this));
-    emitterStorage.emitter = null;
+    emitterStorage.emitter = null;*/
   }
 
   componentWillMount() {

@@ -103,9 +103,9 @@ var Layout = React.createClass({
 
   },
   componentWillUnmount(){
-    emitter = emitterStorage.emitter;
+    /*emitter = emitterStorage.emitter;
     emitter.off('radiation', false);
-    emitterStorage.emitter = null;
+    emitterStorage.emitter = null;*/
   },
   render() {
 

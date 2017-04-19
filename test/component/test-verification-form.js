@@ -15,19 +15,30 @@ describe('<VerificationForm/ >', () => {
 
   before(function() {
     console.log("#before2");
-    //console.log("WRAP=",wrap);
-    //console.log("Content=",wrap.find('div.content.overflow-scroll.has-header'));
-    console.log("ListMy=",wrap.find('.list a'));
-    //_wrap.find('.list a').first().simulate('click', { button: 0 });
+
+    console.log("wrapEvent",wrap.find('.list a').at(1));
+    wrap.find('.list a').at(1).simulate('click', { button: 0 });
+    return new Promise(function(resolve, reject) {
+      wrap.find('.list a').at(1).node.addEventListener("click", function(){ resolve(); });
+    });
   });
 
   after(function() {
     console.log("#after2");
-    hashHistory.push('/');
+    return new Promise(function(resolve, reject) {
+      hashHistory.goBack();
+      resolve();
+    });
   });
 
-  it('aaaaaaaa', () => {
+  it('existence render components', () => {
     console.log("#2.1");
+
+    let wrapper = wrap;
+    expect(wrapper.find('.verification-code')).to.have.length(1);
+    expect(wrapper.find('.verification-code input')).to.have.length(1);
+    expect(wrapper.find('.verification-button')).to.have.length(1);
+    expect(wrapper.find('.verification-button button')).to.have.length(1);
   });
 
 

@@ -32,7 +32,7 @@ import EditCar from './imports/components/edit-car/edit-car';
     {path: '/set-balance', component: SetBalance, title: 'Пополнение баланса', done: true},
     {path: '/confirm-pay-parking/:id', component: ConfirmPayParking, title: 'Условия парковки', done: true},
     {path: '/parking-history', component: ParkingHistory, title: 'История парковок', done: true},
-    {path: '/edit-car/:id', component: EditCar, title: 'Редактирование автомобиля', done: true},
+    {path: '/edit-car/:id', component: EditCar, title: 'Редактирование', done: true},
     {path: '/parking-counter-list', component: ParkingCounterList, title: 'Припаркованные авто', done: true}
   ];
 

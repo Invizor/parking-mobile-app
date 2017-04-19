@@ -5,7 +5,7 @@ import "./confirm-pay-parking.scss";
 import Repository from "../../storage/local-storage";
 import RequestToServer from "../../utils/request-to-server";
 import LocalStorage from "../../storage/local-storage";
-
+import isNumberCar from "../../utils/is-number-car"
 
 export default class ConfirmPayParking extends Component {
 
@@ -112,8 +112,20 @@ export default class ConfirmPayParking extends Component {
   }
 
   startParking() {
-    //console.log(this.state.selectedValue);
     let ionUpdatePopup = this.context.ionUpdatePopup;
+
+    if (!isNumberCar(this.state.regNumberValue)) {
+      ionUpdatePopup({
+        popupType: "alert",
+        okText: "Ok",
+        title: "Ошибка!",
+        template: <span>Введите номер в формате: А123БВ45 или А123БВ456</span>,
+        cancelType: "button-light",
+        onOk: () => {
+
+        }
+      });
+    } else
     if (this.state.selectedValue === "Не указано") {
       ionUpdatePopup({
         popupType: "alert",
@@ -125,7 +137,8 @@ export default class ConfirmPayParking extends Component {
 
         }
       });
-    } else if (this.state.balance <= 0) {
+    }
+    else if (this.state.balance <= 0) {
       ionUpdatePopup({
         popupType: "confirm",
         cancelText: "Нет",
